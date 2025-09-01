@@ -1,0 +1,64 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [ develop ]
+    paths:
+      - 'Viaplay/**'
+      - '.swiftlint.yml'
+      - '!**/*.md'
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Run Unit Tests
+    runs-on: macos-15
+    if: startsWith(github.head_ref, 'feature/') 
+
+    env:
+      SCHEME: Viaplay
+      PROJECT: Viaplay/Viaplay.xcodeproj
+      DESTINATION: 'platform=iOS Simulator,name=iPhone 16 Pro,OS=latest'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Select Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: 'latest-stable'
+
+      - name: Cache SPM
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/Library/Caches/org.swift.swiftpm
+            ~/.swiftpm
+            ~/Library/Developer/Xcode/DerivedData
+          key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
+          restore-keys: ${{ runner.os }}-spm-
+      - name: Install SwiftLint
+        run: brew install swiftlint
+
+      - name: Run SwiftLint
+        working-directory: Viaplay
+        run: swiftlint --strict
+
+      - name: Build & Test (unit tests only, with coverage)
+        run: |
+          xcodebuild \
+            -project "$PROJECT" \
+            -scheme "$SCHEME" \
+            -destination "$DESTINATION" \
+            -enableCodeCoverage YES \
+            -skipMacroValidation \
+            -only-testing:ViaplayTests \
+            clean test
+
+      - name: Upload xcresult
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: xcresult
+          path: ~/Library/Developer/Xcode/DerivedData/**/Logs/Test/*.xcresult
