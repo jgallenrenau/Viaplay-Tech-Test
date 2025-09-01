@@ -18,7 +18,7 @@ jobs:
     env:
       SCHEME: Viaplay
       PROJECT: Viaplay/Viaplay.xcodeproj
-      DESTINATION: 'platform=iOS Simulator,name=iPhone 15 Pro,OS=latest'
+      DESTINATION: 'platform=iOS Simulator,name=iPhone 16 Pro,OS=latest'
 
     steps:
       - name: Checkout
@@ -38,15 +38,12 @@ jobs:
             ~/Library/Developer/Xcode/DerivedData
           key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
           restore-keys: ${{ runner.os }}-spm-
-
-      # ---- SwiftLint en macOS vía Homebrew ----
       - name: Install SwiftLint
         run: brew install swiftlint
 
       - name: Run SwiftLint
         working-directory: Viaplay
         run: swiftlint --strict
-      # ----------------------------------------
 
       - name: Build & Test (unit tests only, with coverage)
         run: |
