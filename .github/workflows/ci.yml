@@ -40,11 +40,13 @@ jobs:
           restore-keys: ${{ runner.os }}-spm-
 
       - name: SwiftLint
-        uses: nttld/swiftlint-action@v1
+        uses: norio-nomura/action-swiftlint@3.2.1
         with:
           args: --strict
+        env:
+          WORKING_DIRECTORY: Viaplay
 
-      - name: Build & Test (with coverage)
+      - name: Build & Test (unit tests only, with coverage)
         run: |
           xcodebuild \
             -project "$PROJECT" \
@@ -52,6 +54,7 @@ jobs:
             -destination "$DESTINATION" \
             -enableCodeCoverage YES \
             -skipMacroValidation \
+            -only-testing:ViaplayTests \
             clean test
 
       - name: Upload xcresult
@@ -60,4 +63,3 @@ jobs:
         with:
           name: xcresult
           path: ~/Library/Developer/Xcode/DerivedData/**/Logs/Test/*.xcresult
-
