@@ -13,7 +13,7 @@ jobs:
   test:
     name: Run Unit Tests
     runs-on: macos-15
-    if: startsWith(github.head_ref, 'feature/')   # solo PRs desde feature/*
+    if: startsWith(github.head_ref, 'feature/') 
 
     env:
       SCHEME: Viaplay
@@ -39,12 +39,14 @@ jobs:
           key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
           restore-keys: ${{ runner.os }}-spm-
 
-      - name: SwiftLint
-        uses: norio-nomura/action-swiftlint@3.2.1
-        with:
-          args: --strict
-        env:
-          WORKING_DIRECTORY: Viaplay
+      # ---- SwiftLint en macOS vía Homebrew ----
+      - name: Install SwiftLint
+        run: brew install swiftlint
+
+      - name: Run SwiftLint
+        working-directory: Viaplay
+        run: swiftlint --strict
+      # ----------------------------------------
 
       - name: Build & Test (unit tests only, with coverage)
         run: |
