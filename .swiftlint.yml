@@ -1,0 +1,13 @@
+disabled_rules:               
+  - trailing_whitespace
+  - todo
+  - identifier_name
+
+line_length: 140              
+included:                      
+  - Viaplay
+excluded:                      
+  - Carthage
+  - Pods
+  - DerivedData
+  - ViaplayTests              
