@@ -13,7 +13,7 @@ jobs:
   test:
     name: Run Unit Tests
     runs-on: macos-15
-    if: startsWith(github.head_ref, 'feature/') 
+    if: startsWith(github.head_ref, 'feature/') || startsWith(github.head_ref, 'fix/')
 
     env:
       SCHEME: Viaplay
