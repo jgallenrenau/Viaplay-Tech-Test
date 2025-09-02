@@ -3,6 +3,7 @@ import SwiftUI
 @testable import SectionsFeature
 @testable import DomainKit
 
+@MainActor
 final class SectionsListViewTests: XCTestCase {
     func testConstructsWithMockUseCase() {
         class MockGetRootPageUseCase: GetRootPageUseCase {
