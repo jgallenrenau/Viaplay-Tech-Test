@@ -57,13 +57,28 @@ jobs:
 
       - name: Generate Code Coverage Report
         run: |
-          xcrun xccov view --report --json ~/Library/Developer/Xcode/DerivedData/**/Logs/Test/*.xcresult > coverage.json
+          # Find the most recent xcresult file
+          XCRESULT_PATH=$(find ~/Library/Developer/Xcode/DerivedData -name "*.xcresult" -type d | head -1)
+          if [ -z "$XCRESULT_PATH" ]; then
+            echo "No xcresult file found"
+            exit 1
+          fi
+          echo "Using xcresult: $XCRESULT_PATH"
+          xcrun xccov view --report --json "$XCRESULT_PATH" > coverage.json
           echo "Coverage report generated"
+
+      - name: Verify Coverage Report
+        run: |
+          if [ ! -f coverage.json ]; then
+            echo "Coverage report not found"
+            exit 1
+          fi
+          echo "Coverage report verified: $(wc -l < coverage.json) lines"
 
       - name: Upload Coverage to Codecov
         uses: codecov/codecov-action@v4
         with:
-          file: ~/Library/Developer/Xcode/DerivedData/**/Logs/Test/*.xcresult
+          file: coverage.json
           flags: unittests
           name: codecov-umbrella
           fail_ci_if_error: false
