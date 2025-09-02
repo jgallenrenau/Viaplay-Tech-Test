@@ -22,7 +22,7 @@ The Viaplay Tech Test is a Swift-based iOS application that demonstrates modern 
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                    Presentation Layer                       │
-│              SwiftUI + MVVM + Design System                │
+│              SwiftUI + MVVM + Design System                 │
 └─────────────────────────────────────────────────────────────┘
                                 │
 ┌─────────────────────────────────────────────────────────────┐
