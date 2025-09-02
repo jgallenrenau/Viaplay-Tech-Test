@@ -55,7 +55,6 @@ jobs:
       - name: Build & Test (all tests with coverage)
         run: |
           # Clean Swift Package Manager cache to avoid dependency conflicts
-          swift package clean
           rm -rf ~/.swiftpm
           rm -rf ~/Library/Caches/org.swift.swiftpm
           
