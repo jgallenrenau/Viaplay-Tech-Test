@@ -17,6 +17,21 @@
 
 The Viaplay Tech Test is a Swift-based iOS application that demonstrates modern iOS development practices through a modular architecture built with Swift Package Manager (SPM). This project showcases a content browsing experience with sections and detailed views, leveraging Clean Architecture principles, MVVM pattern, and an offline-first strategy with ETag-based caching. The application is structured as independent SPM modules, each with specific responsibilities and clear dependency boundaries, ensuring maintainability, testability, and team scalability. This project serves as a technical assessment demonstrating enterprise-grade iOS development practices, including comprehensive testing strategies, CI/CD integration, and SOLID principles implementation.
 
+## 📋 Table of Contents
+
+- [🧭 Why this architecture](#-why-this-architecture)
+- [🧩 MVVM pattern (per feature)](#-mvvm-pattern-per-feature)
+- [🧱 Modular architecture (SPM)](#-modular-architecture-spm)
+- [🧪 Testing strategy](#-testing-strategy)
+- [📈 Scalability and team workflow](#-scalability-and-team-workflow)
+- [🧠 SOLID applied](#-solid-applied)
+- [🗂️ Module index](#️-module-index)
+- [🏗️ Architecture overview](#️-architecture-overview)
+- [🚀 Continuous Integration (CI) with GitHub Actions](#-continuous-integration-ci-with-github-actions)
+- [🧹 Linting with SwiftLint](#-linting-with-swiftlint)
+
+---
+
 ## 🏗️ Architecture Layers
 
 ```
@@ -54,20 +69,63 @@ The Viaplay Tech Test is a Swift-based iOS application that demonstrates modern 
 - **Caching:** ETag-based offline-first strategy
 - **CI/CD:** GitHub Actions + SwiftLint + Codecov
 
-## 📋 Table of Contents
+## 🛠️ Development Tools
 
-- [🧭 Why this architecture](#-why-this-architecture)
-- [🧩 MVVM pattern (per feature)](#-mvvm-pattern-per-feature)
-- [🧱 Modular architecture (SPM)](#-modular-architecture-spm)
-- [🧪 Testing strategy](#-testing-strategy)
-- [📈 Scalability and team workflow](#-scalability-and-team-workflow)
-- [🧠 SOLID applied](#-solid-applied)
-- [🗂️ Module index](#️-module-index)
-- [🏗️ Architecture overview](#️-architecture-overview)
-- [🚀 Continuous Integration (CI) with GitHub Actions](#-continuous-integration-ci-with-github-actions)
-- [🧹 Linting with SwiftLint](#-linting-with-swiftlint)
+- **SwiftLint**: Code quality and consistency enforcement
+- **Xcode 15.0+**: Latest development environment
+- **Git**: Version control with conventional commits
+- **GitHub Actions**: Automated CI/CD pipeline
+- **Codecov**: Code coverage tracking and reporting
 
----
+## 📱 Features
+
+### **Core Functionality**
+- **Content Sections Display**: Browse content sections with rich metadata
+- **Section Details**: Comprehensive section information and navigation
+- **Offline-First**: Seamless experience with ETag-based caching
+- **Error Handling**: Graceful error states with retry mechanisms
+- **Loading States**: Smooth loading indicators and state management
+
+### **Advanced Features**
+- **Accessibility**: VoiceOver support, Dynamic Type, and semantic grouping
+- **Performance**: Efficient list rendering, optimized data fetching, and state management
+- **Modern UI**: Custom design system built with SwiftUI and DSKit
+- **Modular Architecture**: Independent SPM packages for maintainability
+- **Comprehensive Testing**: Unit tests, integration tests, and test plans
+
+## 🚀 Getting Started
+
+### **Prerequisites**
+- `Xcode 15.0+`
+- `Swift 5.9+`
+- `iOS 17.0+`
+- `SwiftLint` (`brew install swiftlint`)
+
+### **Installation**
+
+**1. Clone the repository:**
+```bash
+git clone https://github.com/jordigallenrenau/Viaplay-Tech-Test.git
+cd Viaplay-Tech-Test
+```
+
+**2. Open and build:**
+```bash
+open Viaplay/Viaplay.xcodeproj
+```
+
+**3. Run tests:**
+```bash
+xcodebuild test \
+  -project Viaplay/Viaplay.xcodeproj \
+  -scheme Viaplay \
+  -destination 'platform=iOS Simulator,name=iPhone 16 Pro,OS=latest'
+```
+
+**4. Run SwiftLint:**
+```bash
+swiftlint --strict
+```
 
 ## 🧭 Why this architecture
 
