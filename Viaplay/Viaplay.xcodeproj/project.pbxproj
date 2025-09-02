@@ -7,15 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		14ABC1DA2E66DA69001910D4 /* APIClient in Frameworks */ = {isa = PBXBuildFile; productRef = 14ABC1D92E66DA69001910D4 /* APIClient */; };
-		14ABC1DD2E66DA7A001910D4 /* CoreKit in Frameworks */ = {isa = PBXBuildFile; productRef = 14ABC1DC2E66DA7A001910D4 /* CoreKit */; };
-		14ABC1E02E66DA8F001910D4 /* DataKit in Frameworks */ = {isa = PBXBuildFile; productRef = 14ABC1DF2E66DA8F001910D4 /* DataKit */; };
-		14ABC1E32E66DAA1001910D4 /* StorageKit in Frameworks */ = {isa = PBXBuildFile; productRef = 14ABC1E22E66DAA1001910D4 /* StorageKit */; };
-		14ABC1E62E66DAB1001910D4 /* SectionsFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 14ABC1E52E66DAB1001910D4 /* SectionsFeature */; };
-		14ABC1E92E66DAC5001910D4 /* NetworkingKit in Frameworks */ = {isa = PBXBuildFile; productRef = 14ABC1E82E66DAC5001910D4 /* NetworkingKit */; };
-		14ABC1EC2E66DAE6001910D4 /* DetailFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 14ABC1EB2E66DAE6001910D4 /* DetailFeature */; };
-		14ABC1EF2E66DB21001910D4 /* DomainKit in Frameworks */ = {isa = PBXBuildFile; productRef = 14ABC1EE2E66DB21001910D4 /* DomainKit */; };
-		14ABC1F22E66DB5D001910D4 /* DSKit in Frameworks */ = {isa = PBXBuildFile; productRef = 14ABC1F12E66DB5D001910D4 /* DSKit */; };
+		1405E68B2E66FBC000D521FD /* DataKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1405E68A2E66FBC000D521FD /* DataKit */; };
+		1405E68F2E66FBFD00D521FD /* StorageKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1405E68E2E66FBFD00D521FD /* StorageKit */; };
+		1405E6922E66FC0D00D521FD /* DSKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1405E6912E66FC0D00D521FD /* DSKit */; };
+		1405E6952E66FC1F00D521FD /* NetworkingKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1405E6942E66FC1F00D521FD /* NetworkingKit */; };
+		1405E6982E66FCF500D521FD /* DetailFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 1405E6972E66FCF500D521FD /* DetailFeature */; };
+		1405E69B2E66FD0A00D521FD /* SectionsFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 1405E69A2E66FD0A00D521FD /* SectionsFeature */; };
 		14D5FF3C2E6632E600F53C94 /* ViaplayApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D5FF3B2E6632E600F53C94 /* ViaplayApp.swift */; };
 		14D5FF3E2E6632E600F53C94 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D5FF3D2E6632E600F53C94 /* ContentView.swift */; };
 		14D5FF402E6632EB00F53C94 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14D5FF3F2E6632EB00F53C94 /* Assets.xcassets */; };
@@ -35,6 +32,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1405E69C2E6703B300D521FD /*  AllTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = " AllTests.xctestplan"; sourceTree = "<group>"; };
 		14D5FF382E6632E600F53C94 /* Viaplay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Viaplay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		14D5FF3B2E6632E600F53C94 /* ViaplayApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViaplayApp.swift; sourceTree = "<group>"; };
 		14D5FF3D2E6632E600F53C94 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -51,15 +49,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				14ABC1E02E66DA8F001910D4 /* DataKit in Frameworks */,
-				14ABC1EF2E66DB21001910D4 /* DomainKit in Frameworks */,
-				14ABC1EC2E66DAE6001910D4 /* DetailFeature in Frameworks */,
-				14ABC1F22E66DB5D001910D4 /* DSKit in Frameworks */,
-				14ABC1DD2E66DA7A001910D4 /* CoreKit in Frameworks */,
-				14ABC1DA2E66DA69001910D4 /* APIClient in Frameworks */,
-				14ABC1E62E66DAB1001910D4 /* SectionsFeature in Frameworks */,
-				14ABC1E32E66DAA1001910D4 /* StorageKit in Frameworks */,
-				14ABC1E92E66DAC5001910D4 /* NetworkingKit in Frameworks */,
+				1405E6922E66FC0D00D521FD /* DSKit in Frameworks */,
+				1405E6982E66FCF500D521FD /* DetailFeature in Frameworks */,
+				1405E6952E66FC1F00D521FD /* NetworkingKit in Frameworks */,
+				1405E68B2E66FBC000D521FD /* DataKit in Frameworks */,
+				1405E68F2E66FBFD00D521FD /* StorageKit in Frameworks */,
+				1405E69B2E66FD0A00D521FD /* SectionsFeature in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,13 +68,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1405E6882E66FB4100D521FD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		14D5FF2F2E6632E600F53C94 = {
 			isa = PBXGroup;
 			children = (
+				1405E69C2E6703B300D521FD /*  AllTests.xctestplan */,
 				14D5FF662E66C36100F53C94 /* README.md */,
 				14D5FF3A2E6632E600F53C94 /* Viaplay */,
 				14D5FF4C2E6632EC00F53C94 /* ViaplayTests */,
 				14D5FF392E6632E600F53C94 /* Products */,
+				1405E6882E66FB4100D521FD /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -137,15 +141,12 @@
 			);
 			name = Viaplay;
 			packageProductDependencies = (
-				14ABC1D92E66DA69001910D4 /* APIClient */,
-				14ABC1DC2E66DA7A001910D4 /* CoreKit */,
-				14ABC1DF2E66DA8F001910D4 /* DataKit */,
-				14ABC1E22E66DAA1001910D4 /* StorageKit */,
-				14ABC1E52E66DAB1001910D4 /* SectionsFeature */,
-				14ABC1E82E66DAC5001910D4 /* NetworkingKit */,
-				14ABC1EB2E66DAE6001910D4 /* DetailFeature */,
-				14ABC1EE2E66DB21001910D4 /* DomainKit */,
-				14ABC1F12E66DB5D001910D4 /* DSKit */,
+				1405E68A2E66FBC000D521FD /* DataKit */,
+				1405E68E2E66FBFD00D521FD /* StorageKit */,
+				1405E6912E66FC0D00D521FD /* DSKit */,
+				1405E6942E66FC1F00D521FD /* NetworkingKit */,
+				1405E6972E66FCF500D521FD /* DetailFeature */,
+				1405E69A2E66FD0A00D521FD /* SectionsFeature */,
 			);
 			productName = Viaplay;
 			productReference = 14D5FF382E6632E600F53C94 /* Viaplay.app */;
@@ -198,15 +199,12 @@
 			);
 			mainGroup = 14D5FF2F2E6632E600F53C94;
 			packageReferences = (
-				14ABC1D82E66DA69001910D4 /* XCLocalSwiftPackageReference "../Packages/APIClient" */,
-				14ABC1DB2E66DA7A001910D4 /* XCLocalSwiftPackageReference "../Packages/CoreKit" */,
-				14ABC1DE2E66DA8F001910D4 /* XCLocalSwiftPackageReference "../Packages/DataKit" */,
-				14ABC1E12E66DAA1001910D4 /* XCLocalSwiftPackageReference "../Packages/StorageKit" */,
-				14ABC1E42E66DAB1001910D4 /* XCLocalSwiftPackageReference "../Packages/SectionsFeature" */,
-				14ABC1E72E66DAC5001910D4 /* XCLocalSwiftPackageReference "../Packages/NetworkingKit" */,
-				14ABC1EA2E66DAE6001910D4 /* XCLocalSwiftPackageReference "../Packages/DetailFeature" */,
-				14ABC1ED2E66DB21001910D4 /* XCLocalSwiftPackageReference "../Packages/DomainKit" */,
-				14ABC1F02E66DB5D001910D4 /* XCLocalSwiftPackageReference "../Packages/DSKit" */,
+				1405E6892E66FBC000D521FD /* XCLocalSwiftPackageReference "../Packages/DataKit" */,
+				1405E68D2E66FBFD00D521FD /* XCLocalSwiftPackageReference "../Packages/StorageKit" */,
+				1405E6902E66FC0D00D521FD /* XCLocalSwiftPackageReference "../Packages/DSKit" */,
+				1405E6932E66FC1F00D521FD /* XCLocalSwiftPackageReference "../Packages/NetworkingKit" */,
+				1405E6962E66FCF400D521FD /* XCLocalSwiftPackageReference "../Packages/DetailFeature" */,
+				1405E6992E66FD0A00D521FD /* XCLocalSwiftPackageReference "../Packages/SectionsFeature" */,
 			);
 			productRefGroup = 14D5FF392E6632E600F53C94 /* Products */;
 			projectDirPath = "";
@@ -536,80 +534,56 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		14ABC1D82E66DA69001910D4 /* XCLocalSwiftPackageReference "../Packages/APIClient" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ../Packages/APIClient;
-		};
-		14ABC1DB2E66DA7A001910D4 /* XCLocalSwiftPackageReference "../Packages/CoreKit" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ../Packages/CoreKit;
-		};
-		14ABC1DE2E66DA8F001910D4 /* XCLocalSwiftPackageReference "../Packages/DataKit" */ = {
+		1405E6892E66FBC000D521FD /* XCLocalSwiftPackageReference "../Packages/DataKit" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ../Packages/DataKit;
 		};
-		14ABC1E12E66DAA1001910D4 /* XCLocalSwiftPackageReference "../Packages/StorageKit" */ = {
+		1405E68D2E66FBFD00D521FD /* XCLocalSwiftPackageReference "../Packages/StorageKit" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ../Packages/StorageKit;
 		};
-		14ABC1E42E66DAB1001910D4 /* XCLocalSwiftPackageReference "../Packages/SectionsFeature" */ = {
+		1405E6902E66FC0D00D521FD /* XCLocalSwiftPackageReference "../Packages/DSKit" */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = ../Packages/SectionsFeature;
+			relativePath = ../Packages/DSKit;
 		};
-		14ABC1E72E66DAC5001910D4 /* XCLocalSwiftPackageReference "../Packages/NetworkingKit" */ = {
+		1405E6932E66FC1F00D521FD /* XCLocalSwiftPackageReference "../Packages/NetworkingKit" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ../Packages/NetworkingKit;
 		};
-		14ABC1EA2E66DAE6001910D4 /* XCLocalSwiftPackageReference "../Packages/DetailFeature" */ = {
+		1405E6962E66FCF400D521FD /* XCLocalSwiftPackageReference "../Packages/DetailFeature" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ../Packages/DetailFeature;
 		};
-		14ABC1ED2E66DB21001910D4 /* XCLocalSwiftPackageReference "../Packages/DomainKit" */ = {
+		1405E6992E66FD0A00D521FD /* XCLocalSwiftPackageReference "../Packages/SectionsFeature" */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = ../Packages/DomainKit;
-		};
-		14ABC1F02E66DB5D001910D4 /* XCLocalSwiftPackageReference "../Packages/DSKit" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ../Packages/DSKit;
+			relativePath = ../Packages/SectionsFeature;
 		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		14ABC1D92E66DA69001910D4 /* APIClient */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = APIClient;
-		};
-		14ABC1DC2E66DA7A001910D4 /* CoreKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = CoreKit;
-		};
-		14ABC1DF2E66DA8F001910D4 /* DataKit */ = {
+		1405E68A2E66FBC000D521FD /* DataKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = DataKit;
 		};
-		14ABC1E22E66DAA1001910D4 /* StorageKit */ = {
+		1405E68E2E66FBFD00D521FD /* StorageKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = StorageKit;
 		};
-		14ABC1E52E66DAB1001910D4 /* SectionsFeature */ = {
+		1405E6912E66FC0D00D521FD /* DSKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = SectionsFeature;
+			productName = DSKit;
 		};
-		14ABC1E82E66DAC5001910D4 /* NetworkingKit */ = {
+		1405E6942E66FC1F00D521FD /* NetworkingKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = NetworkingKit;
 		};
-		14ABC1EB2E66DAE6001910D4 /* DetailFeature */ = {
+		1405E6972E66FCF500D521FD /* DetailFeature */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = DetailFeature;
 		};
-		14ABC1EE2E66DB21001910D4 /* DomainKit */ = {
+		1405E69A2E66FD0A00D521FD /* SectionsFeature */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = DomainKit;
-		};
-		14ABC1F12E66DB5D001910D4 /* DSKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = DSKit;
+			productName = SectionsFeature;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
