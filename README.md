@@ -340,33 +340,33 @@ Our architecture strictly follows **SOLID principles** to ensure maintainable an
 
 - **Clean Architecture + MVVM** in modular SPM packages.
 - **Flow**: `View (SwiftUI) → ViewModel → UseCase (Domain) → Repository (DataKit) → Data Sources (NetworkingKit + StorageKit)`.
-- **Offline-first** con ETag/304: cuando el servidor indica Not Modified devolvemos el **cache**.
-- **DSKit** es solo UI; las features traducen modelos de dominio a modelos de vista.
+- **Offline-first** with ETag/304: when the server indicates Not Modified we return the **cache**.
+- **DSKit** is UI only; features translate domain models to view models.
 
 ### Why this design (rationale per layer)
 
-- **DomainKit (Why?)**: mantener el corazón de negocio estable, portable y fácil de testear. No depende de Apple frameworks.
-  - Define entidades (`Page`, `ContentSection`), contratos (`PageRepository`) y casos de uso (`GetRootPage`).
-- **DataKit (Why?)**: orquestar políticas (ETag, mapeos, expiración futura) separadas del dominio. Cambios de API o caché no impactan en UI ni casos de uso.
-  - Implementa `PageRepository` combinando remoto y local; mapea DTO ↔ dominio.
-- **NetworkingKit (Why?)**: abstraer HTTP para poder stubear/testear y sustituir cliente o estrategia sin tocar repos/uso de casos.
-  - Provee `HTTPClient` y helpers de endpoints.
-- **StorageKit (Why?)**: encapsular persistencia (JSON/KeyValue) y permitir cambiar de disco a base de datos sin afectar a DataKit.
+- **DomainKit (Why?)**: Keep the business core stable, portable, and easy to test. No dependency on Apple frameworks.
+  - Defines entities (`Page`, `ContentSection`), contracts (`PageRepository`), and use cases (`GetRootPage`).
+- **DataKit (Why?)**: Orchestrate policies (ETag, mappings, future expiration) separated from domain. API or cache changes don't impact UI or use cases.
+  - Implements `PageRepository` combining remote and local; maps DTO ↔ domain.
+- **NetworkingKit (Why?)**: Abstract HTTP to enable stubbing/testing and replace client or strategy without touching repos/use cases.
+  - Provides `HTTPClient` and endpoint helpers.
+- **StorageKit (Why?)**: Encapsulate persistence (JSON/KeyValue) and allow switching from disk to database without affecting DataKit.
   - `JSONDiskCache`, `KeyValueStore` (ETag/Last-Modified).
-- **DSKit (Why?)**: UI reusable independiente; facilita consistencia visual y evita acoplar UI a tipos de dominio.
-  - Componentes SwiftUI que reciben modelos simples.
-- **Features (Why?)**: mover la lógica de presentación (MVVM) fuera de la app raíz y permitir evolucionar pantallas sin tocar infra.
-  - View + ViewModel dependientes del dominio; inyección de dependencias en el composition root.
+- **DSKit (Why?)**: Independent reusable UI; facilitates visual consistency and avoids coupling UI to domain types.
+  - SwiftUI components that receive simple models.
+- **Features (Why?)**: Move presentation logic (MVVM) out of the root app and allow screen evolution without touching infrastructure.
+  - View + ViewModel dependent on domain; dependency injection in the composition root.
 
 ### Online/Offline flow
 
-1) View solicita datos vía ViewModel → UseCase (`GetRootPage`).
-2) Repository (`DataKit`) prepara cabeceras condicionales (`If-None-Match` con ETag almacenado en `StorageKit`).
-3) `NetworkingKit` hace el GET:
-   - **200 OK (online, contenido nuevo)**: DataKit decodifica JSON → mapea a dominio → guarda ETag y JSON en `StorageKit` → devuelve al ViewModel.
-   - **304 Not Modified (offline lógico / sin cambios)**: DataKit lee el JSON cacheado desde `StorageKit` y lo devuelve.
-   - **Error de red (offline real)**: DataKit intenta fallback al JSON cacheado; si existe, lo devuelve, si no, propaga error.
-4) ViewModel adapta a modelos de vista (para DSKit) y actualiza la UI.
+1) View requests data via ViewModel → UseCase (`GetRootPage`).
+2) Repository (`DataKit`) prepares conditional headers (`If-None-Match` with ETag stored in `StorageKit`).
+3) `NetworkingKit` makes the GET:
+   - **200 OK (online, new content)**: DataKit decodes JSON → maps to domain → saves ETag and JSON in `StorageKit` → returns to ViewModel.
+   - **304 Not Modified (logical offline / no changes)**: DataKit reads cached JSON from `StorageKit` and returns it.
+   - **Network error (real offline)**: DataKit attempts fallback to cached JSON; if it exists, returns it, if not, propagates error.
+4) ViewModel adapts to view models (for DSKit) and updates the UI.
 
 
 ### 🚀 Continuous Integration (CI) with GitHub Actions
