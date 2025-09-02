@@ -20,7 +20,7 @@ jobs:
   test:
     name: Run Unit Tests
     runs-on: macos-15
-    if: (startsWith(github.head_ref, 'feature/') || startsWith(github.head_ref, 'fix/')) || github.event.inputs.run_tests == 'true'
+    if: (startsWith(github.head_ref, 'feature/') || startsWith(github.head_ref, 'fix/')) || github.event.inputs.run_tests == true
 
     env:
       SCHEME: Viaplay
@@ -54,6 +54,11 @@ jobs:
 
       - name: Build & Test (all tests with coverage)
         run: |
+          # Clean Swift Package Manager cache to avoid dependency conflicts
+          swift package clean
+          rm -rf ~/.swiftpm
+          rm -rf ~/Library/Caches/org.swift.swiftpm
+          
           # Run tests for Swift packages in dependency order
           # First: Independent packages (no dependencies)
           for package in Packages/DomainKit Packages/NetworkingKit Packages/StorageKit Packages/DSKit; do
