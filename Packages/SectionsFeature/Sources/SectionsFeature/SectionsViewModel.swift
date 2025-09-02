@@ -5,7 +5,7 @@ import DomainKit
 public final class SectionsViewModel: ObservableObject {
     @Published public private(set) var title: String = ""
     @Published public private(set) var descriptionText: String = ""
-    @Published public private(set) var sections: [Section] = []
+    @Published public private(set) var sections: [ContentSection] = []
 
     private let getRootPage: GetRootPageUseCase
 
