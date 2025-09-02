@@ -6,14 +6,21 @@ on:
     paths:
       - 'Viaplay/**'
       - '.swiftlint.yml'
+      - '.github/workflows/**'
       - '!**/*.md'
   workflow_dispatch:
+    inputs:
+      run_tests:
+        description: 'Force run tests even if paths don\'t match'
+        required: false
+        default: 'false'
+        type: boolean
 
 jobs:
   test:
     name: Run Unit Tests
     runs-on: macos-15
-    if: startsWith(github.head_ref, 'feature/') || startsWith(github.head_ref, 'fix/')
+    if: (startsWith(github.head_ref, 'feature/') || startsWith(github.head_ref, 'fix/')) || github.event.inputs.run_tests == 'true'
 
     env:
       SCHEME: Viaplay
@@ -45,7 +52,7 @@ jobs:
         working-directory: Viaplay
         run: swiftlint --strict
 
-      - name: Build & Test (unit tests only, with coverage)
+      - name: Build & Test (all tests with coverage)
         run: |
           xcodebuild \
             -project "$PROJECT" \
@@ -53,8 +60,35 @@ jobs:
             -destination "$DESTINATION" \
             -enableCodeCoverage YES \
             -skipMacroValidation \
-            -only-testing:ViaplayTests \
             clean test
+
+      - name: Generate Code Coverage Report
+        run: |
+          # Find the most recent xcresult file
+          XCRESULT_PATH=$(find ~/Library/Developer/Xcode/DerivedData -name "*.xcresult" -type d -exec stat -f "%m %N" {} \; | sort -nr | head -1 | cut -d' ' -f2-)
+          if [ -z "$XCRESULT_PATH" ]; then
+            echo "No xcresult file found"
+            exit 1
+          fi
+          echo "Using xcresult: $XCRESULT_PATH"
+          xcrun xccov view --report --json "$XCRESULT_PATH" > coverage.json
+          echo "Coverage report generated"
+
+      - name: Verify Coverage Report
+        run: |
+          if [ ! -f coverage.json ]; then
+            echo "Coverage report not found"
+            exit 1
+          fi
+          echo "Coverage report verified: $(wc -l < coverage.json) lines"
+
+      - name: Upload Coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          file: coverage.json
+          flags: unittests
+          name: codecov-umbrella
+          fail_ci_if_error: false
 
       - name: Upload xcresult
         if: always()
