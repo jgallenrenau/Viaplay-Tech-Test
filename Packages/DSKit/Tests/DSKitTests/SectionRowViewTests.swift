@@ -1,7 +1,6 @@
 import XCTest
 import SwiftUI
 @testable import DSKit
-@testable import DomainKit
 
 final class SectionRowViewTests: XCTestCase {
     func testViewRendersTitle() {
