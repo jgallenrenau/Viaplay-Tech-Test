@@ -17,6 +17,43 @@
 
 The Viaplay Tech Test is a Swift-based iOS application that demonstrates modern iOS development practices through a modular architecture built with Swift Package Manager (SPM). This project showcases a content browsing experience with sections and detailed views, leveraging Clean Architecture principles, MVVM pattern, and an offline-first strategy with ETag-based caching. The application is structured as independent SPM modules, each with specific responsibilities and clear dependency boundaries, ensuring maintainability, testability, and team scalability. This project serves as a technical assessment demonstrating enterprise-grade iOS development practices, including comprehensive testing strategies, CI/CD integration, and SOLID principles implementation.
 
+## 🏗️ Architecture Layers
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    Presentation Layer                       │
+│              SwiftUI + MVVM + Design System                │
+└─────────────────────────────────────────────────────────────┘
+                                │
+┌─────────────────────────────────────────────────────────────┐
+│                      Feature Layer                          │
+│           SectionsFeature + DetailFeature                   │
+└─────────────────────────────────────────────────────────────┘
+                                │
+┌─────────────────────────────────────────────────────────────┐
+│                       Data Layer                            │
+│              Repositories + Use Cases                       │
+└─────────────────────────────────────────────────────────────┘
+                                │
+┌─────────────────────────────────────────────────────────────┐
+│                   Infrastructure Layer                      │
+│            Networking + Storage + Caching                   │
+└─────────────────────────────────────────────────────────────┘
+```
+
+## 🛠️ Technical Stack
+
+### **Core Technologies**
+- **Platform:** iOS 17.0+
+- **Language:** Swift 5.9+
+- **UI Framework:** SwiftUI
+- **Architecture:** Clean Architecture + MVVM
+- **Modularity:** Swift Package Manager (SPM)
+- **Concurrency:** Swift Concurrency (async/await)
+- **Testing:** XCTest + URLProtocol stubbing
+- **Caching:** ETag-based offline-first strategy
+- **CI/CD:** GitHub Actions + SwiftLint + Codecov
+
 ## 📋 Table of Contents
 
 - [🧭 Why this architecture](#-why-this-architecture)
