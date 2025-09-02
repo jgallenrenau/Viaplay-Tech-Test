@@ -32,7 +32,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1405E69C2E6703B300D521FD /*  AllTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = " AllTests.xctestplan"; sourceTree = "<group>"; };
 		14D5FF382E6632E600F53C94 /* Viaplay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Viaplay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		14D5FF3B2E6632E600F53C94 /* ViaplayApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViaplayApp.swift; sourceTree = "<group>"; };
 		14D5FF3D2E6632E600F53C94 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -78,7 +77,6 @@
 		14D5FF2F2E6632E600F53C94 = {
 			isa = PBXGroup;
 			children = (
-				1405E69C2E6703B300D521FD /*  AllTests.xctestplan */,
 				14D5FF662E66C36100F53C94 /* README.md */,
 				14D5FF3A2E6632E600F53C94 /* Viaplay */,
 				14D5FF4C2E6632EC00F53C94 /* ViaplayTests */,
