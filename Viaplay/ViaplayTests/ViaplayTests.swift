@@ -1,10 +1,3 @@
-//
-//  ViaplayTests.swift
-//  ViaplayTests
-//
-//  Created by Jordi Gallen Renau on 1/9/25.
-//
-
 import XCTest
 
 final class ViaplayTests: XCTestCase {
