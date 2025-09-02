@@ -3,10 +3,19 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		14ABC1DA2E66DA69001910D4 /* APIClient in Frameworks */ = {isa = PBXBuildFile; productRef = 14ABC1D92E66DA69001910D4 /* APIClient */; };
+		14ABC1DD2E66DA7A001910D4 /* CoreKit in Frameworks */ = {isa = PBXBuildFile; productRef = 14ABC1DC2E66DA7A001910D4 /* CoreKit */; };
+		14ABC1E02E66DA8F001910D4 /* DataKit in Frameworks */ = {isa = PBXBuildFile; productRef = 14ABC1DF2E66DA8F001910D4 /* DataKit */; };
+		14ABC1E32E66DAA1001910D4 /* StorageKit in Frameworks */ = {isa = PBXBuildFile; productRef = 14ABC1E22E66DAA1001910D4 /* StorageKit */; };
+		14ABC1E62E66DAB1001910D4 /* SectionsFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 14ABC1E52E66DAB1001910D4 /* SectionsFeature */; };
+		14ABC1E92E66DAC5001910D4 /* NetworkingKit in Frameworks */ = {isa = PBXBuildFile; productRef = 14ABC1E82E66DAC5001910D4 /* NetworkingKit */; };
+		14ABC1EC2E66DAE6001910D4 /* DetailFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 14ABC1EB2E66DAE6001910D4 /* DetailFeature */; };
+		14ABC1EF2E66DB21001910D4 /* DomainKit in Frameworks */ = {isa = PBXBuildFile; productRef = 14ABC1EE2E66DB21001910D4 /* DomainKit */; };
+		14ABC1F22E66DB5D001910D4 /* DSKit in Frameworks */ = {isa = PBXBuildFile; productRef = 14ABC1F12E66DB5D001910D4 /* DSKit */; };
 		14D5FF3C2E6632E600F53C94 /* ViaplayApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D5FF3B2E6632E600F53C94 /* ViaplayApp.swift */; };
 		14D5FF3E2E6632E600F53C94 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D5FF3D2E6632E600F53C94 /* ContentView.swift */; };
 		14D5FF402E6632EB00F53C94 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14D5FF3F2E6632EB00F53C94 /* Assets.xcassets */; };
@@ -42,6 +51,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14ABC1E02E66DA8F001910D4 /* DataKit in Frameworks */,
+				14ABC1EF2E66DB21001910D4 /* DomainKit in Frameworks */,
+				14ABC1EC2E66DAE6001910D4 /* DetailFeature in Frameworks */,
+				14ABC1F22E66DB5D001910D4 /* DSKit in Frameworks */,
+				14ABC1DD2E66DA7A001910D4 /* CoreKit in Frameworks */,
+				14ABC1DA2E66DA69001910D4 /* APIClient in Frameworks */,
+				14ABC1E62E66DAB1001910D4 /* SectionsFeature in Frameworks */,
+				14ABC1E32E66DAA1001910D4 /* StorageKit in Frameworks */,
+				14ABC1E92E66DAC5001910D4 /* NetworkingKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -118,6 +136,17 @@
 			dependencies = (
 			);
 			name = Viaplay;
+			packageProductDependencies = (
+				14ABC1D92E66DA69001910D4 /* APIClient */,
+				14ABC1DC2E66DA7A001910D4 /* CoreKit */,
+				14ABC1DF2E66DA8F001910D4 /* DataKit */,
+				14ABC1E22E66DAA1001910D4 /* StorageKit */,
+				14ABC1E52E66DAB1001910D4 /* SectionsFeature */,
+				14ABC1E82E66DAC5001910D4 /* NetworkingKit */,
+				14ABC1EB2E66DAE6001910D4 /* DetailFeature */,
+				14ABC1EE2E66DB21001910D4 /* DomainKit */,
+				14ABC1F12E66DB5D001910D4 /* DSKit */,
+			);
 			productName = Viaplay;
 			productReference = 14D5FF382E6632E600F53C94 /* Viaplay.app */;
 			productType = "com.apple.product-type.application";
@@ -168,6 +197,17 @@
 				Base,
 			);
 			mainGroup = 14D5FF2F2E6632E600F53C94;
+			packageReferences = (
+				14ABC1D82E66DA69001910D4 /* XCLocalSwiftPackageReference "../Packages/APIClient" */,
+				14ABC1DB2E66DA7A001910D4 /* XCLocalSwiftPackageReference "../Packages/CoreKit" */,
+				14ABC1DE2E66DA8F001910D4 /* XCLocalSwiftPackageReference "../Packages/DataKit" */,
+				14ABC1E12E66DAA1001910D4 /* XCLocalSwiftPackageReference "../Packages/StorageKit" */,
+				14ABC1E42E66DAB1001910D4 /* XCLocalSwiftPackageReference "../Packages/SectionsFeature" */,
+				14ABC1E72E66DAC5001910D4 /* XCLocalSwiftPackageReference "../Packages/NetworkingKit" */,
+				14ABC1EA2E66DAE6001910D4 /* XCLocalSwiftPackageReference "../Packages/DetailFeature" */,
+				14ABC1ED2E66DB21001910D4 /* XCLocalSwiftPackageReference "../Packages/DomainKit" */,
+				14ABC1F02E66DB5D001910D4 /* XCLocalSwiftPackageReference "../Packages/DSKit" */,
+			);
 			productRefGroup = 14D5FF392E6632E600F53C94 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -494,6 +534,84 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		14ABC1D82E66DA69001910D4 /* XCLocalSwiftPackageReference "../Packages/APIClient" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../Packages/APIClient;
+		};
+		14ABC1DB2E66DA7A001910D4 /* XCLocalSwiftPackageReference "../Packages/CoreKit" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../Packages/CoreKit;
+		};
+		14ABC1DE2E66DA8F001910D4 /* XCLocalSwiftPackageReference "../Packages/DataKit" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../Packages/DataKit;
+		};
+		14ABC1E12E66DAA1001910D4 /* XCLocalSwiftPackageReference "../Packages/StorageKit" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../Packages/StorageKit;
+		};
+		14ABC1E42E66DAB1001910D4 /* XCLocalSwiftPackageReference "../Packages/SectionsFeature" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../Packages/SectionsFeature;
+		};
+		14ABC1E72E66DAC5001910D4 /* XCLocalSwiftPackageReference "../Packages/NetworkingKit" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../Packages/NetworkingKit;
+		};
+		14ABC1EA2E66DAE6001910D4 /* XCLocalSwiftPackageReference "../Packages/DetailFeature" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../Packages/DetailFeature;
+		};
+		14ABC1ED2E66DB21001910D4 /* XCLocalSwiftPackageReference "../Packages/DomainKit" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../Packages/DomainKit;
+		};
+		14ABC1F02E66DB5D001910D4 /* XCLocalSwiftPackageReference "../Packages/DSKit" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../Packages/DSKit;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		14ABC1D92E66DA69001910D4 /* APIClient */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = APIClient;
+		};
+		14ABC1DC2E66DA7A001910D4 /* CoreKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CoreKit;
+		};
+		14ABC1DF2E66DA8F001910D4 /* DataKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DataKit;
+		};
+		14ABC1E22E66DAA1001910D4 /* StorageKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = StorageKit;
+		};
+		14ABC1E52E66DAB1001910D4 /* SectionsFeature */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SectionsFeature;
+		};
+		14ABC1E82E66DAC5001910D4 /* NetworkingKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = NetworkingKit;
+		};
+		14ABC1EB2E66DAE6001910D4 /* DetailFeature */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DetailFeature;
+		};
+		14ABC1EE2E66DB21001910D4 /* DomainKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DomainKit;
+		};
+		14ABC1F12E66DB5D001910D4 /* DSKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DSKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 14D5FF302E6632E600F53C94 /* Project object */;
 }
