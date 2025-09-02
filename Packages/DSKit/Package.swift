@@ -9,11 +9,9 @@ let package = Package(
     products: [
         .library(name: "DSKit", targets: ["DSKit"])
     ],
-    dependencies: [
-        .package(path: "../CoreKit")
-    ],
+    dependencies: [],
     targets: [
-        .target(name: "DSKit", dependencies: ["CoreKit"]),
+        .target(name: "DSKit"),
         .testTarget(name: "DSKitTests", dependencies: ["DSKit"])
     ]
 )

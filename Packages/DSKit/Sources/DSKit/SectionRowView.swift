@@ -1,17 +1,25 @@
 import SwiftUI
-import CoreKit
 
 public struct SectionRowView: View {
-    private let section: ViaplaySection
+    public struct Model: Equatable {
+        public let title: String
+        public let description: String?
+        public init(title: String, description: String? = nil) {
+            self.title = title
+            self.description = description
+        }
+    }
 
-    public init(section: ViaplaySection) {
-        self.section = section
+    private let model: Model
+
+    public init(model: Model) {
+        self.model = model
     }
 
     public var body: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text(section.title).font(.headline)
-            if let description = section.description, !description.isEmpty {
+            Text(model.title).font(.headline)
+            if let description = model.description, !description.isEmpty {
                 Text(description).font(.subheadline).foregroundStyle(.secondary)
             }
         }
