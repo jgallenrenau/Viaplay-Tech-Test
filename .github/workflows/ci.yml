@@ -54,9 +54,18 @@ jobs:
 
       - name: Build & Test (all tests with coverage)
         run: |
-          # Run tests for all Swift packages individually
-          for package in Packages/*/; do
-            echo "Testing package: $package"
+          # Run tests for Swift packages in dependency order
+          # First: Independent packages (no dependencies)
+          for package in Packages/DomainKit Packages/NetworkingKit Packages/StorageKit Packages/DSKit; do
+            echo "Testing independent package: $package"
+            cd "$package"
+            swift test --enable-code-coverage
+            cd ../..
+          done
+          
+          # Second: Packages with dependencies
+          for package in Packages/DataKit Packages/DetailFeature Packages/SectionsFeature; do
+            echo "Testing dependent package: $package"
             cd "$package"
             swift test --enable-code-coverage
             cd ../..
