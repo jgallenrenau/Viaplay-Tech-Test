@@ -16,7 +16,8 @@ let package = Package(
         .package(path: "../DataKit")
     ],
     targets: [
-        .target(name: "DetailFeature", dependencies: ["DomainKit", "DSKit", "DataKit"])
+        .target(name: "DetailFeature", dependencies: ["DomainKit", "DSKit", "DataKit"]),
+        .testTarget(name: "DetailFeatureTests", dependencies: ["DetailFeature"])
     ]
 )
 
