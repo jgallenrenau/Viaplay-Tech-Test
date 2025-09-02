@@ -1,10 +1,10 @@
 import SwiftUI
-import CoreKit
+import DomainKit
 
 public struct DetailView: View {
-    private let section: ViaplaySection
+    private let section: ContentSection
 
-    public init(section: ViaplaySection) {
+    public init(section: ContentSection) {
         self.section = section
     }
 

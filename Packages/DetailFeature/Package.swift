@@ -10,12 +10,12 @@ let package = Package(
         .library(name: "DetailFeature", targets: ["DetailFeature"])
     ],
     dependencies: [
-        .package(path: "../CoreKit"),
+        .package(path: "../DomainKit"),
         .package(path: "../DSKit"),
-        .package(path: "../APIClient")
+        .package(path: "../DataKit")
     ],
     targets: [
-        .target(name: "DetailFeature", dependencies: ["CoreKit", "DSKit", "APIClient"])
+        .target(name: "DetailFeature", dependencies: ["DomainKit", "DSKit", "DataKit"])
     ]
 )
 
