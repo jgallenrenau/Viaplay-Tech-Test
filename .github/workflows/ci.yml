@@ -45,7 +45,7 @@ jobs:
         working-directory: Viaplay
         run: swiftlint --strict
 
-      - name: Build & Test (unit tests only, with coverage)
+      - name: Build & Test (all tests with coverage)
         run: |
           xcodebuild \
             -project "$PROJECT" \
@@ -53,8 +53,20 @@ jobs:
             -destination "$DESTINATION" \
             -enableCodeCoverage YES \
             -skipMacroValidation \
-            -only-testing:ViaplayTests \
             clean test
+
+      - name: Generate Code Coverage Report
+        run: |
+          xcrun xccov view --report --json ~/Library/Developer/Xcode/DerivedData/**/Logs/Test/*.xcresult > coverage.json
+          echo "Coverage report generated"
+
+      - name: Upload Coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          file: ~/Library/Developer/Xcode/DerivedData/**/Logs/Test/*.xcresult
+          flags: unittests
+          name: codecov-umbrella
+          fail_ci_if_error: false
 
       - name: Upload xcresult
         if: always()
