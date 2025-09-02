@@ -11,9 +11,9 @@ on:
   workflow_dispatch:
     inputs:
       run_tests:
-        description: 'Force run tests even if paths don\'t match'
+        description: 'Force run tests even if paths do not match'
         required: false
-        default: 'false'
+        default: false
         type: boolean
 
 jobs:
