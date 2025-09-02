@@ -1,6 +1,8 @@
 import XCTest
 @testable import DataKit
 @testable import DomainKit
+@testable import NetworkingKit
+@testable import StorageKit
 
 private final class StubHTTPClient: HTTPClient {
     let status: Int
