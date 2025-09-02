@@ -3,15 +3,15 @@ import Foundation
 public struct Page: Equatable, Codable, Sendable {
     public let title: String
     public let description: String?
-    public let sections: [Section]
-    public init(title: String, description: String? = nil, sections: [Section]) {
+    public let sections: [ContentSection]
+    public init(title: String, description: String? = nil, sections: [ContentSection]) {
         self.title = title
         self.description = description
         self.sections = sections
     }
 }
 
-public struct Section: Equatable, Codable, Sendable {
+public struct ContentSection: Equatable, Codable, Sendable {
     public let title: String
     public let description: String?
     public let href: URL?
@@ -28,5 +28,3 @@ public enum DomainError: Error, Sendable {
     case storage
     case notModified
 }
-
-

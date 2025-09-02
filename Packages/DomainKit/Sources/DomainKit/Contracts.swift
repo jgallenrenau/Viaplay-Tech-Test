@@ -12,5 +12,3 @@ public protocol GetRootPageUseCase {
 public protocol GetPageUseCase {
     func execute(url: URL) async throws -> Page
 }
-
-
