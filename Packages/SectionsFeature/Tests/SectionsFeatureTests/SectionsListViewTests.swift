@@ -1,13 +1,23 @@
 import XCTest
 import SwiftUI
 @testable import SectionsFeature
+@testable import DomainKit
 
 final class SectionsListViewTests: XCTestCase {
-    func testConstructsWithMockClient() {
-        class MockClient: ViaplayAPIClientProtocol {
-            func fetchSections(from url: URL) async throws -> [ViaplaySection] { [] }
+    func testConstructsWithMockUseCase() {
+        class MockGetRootPageUseCase: GetRootPageUseCase {
+            func execute() async throws -> Page {
+                return Page(
+                    title: "Test Title",
+                    description: "Test Description",
+                    sections: []
+                )
+            }
         }
-        let _ = SectionsListView(apiClient: MockClient())
+        
+        let mockUseCase = MockGetRootPageUseCase()
+        let viewModel = SectionsViewModel(getRootPage: mockUseCase)
+        let _ = SectionsListView(viewModel: viewModel)
         XCTAssertTrue(true)
     }
 }
