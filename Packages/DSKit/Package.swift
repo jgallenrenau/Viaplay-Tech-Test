@@ -13,7 +13,7 @@ let package = Package(
     dependencies: [],
     targets: [
         .target(name: "DSKit"),
-        .testTarget(name: "DSKitTests", dependencies: ["DSKit", "DomainKit"])
+        .testTarget(name: "DSKitTests", dependencies: ["DSKit"])
     ]
 )
 
