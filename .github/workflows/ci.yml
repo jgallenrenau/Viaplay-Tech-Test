@@ -65,7 +65,7 @@ jobs:
       - name: Generate Code Coverage Report
         run: |
           # Find the most recent xcresult file
-          XCRESULT_PATH=$(find ~/Library/Developer/Xcode/DerivedData -name "*.xcresult" -type d | head -1)
+          XCRESULT_PATH=$(find ~/Library/Developer/Xcode/DerivedData -name "*.xcresult" -type d -exec stat -f "%m %N" {} \; | sort -nr | head -1 | cut -d' ' -f2-)
           if [ -z "$XCRESULT_PATH" ]; then
             echo "No xcresult file found"
             exit 1
