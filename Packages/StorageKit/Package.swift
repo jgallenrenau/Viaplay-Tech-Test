@@ -3,7 +3,7 @@ import PackageDescription
 
 let package = Package(
     name: "StorageKit",
-    platforms: [ .iOS(.v16) ],
+    platforms: [ .iOS(.v16), .macOS(.v12) ],
     products: [ .library(name: "StorageKit", targets: ["StorageKit"]) ],
     targets: [ .target(name: "StorageKit"), .testTarget(name: "StorageKitTests", dependencies: ["StorageKit"]) ]
 )
