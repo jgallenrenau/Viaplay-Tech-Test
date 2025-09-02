@@ -12,6 +12,7 @@
 		14D5FF402E6632EB00F53C94 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14D5FF3F2E6632EB00F53C94 /* Assets.xcassets */; };
 		14D5FF442E6632EB00F53C94 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14D5FF432E6632EB00F53C94 /* Preview Assets.xcassets */; };
 		14D5FF4E2E6632EC00F53C94 /* ViaplayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D5FF4D2E6632EC00F53C94 /* ViaplayTests.swift */; };
+		14D5FF672E66C36200F53C94 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 14D5FF662E66C36100F53C94 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +34,7 @@
 		14D5FF432E6632EB00F53C94 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		14D5FF492E6632EB00F53C94 /* ViaplayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ViaplayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		14D5FF4D2E6632EC00F53C94 /* ViaplayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViaplayTests.swift; sourceTree = "<group>"; };
+		14D5FF662E66C36100F53C94 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 		14D5FF2F2E6632E600F53C94 = {
 			isa = PBXGroup;
 			children = (
+				14D5FF662E66C36100F53C94 /* README.md */,
 				14D5FF3A2E6632E600F53C94 /* Viaplay */,
 				14D5FF4C2E6632EC00F53C94 /* ViaplayTests */,
 				14D5FF392E6632E600F53C94 /* Products */,
@@ -180,6 +183,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14D5FF672E66C36200F53C94 /* README.md in Resources */,
 				14D5FF442E6632EB00F53C94 /* Preview Assets.xcassets in Resources */,
 				14D5FF402E6632EB00F53C94 /* Assets.xcassets in Resources */,
 			);
