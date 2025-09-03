@@ -21,6 +21,7 @@ The Viaplay Tech Test is a Swift-based iOS application that demonstrates modern 
 
 - [🧭 Why this architecture](#-why-this-architecture)
 - [🧩 MVVM pattern (per feature)](#-mvvm-pattern-per-feature)
+- [📦 SPM Architecture Decision: Internal vs External Dependencies](#-spm-architecture-decision-internal-vs-external-dependencies)
 - [🧱 Modular architecture (SPM)](#-modular-architecture-spm)
 - [🧪 Testing strategy](#-testing-strategy)
 - [📈 Scalability and team workflow](#-scalability-and-team-workflow)
@@ -42,7 +43,7 @@ The Viaplay Tech Test is a Swift-based iOS application that demonstrates modern 
                                 │
 ┌─────────────────────────────────────────────────────────────┐
 │                      Feature Layer                          │
-│           SectionsFeature + DetailFeature                   │
+│                  Sections + DetailSection                   │
 └─────────────────────────────────────────────────────────────┘
                                 │
 ┌─────────────────────────────────────────────────────────────┐
@@ -177,7 +178,7 @@ Each feature follows the **MVVM (Model-View-ViewModel)** pattern with **Clean Ar
 - **Characteristics**: Pure functions with no side effects, easy to test with mocks.
 - **Benefits**: Reusable business logic, clear contracts, and framework independence.
 
-### **Repository (DataKit)** 🗄️
+### **Repository (Data)** 🗄️
 - **Responsibility**: Implement domain contracts by orchestrating data sources.
 - **What it does**: 
   - Combines remote (API) and local (cache) data sources
@@ -186,20 +187,72 @@ Each feature follows the **MVVM (Model-View-ViewModel)** pattern with **Clean Ar
   - Manages offline/online data synchronization
 - **Benefits**: Abstract data access, testable with stubs, and flexible data strategies.
 
+## 📦 SPM Architecture Decision: Internal vs External Dependencies
+
+### **Decision: SPM as Internal Targets**
+
+We chose to implement SPM modules as **internal targets** within the main Xcode project rather than external dependencies. Here's the rationale:
+
+### **✅ Advantages of Internal SPM Targets**
+
+**Development Experience:**
+- **Test Plans**: All test targets appear automatically in Xcode Test Navigator
+- **Debugging**: Seamless debugging across modules with breakpoints
+- **IntelliSense**: Perfect autocompletion and navigation between modules
+- **Build Performance**: Faster incremental builds and development cycles
+
+**Tech Test Benefits:**
+- **Demonstration**: Easy to show comprehensive testing strategies
+- **Evaluation**: Evaluators can quickly run and review all tests
+- **Maintainability**: Clear module separation without complexity overhead
+
+### **❌ Trade-offs Considered**
+
+**External SPM Dependencies would provide:**
+- **True Modularity**: Complete independence between packages
+- **Reusability**: Packages could be used in other projects
+- **Versioning**: Independent versioning per module
+- **Team Scalability**: Better for large distributed teams
+
+**Why we chose Internal for this Tech Test:**
+- **Scope**: Single-project demonstration of architectural principles
+- **Time Constraints**: Faster development and testing cycles
+- **Evaluation Focus**: Emphasis on code quality over distribution complexity
+- **Learning**: Clear demonstration of Clean Architecture without tooling overhead
+
+### **🏗️ Architecture Benefits Maintained**
+
+Even with internal targets, we maintain:
+- **Separation of Concerns**: Each module has single responsibility
+- **Dependency Inversion**: Clear dependency flow (Features → Domain ← Data)
+- **Testability**: Isolated testing with dependency injection
+- **SOLID Principles**: All principles applied within modular structure
+
+### **🔄 Future Migration Path**
+
+If this project were to scale to a production environment with multiple teams, the migration path to external SPM dependencies would be straightforward:
+
+1. **Extract Packages**: Move each internal target to separate `Package.swift` files
+2. **Update Dependencies**: Modify project to reference local package dependencies
+3. **CI/CD Updates**: Update build scripts to handle individual package testing
+4. **Team Structure**: Assign ownership of packages to different teams
+
+The current architecture makes this migration path clear and maintainable.
+
 ## 🧱 Modular architecture (SPM)
 
 The application is structured as **independent Swift Package Manager (SPM) modules**, each with a specific responsibility and clear dependency boundaries:
 
-### **DomainKit** 🏛️
+### **Domain** 🏛️
 - **Purpose**: Contains the core business logic and rules of the application.
 - **Contains**: Entities (`Page`, `ContentSection`), contracts (`PageRepository`), use cases (`GetRootPage`), and domain errors.
 - **Dependencies**: None (pure domain logic).
 - **Benefits**: Framework-agnostic, highly testable, and stable core that rarely changes.
 
-### **DataKit** 📊
+### **Data** 📊
 - **Purpose**: Orchestrates data access by implementing domain contracts.
 - **Contains**: Repository implementations, DTO mappers, and data coordination logic.
-- **Dependencies**: `DomainKit` + `NetworkingKit` + `StorageKit`.
+- **Dependencies**: `Domain` + `NetworkingKit` + `StorageKit`.
 - **Benefits**: Centralized data policies, testable with stubs, and flexible data strategies.
 
 ### **NetworkingKit** 🌐
@@ -220,10 +273,10 @@ The application is structured as **independent Swift Package Manager (SPM) modul
 - **Dependencies**: None (pure UI components).
 - **Benefits**: Consistent design, reusable components, and UI/UX standardization.
 
-### **Features** (SectionsFeature, DetailFeature) 🚀
+### **Features** (Sections, DetailSection) 🚀
 - **Purpose**: Implements complete user-facing features with MVVM pattern.
 - **Contains**: SwiftUI views, ViewModels, and feature-specific logic.
-- **Dependencies**: `DomainKit` + `DSKit` (optional).
+- **Dependencies**: `Domain` + `DSKit` (optional).
 - **Benefits**: Independent features, clear boundaries, and easy testing.
 
 ### **Data Flow** 🔄
@@ -237,13 +290,13 @@ This unidirectional flow ensures predictable data movement and makes debugging e
 
 Our testing approach ensures **comprehensive coverage** across all modules while maintaining **fast, reliable tests**:
 
-### **DomainKit** 🏛️
+### **Domain** 🏛️
 - **Strategy**: Unit tests for use cases with **fake repositories**.
 - **What we test**: Business logic, use case execution, and domain rules.
 - **Tools**: XCTest with simple mock objects.
 - **Benefits**: Fast execution, no external dependencies, and pure business logic validation.
 
-### **DataKit** 📊
+### **Data** 📊
 - **Strategy**: Repository tests with **stubbed `HTTPClient`** and **temporary `JSONDiskCache`/`KeyValueStore`**.
 - **What we test**: Data mapping, caching logic, ETag handling, and offline scenarios.
 - **Scenarios**: 200 OK responses, 304 Not Modified, network errors, and cache fallbacks.
@@ -277,19 +330,19 @@ This architecture is designed to **scale with your team and product requirements
 
 ### **Adding new features** 🚀
 1. **Create new Feature package**: Implement View/ViewModel following MVVM pattern.
-2. **Define domain contracts**: Add new use cases and repository interfaces in DomainKit.
-3. **Implement data layer**: DataKit provides concrete implementations of domain contracts.
+2. **Define domain contracts**: Add new use cases and repository interfaces in Domain.
+3. **Implement data layer**: Data provides concrete implementations of domain contracts.
 4. **Wire dependencies**: Inject implementations in the app's composition root.
 5. **Add tests**: Each layer gets its own test suite following our testing strategy.
 
 ### **Infrastructure changes** 🔧
 - **Swap HTTP client**: Change NetworkingKit implementation without touching domain or features.
 - **Storage backend**: Replace StorageKit implementation (disk → database) without affecting business logic.
-- **API changes**: Update DataKit mappers and DTOs while keeping domain models stable.
+- **API changes**: Update Data mappers and DTOs while keeping domain models stable.
 
 ### **Team collaboration** 👥
 - **Parallel development**: Multiple developers can work on different features simultaneously.
-- **Clear ownership**: Each team can own specific modules (e.g., UI team owns DSKit, backend team owns DataKit).
+- **Clear ownership**: Each team can own specific modules (e.g., UI team owns DSKit, backend team owns Data).
 - **Independent releases**: Features can be developed and tested independently.
 
 ### **CI/CD pipeline** ⚙️
@@ -302,7 +355,7 @@ This architecture is designed to **scale with your team and product requirements
 Our architecture strictly follows **SOLID principles** to ensure maintainable and extensible code:
 
 ### **S - Single Responsibility Principle** 🎯
-- **Each module has one reason to change**: DomainKit handles business logic, NetworkingKit handles HTTP, StorageKit handles persistence.
+- **Each module has one reason to change**: Domain handles business logic, NetworkingKit handles HTTP, StorageKit handles persistence.
 - **Each class has one responsibility**: `GetRootPageUseCase` only fetches root page, `HTTPClient` only makes HTTP requests.
 - **Benefits**: Easier testing, debugging, and maintenance.
 
@@ -323,35 +376,40 @@ Our architecture strictly follows **SOLID principles** to ensure maintainable an
 
 ### **D - Dependency Inversion Principle** ⬆️
 - **Depend on abstractions, not concretions**: Features depend on domain protocols, not concrete implementations.
-- **Infrastructure depends on domain**: DataKit implements domain contracts, not the other way around.
+- **Infrastructure depends on domain**: Data implements domain contracts, not the other way around.
 - **Benefits**: Flexible architecture and easy testing with mocks.
 
 ## 🗂️ Module index
 
-- DomainKit → [Packages/DomainKit/README.md](Packages/DomainKit/README.md)
-- DataKit → [Packages/DataKit/README.md](Packages/DataKit/README.md)
-- NetworkingKit → [Packages/NetworkingKit/README.md](Packages/NetworkingKit/README.md)
-- StorageKit → [Packages/StorageKit/README.md](Packages/StorageKit/README.md)
-- DSKit → [Packages/DSKit/README.md](Packages/DSKit/README.md)
-- SectionsFeature → [Packages/SectionsFeature/README.md](Packages/SectionsFeature/README.md)
-- DetailFeature → [Packages/DetailFeature/README.md](Packages/DetailFeature/README.md)
+### **Base Layer**
+- Domain → [Packages/Base/Domain/README.md](Packages/Base/Domain/README.md)
+- Data → [Packages/Base/Data/README.md](Packages/Base/Data/README.md)
+
+### **Feature Layer**
+- Sections → [Packages/Feature/Sections/README.md](Packages/Feature/Sections/README.md)
+- DetailSection → [Packages/Feature/DetailSection/README.md](Packages/Feature/DetailSection/README.md)
+
+### **Infrastructure Layer**
+- NetworkingKit → [Packages/Infraestructure/NetworkingKit/README.md](Packages/Infraestructure/NetworkingKit/README.md)
+- StorageKit → [Packages/Infraestructure/StorageKit/README.md](Packages/Infraestructure/StorageKit/README.md)
+- DSKit → [Packages/Infraestructure/DSKit/README.md](Packages/Infraestructure/DSKit/README.md)
 
 ## 🏗️ Architecture overview
 
 - **Clean Architecture + MVVM** in modular SPM packages.
-- **Flow**: `View (SwiftUI) → ViewModel → UseCase (Domain) → Repository (DataKit) → Data Sources (NetworkingKit + StorageKit)`.
+- **Flow**: `View (SwiftUI) → ViewModel → UseCase (Domain) → Repository (Data) → Data Sources (NetworkingKit + StorageKit)`.
 - **Offline-first** with ETag/304: when the server indicates Not Modified we return the **cache**.
 - **DSKit** is UI only; features translate domain models to view models.
 
 ### Why this design (rationale per layer)
 
-- **DomainKit (Why?)**: Keep the business core stable, portable, and easy to test. No dependency on Apple frameworks.
+- **Domain (Why?)**: Keep the business core stable, portable, and easy to test. No dependency on Apple frameworks.
   - Defines entities (`Page`, `ContentSection`), contracts (`PageRepository`), and use cases (`GetRootPage`).
-- **DataKit (Why?)**: Orchestrate policies (ETag, mappings, future expiration) separated from domain. API or cache changes don't impact UI or use cases.
+- **Data (Why?)**: Orchestrate policies (ETag, mappings, future expiration) separated from domain. API or cache changes don't impact UI or use cases.
   - Implements `PageRepository` combining remote and local; maps DTO ↔ domain.
 - **NetworkingKit (Why?)**: Abstract HTTP to enable stubbing/testing and replace client or strategy without touching repos/use cases.
   - Provides `HTTPClient` and endpoint helpers.
-- **StorageKit (Why?)**: Encapsulate persistence (JSON/KeyValue) and allow switching from disk to database without affecting DataKit.
+- **StorageKit (Why?)**: Encapsulate persistence (JSON/KeyValue) and allow switching from disk to database without affecting Data.
   - `JSONDiskCache`, `KeyValueStore` (ETag/Last-Modified).
 - **DSKit (Why?)**: Independent reusable UI; facilitates visual consistency and avoids coupling UI to domain types.
   - SwiftUI components that receive simple models.
@@ -361,11 +419,11 @@ Our architecture strictly follows **SOLID principles** to ensure maintainable an
 ### Online/Offline flow
 
 1) View requests data via ViewModel → UseCase (`GetRootPage`).
-2) Repository (`DataKit`) prepares conditional headers (`If-None-Match` with ETag stored in `StorageKit`).
+2) Repository (`Data`) prepares conditional headers (`If-None-Match` with ETag stored in `StorageKit`).
 3) `NetworkingKit` makes the GET:
-   - **200 OK (online, new content)**: DataKit decodes JSON → maps to domain → saves ETag and JSON in `StorageKit` → returns to ViewModel.
-   - **304 Not Modified (logical offline / no changes)**: DataKit reads cached JSON from `StorageKit` and returns it.
-   - **Network error (real offline)**: DataKit attempts fallback to cached JSON; if it exists, returns it, if not, propagates error.
+   - **200 OK (online, new content)**: Data decodes JSON → maps to domain → saves ETag and JSON in `StorageKit` → returns to ViewModel.
+   - **304 Not Modified (logical offline / no changes)**: Data reads cached JSON from `StorageKit` and returns it.
+   - **Network error (real offline)**: Data attempts fallback to cached JSON; if it exists, returns it, if not, propagates error.
 4) ViewModel adapts to view models (for DSKit) and updates the UI.
 
 
