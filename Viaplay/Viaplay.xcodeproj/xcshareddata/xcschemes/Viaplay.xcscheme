@@ -33,7 +33,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "14D5FF382E6632E600F53C94"
+               BlueprintIdentifier = "14D5FF482E6632EB00F53C94"
                BuildableName = "ViaplayTests.xctest"
                BlueprintName = "ViaplayTests"
                ReferencedContainer = "container:Viaplay.xcodeproj">
