@@ -3,10 +3,17 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		145E180F2E6980EC00A602E3 /* Sections in Frameworks */ = {isa = PBXBuildFile; productRef = 145E180E2E6980EC00A602E3 /* Sections */; };
+		145E18112E69810A00A602E3 /* Data in Frameworks */ = {isa = PBXBuildFile; productRef = 145E18102E69810A00A602E3 /* Data */; };
+		145E18132E69810A00A602E3 /* DetailSection in Frameworks */ = {isa = PBXBuildFile; productRef = 145E18122E69810A00A602E3 /* DetailSection */; };
+		145E18152E69810A00A602E3 /* Domain in Frameworks */ = {isa = PBXBuildFile; productRef = 145E18142E69810A00A602E3 /* Domain */; };
+		145E18172E69810A00A602E3 /* DSKit in Frameworks */ = {isa = PBXBuildFile; productRef = 145E18162E69810A00A602E3 /* DSKit */; };
+		145E18192E69810A00A602E3 /* NetworkingKit in Frameworks */ = {isa = PBXBuildFile; productRef = 145E18182E69810A00A602E3 /* NetworkingKit */; };
+		145E181B2E69810A00A602E3 /* StorageKit in Frameworks */ = {isa = PBXBuildFile; productRef = 145E181A2E69810A00A602E3 /* StorageKit */; };
 		14D5FF3C2E6632E600F53C94 /* ViaplayApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D5FF3B2E6632E600F53C94 /* ViaplayApp.swift */; };
 		14D5FF3E2E6632E600F53C94 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D5FF3D2E6632E600F53C94 /* ContentView.swift */; };
 		14D5FF402E6632EB00F53C94 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14D5FF3F2E6632EB00F53C94 /* Assets.xcassets */; };
@@ -50,6 +57,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				145E18112E69810A00A602E3 /* Data in Frameworks */,
+				145E181B2E69810A00A602E3 /* StorageKit in Frameworks */,
+				145E180F2E6980EC00A602E3 /* Sections in Frameworks */,
+				145E18152E69810A00A602E3 /* Domain in Frameworks */,
+				145E18132E69810A00A602E3 /* DetailSection in Frameworks */,
+				145E18172E69810A00A602E3 /* DSKit in Frameworks */,
+				145E18192E69810A00A602E3 /* NetworkingKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,6 +87,11 @@
 		14530D612E697D9200978272 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				14D5FF422E6632EB00F53C94 /* Preview Content */,
+				14D5FF3F2E6632EB00F53C94 /* Assets.xcassets */,
+				14D5FF412E6632EB00F53C94 /* Viaplay.entitlements */,
+				14D5FF3B2E6632E600F53C94 /* ViaplayApp.swift */,
+				14D5FF3D2E6632E600F53C94 /* ContentView.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -105,11 +124,6 @@
 				14EF95CD2E68CA2400CC74B1 /* Base */,
 				14EF95CE2E68CA2400CC74B1 /* Features */,
 				14EF95CF2E68CA2400CC74B1 /* Infraestructure */,
-				14D5FF3B2E6632E600F53C94 /* ViaplayApp.swift */,
-				14D5FF3D2E6632E600F53C94 /* ContentView.swift */,
-				14D5FF3F2E6632EB00F53C94 /* Assets.xcassets */,
-				14D5FF412E6632EB00F53C94 /* Viaplay.entitlements */,
-				14D5FF422E6632EB00F53C94 /* Preview Content */,
 			);
 			path = Viaplay;
 			sourceTree = "<group>";
@@ -175,6 +189,13 @@
 			);
 			name = Viaplay;
 			packageProductDependencies = (
+				145E180E2E6980EC00A602E3 /* Sections */,
+				145E18102E69810A00A602E3 /* Data */,
+				145E18122E69810A00A602E3 /* DetailSection */,
+				145E18142E69810A00A602E3 /* Domain */,
+				145E18162E69810A00A602E3 /* DSKit */,
+				145E18182E69810A00A602E3 /* NetworkingKit */,
+				145E181A2E69810A00A602E3 /* StorageKit */,
 			);
 			productName = Viaplay;
 			productReference = 14D5FF382E6632E600F53C94 /* Viaplay.app */;
@@ -227,6 +248,7 @@
 			);
 			mainGroup = 14D5FF2F2E6632E600F53C94;
 			packageReferences = (
+				145E180D2E6980EC00A602E3 /* XCLocalSwiftPackageReference "../Packages/Feature/Sections" */,
 			);
 			productRefGroup = 14D5FF392E6632E600F53C94 /* Products */;
 			projectDirPath = "";
@@ -406,10 +428,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Viaplay/Viaplay.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Viaplay/App/Viaplay.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Viaplay/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Viaplay/App/Preview Content\"";
 				DEVELOPMENT_TEAM = XMY6QG9YH8;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -444,10 +466,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Viaplay/Viaplay.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Viaplay/App/Viaplay.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Viaplay/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Viaplay/App/Preview Content\"";
 				DEVELOPMENT_TEAM = XMY6QG9YH8;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -554,6 +576,44 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		145E180D2E6980EC00A602E3 /* XCLocalSwiftPackageReference "../Packages/Feature/Sections" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../Packages/Feature/Sections;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		145E180E2E6980EC00A602E3 /* Sections */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Sections;
+		};
+		145E18102E69810A00A602E3 /* Data */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Data;
+		};
+		145E18122E69810A00A602E3 /* DetailSection */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DetailSection;
+		};
+		145E18142E69810A00A602E3 /* Domain */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Domain;
+		};
+		145E18162E69810A00A602E3 /* DSKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DSKit;
+		};
+		145E18182E69810A00A602E3 /* NetworkingKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = NetworkingKit;
+		};
+		145E181A2E69810A00A602E3 /* StorageKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = StorageKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 14D5FF302E6632E600F53C94 /* Project object */;
 }
