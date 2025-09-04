@@ -15,7 +15,7 @@
     {
       "parallelizable" : true,
       "target" : {
-        "containerPath" : "container:..\/..\/Base\/Data",
+        "containerPath" : "container:Viaplay\/Packages\/Base\/Data",
         "identifier" : "DataTests",
         "name" : "DataTests"
       }
@@ -23,7 +23,7 @@
     {
       "parallelizable" : true,
       "target" : {
-        "containerPath" : "container:..\/..\/Feature\/DetailSection",
+        "containerPath" : "container:Viaplay\/Packages\/Feature\/DetailSection",
         "identifier" : "DetailSectionTests",
         "name" : "DetailSectionTests"
       }
@@ -31,7 +31,7 @@
     {
       "parallelizable" : true,
       "target" : {
-        "containerPath" : "container:..\/..\/Base\/Domain",
+        "containerPath" : "container:Viaplay\/Packages\/Base\/Domain",
         "identifier" : "DomainTests",
         "name" : "DomainTests"
       }
@@ -39,7 +39,7 @@
     {
       "parallelizable" : true,
       "target" : {
-        "containerPath" : "container:",
+        "containerPath" : "container:Viaplay\/Packages\/Infraestructure\/DSKit",
         "identifier" : "DSKitTests",
         "name" : "DSKitTests"
       }
@@ -47,7 +47,7 @@
     {
       "parallelizable" : true,
       "target" : {
-        "containerPath" : "container:..\/NetworkingKit",
+        "containerPath" : "container:Viaplay\/Packages\/Infraestructure\/NetworkingKit",
         "identifier" : "NetworkingKitTests",
         "name" : "NetworkingKitTests"
       }
@@ -55,7 +55,7 @@
     {
       "parallelizable" : true,
       "target" : {
-        "containerPath" : "container:..\/..\/Feature\/Sections",
+        "containerPath" : "container:Viaplay\/Packages\/Feature\/Sections",
         "identifier" : "SectionsTests",
         "name" : "SectionsTests"
       }
@@ -63,7 +63,7 @@
     {
       "parallelizable" : true,
       "target" : {
-        "containerPath" : "container:..\/StorageKit",
+        "containerPath" : "container:Viaplay\/Packages\/Infraestructure\/StorageKit",
         "identifier" : "StorageKitTests",
         "name" : "StorageKitTests"
       }
