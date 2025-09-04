@@ -15,7 +15,7 @@
     {
       "parallelizable" : true,
       "target" : {
-        "containerPath" : "container:Viaplay\/Base\/Data",
+        "containerPath" : "container:..\/..\/Base\/Data",
         "identifier" : "DataTests",
         "name" : "DataTests"
       }
@@ -23,7 +23,7 @@
     {
       "parallelizable" : true,
       "target" : {
-        "containerPath" : "container:..\/Packages\/Feature\/DetailSection",
+        "containerPath" : "container:..\/..\/Feature\/DetailSection",
         "identifier" : "DetailSectionTests",
         "name" : "DetailSectionTests"
       }
@@ -31,7 +31,7 @@
     {
       "parallelizable" : true,
       "target" : {
-        "containerPath" : "container:..\/Packages\/Base\/Domain",
+        "containerPath" : "container:..\/..\/Base\/Domain",
         "identifier" : "DomainTests",
         "name" : "DomainTests"
       }
@@ -39,7 +39,7 @@
     {
       "parallelizable" : true,
       "target" : {
-        "containerPath" : "container:..\/Packages\/Infraestructure\/DSKit",
+        "containerPath" : "container:",
         "identifier" : "DSKitTests",
         "name" : "DSKitTests"
       }
@@ -47,7 +47,7 @@
     {
       "parallelizable" : true,
       "target" : {
-        "containerPath" : "container:..\/Packages\/Infraestructure\/NetworkingKit",
+        "containerPath" : "container:..\/NetworkingKit",
         "identifier" : "NetworkingKitTests",
         "name" : "NetworkingKitTests"
       }
@@ -55,7 +55,7 @@
     {
       "parallelizable" : true,
       "target" : {
-        "containerPath" : "container:..\/Packages\/Feature\/Sections",
+        "containerPath" : "container:..\/..\/Feature\/Sections",
         "identifier" : "SectionsTests",
         "name" : "SectionsTests"
       }
@@ -63,17 +63,9 @@
     {
       "parallelizable" : true,
       "target" : {
-        "containerPath" : "container:..\/Packages\/Infraestructure\/StorageKit",
+        "containerPath" : "container:..\/StorageKit",
         "identifier" : "StorageKitTests",
         "name" : "StorageKitTests"
-      }
-    },
-    {
-      "parallelizable" : true,
-      "target" : {
-        "containerPath" : "container:Viaplay.xcodeproj",
-        "identifier" : "14D5FF482E6632EB00F53C94",
-        "name" : "ViaplayTests"
       }
     }
   ],

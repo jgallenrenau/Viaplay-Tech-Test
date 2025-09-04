@@ -29,13 +29,13 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <TestPlans>
          <TestPlanReference
-            reference = "container:Viaplay/TestPlan.xctestplan"
-            default = "YES">
+            reference = "container:Viaplay/TestPlan.xctestplan">
          </TestPlanReference>
       </TestPlans>
       <Testables>
          <TestableReference
-            skipped = "NO">
+            skipped = "NO"
+            parallelizable = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "14D5FF482E6632EB00F53C94"

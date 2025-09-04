@@ -3,17 +3,22 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		145E180F2E6980EC00A602E3 /* Sections in Frameworks */ = {isa = PBXBuildFile; productRef = 145E180E2E6980EC00A602E3 /* Sections */; };
-		145E18112E69810A00A602E3 /* Data in Frameworks */ = {isa = PBXBuildFile; productRef = 145E18102E69810A00A602E3 /* Data */; };
-		145E18132E69810A00A602E3 /* DetailSection in Frameworks */ = {isa = PBXBuildFile; productRef = 145E18122E69810A00A602E3 /* DetailSection */; };
-		145E18152E69810A00A602E3 /* Domain in Frameworks */ = {isa = PBXBuildFile; productRef = 145E18142E69810A00A602E3 /* Domain */; };
-		145E18172E69810A00A602E3 /* DSKit in Frameworks */ = {isa = PBXBuildFile; productRef = 145E18162E69810A00A602E3 /* DSKit */; };
-		145E18192E69810A00A602E3 /* NetworkingKit in Frameworks */ = {isa = PBXBuildFile; productRef = 145E18182E69810A00A602E3 /* NetworkingKit */; };
-		145E181B2E69810A00A602E3 /* StorageKit in Frameworks */ = {isa = PBXBuildFile; productRef = 145E181A2E69810A00A602E3 /* StorageKit */; };
+		14521C582E69BD6B00CD75E9 /* StorageKit in Resources */ = {isa = PBXBuildFile; fileRef = 14521C4F2E69BD6B00CD75E9 /* StorageKit */; };
+		14521C592E69BD6B00CD75E9 /* DSKit in Resources */ = {isa = PBXBuildFile; fileRef = 14521C502E69BD6B00CD75E9 /* DSKit */; };
+		14521C5A2E69BD6B00CD75E9 /* Sections in Resources */ = {isa = PBXBuildFile; fileRef = 14521C522E69BD6B00CD75E9 /* Sections */; };
+		14521C5B2E69BD6B00CD75E9 /* DetailSection in Resources */ = {isa = PBXBuildFile; fileRef = 14521C532E69BD6B00CD75E9 /* DetailSection */; };
+		14521C5C2E69BD6B00CD75E9 /* Data in Resources */ = {isa = PBXBuildFile; fileRef = 14521C552E69BD6B00CD75E9 /* Data */; };
+		14521C5D2E69BD6B00CD75E9 /* Domain in Resources */ = {isa = PBXBuildFile; fileRef = 14521C562E69BD6B00CD75E9 /* Domain */; };
+		14521C5F2E69BE0E00CD75E9 /* Data in Frameworks */ = {isa = PBXBuildFile; productRef = 14521C5E2E69BE0E00CD75E9 /* Data */; };
+		14521C612E69BE0E00CD75E9 /* DetailSection in Frameworks */ = {isa = PBXBuildFile; productRef = 14521C602E69BE0E00CD75E9 /* DetailSection */; };
+		14521C632E69BE0E00CD75E9 /* Domain in Frameworks */ = {isa = PBXBuildFile; productRef = 14521C622E69BE0E00CD75E9 /* Domain */; };
+		14521C652E69BE0E00CD75E9 /* DSKit in Frameworks */ = {isa = PBXBuildFile; productRef = 14521C642E69BE0E00CD75E9 /* DSKit */; };
+		14521C672E69BE0E00CD75E9 /* Sections in Frameworks */ = {isa = PBXBuildFile; productRef = 14521C662E69BE0E00CD75E9 /* Sections */; };
+		14521C692E69BE0E00CD75E9 /* StorageKit in Frameworks */ = {isa = PBXBuildFile; productRef = 14521C682E69BE0E00CD75E9 /* StorageKit */; };
 		14D5FF3C2E6632E600F53C94 /* ViaplayApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D5FF3B2E6632E600F53C94 /* ViaplayApp.swift */; };
 		14D5FF3E2E6632E600F53C94 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D5FF3D2E6632E600F53C94 /* ContentView.swift */; };
 		14D5FF402E6632EB00F53C94 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14D5FF3F2E6632EB00F53C94 /* Assets.xcassets */; };
@@ -33,6 +38,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		14521C4F2E69BD6B00CD75E9 /* StorageKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = StorageKit; sourceTree = "<group>"; };
+		14521C502E69BD6B00CD75E9 /* DSKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = DSKit; sourceTree = "<group>"; };
+		14521C522E69BD6B00CD75E9 /* Sections */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Sections; sourceTree = "<group>"; };
+		14521C532E69BD6B00CD75E9 /* DetailSection */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = DetailSection; sourceTree = "<group>"; };
+		14521C552E69BD6B00CD75E9 /* Data */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Data; sourceTree = "<group>"; };
+		14521C562E69BD6B00CD75E9 /* Domain */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Domain; sourceTree = "<group>"; };
+		14521C6A2E69BE6E00CD75E9 /* NetworkingKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = NetworkingKit; sourceTree = "<group>"; };
 		14D5FF382E6632E600F53C94 /* Viaplay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Viaplay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		14D5FF3B2E6632E600F53C94 /* ViaplayApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViaplayApp.swift; sourceTree = "<group>"; };
 		14D5FF3D2E6632E600F53C94 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -43,13 +55,6 @@
 		14D5FF4D2E6632EC00F53C94 /* ViaplayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViaplayTests.swift; sourceTree = "<group>"; };
 		14D5FF662E66C36100F53C94 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		14D66F5A2E68DCA70081ED7A /* TestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = TestPlan.xctestplan; path = Viaplay/TestPlan.xctestplan; sourceTree = "<group>"; };
-		14EF95D02E68CA6900CC74B1 /* Data */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Data; sourceTree = "<group>"; };
-		14EF95D12E68CB2B00CC74B1 /* DetailSection */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DetailSection; path = ../../../Packages/Feature/DetailSection; sourceTree = "<group>"; };
-		14EF95D32E68CBDA00CC74B1 /* DSKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DSKit; path = ../../../Packages/Infraestructure/DSKit; sourceTree = "<group>"; };
-		14EF95D42E68CC0D00CC74B1 /* NetworkingKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = NetworkingKit; path = ../../../Packages/Infraestructure/NetworkingKit; sourceTree = "<group>"; };
-		14EF95D52E68CC4A00CC74B1 /* Sections */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Sections; path = ../../../Packages/Feature/Sections; sourceTree = "<group>"; };
-		14EF95D62E68CC6F00CC74B1 /* StorageKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = StorageKit; path = ../../../Packages/Infraestructure/StorageKit; sourceTree = "<group>"; };
-		14EF95D82E68CD4900CC74B1 /* Domain */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Domain; path = ../../../Packages/Base/Domain; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,13 +62,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				145E18112E69810A00A602E3 /* Data in Frameworks */,
-				145E181B2E69810A00A602E3 /* StorageKit in Frameworks */,
-				145E180F2E6980EC00A602E3 /* Sections in Frameworks */,
-				145E18152E69810A00A602E3 /* Domain in Frameworks */,
-				145E18132E69810A00A602E3 /* DetailSection in Frameworks */,
-				145E18172E69810A00A602E3 /* DSKit in Frameworks */,
-				145E18192E69810A00A602E3 /* NetworkingKit in Frameworks */,
+				14521C652E69BE0E00CD75E9 /* DSKit in Frameworks */,
+				14521C632E69BE0E00CD75E9 /* Domain in Frameworks */,
+				14521C672E69BE0E00CD75E9 /* Sections in Frameworks */,
+				14521C5F2E69BE0E00CD75E9 /* Data in Frameworks */,
+				14521C612E69BE0E00CD75E9 /* DetailSection in Frameworks */,
+				14521C692E69BE0E00CD75E9 /* StorageKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,6 +86,44 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		14521C4C2E69BD6B00CD75E9 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				14521C4D2E69BD6B00CD75E9 /* Infraestructure */,
+				14521C512E69BD6B00CD75E9 /* Feature */,
+				14521C542E69BD6B00CD75E9 /* Base */,
+			);
+			path = Packages;
+			sourceTree = "<group>";
+		};
+		14521C4D2E69BD6B00CD75E9 /* Infraestructure */ = {
+			isa = PBXGroup;
+			children = (
+				14521C6A2E69BE6E00CD75E9 /* NetworkingKit */,
+				14521C4F2E69BD6B00CD75E9 /* StorageKit */,
+				14521C502E69BD6B00CD75E9 /* DSKit */,
+			);
+			path = Infraestructure;
+			sourceTree = "<group>";
+		};
+		14521C512E69BD6B00CD75E9 /* Feature */ = {
+			isa = PBXGroup;
+			children = (
+				14521C522E69BD6B00CD75E9 /* Sections */,
+				14521C532E69BD6B00CD75E9 /* DetailSection */,
+			);
+			path = Feature;
+			sourceTree = "<group>";
+		};
+		14521C542E69BD6B00CD75E9 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				14521C552E69BD6B00CD75E9 /* Data */,
+				14521C562E69BD6B00CD75E9 /* Domain */,
+			);
+			path = Base;
 			sourceTree = "<group>";
 		};
 		14530D612E697D9200978272 /* App */ = {
@@ -120,10 +162,8 @@
 		14D5FF3A2E6632E600F53C94 /* Viaplay */ = {
 			isa = PBXGroup;
 			children = (
+				14521C4C2E69BD6B00CD75E9 /* Packages */,
 				14530D612E697D9200978272 /* App */,
-				14EF95CD2E68CA2400CC74B1 /* Base */,
-				14EF95CE2E68CA2400CC74B1 /* Features */,
-				14EF95CF2E68CA2400CC74B1 /* Infraestructure */,
 			);
 			path = Viaplay;
 			sourceTree = "<group>";
@@ -144,34 +184,6 @@
 			path = ViaplayTests;
 			sourceTree = "<group>";
 		};
-		14EF95CD2E68CA2400CC74B1 /* Base */ = {
-			isa = PBXGroup;
-			children = (
-				14EF95D82E68CD4900CC74B1 /* Domain */,
-				14EF95D02E68CA6900CC74B1 /* Data */,
-			);
-			path = Base;
-			sourceTree = "<group>";
-		};
-		14EF95CE2E68CA2400CC74B1 /* Features */ = {
-			isa = PBXGroup;
-			children = (
-				14EF95D52E68CC4A00CC74B1 /* Sections */,
-				14EF95D12E68CB2B00CC74B1 /* DetailSection */,
-			);
-			path = Features;
-			sourceTree = "<group>";
-		};
-		14EF95CF2E68CA2400CC74B1 /* Infraestructure */ = {
-			isa = PBXGroup;
-			children = (
-				14EF95D62E68CC6F00CC74B1 /* StorageKit */,
-				14EF95D42E68CC0D00CC74B1 /* NetworkingKit */,
-				14EF95D32E68CBDA00CC74B1 /* DSKit */,
-			);
-			path = Infraestructure;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -189,13 +201,12 @@
 			);
 			name = Viaplay;
 			packageProductDependencies = (
-				145E180E2E6980EC00A602E3 /* Sections */,
-				145E18102E69810A00A602E3 /* Data */,
-				145E18122E69810A00A602E3 /* DetailSection */,
-				145E18142E69810A00A602E3 /* Domain */,
-				145E18162E69810A00A602E3 /* DSKit */,
-				145E18182E69810A00A602E3 /* NetworkingKit */,
-				145E181A2E69810A00A602E3 /* StorageKit */,
+				14521C5E2E69BE0E00CD75E9 /* Data */,
+				14521C602E69BE0E00CD75E9 /* DetailSection */,
+				14521C622E69BE0E00CD75E9 /* Domain */,
+				14521C642E69BE0E00CD75E9 /* DSKit */,
+				14521C662E69BE0E00CD75E9 /* Sections */,
+				14521C682E69BE0E00CD75E9 /* StorageKit */,
 			);
 			productName = Viaplay;
 			productReference = 14D5FF382E6632E600F53C94 /* Viaplay.app */;
@@ -248,7 +259,6 @@
 			);
 			mainGroup = 14D5FF2F2E6632E600F53C94;
 			packageReferences = (
-				145E180D2E6980EC00A602E3 /* XCLocalSwiftPackageReference "../Packages/Feature/Sections" */,
 			);
 			productRefGroup = 14D5FF392E6632E600F53C94 /* Products */;
 			projectDirPath = "";
@@ -265,9 +275,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14521C5D2E69BD6B00CD75E9 /* Domain in Resources */,
+				14521C592E69BD6B00CD75E9 /* DSKit in Resources */,
 				14D5FF672E66C36200F53C94 /* README.md in Resources */,
+				14521C5A2E69BD6B00CD75E9 /* Sections in Resources */,
+				14521C582E69BD6B00CD75E9 /* StorageKit in Resources */,
+				14521C5B2E69BD6B00CD75E9 /* DetailSection in Resources */,
 				14D5FF442E6632EB00F53C94 /* Preview Assets.xcassets in Resources */,
 				14D5FF402E6632EB00F53C94 /* Assets.xcassets in Resources */,
+				14521C5C2E69BD6B00CD75E9 /* Data in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -577,39 +593,28 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCLocalSwiftPackageReference section */
-		145E180D2E6980EC00A602E3 /* XCLocalSwiftPackageReference "../Packages/Feature/Sections" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ../Packages/Feature/Sections;
-		};
-/* End XCLocalSwiftPackageReference section */
-
 /* Begin XCSwiftPackageProductDependency section */
-		145E180E2E6980EC00A602E3 /* Sections */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Sections;
-		};
-		145E18102E69810A00A602E3 /* Data */ = {
+		14521C5E2E69BE0E00CD75E9 /* Data */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Data;
 		};
-		145E18122E69810A00A602E3 /* DetailSection */ = {
+		14521C602E69BE0E00CD75E9 /* DetailSection */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = DetailSection;
 		};
-		145E18142E69810A00A602E3 /* Domain */ = {
+		14521C622E69BE0E00CD75E9 /* Domain */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Domain;
 		};
-		145E18162E69810A00A602E3 /* DSKit */ = {
+		14521C642E69BE0E00CD75E9 /* DSKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = DSKit;
 		};
-		145E18182E69810A00A602E3 /* NetworkingKit */ = {
+		14521C662E69BE0E00CD75E9 /* Sections */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = NetworkingKit;
+			productName = Sections;
 		};
-		145E181A2E69810A00A602E3 /* StorageKit */ = {
+		14521C682E69BE0E00CD75E9 /* StorageKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = StorageKit;
 		};
