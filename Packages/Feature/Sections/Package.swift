@@ -11,9 +11,9 @@ let package = Package(
         .library(name: "Sections", targets: ["Sections"])
     ],
     dependencies: [
-        .package(path: "../Domain"),
-        .package(path: "../DSKit"),
-        .package(path: "../Data")
+        .package(path: "../../Base/Domain"),
+        .package(path: "../../Infraestructure/DSKit"),
+        .package(path: "../../Base/Data")
     ],
     targets: [
         .target(name: "Sections", dependencies: ["Domain", "DSKit", "Data"]),
