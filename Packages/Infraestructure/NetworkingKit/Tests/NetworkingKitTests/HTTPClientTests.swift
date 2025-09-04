@@ -9,5 +9,3 @@ final class HTTPClientTests: XCTestCase {
         XCTAssertTrue(true)
     }
 }
-
-

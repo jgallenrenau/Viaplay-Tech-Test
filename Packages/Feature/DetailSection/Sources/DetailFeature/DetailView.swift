@@ -19,5 +19,3 @@ public struct DetailView: View {
         .navigationTitle(section.title)
     }
 }
-
-

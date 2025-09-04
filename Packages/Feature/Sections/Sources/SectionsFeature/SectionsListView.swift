@@ -17,5 +17,3 @@ public struct SectionsListView: View {
         .task { await viewModel.load() }
     }
 }
-
-

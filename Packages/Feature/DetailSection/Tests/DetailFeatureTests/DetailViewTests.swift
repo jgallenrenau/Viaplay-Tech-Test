@@ -10,5 +10,3 @@ final class DetailViewTests: XCTestCase {
         XCTAssertTrue(true)
     }
 }
-
-

@@ -22,5 +22,3 @@ final class SectionsListViewTests: XCTestCase {
         XCTAssertTrue(true)
     }
 }
-
-

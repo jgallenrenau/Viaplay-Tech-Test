@@ -43,5 +43,3 @@ public final class UserDefaultsStore: KeyValueStore {
     public func get(_ key: String) -> String? { defaults.string(forKey: key) }
     public func set(_ value: String, for key: String) { defaults.set(value, forKey: key) }
 }
-
-

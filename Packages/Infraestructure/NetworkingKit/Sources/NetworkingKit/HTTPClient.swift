@@ -28,5 +28,3 @@ public final class URLSessionHTTPClient: HTTPClient {
 public enum ViaplayAPI {
     public static func rootURL() -> URL { URL(string: "https://content.viaplay.com/ios-se")! }
 }
-
-

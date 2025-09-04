@@ -26,5 +26,3 @@ public struct SectionRowView: View {
         .padding(.vertical, 8)
     }
 }
-
-

@@ -7,5 +7,3 @@ let package = Package(
     products: [ .library(name: "Domain", targets: ["Domain"]) ],
     targets: [ .target(name: "Domain"), .testTarget(name: "DomainTests", dependencies: ["Domain"]) ]
 )
-
-

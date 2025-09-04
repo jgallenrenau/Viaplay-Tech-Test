@@ -16,5 +16,3 @@ let package = Package(
         .testTarget(name: "DSKitTests", dependencies: ["DSKit"])
     ]
 )
-
-

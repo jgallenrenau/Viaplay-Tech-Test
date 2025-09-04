@@ -10,5 +10,3 @@ final class SectionRowViewTests: XCTestCase {
         XCTAssertTrue(true)
     }
 }
-
-

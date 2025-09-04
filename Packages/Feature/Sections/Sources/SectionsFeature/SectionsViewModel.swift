@@ -24,5 +24,3 @@ public final class SectionsViewModel: ObservableObject {
         }
     }
 }
-
-

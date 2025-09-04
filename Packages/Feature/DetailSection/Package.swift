@@ -20,5 +20,3 @@ let package = Package(
         .testTarget(name: "DetailSectionTests", dependencies: ["DetailSection"])
     ]
 )
-
-

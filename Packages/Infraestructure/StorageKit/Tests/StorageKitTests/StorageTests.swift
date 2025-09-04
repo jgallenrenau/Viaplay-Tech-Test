@@ -20,5 +20,3 @@ final class StorageTests: XCTestCase {
         XCTAssertEqual(store.get(k), "abc")
     }
 }
-
-

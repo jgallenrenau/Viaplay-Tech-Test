@@ -29,5 +29,3 @@ final class UseCasesTests: XCTestCase {
         XCTAssertEqual(page.sections.first?.title, "A")
     }
 }
-
-

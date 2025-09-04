@@ -7,5 +7,3 @@ let package = Package(
     products: [ .library(name: "StorageKit", targets: ["StorageKit"]) ],
     targets: [ .target(name: "StorageKit"), .testTarget(name: "StorageKitTests", dependencies: ["StorageKit"]) ]
 )
-
-

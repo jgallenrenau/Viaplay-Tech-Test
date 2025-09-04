@@ -7,5 +7,3 @@ let package = Package(
     products: [ .library(name: "NetworkingKit", targets: ["NetworkingKit"]) ],
     targets: [ .target(name: "NetworkingKit"), .testTarget(name: "NetworkingKitTests", dependencies: ["NetworkingKit"]) ]
 )
-
-
