@@ -60,19 +60,19 @@ jobs:
           
           # Run tests for Swift packages in dependency order
           # First: Independent packages (no dependencies)
-          for package in Packages/DomainKit Packages/NetworkingKit Packages/StorageKit Packages/DSKit; do
+          for package in Packages/Base/Domain Packages/Infraestructure/NetworkingKit Packages/Infraestructure/StorageKit Packages/Infraestructure/DSKit; do
             echo "Testing independent package: $package"
             cd "$package"
             swift test --enable-code-coverage
-            cd ../..
+            cd - >/dev/null
           done
           
           # Second: Packages with dependencies
-          for package in Packages/DataKit Packages/DetailFeature Packages/SectionsFeature; do
+          for package in Packages/Base/Data Packages/Feature/DetailSection Packages/Feature/Sections; do
             echo "Testing dependent package: $package"
             cd "$package"
             swift test --enable-code-coverage
-            cd ../..
+            cd - >/dev/null
           done
           
           # Run the main app tests
