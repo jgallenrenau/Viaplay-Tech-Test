@@ -13,6 +13,7 @@
   },
   "testTargets" : [
     {
+      "parallelizable" : true,
       "target" : {
         "containerPath" : "container:Viaplay\/Base\/Data",
         "identifier" : "DataTests",
@@ -20,6 +21,7 @@
       }
     },
     {
+      "parallelizable" : true,
       "target" : {
         "containerPath" : "container:..\/Packages\/Feature\/DetailSection",
         "identifier" : "DetailSectionTests",
@@ -27,6 +29,7 @@
       }
     },
     {
+      "parallelizable" : true,
       "target" : {
         "containerPath" : "container:..\/Packages\/Base\/Domain",
         "identifier" : "DomainTests",
@@ -34,6 +37,23 @@
       }
     },
     {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:..\/Packages\/Infraestructure\/DSKit",
+        "identifier" : "DSKitTests",
+        "name" : "DSKitTests"
+      }
+    },
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:..\/Packages\/Infraestructure\/NetworkingKit",
+        "identifier" : "NetworkingKitTests",
+        "name" : "NetworkingKitTests"
+      }
+    },
+    {
+      "parallelizable" : true,
       "target" : {
         "containerPath" : "container:..\/Packages\/Feature\/Sections",
         "identifier" : "SectionsTests",
@@ -41,6 +61,15 @@
       }
     },
     {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:..\/Packages\/Infraestructure\/StorageKit",
+        "identifier" : "StorageKitTests",
+        "name" : "StorageKitTests"
+      }
+    },
+    {
+      "parallelizable" : true,
       "target" : {
         "containerPath" : "container:Viaplay.xcodeproj",
         "identifier" : "14D5FF482E6632EB00F53C94",

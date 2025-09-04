@@ -70,6 +70,13 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		14530D612E697D9200978272 /* App */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
 		14D5FF2F2E6632E600F53C94 = {
 			isa = PBXGroup;
 			children = (
@@ -94,6 +101,7 @@
 		14D5FF3A2E6632E600F53C94 /* Viaplay */ = {
 			isa = PBXGroup;
 			children = (
+				14530D612E697D9200978272 /* App */,
 				14EF95CD2E68CA2400CC74B1 /* Base */,
 				14EF95CE2E68CA2400CC74B1 /* Features */,
 				14EF95CF2E68CA2400CC74B1 /* Infraestructure */,
