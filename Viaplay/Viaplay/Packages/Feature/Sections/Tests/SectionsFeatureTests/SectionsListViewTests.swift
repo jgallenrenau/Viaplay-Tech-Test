@@ -14,8 +14,8 @@ final class SectionsListViewTests: XCTestCase {
                     sections: []
                 )
             }
-        }
-        
+}
+
         let mockUseCase = MockGetRootPageUseCase()
         let viewModel = SectionsViewModel(getRootPage: mockUseCase)
         let _ = SectionsListView(viewModel: viewModel)
