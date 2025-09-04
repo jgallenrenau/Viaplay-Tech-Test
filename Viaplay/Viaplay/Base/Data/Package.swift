@@ -12,6 +12,6 @@ let package = Package(
     ],
     targets: [
         .target(name: "Data", dependencies: ["Domain", "NetworkingKit", "StorageKit"]),
-        .testTarget(name: "DataTests", dependencies: ["Data"]) 
+        .testTarget(name: "DataTests", dependencies: ["Data"])
     ]
 )
