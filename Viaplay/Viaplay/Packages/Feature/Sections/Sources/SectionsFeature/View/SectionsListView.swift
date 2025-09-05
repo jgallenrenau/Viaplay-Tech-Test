@@ -59,7 +59,6 @@ public struct SectionsListView: View {
         List(viewModel.sections, id: \.id) { section in
             SectionRowView(section: section)
                 .listRowInsets(EdgeInsets())
-                .listRowSeparator(.hidden)
         }
         .listStyle(PlainListStyle())
     }
