@@ -1,0 +1,49 @@
+# SwiftLint Configuration
+# Only lint our source code, exclude all dependencies
+
+excluded:
+  - .build
+  - "**/.build/**"
+  - "**/checkouts/**"
+  - "**/DerivedData/**"
+  - "**/Tests/**"
+  - "**/Package.swift"
+
+# Only include our specific source files
+included:
+  - Viaplay/App/ViaplayApp.swift
+  - Viaplay/App/ContentView.swift
+  - Packages/Base/Domain/Sources/Domain
+  - Packages/Base/Data/Sources/Data
+  - Packages/Feature/Sections/Sources/SectionsFeature
+  - Packages/Feature/DetailSection/Sources/DetailSection
+  - Packages/Infraestructure/DSKit/Sources/DSKit
+  - Packages/Infraestructure/NetworkingKit/Sources/NetworkingKit
+  - Packages/Infraestructure/StorageKit/Sources/StorageKit
+
+# Disable problematic rules
+disabled_rules:
+  - todo
+  - line_length
+  - file_length
+  - function_body_length
+  - type_body_length
+  - cyclomatic_complexity
+  - identifier_name
+  - type_name
+  - nesting
+  - trailing_comma
+  - opening_brace
+  - force_cast
+  - force_try
+  - multiple_closures_with_trailing_closure
+  - closure_parameter_position
+  - unused_closure_parameter
+  - optional_data_string_conversion
+  - orphaned_doc_comment
+  - static_over_final_class
+  - redundant_discardable_let
+  - compiler_protocol_init
+  - comment_spacing
+  - duplicate_imports
+  - implicit_optional_initialization

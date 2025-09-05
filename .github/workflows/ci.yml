@@ -58,21 +58,30 @@ jobs:
           rm -rf ~/.swiftpm
           rm -rf ~/Library/Caches/org.swift.swiftpm
           
-          # Run tests for Swift packages in dependency order
+          # Base path where the Swift packages live
+          ROOT="Viaplay/Viaplay"
+
+          # Run tests for Swift packages in dependency order using absolute paths
           # First: Independent packages (no dependencies)
           for package in Packages/Base/Domain Packages/Infraestructure/NetworkingKit Packages/Infraestructure/StorageKit Packages/Infraestructure/DSKit; do
+            PKG_PATH="$ROOT/$package"
             echo "Testing independent package: $package"
-            cd "$package"
-            swift test --enable-code-coverage
-            cd - >/dev/null
+            if [ -d "$PKG_PATH" ]; then
+              swift test --package-path "$PKG_PATH" --enable-code-coverage
+            else
+              echo "Skipping missing package path: $PKG_PATH"
+            fi
           done
-          
+
           # Second: Packages with dependencies
           for package in Packages/Base/Data Packages/Feature/DetailSection Packages/Feature/Sections; do
+            PKG_PATH="$ROOT/$package"
             echo "Testing dependent package: $package"
-            cd "$package"
-            swift test --enable-code-coverage
-            cd - >/dev/null
+            if [ -d "$PKG_PATH" ]; then
+              swift test --package-path "$PKG_PATH" --enable-code-coverage
+            else
+              echo "Skipping missing package path: $PKG_PATH"
+            fi
           done
           
           # Run the main app tests

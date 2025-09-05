@@ -13,10 +13,34 @@ let package = Package(
     dependencies: [
         .package(path: "../../Base/Domain"),
         .package(path: "../../Infraestructure/DSKit"),
-        .package(path: "../../Base/Data")
+        .package(path: "../../Base/Data"),
+        .package(path: "../../Infraestructure/NetworkingKit"),
+        .package(path: "../../Infraestructure/StorageKit"),
+        .package(url: "https://github.com/pointfreeco/swift-snapshot-testing", from: "1.11.0")
     ],
     targets: [
-        .target(name: "Sections", dependencies: ["Domain", "DSKit", "Data"]),
-        .testTarget(name: "SectionsTests", dependencies: ["Sections"])
+        .target(
+            name: "Sections",
+            dependencies: ["Domain", "DSKit", "Data", "NetworkingKit", "StorageKit"],
+            resources: [.process("Sources/SectionsFeature/Resources")]
+        ),
+        .testTarget(
+            name: "SectionsUnitTests",
+            dependencies: ["Sections"],
+            path: "Tests/Unit"
+        ),
+        .testTarget(
+            name: "SectionsIntegrationTests",
+            dependencies: ["Sections"],
+            path: "Tests/Integration"
+        ),
+        .testTarget(
+            name: "SectionsSnapshotTests",
+            dependencies: [
+                "Sections",
+                .product(name: "SnapshotTesting", package: "swift-snapshot-testing")
+            ],
+            path: "Tests/Snapshot"
+        )
     ]
 )

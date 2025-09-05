@@ -12,3 +12,13 @@ public protocol GetRootPageUseCase {
 public protocol GetPageUseCase {
     func execute(url: URL) async throws -> Page
 }
+
+// MARK: - Sections Feature Contracts
+
+public protocol SectionsRepository {
+    func fetchSections() async throws -> SectionsPage
+}
+
+public protocol FetchSectionsUseCaseProtocol {
+    func execute() async throws -> SectionsPage
+}

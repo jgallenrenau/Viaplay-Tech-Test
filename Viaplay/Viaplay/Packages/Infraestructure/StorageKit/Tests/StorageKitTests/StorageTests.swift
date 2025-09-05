@@ -3,20 +3,20 @@ import XCTest
 
 final class StorageTests: XCTestCase {
     func testJSONDiskCacheRoundtrip() throws {
-        struct Obj: Codable, Equatable { let x: Int }
+        struct CacheObject: Codable, Equatable { let value: Int }
         let temp = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
         try FileManager.default.createDirectory(at: temp, withIntermediateDirectories: true)
         let cache = FileJSONDiskCache(directory: temp)
-        let value = Obj(x: 42)
-        try cache.write(value, for: "k.json")
-        let restored: Obj? = try cache.read(for: "k.json", as: Obj.self)
+        let value = CacheObject(value: 42)
+        try cache.write(value, for: "etag.json")
+        let restored: CacheObject? = try cache.read(for: "etag.json", as: CacheObject.self)
         XCTAssertEqual(restored, value)
     }
 
     func testKeyValueStore() {
         let store = UserDefaultsStore()
-        let k = "etag.test.\(UUID().uuidString)"
-        store.set("abc", for: k)
-        XCTAssertEqual(store.get(k), "abc")
+        let etagKey = "etag.test.\(UUID().uuidString)"
+        store.set("abc", for: etagKey)
+        XCTAssertEqual(store.get(etagKey), "abc")
     }
 }
