@@ -12,8 +12,8 @@ let package = Package(
     ],
     dependencies: [
         .package(path: "../Domain"),
-        .package(path: "../NetworkingKit"),
-        .package(path: "../StorageKit")
+        .package(path: "../../Infraestructure/NetworkingKit"),
+        .package(path: "../../Infraestructure/StorageKit")
     ],
     targets: [
         .target(
