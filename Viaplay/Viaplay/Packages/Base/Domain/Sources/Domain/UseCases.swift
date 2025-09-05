@@ -17,3 +17,17 @@ public struct GetPage: GetPageUseCase {
         try await repository.getPage(by: url)
     }
 }
+
+// MARK: - Sections Feature UseCase
+
+public final class FetchSectionsUseCase: FetchSectionsUseCaseProtocol {
+    private let repository: SectionsRepository
+
+    public init(repository: SectionsRepository) {
+        self.repository = repository
+    }
+
+    public func execute() async throws -> SectionsPage {
+        try await repository.fetchSections()
+    }
+}
