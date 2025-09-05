@@ -22,7 +22,7 @@ public struct SectionRowView: View {
             }
         }
         .padding()
-        .background(Color(UIColor.systemBackground))
+        .background(Color(red: 0.95, green: 0.95, blue: 0.97))
         .cornerRadius(8)
         .shadow(radius: 2)
     }
