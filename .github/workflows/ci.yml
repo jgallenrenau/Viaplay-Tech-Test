@@ -58,8 +58,8 @@ jobs:
           rm -rf ~/.swiftpm
           rm -rf ~/Library/Caches/org.swift.swiftpm
           
-          # Ensure we run inside the Xcode project folder
-          cd Viaplay
+          # Ensure we run inside the Xcode project folder (the project lives in Viaplay/Viaplay)
+          cd Viaplay/Viaplay
 
           # Run tests for Swift packages in dependency order
           # First: Independent packages (no dependencies)
