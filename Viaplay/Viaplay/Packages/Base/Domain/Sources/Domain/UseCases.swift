@@ -31,3 +31,17 @@ public final class FetchSectionsUseCase: FetchSectionsUseCaseProtocol {
         try await repository.fetchSections()
     }
 }
+
+// MARK: - DetailSection Feature UseCase
+
+public final class FetchDetailUseCase: FetchDetailUseCaseProtocol {
+    private let repository: DetailRepositoryProtocol
+
+    public init(repository: DetailRepositoryProtocol) {
+        self.repository = repository
+    }
+
+    public func execute(section: ContentSection) async throws -> DetailPage {
+        try await repository.fetchDetail(for: section)
+    }
+}

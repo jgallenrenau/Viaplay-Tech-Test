@@ -22,3 +22,13 @@ public protocol SectionsRepository {
 public protocol FetchSectionsUseCaseProtocol {
     func execute() async throws -> SectionsPage
 }
+
+// MARK: - DetailSection Feature Contracts
+
+public protocol DetailRepositoryProtocol {
+    func fetchDetail(for section: ContentSection) async throws -> DetailPage
+}
+
+public protocol FetchDetailUseCaseProtocol {
+    func execute(section: ContentSection) async throws -> DetailPage
+}
