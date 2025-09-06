@@ -15,23 +15,50 @@ public final class PageRepositoryImpl: PageRepository {
     }
 
     public func getRootPage() async throws -> Page {
-        try await fetch(url: ViaplayAPI.rootURL(), cacheKey: "root.json")
+        print("🌐 [PageRepository] Fetching root page from: \(ViaplayAPI.rootURL())")
+        let result = try await fetch(url: ViaplayAPI.rootURL(), cacheKey: "root.json")
+        print("✅ [PageRepository] Root page fetched successfully with \(result.sections.count) sections")
+        return result
     }
 
     public func getPage(by url: URL) async throws -> Page {
-        try await fetch(url: url, cacheKey: url.lastPathComponent + ".json")
+        print("🌐 [PageRepository] Fetching page from: \(url)")
+        let result = try await fetch(url: url, cacheKey: url.lastPathComponent + ".json")
+        print("✅ [PageRepository] Page fetched successfully with \(result.sections.count) sections")
+        return result
     }
 
     private func fetch(url: URL, cacheKey: String) async throws -> Page {
         var headers: [String: String] = [:]
-        if let etag = etagStore.get(cacheKey) { headers["If-None-Match"] = etag }
+        if let etag = etagStore.get(cacheKey) { 
+            headers["If-None-Match"] = etag
+            print("📋 [PageRepository] Using ETag for cache validation: \(etag)")
+        }
+        
+        print("🚀 [PageRepository] Making HTTP request to: \(url)")
         let response = try await http.get(url, headers: headers)
+        print("📡 [PageRepository] HTTP response received - Status: \(response.statusCode)")
+        
         if response.statusCode == 304, let cached: Page = try cache.read(for: cacheKey, as: Page.self) {
+            print("💾 [PageRepository] Using cached data (304 Not Modified)")
             return cached
         }
-        if let etag = response.headers["ETag"] { etagStore.set(etag, for: cacheKey) }
+        
+        if let etag = response.headers["ETag"] { 
+            etagStore.set(etag, for: cacheKey)
+            print("🏷️ [PageRepository] Storing ETag for future requests: \(etag)")
+        }
+        
+        print("🔄 [PageRepository] Decoding JSON response...")
         let page = try JSONDecoder().decode(Page.self, from: response.data)
-        try? cache.write(page, for: cacheKey)
+        
+        do {
+            try cache.write(page, for: cacheKey)
+            print("💾 [PageRepository] Data cached successfully for key: \(cacheKey)")
+        } catch {
+            print("⚠️ [PageRepository] Failed to cache data: \(error.localizedDescription)")
+        }
+        
         return page
     }
 }

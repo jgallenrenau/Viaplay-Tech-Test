@@ -20,16 +20,21 @@ public final class DetailViewModel: ObservableObject {
     }
 
     public func loadDetail() async {
+        print("🔄 [DetailViewModel] Starting to load detail for section: \(section.title)")
         isLoading = true
         errorMessage = nil
 
         do {
+            print("📡 [DetailViewModel] Calling fetchDetailUseCase for section: \(section.title)")
             let detailPage = try await fetchDetailUseCase.execute(section: section)
+            print("✅ [DetailViewModel] Successfully loaded detail with \(detailPage.items.count) items")
             self.detailPage = detailPage
         } catch {
+            print("❌ [DetailViewModel] Failed to load detail for section '\(section.title)': \(error.localizedDescription)")
             errorMessage = error.localizedDescription
         }
 
+        print("🏁 [DetailViewModel] Loading completed. isLoading: \(isLoading)")
         isLoading = false
     }
 }

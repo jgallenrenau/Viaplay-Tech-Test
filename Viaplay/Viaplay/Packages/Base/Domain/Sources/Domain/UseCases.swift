@@ -3,7 +3,12 @@ import Foundation
 public struct GetRootPage: GetRootPageUseCase {
     private let repository: PageRepository
     public init(repository: PageRepository) { self.repository = repository }
-    public func execute() async throws -> Page { try await repository.getRootPage() }
+    public func execute() async throws -> Page { 
+        print("🎯 [GetRootPage] Executing use case...")
+        let result = try await repository.getRootPage()
+        print("✅ [GetRootPage] Use case completed successfully")
+        return result
+    }
 }
 
 public struct GetPage: GetPageUseCase {
@@ -14,7 +19,10 @@ public struct GetPage: GetPageUseCase {
     }
 
     public func execute(url: URL) async throws -> Page {
-        try await repository.getPage(by: url)
+        print("🎯 [GetPage] Executing use case for URL: \(url)")
+        let result = try await repository.getPage(by: url)
+        print("✅ [GetPage] Use case completed successfully")
+        return result
     }
 }
 
@@ -28,7 +36,10 @@ public final class FetchSectionsUseCase: FetchSectionsUseCaseProtocol {
     }
 
     public func execute() async throws -> SectionsPage {
-        try await repository.fetchSections()
+        print("🎯 [FetchSectionsUseCase] Executing use case...")
+        let result = try await repository.fetchSections()
+        print("✅ [FetchSectionsUseCase] Use case completed successfully with \(result.sections.count) sections")
+        return result
     }
 }
 
@@ -42,6 +53,9 @@ public final class FetchDetailUseCase: FetchDetailUseCaseProtocol {
     }
 
     public func execute(section: ContentSection) async throws -> DetailPage {
-        try await repository.fetchDetail(for: section)
+        print("🎯 [FetchDetailUseCase] Executing use case for section: \(section.title)")
+        let result = try await repository.fetchDetail(for: section)
+        print("✅ [FetchDetailUseCase] Use case completed successfully with \(result.items.count) items")
+        return result
     }
 }
