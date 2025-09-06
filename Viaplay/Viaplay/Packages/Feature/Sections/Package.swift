@@ -22,7 +22,7 @@ let package = Package(
         .target(
             name: "Sections",
             dependencies: ["Domain", "DSKit", "Data", "NetworkingKit", "StorageKit"],
-            resources: [.process("Sources/SectionsFeature/Resources")]
+            resources: [.process("Resources")]
         ),
         .testTarget(
             name: "SectionsUnitTests",

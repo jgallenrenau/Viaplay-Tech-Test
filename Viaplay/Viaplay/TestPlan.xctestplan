@@ -23,14 +23,6 @@
     {
       "parallelizable" : true,
       "target" : {
-        "containerPath" : "container:Viaplay\/Packages\/Feature\/DetailSection",
-        "identifier" : "DetailSectionTests",
-        "name" : "DetailSectionTests"
-      }
-    },
-    {
-      "parallelizable" : true,
-      "target" : {
         "containerPath" : "container:Viaplay\/Packages\/Base\/Domain",
         "identifier" : "DomainTests",
         "name" : "DomainTests"
@@ -69,6 +61,7 @@
       }
     },
     {
+      "parallelizable" : true,
       "target" : {
         "containerPath" : "container:Viaplay\/Packages\/Feature\/Sections",
         "identifier" : "SectionsIntegrationTests",
@@ -76,6 +69,7 @@
       }
     },
     {
+      "parallelizable" : true,
       "target" : {
         "containerPath" : "container:Viaplay\/Packages\/Feature\/Sections",
         "identifier" : "SectionsSnapshotTests",
@@ -83,10 +77,35 @@
       }
     },
     {
+      "parallelizable" : true,
       "target" : {
         "containerPath" : "container:Viaplay\/Packages\/Feature\/Sections",
         "identifier" : "SectionsUnitTests",
         "name" : "SectionsUnitTests"
+      }
+    },
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:Viaplay\/Packages\/Feature\/DetailSection",
+        "identifier" : "DetailSectionIntegrationTests",
+        "name" : "DetailSectionIntegrationTests"
+      }
+    },
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:Viaplay\/Packages\/Feature\/DetailSection",
+        "identifier" : "DetailSectionSnapshotTests",
+        "name" : "DetailSectionSnapshotTests"
+      }
+    },
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:Viaplay\/Packages\/Feature\/DetailSection",
+        "identifier" : "DetailSectionUnitTests",
+        "name" : "DetailSectionUnitTests"
       }
     }
   ],

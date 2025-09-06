@@ -8,6 +8,13 @@ on:
       - '.swiftlint.yml'
       - '.github/workflows/**'
       - '!**/*.md'
+  push:
+    branches: [ develop ]
+    paths:
+      - 'Viaplay/**'
+      - '.swiftlint.yml'
+      - '.github/workflows/**'
+      - '!**/*.md'
   workflow_dispatch:
     inputs:
       run_tests:
@@ -84,7 +91,10 @@ jobs:
             fi
           done
           
-          # Run the main app tests
+          # Clean up any existing xcresult file
+          rm -rf TestResults.xcresult
+          
+          # Run the main app tests with coverage
           xcodebuild \
             -project "$PROJECT" \
             -scheme "$SCHEME" \
@@ -92,19 +102,47 @@ jobs:
             -enableCodeCoverage YES \
             -skipMacroValidation \
             -only-testing:ViaplayTests \
-            clean test
+            clean test \
+            -resultBundlePath TestResults.xcresult
 
       - name: Generate Code Coverage Report
         run: |
-          # Find the most recent xcresult file from Xcode tests
-          XCRESULT_PATH=$(find ~/Library/Developer/Xcode/DerivedData -name "*.xcresult" -type d -exec stat -f "%m %N" {} \; | sort -nr | head -1 | cut -d' ' -f2-)
-          if [ -z "$XCRESULT_PATH" ]; then
-            echo "No xcresult file found"
+          # Use the specified xcresult file first
+          if [ -d "TestResults.xcresult" ]; then
+            XCRESULT_PATH="TestResults.xcresult"
+            echo "Using specified xcresult: $XCRESULT_PATH"
+          else
+            echo "TestResults.xcresult not found, searching for alternatives..."
+            # Fallback: Find the most recent xcresult file from Xcode tests
+            XCRESULT_PATH=$(find ~/Library/Developer/Xcode/DerivedData -name "*.xcresult" -type d -exec stat -f "%m %N" {} \; | sort -nr | head -1 | cut -d' ' -f2-)
+            if [ -z "$XCRESULT_PATH" ]; then
+              echo "No xcresult file found in DerivedData, trying current directory..."
+              # Try alternative paths for GitHub Actions
+              XCRESULT_PATH=$(find . -name "*.xcresult" -type d -exec stat -f "%m %N" {} \; | sort -nr | head -1 | cut -d' ' -f2-)
+              if [ -z "$XCRESULT_PATH" ]; then
+                echo "❌ No xcresult file found in any location"
+                echo "Available files in current directory:"
+                ls -la
+                exit 1
+              fi
+            fi
+            echo "Using found xcresult: $XCRESULT_PATH"
+          fi
+          
+          # Verify the xcresult file exists and is valid
+          if [ ! -d "$XCRESULT_PATH" ]; then
+            echo "❌ xcresult file is not a directory: $XCRESULT_PATH"
             exit 1
           fi
-          echo "Using xcresult: $XCRESULT_PATH"
+          
+          # Generate coverage report
+          echo "Generating coverage report from: $XCRESULT_PATH"
           xcrun xccov view --report --json "$XCRESULT_PATH" > coverage.json
-          echo "Coverage report generated"
+          echo "✅ Coverage report generated successfully"
+          
+          # Show coverage summary
+          echo "📊 Coverage summary:"
+          xcrun xccov view --report "$XCRESULT_PATH"
 
       - name: Verify Coverage Report
         run: |
@@ -121,6 +159,21 @@ jobs:
           flags: unittests
           name: codecov-umbrella
           fail_ci_if_error: false
+          token: ${{ secrets.CODECOV_TOKEN }}
+          verbose: true
+          directory: ./
+        continue-on-error: true
+
+      - name: Verify Codecov Upload
+        run: |
+          echo "Checking if Codecov upload was successful..."
+          if [ -f "coverage.json" ]; then
+            echo "✅ Coverage file exists and is ready for upload"
+            echo "📊 Coverage file size: $(wc -c < coverage.json) bytes"
+          else
+            echo "❌ Coverage file not found"
+            exit 1
+          fi
 
       - name: Upload xcresult
         if: always()

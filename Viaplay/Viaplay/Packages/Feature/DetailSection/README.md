@@ -1,63 +1,112 @@
-# DetailSection
+<p align="center">
+  <img src="../../../../DocResources/viaplay_image_header.jpeg" alt="Viaplay Header" width="600"/>
+</p>
 
-## Overview
-Feature module for the detail screen following MVVM + UseCase pattern. This module implements the detailed view for individual content sections with comprehensive information display.
+# 🎯 DetailSection Feature Module
 
-## Responsibilities
-- **UI Presentation**: SwiftUI views for section detail display
-- **State Management**: ViewModel for managing UI state and user interactions
-- **Business Logic**: Integration with domain use cases for data retrieval
-- **Content Display**: Show detailed section information and metadata
+## ✨ Overview
+**Feature module** for the detail/section content following _Clean Architecture_ (Domain/Data/View) with **MVVM + UseCase**. It implements the detail view experience with DI via `DetailFactory`.
 
-## Architecture
+## 🏗️ Architecture
 ```
 DetailSection Feature
-├── Views/
-│   └── DetailView.swift            # Main detail view UI
+├── Data/
+│   ├── DataSource/
+│   │   ├── DetailDataSourceProtocol.swift     # Protocol for data fetching
+│   │   └── DetailDataSource.swift             # Fetches detail data from PageRepository
+│   └── Repository/
+│       └── DetailRepositoryImpl.swift         # Implements Domain.DetailRepositoryProtocol
+├── View/
+│   ├── Components/
+│   │   └── DetailItemView.swift               # Reusable UI for a single detail item
+│   ├── ViewModel/
+│   │   └── DetailViewModel.swift              # Manages UI state and interacts with UseCase
+│   └── DetailView.swift                       # Main detail view UI
+├── Resources/
+│   └── Localizable.strings                    # Localized strings
+├── DetailFactory.swift                        # Dependency injection factory
 └── Tests/
-    └── DetailViewTests.swift       # Feature tests
+    ├── Unit/                                  # Isolated tests for business logic
+    │   ├── Mocks.swift                        # Test doubles (spies, stubs)
+    │   ├── DetailViewModelTests.swift
+    │   ├── FetchDetailUseCaseTests.swift
+    │   ├── DetailRepositoryImplTests.swift
+    │   └── DetailDataSourceTests.swift
+    ├── Integration/                           # Tests across multiple layers
+    │   └── DetailIntegrationTests.swift
+    └── Snapshot/                              # UI snapshot tests
+        └── DetailViewSnapshotTests.swift
 ```
 
-## Dependencies
-- **Domain**: Uses domain models and use cases
-- **DSKit**: Reusable UI components for consistent design
-- **Data**: Repository implementations for data access
+## 🔗 Dependencies
+- **`Domain`**: Core business logic, models (`DetailItem`, `DetailPage`), and use cases (`FetchDetailUseCase`).
+- **`Data`**: Base data layer abstractions (e.g., `PageRepository`).
+- **`NetworkingKit`**: Handles network requests.
+- **`StorageKit`**: Manages data caching and persistence.
+- **`DSKit`**: Reusable UI components for consistent design.
+- **`SnapshotTesting`**: For visual regression testing of SwiftUI views.
 
-## Key Components
+## 🔄 Data Flow
+1. **View Load**: `DetailView` appears → `DetailViewModel.loadDetail()`
+2. **Use Case Call**: `ViewModel` calls `Domain.FetchDetailUseCase.execute(section:)`
+3. **Repository Call**: `UseCase` calls `Domain.DetailRepositoryProtocol.fetchDetail(for:)` (implemented by `DetailRepositoryImpl`)
+4. **Data Source Call**: `Repository` calls `DetailDataSourceProtocol.fetchDetail(for:)`
+5. **Data Retrieval**: `DataSource` uses `PageRepository` (from `Data` layer) to fetch raw data.
+6. **Mapping**: `DataSource` maps `ContentSection` to `Domain.DetailPage` and `Domain.DetailItem`.
+7. **State Update**: `ViewModel` updates `@Published` properties with `Domain.DetailPage` data.
+8. **UI Refresh**: SwiftUI automatically updates the view.
 
-### DetailView
-SwiftUI view that displays detailed section information:
+## 🧪 Testing
+The `DetailSection` package includes a comprehensive testing suite:
+
+- **Unit Tests** (`Tests/Unit`):
+    - Isolated tests for `DetailViewModel`, `FetchDetailUseCase`, `DetailRepositoryImpl`, and `DetailDataSource`.
+    - Uses mocks and stubs (`Mocks.swift`) for dependency isolation.
+    - Employs `setUp()` and `tearDown()` for consistent test environment setup.
+- **Integration Tests** (`Tests/Integration`):
+    - Tests the interaction between `DataSource`, `Repository`, and `UseCase` layers.
+- **Snapshot Tests** (`Tests/Snapshot`):
+    - Leverages [SnapshotTesting](https://github.com/pointfreeco/swift-snapshot-testing) to capture and compare UI snapshots of `DetailView`.
+    - Ensures visual consistency across changes.
+
+## 🛠️ Example Wiring (App)
 ```swift
-struct DetailView: View {
-    @StateObject private var viewModel: DetailViewModel
+import DetailSection
+import SwiftUI
+
+struct ContentView: View {
+    var body: some View {
+        NavigationView {
+            VStack {
+                // Your sections list
+                ForEach(sections) { section in
+                    NavigationLink(destination: DetailView(section: section)) {
+                        Text(section.title)
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Or with custom ViewModel
+struct CustomDetailView: View {
+    let section: ContentSection
     
     var body: some View {
-        // Section details with rich content
-        // Loading states and error handling
-        // Navigation and user interactions
+        DetailView(
+            section: section,
+            viewModel: DetailFactory.makeDetailViewModel(for: section)
+        )
     }
 }
 ```
 
-## Data Flow
-1. **View Load**: DetailView appears with section data
-2. **Use Case Call**: ViewModel calls appropriate use case
-3. **Data Retrieval**: Use case → Repository → API/Cache
-4. **State Update**: ViewModel updates @Published properties
-5. **UI Refresh**: SwiftUI automatically updates the view
-
-## Testing
-- **View Tests**: Test UI rendering and user interactions
-- **Mock Use Cases**: Use fake implementations for isolated testing
-- **State Tests**: Verify proper state management
-
-## Directory Layout
-- `Sources/DetailSection/DetailView.swift` - Main UI view
-- `Tests/DetailSectionTests/DetailViewTests.swift` - Feature tests
-
-## Example Wiring (App)
-```swift
-let repo = PageRepositoryImpl(http: http, cache: cache, etagStore: etags)
-let useCase = GetPage(repository: repo)
-// later: DetailViewModel(useCase: useCase)
-```
+## 📱 Features
+- **Clean Architecture**: Separation of concerns with Domain/Data/View layers
+- **MVVM Pattern**: Reactive UI updates with `@Published` properties
+- **Dependency Injection**: Easy testing and modularity via `DetailFactory`
+- **Comprehensive Testing**: Unit, Integration, and Snapshot tests
+- **Localization Ready**: Support for multiple languages via `Localizable.strings`
+- **SwiftUI Native**: Modern, declarative UI framework
+- **Cross-Platform**: iOS 16+ and macOS 12+ support
