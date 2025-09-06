@@ -73,11 +73,11 @@ public struct SectionsListView: View {
             }
             
             VStack(spacing: 8) {
-                Text("Cargando contenido")
+                Text("Loading content")
                     .font(.system(size: 18, weight: .semibold, design: .rounded))
                     .foregroundColor(.primary)
                 
-                Text("Preparando las mejores series y películas...")
+                Text("Preparing the best series and movies...")
                     .font(.system(size: 14, weight: .medium, design: .rounded))
                     .foregroundColor(.secondary)
                     .multilineTextAlignment(.center)
@@ -105,7 +105,7 @@ public struct SectionsListView: View {
             .animation(.spring(response: 0.6, dampingFraction: 0.8), value: animateSections)
 
             VStack(spacing: 12) {
-                Text("¡Ups! Algo salió mal")
+                Text("Oops! Something went wrong")
                     .font(.system(size: 20, weight: .bold, design: .rounded))
                     .foregroundColor(.primary)
 
@@ -155,11 +155,11 @@ public struct SectionsListView: View {
             LazyVStack(spacing: 16) {
                 // Header section
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Explora nuestro contenido")
+                    Text("Explore our content")
                         .font(.system(size: 28, weight: .bold, design: .rounded))
                         .foregroundColor(.primary)
                     
-                    Text("Descubre series, películas, deportes y más")
+                    Text("Discover series, movies, sports and more")
                         .font(.system(size: 16, weight: .medium, design: .rounded))
                         .foregroundColor(.secondary)
                 }

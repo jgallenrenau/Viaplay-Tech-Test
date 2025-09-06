@@ -80,12 +80,12 @@ public struct DetailView: View {
                 
                 // Section metadata
                 HStack(spacing: 16) {
-                    Label("Sección", systemImage: "folder.fill")
+                    Label("Section", systemImage: "folder.fill")
                         .font(.caption)
                         .foregroundColor(.blue)
                     
                     if let href = viewModel.section.href {
-                        Label("Enlace disponible", systemImage: "link")
+                        Label("Link available", systemImage: "link")
                             .font(.caption)
                             .foregroundColor(.green)
                     }
@@ -169,7 +169,7 @@ public struct DetailView: View {
             .animation(.spring(response: 0.6, dampingFraction: 0.8), value: animateContent)
 
             VStack(spacing: 12) {
-                Text("¡Ups! Algo salió mal")
+                Text("Oops! Something went wrong")
                     .font(.system(size: 20, weight: .bold, design: .rounded))
                     .foregroundColor(.primary)
 
@@ -251,7 +251,7 @@ public struct DetailView: View {
                             .font(.title3)
                             .fontWeight(.semibold)
                             .foregroundColor(.purple)
-                        Text("Categoría")
+                        Text("Category")
                             .font(.caption)
                             .foregroundColor(.secondary)
                     }
@@ -309,7 +309,7 @@ public struct DetailView: View {
                         .font(.system(size: 48))
                         .foregroundColor(.secondary)
                     
-                    Text("No hay contenido disponible")
+                    Text("No content available")
                         .font(.title3)
                         .fontWeight(.medium)
                         .foregroundColor(.secondary)
@@ -340,11 +340,11 @@ public struct DetailView: View {
             .animation(.spring(response: 0.6, dampingFraction: 0.8), value: animateContent)
 
             VStack(spacing: 12) {
-                Text("No hay contenido disponible")
+                Text("No content available")
                     .font(.system(size: 20, weight: .bold, design: .rounded))
                     .foregroundColor(.primary)
 
-                Text("Esta sección no tiene elementos para mostrar en este momento.")
+                Text("This section has no items to display at the moment.")
                     .font(.system(size: 16, weight: .medium, design: .rounded))
                     .foregroundColor(.secondary)
                     .multilineTextAlignment(.center)

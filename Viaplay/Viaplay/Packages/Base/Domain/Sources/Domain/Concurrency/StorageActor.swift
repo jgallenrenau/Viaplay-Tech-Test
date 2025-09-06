@@ -11,6 +11,12 @@ public actor StorageActor {
     
     private init() {}
     
+    /// Cleanup method for task cancellation
+    private func cleanupTask(for key: String) {
+        pendingWrites.removeValue(forKey: key)
+        print("🧹 [StorageActor] Cleaned up task for key: \(key)")
+    }
+    
     /// Thread-safe write operation with queuing
     public func write<T: Codable>(_ object: T, for key: String) async throws {
         let data = try JSONEncoder().encode(object)
@@ -22,9 +28,16 @@ public actor StorageActor {
             return
         }
         
-        // Create write task
+        // Create write task with automatic cleanup
         let task = Task<Void, Error> {
-            try await self.performWrite(data, for: key)
+            try await withTaskCancellationHandler {
+                try await self.performWrite(data, for: key)
+            } onCancel: {
+                // Schedule cleanup on the actor itself
+                Task {
+                    await self.cleanupTask(for: key)
+                }
+            }
         }
         
         pendingWrites[key] = task

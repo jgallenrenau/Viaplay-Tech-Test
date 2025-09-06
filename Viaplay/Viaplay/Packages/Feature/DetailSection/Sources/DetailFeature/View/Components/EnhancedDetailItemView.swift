@@ -114,7 +114,7 @@ public struct EnhancedDetailItemView: View {
                     HStack(spacing: 6) {
                         Image(systemName: showFullDescription ? "eye.slash" : "eye")
                             .font(.caption)
-                        Text(showFullDescription ? "Ver menos" : "Ver más")
+                        Text(showFullDescription ? "Show less" : "Show more")
                             .font(.caption)
                             .fontWeight(.medium)
                     }
@@ -207,11 +207,10 @@ public struct EnhancedDetailItemView: View {
     VStack {
         EnhancedDetailItemView(item: Domain.DetailItem(
             id: "1",
-            title: "Ejemplo de Item",
-            description: "Esta es una descripción de ejemplo para mostrar cómo se ve el componente mejorado.",
-            content: "Contenido adicional que puede ser muy largo y mostrar más información sobre el item.",
-            href: URL(string: "https://example.com"),
-            tags: ["iOS", "SwiftUI", "Ejemplo", "Demo"]
+            title: "Example Item",
+            description: "This is an example description to show how the enhanced component looks.",
+            href: URL(string: "https://example.com"), content: "Additional content that can be very long and show more information about the item.",
+            tags: ["iOS", "SwiftUI", "Example", "Demo"]
         ))
         
         Spacer()

@@ -110,7 +110,7 @@ public struct DetailItemView: View {
                         HStack(spacing: 6) {
                             Image(systemName: "arrow.up.right.square.fill")
                                 .font(.system(size: 14, weight: .semibold))
-                            Text("Ver más")
+                            Text("Show more")
                                 .font(.system(size: 14, weight: .semibold, design: .rounded))
                         }
                         .foregroundColor(.white)
