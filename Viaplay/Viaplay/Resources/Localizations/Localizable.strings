@@ -1,0 +1,47 @@
+/* 
+  Localizable.strings
+  Viaplay
+  
+  English (Base) Localization
+*/
+
+// MARK: - Common
+"common.loading" = "Loading...";
+"common.error" = "Oops! Something went wrong";
+"common.retry" = "Try again";
+"common.show_more" = "Show more";
+"common.show_less" = "Show less";
+"common.open" = "Open";
+"common.content" = "Content";
+"common.category" = "Category";
+"common.section" = "Section";
+"common.link_available" = "Link available";
+"common.no_content" = "No content available";
+
+// MARK: - Loading States
+"loading.content" = "Loading content";
+"loading.preparing" = "Preparing the best series and movies...";
+"loading.details" = "Preparing details...";
+
+// MARK: - Sections
+"sections.title" = "Explore our content";
+"sections.subtitle" = "Discover series, movies, sports and more";
+"sections.items_count" = "%d items";
+"sections.section" = "Section";
+
+// MARK: - Detail View
+"detail.title" = "Section Details";
+"detail.items_count" = "%d elements";
+"detail.no_items_message" = "This section has no items to display at the moment.";
+"detail.tags" = "Tags:";
+"detail.content_label" = "Content:";
+
+// MARK: - Error Messages
+"error.loading_failed" = "Failed to load content";
+"error.network_error" = "Network connection error";
+"error.unknown_error" = "An unknown error occurred";
+
+// MARK: - Actions
+"action.retry" = "Try again";
+"action.open_link" = "Open link";
+"action.view_content" = "View content";

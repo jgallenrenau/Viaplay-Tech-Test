@@ -1,0 +1,47 @@
+/* 
+  Localizable.strings
+  Viaplay
+  
+  Spanish Localization
+*/
+
+// MARK: - Common
+"common.loading" = "Cargando...";
+"common.error" = "¡Ups! Algo salió mal";
+"common.retry" = "Intentar de nuevo";
+"common.show_more" = "Ver más";
+"common.show_less" = "Ver menos";
+"common.open" = "Abrir";
+"common.content" = "Contenido";
+"common.category" = "Categoría";
+"common.section" = "Sección";
+"common.link_available" = "Enlace disponible";
+"common.no_content" = "No hay contenido disponible";
+
+// MARK: - Loading States
+"loading.content" = "Cargando contenido";
+"loading.preparing" = "Preparando las mejores series y películas...";
+"loading.details" = "Preparando los detalles...";
+
+// MARK: - Sections
+"sections.title" = "Explora nuestro contenido";
+"sections.subtitle" = "Descubre series, películas, deportes y más";
+"sections.items_count" = "%d elementos";
+"sections.section" = "Sección";
+
+// MARK: - Detail View
+"detail.title" = "Detalles de la Sección";
+"detail.items_count" = "%d elementos";
+"detail.no_items_message" = "Esta sección no tiene elementos para mostrar en este momento.";
+"detail.tags" = "Etiquetas:";
+"detail.content_label" = "Contenido:";
+
+// MARK: - Error Messages
+"error.loading_failed" = "Error al cargar el contenido";
+"error.network_error" = "Error de conexión de red";
+"error.unknown_error" = "Ocurrió un error desconocido";
+
+// MARK: - Actions
+"action.retry" = "Intentar de nuevo";
+"action.open_link" = "Abrir enlace";
+"action.view_content" = "Ver contenido";
