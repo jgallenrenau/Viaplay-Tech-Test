@@ -10,9 +10,8 @@ final class DetailItemViewTests: XCTestCase {
             id: "1",
             title: "Test Item",
             description: "Test Description",
-            content: "Test Content",
-            tags: ["tag1", "tag2"],
-            href: URL(string: "https://example.com")
+            href: URL(string: "https://example.com"), content: "Test Content",
+            tags: ["tag1", "tag2"]
         )
         let view = DetailItemView(item: item)
         
@@ -86,9 +85,8 @@ final class DetailItemViewTests: XCTestCase {
             id: "1",
             title: "Test Item",
             description: "Test Description",
-            content: "Test Content",
-            tags: ["tag1", "tag2"],
-            href: URL(string: "https://example.com")
+            href: URL(string: "https://example.com"), content: "Test Content",
+            tags: ["tag1", "tag2"]
         )
         let view = DetailItemView(item: item)
         

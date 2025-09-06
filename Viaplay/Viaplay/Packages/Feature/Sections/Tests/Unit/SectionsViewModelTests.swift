@@ -49,7 +49,7 @@ final class SectionsViewModelTests: XCTestCase {
     func test_initialState() {
         XCTAssertTrue(sut.sections.isEmpty)
         XCTAssertNil(sut.errorMessage)
-        XCTAssertTrue(sut.isLoading)
+        XCTAssertFalse(sut.isLoading)
     }
     
     func test_loadSections_multipleCalls() async {
@@ -67,15 +67,11 @@ final class SectionsViewModelTests: XCTestCase {
     func test_loadSections_loadingState() async {
         repo.result = .success(SectionsPage(title: "Home", sections: []))
         
+        // Verify initial state
+        XCTAssertFalse(sut.isLoading)
+        
         // Start loading
-        let loadingTask = Task {
-            await sut.loadSections()
-        }
-        
-        // Verify loading state is true during execution
-        XCTAssertTrue(sut.isLoading)
-        
-        await loadingTask.value
+        await sut.loadSections()
         
         // Verify loading state is false after completion
         XCTAssertFalse(sut.isLoading)

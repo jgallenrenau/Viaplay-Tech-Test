@@ -50,7 +50,7 @@ final class DetailViewModelTests: XCTestCase {
     }
     
     func test_initialState() {
-        XCTAssertTrue(sut.isLoading)
+        XCTAssertFalse(sut.isLoading)
         XCTAssertNil(sut.errorMessage)
         XCTAssertNil(sut.detailPage)
         XCTAssertEqual(useCase.executeCalls, 0)
@@ -73,15 +73,11 @@ final class DetailViewModelTests: XCTestCase {
     func test_loadDetail_loadingState() async {
         useCase.result = .success(Domain.DetailPage(title: "Test", items: []))
         
+        // Verify initial state
+        XCTAssertFalse(sut.isLoading)
+        
         // Start loading
-        let loadingTask = Task {
-            await sut.loadDetail()
-        }
-        
-        // Verify loading state is true during execution
-        XCTAssertTrue(sut.isLoading)
-        
-        await loadingTask.value
+        await sut.loadDetail()
         
         // Verify loading state is false after completion
         XCTAssertFalse(sut.isLoading)

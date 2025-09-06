@@ -5,7 +5,7 @@ import Domain
 
 final class DetailViewTests: XCTestCase {
     
-    func testDetailViewInitializationWithViewModel() {
+    @MainActor func testDetailViewInitializationWithViewModel() {
         let section = ContentSection(title: "Test Section", description: "Test Description")
         let viewModel = DetailViewModel(section: section, fetchDetailUseCase: MockFetchDetailUseCase())
         let view = DetailView(section: section, viewModel: viewModel)
