@@ -91,6 +91,9 @@ jobs:
             fi
           done
           
+          # Clean up any existing xcresult file
+          rm -rf TestResults.xcresult
+          
           # Run the main app tests with coverage
           xcodebuild \
             -project "$PROJECT" \
@@ -105,29 +108,40 @@ jobs:
       - name: Generate Code Coverage Report
         run: |
           # Use the specified xcresult file first
-          if [ -f "TestResults.xcresult" ]; then
+          if [ -d "TestResults.xcresult" ]; then
             XCRESULT_PATH="TestResults.xcresult"
             echo "Using specified xcresult: $XCRESULT_PATH"
           else
+            echo "TestResults.xcresult not found, searching for alternatives..."
             # Fallback: Find the most recent xcresult file from Xcode tests
             XCRESULT_PATH=$(find ~/Library/Developer/Xcode/DerivedData -name "*.xcresult" -type d -exec stat -f "%m %N" {} \; | sort -nr | head -1 | cut -d' ' -f2-)
             if [ -z "$XCRESULT_PATH" ]; then
-              echo "No xcresult file found, trying alternative paths..."
+              echo "No xcresult file found in DerivedData, trying current directory..."
               # Try alternative paths for GitHub Actions
               XCRESULT_PATH=$(find . -name "*.xcresult" -type d -exec stat -f "%m %N" {} \; | sort -nr | head -1 | cut -d' ' -f2-)
               if [ -z "$XCRESULT_PATH" ]; then
-                echo "No xcresult file found in any location"
+                echo "❌ No xcresult file found in any location"
+                echo "Available files in current directory:"
+                ls -la
                 exit 1
               fi
             fi
             echo "Using found xcresult: $XCRESULT_PATH"
           fi
           
+          # Verify the xcresult file exists and is valid
+          if [ ! -d "$XCRESULT_PATH" ]; then
+            echo "❌ xcresult file is not a directory: $XCRESULT_PATH"
+            exit 1
+          fi
+          
           # Generate coverage report
+          echo "Generating coverage report from: $XCRESULT_PATH"
           xcrun xccov view --report --json "$XCRESULT_PATH" > coverage.json
-          echo "Coverage report generated"
+          echo "✅ Coverage report generated successfully"
           
           # Show coverage summary
+          echo "📊 Coverage summary:"
           xcrun xccov view --report "$XCRESULT_PATH"
 
       - name: Verify Coverage Report
