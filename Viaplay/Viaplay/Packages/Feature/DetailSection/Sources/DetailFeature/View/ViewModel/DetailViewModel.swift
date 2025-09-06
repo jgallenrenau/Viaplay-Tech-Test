@@ -9,7 +9,7 @@ public final class DetailViewModel: ObservableObject {
     @Published public var errorMessage: String?
 
     private let fetchDetailUseCase: Domain.FetchDetailUseCaseProtocol
-    private let section: ContentSection
+    public let section: ContentSection
 
     public init(
         section: ContentSection,

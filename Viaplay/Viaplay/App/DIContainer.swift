@@ -3,8 +3,6 @@ import Data
 import Domain
 import NetworkingKit
 import StorageKit
-import Sections
-import DetailSection
 
 /// Modern Dependency Injection Container using Swift 5.9+ features
 @MainActor
