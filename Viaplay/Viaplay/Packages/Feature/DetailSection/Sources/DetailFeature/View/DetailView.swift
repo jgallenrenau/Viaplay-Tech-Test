@@ -241,13 +241,13 @@ public struct DetailView: View {
                             .font(.title2)
                             .fontWeight(.bold)
                             .foregroundColor(.blue)
-                        Text("Elementos")
+                        Text("Elements")
                             .font(.caption)
                             .foregroundColor(.secondary)
                     }
                     
                     VStack(alignment: .leading, spacing: 4) {
-                        Text(detailPage.navigationTitle)
+                        Text(detailPage.navigationTitle ?? "Unknown Category")
                             .font(.title3)
                             .fontWeight(.semibold)
                             .foregroundColor(.purple)
@@ -280,7 +280,7 @@ public struct DetailView: View {
                         
                         Spacer()
                         
-                        Text("\(detailPage.items.count) elementos")
+                        Text("\(detailPage.items.count) elements")
                             .font(.caption)
                             .foregroundColor(.secondary)
                             .padding(.horizontal, 12)

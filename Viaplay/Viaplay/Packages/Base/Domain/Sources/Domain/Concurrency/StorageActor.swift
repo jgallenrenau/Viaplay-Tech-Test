@@ -1,4 +1,4 @@
-ste el disimport Foundation
+import Foundation
 
 /// Actor for thread-safe storage operations
 @globalActor
