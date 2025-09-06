@@ -100,7 +100,7 @@ public struct DetailItemView: View {
             }
 
             // Action button
-            if let href = item.href {
+            if item.href != nil {
                 HStack {
                     Spacer()
                     

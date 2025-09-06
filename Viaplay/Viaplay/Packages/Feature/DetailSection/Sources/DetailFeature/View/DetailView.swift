@@ -1,5 +1,6 @@
 import SwiftUI
 import Domain
+import DSKit
 
 public struct DetailView: View {
     @StateObject private var viewModel: DetailViewModel
@@ -39,9 +40,17 @@ public struct DetailView: View {
                     // Content based on state
                     Group {
                         if viewModel.isLoading {
-                            loadingView
+                            LoadingView.detailsLoading()
                         } else if let errorMessage = viewModel.errorMessage {
-                            errorView(message: errorMessage)
+                            DesignSystem.Components.errorView(
+                                title: "Oops! Something went wrong",
+                                message: errorMessage,
+                                retryAction: {
+                                    Task {
+                                        await viewModel.loadDetail()
+                                    }
+                                }
+                            )
                         } else if let detailPage = viewModel.detailPage {
                             detailContentView(detailPage: detailPage)
                         } else {
@@ -84,7 +93,7 @@ public struct DetailView: View {
                         .font(.caption)
                         .foregroundColor(.blue)
                     
-                    if let href = viewModel.section.href {
+                    if viewModel.section.href != nil {
                         Label("Link available", systemImage: "link")
                             .font(.caption)
                             .foregroundColor(.green)
@@ -113,106 +122,7 @@ public struct DetailView: View {
         }
     }
     
-    private var loadingView: some View {
-        VStack(spacing: 24) {
-            // Animated loading indicator
-            ZStack {
-                Circle()
-                    .stroke(Color.blue.opacity(0.3), lineWidth: 4)
-                    .frame(width: 60, height: 60)
-                
-                Circle()
-                    .trim(from: 0, to: 0.7)
-                    .stroke(
-                        LinearGradient(
-                            gradient: Gradient(colors: [.blue, .purple]),
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        ),
-                        style: StrokeStyle(lineWidth: 4, lineCap: .round)
-                    )
-                    .frame(width: 60, height: 60)
-                    .rotationEffect(.degrees(animateContent ? 360 : 0))
-                    .animation(.linear(duration: 1).repeatForever(autoreverses: false), value: animateContent)
-            }
-            
-            VStack(spacing: 8) {
-                Text("Cargando contenido")
-                    .font(.system(size: 18, weight: .semibold, design: .rounded))
-                    .foregroundColor(.primary)
-                
-                Text("Preparando los detalles...")
-                    .font(.system(size: 14, weight: .medium, design: .rounded))
-                    .foregroundColor(.secondary)
-                    .multilineTextAlignment(.center)
-            }
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .onAppear {
-            animateContent = true
-        }
-    }
 
-    private func errorView(message: String) -> some View {
-        VStack(spacing: 24) {
-            // Error icon with animation
-            ZStack {
-                Circle()
-                    .fill(Color.red.opacity(0.1))
-                    .frame(width: 80, height: 80)
-                
-                Image(systemName: "exclamationmark.triangle.fill")
-                    .font(.system(size: 32, weight: .semibold))
-                    .foregroundColor(.red)
-            }
-            .scaleEffect(animateContent ? 1.0 : 0.8)
-            .animation(.spring(response: 0.6, dampingFraction: 0.8), value: animateContent)
-
-            VStack(spacing: 12) {
-                Text("Oops! Something went wrong")
-                    .font(.system(size: 20, weight: .bold, design: .rounded))
-                    .foregroundColor(.primary)
-
-                Text(message)
-                    .font(.system(size: 16, weight: .medium, design: .rounded))
-                    .foregroundColor(.secondary)
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal, 20)
-            }
-
-            Button(action: {
-                Task {
-                    await viewModel.loadDetail()
-                }
-            }) {
-                HStack(spacing: 8) {
-                    Image(systemName: "arrow.clockwise")
-                        .font(.system(size: 16, weight: .semibold))
-                    Text("Intentar de nuevo")
-                        .font(.system(size: 16, weight: .semibold, design: .rounded))
-                }
-                .foregroundColor(.white)
-                .padding(.horizontal, 24)
-                .padding(.vertical, 12)
-                .background(
-                    LinearGradient(
-                        gradient: Gradient(colors: [.blue, .purple]),
-                        startPoint: .leading,
-                        endPoint: .trailing
-                    )
-                )
-                .clipShape(Capsule())
-                .shadow(color: .blue.opacity(0.3), radius: 8, x: 0, y: 4)
-            }
-            .scaleEffect(animateContent ? 1.0 : 0.9)
-            .animation(.spring(response: 0.6, dampingFraction: 0.8).delay(0.2), value: animateContent)
-        }
-        .padding(.horizontal, 32)
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .onAppear {
-            animateContent = true
-        }
-    }
 
     private func detailContentView(detailPage: Domain.DetailPage) -> some View {
         VStack(spacing: 24) {

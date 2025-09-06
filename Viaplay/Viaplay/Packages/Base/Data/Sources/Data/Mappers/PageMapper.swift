@@ -13,50 +13,33 @@ struct PageMapper {
     }
     
     private static func extractSections(from dto: PageDTO) -> [ContentSection] {
-        var sections: [ContentSection] = []
-        
-        // Extract sections from viaplay:sections
-        if let viaplaySections = dto.links.viaplaySections {
-            let mappedSections: [ContentSection] = viaplaySections.compactMap { sectionDTO in
-                guard let href = URL(string: sectionDTO.href) else { return nil }
-                
-                return ContentSection(
-                    title: sectionDTO.title,
-                    description: nil, // API doesn't provide description for sections
-                    href: href
-                )
-            }
-            sections.append(contentsOf: mappedSections)
+        // Try viaplay:sections first
+        if let sections = dto.links.viaplaySections {
+            return mapSections(sections)
         }
         
-        // If no sections found in viaplay:sections, try primary navigation
-        if sections.isEmpty, let primaryNav = dto.links.viaplayPrimaryNavigation {
-            let mappedSections: [ContentSection] = primaryNav.compactMap { sectionDTO in
-                guard let href = URL(string: sectionDTO.href) else { return nil }
-                
-                return ContentSection(
-                    title: sectionDTO.title,
-                    description: nil,
-                    href: href
-                )
-            }
-            sections.append(contentsOf: mappedSections)
+        // Fallback to primary navigation
+        if let sections = dto.links.viaplayPrimaryNavigation {
+            return mapSections(sections)
         }
         
-        // If still no sections, try secondary navigation
-        if sections.isEmpty, let secondaryNav = dto.links.viaplaySecondaryNavigation {
-            let mappedSections: [ContentSection] = secondaryNav.compactMap { sectionDTO in
-                guard let href = URL(string: sectionDTO.href) else { return nil }
-                
-                return ContentSection(
-                    title: sectionDTO.title,
-                    description: nil,
-                    href: href
-                )
-            }
-            sections.append(contentsOf: mappedSections)
+        // Fallback to secondary navigation
+        if let sections = dto.links.viaplaySecondaryNavigation {
+            return mapSections(sections)
         }
         
-        return sections
+        return []
+    }
+    
+    private static func mapSections(_ sections: [SectionDTO]) -> [ContentSection] {
+        return sections.compactMap { sectionDTO in
+            guard let href = URL(string: sectionDTO.href) else { return nil }
+            
+            return ContentSection(
+                title: sectionDTO.title,
+                description: nil,
+                href: href
+            )
+        }
     }
 }

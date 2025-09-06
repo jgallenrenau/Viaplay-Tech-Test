@@ -11,7 +11,7 @@ let package = Package(
         .library(name: "Sections", targets: ["Sections"])
     ],
     dependencies: [
-        .package(path: "../../Base≤ß/Domain"),
+        .package(path: "../../Base/Domain"),
         .package(path: "../../Infraestructure/DSKit"),
         .package(path: "../../Base/Data"),
         .package(path: "../../Infraestructure/NetworkingKit"),

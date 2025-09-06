@@ -23,7 +23,7 @@ public final class DIContainer: ObservableObject {
     }()
     
     // MARK: - Repository Layer
-    private lazy var pageRepository: PageRepositoryProtocol = {
+    private lazy var pageRepository: PageRepository = {
         PageRepositoryImpl(
             http: httpClient,
             cache: cache,
@@ -67,15 +67,9 @@ public final class DIContainer: ObservableObject {
         DetailViewModel(section: section, fetchDetailUseCase: fetchDetailUseCase)
     }
     
-    // MARK: - Configuration
-    public func configureForTesting() {
-        // Override dependencies for testing
-        // This allows injecting mocks during testing
-    }
     
     private init() {}
 }
-
 // MARK: - Environment Key
 struct DIContainerKey: EnvironmentKey {
     static let defaultValue = DIContainer.shared

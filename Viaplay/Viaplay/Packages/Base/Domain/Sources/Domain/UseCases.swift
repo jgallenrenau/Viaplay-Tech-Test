@@ -1,31 +1,5 @@
 import Foundation
 
-public struct GetRootPage: GetRootPageUseCase {
-    private let repository: PageRepository
-    public init(repository: PageRepository) { self.repository = repository }
-    public func execute() async throws -> Page { 
-        print("🎯 [GetRootPage] Executing use case...")
-        let result = try await repository.getRootPage()
-        print("✅ [GetRootPage] Use case completed successfully")
-        return result
-    }
-}
-
-public struct GetPage: GetPageUseCase {
-    private let repository: PageRepository
-
-    public init(repository: PageRepository) {
-        self.repository = repository
-    }
-
-    public func execute(url: URL) async throws -> Page {
-        print("🎯 [GetPage] Executing use case for URL: \(url)")
-        let result = try await repository.getPage(by: url)
-        print("✅ [GetPage] Use case completed successfully")
-        return result
-    }
-}
-
 // MARK: - Sections Feature UseCase
 
 public final class FetchSectionsUseCase: FetchSectionsUseCaseProtocol {

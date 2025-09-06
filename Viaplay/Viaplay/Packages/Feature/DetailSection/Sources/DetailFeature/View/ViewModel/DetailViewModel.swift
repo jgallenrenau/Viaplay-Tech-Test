@@ -30,12 +30,9 @@ public final class DetailViewModel: ObservableObject {
             print("✅ [DetailViewModel] Successfully loaded detail with \(detailPage.items.count) items")
             
             // Update UI with animation
-            await withAnimation(.easeInOut(duration: 0.4)) {
+            withAnimation(.easeInOut(duration: 0.4)) {
                 self.detailPage = detailPage
             }
-            
-            // Preload related content if available
-            await preloadRelatedContent(detailPage)
             
         } catch {
             print("❌ [DetailViewModel] Failed to load detail for section '\(section.title)': \(error.localizedDescription)")
@@ -44,40 +41,5 @@ public final class DetailViewModel: ObservableObject {
 
         print("🏁 [DetailViewModel] Loading completed. isLoading: \(isLoading)")
         isLoading = false
-    }
-    
-    /// Preload related content for better user experience
-    private func preloadRelatedContent(_ detailPage: Domain.DetailPage) async {
-        print("🚀 [DetailViewModel] Starting parallel preload for related content...")
-        
-        await withTaskGroup(of: Void.self) { group in
-            // Preload images for items
-            for item in detailPage.items.prefix(5) {
-                group.addTask {
-                    await self.preloadItemImage(item)
-                }
-            }
-            
-            // Preload additional metadata
-            group.addTask {
-                await self.preloadMetadata(detailPage)
-            }
-        }
-        
-        print("✅ [DetailViewModel] Preload completed")
-    }
-    
-    /// Preload image for a detail item
-    private func preloadItemImage(_ item: Domain.DetailItem) async {
-        // Simulate image preloading
-        try? await Task.sleep(nanoseconds: 50_000_000) // 0.05 seconds
-        print("🖼️ [DetailViewModel] Preloaded image for: \(item.title)")
-    }
-    
-    /// Preload additional metadata
-    private func preloadMetadata(_ detailPage: Domain.DetailPage) async {
-        // Simulate metadata preloading
-        try? await Task.sleep(nanoseconds: 100_000_000) // 0.1 seconds
-        print("📊 [DetailViewModel] Preloaded metadata for: \(detailPage.navigationTitle)")
     }
 }

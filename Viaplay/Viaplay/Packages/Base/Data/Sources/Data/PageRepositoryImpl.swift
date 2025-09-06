@@ -29,11 +29,8 @@ public final class PageRepositoryImpl: PageRepository {
     }
 
     private func fetch(url: URL, cacheKey: String) async throws -> Page {
-        // Thread-safe cache and ETag operations
-        async let cachedPage: Page? = try? await StorageActor.shared.read(Page.self, for: cacheKey)
-        async let etag = etagStore.get(cacheKey)
-        
-        let (cached, storedEtag) = await (cachedPage, etag)
+        let cached = try? cache.read(for: cacheKey, as: Page.self)
+        let storedEtag = etagStore.get(cacheKey)
         
         var headers: [String: String] = [:]
         if let etag = storedEtag { 
@@ -50,40 +47,14 @@ public final class PageRepositoryImpl: PageRepository {
             return cached
         }
         
-        // Process response with thread-safe operations
-        let page = try await processResponseThreadSafe(response, cacheKey: cacheKey)
+        let page = try await processResponse(response, cacheKey: cacheKey)
         
-        // Store ETag asynchronously (non-blocking)
-        Task.detached { [weak self] in
-            await self?.storeETagIfNeeded(response, cacheKey: cacheKey)
-        }
+        storeETagIfNeeded(response, cacheKey: cacheKey)
         
         return page
     }
     
-    /// Process HTTP response with thread-safe operations
-    private func processResponseThreadSafe(_ response: HTTPResponse, cacheKey: String) async throws -> Page {
-        print("🔄 [PageRepository] Decoding JSON response...")
-        print("📄 [PageRepository] Raw JSON data: \(String(data: response.data, encoding: .utf8) ?? "Unable to convert to string")")
-        
-        // Decode DTO first, then map to domain model
-        let pageDTO = try JSONDecoder().decode(PageDTO.self, from: response.data)
-        let page = PageMapper.map(pageDTO)
-        
-        // Cache the result using thread-safe storage actor
-        Task.detached {
-            do {
-                try await StorageActor.shared.write(page, for: cacheKey)
-                print("💾 [PageRepository] Data cached successfully for key: \(cacheKey)")
-            } catch {
-                print("⚠️ [PageRepository] Failed to cache data: \(error.localizedDescription)")
-            }
-        }
-        
-        return page
-    }
-    
-    /// Process HTTP response and decode data concurrently (legacy method)
+    /// Process HTTP response and decode data
     private func processResponse(_ response: HTTPResponse, cacheKey: String) async throws -> Page {
         print("🔄 [PageRepository] Decoding JSON response...")
         print("📄 [PageRepository] Raw JSON data: \(String(data: response.data, encoding: .utf8) ?? "Unable to convert to string")")
@@ -95,7 +66,7 @@ public final class PageRepositoryImpl: PageRepository {
         // Cache the result asynchronously
         Task.detached { [weak self] in
             do {
-                try await self?.cache.write(page, for: cacheKey)
+                try self?.cache.write(page, for: cacheKey)
                 print("💾 [PageRepository] Data cached successfully for key: \(cacheKey)")
             } catch {
                 print("⚠️ [PageRepository] Failed to cache data: \(error.localizedDescription)")
@@ -106,7 +77,7 @@ public final class PageRepositoryImpl: PageRepository {
     }
     
     /// Store ETag if present in response
-    private func storeETagIfNeeded(_ response: HTTPResponse, cacheKey: String) async {
+    private func storeETagIfNeeded(_ response: HTTPResponse, cacheKey: String) {
         if let etag = response.headers["ETag"] { 
             etagStore.set(etag, for: cacheKey)
             print("🏷️ [PageRepository] Storing ETag for future requests: \(etag)")
