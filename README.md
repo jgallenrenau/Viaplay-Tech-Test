@@ -17,8 +17,35 @@
 
 The Viaplay Tech Test is a Swift-based iOS application that demonstrates modern iOS development practices through a modular architecture built with Swift Package Manager (SPM). This project showcases a content browsing experience with sections and detailed views, leveraging Clean Architecture principles, MVVM pattern, and an offline-first strategy with ETag-based caching. The application is structured as independent SPM modules, each with specific responsibilities and clear dependency boundaries, ensuring maintainability, testability, and team scalability. This project serves as a technical assessment demonstrating enterprise-grade iOS development practices, including comprehensive testing strategies, CI/CD integration, and SOLID principles implementation.
 
+## 📱 Device Compatibility & Features
+
+### **Supported Devices**
+- **iPhone**: All iPhone models running iOS 17.0+
+- **iPad**: All iPad models running iPadOS 17.0+
+- **Universal App**: Optimized for both iPhone and iPad with adaptive layouts
+- **Orientation Support**: Full rotation support for both portrait and landscape modes
+
+### **User Experience Features**
+- **🌙 Dark Mode**: Native dark mode support with automatic system theme detection
+- **♿ Accessibility**: Comprehensive accessibility features including:
+  - VoiceOver support for screen readers
+  - Dynamic Type support for customizable text sizes
+  - Semantic grouping for better navigation
+  - High contrast support
+  - Reduced motion support
+- **📱 Adaptive Layout**: Responsive design that adapts to different screen sizes and orientations
+- **🔄 Rotation Support**: Seamless rotation between portrait and landscape orientations
+- **⚡ Performance**: Optimized for smooth 60fps scrolling and animations
+
+### **Visual Design**
+- **Modern UI**: Built with SwiftUI and custom DSKit components
+- **Consistent Theming**: Unified design system across all screens
+- **Smooth Animations**: Fluid transitions and micro-interactions
+- **Loading States**: Elegant loading indicators and skeleton screens
+
 ## 📋 Table of Contents
 
+- [📱 Device Compatibility & Features](#-device-compatibility--features)
 - [🧭 Why this architecture](#-why-this-architecture)
 - [🧩 MVVM pattern (per feature)](#-mvvm-pattern-per-feature)
 - [📦 SPM Architecture Decision: Internal vs External Dependencies](#-spm-architecture-decision-internal-vs-external-dependencies)
@@ -78,21 +105,21 @@ The Viaplay Tech Test is a Swift-based iOS application that demonstrates modern 
 - **GitHub Actions**: Automated CI/CD pipeline
 - **Codecov**: Code coverage tracking and reporting
 
-## 📱 Features
+## 🚀 App Features
 
 ### **Core Functionality**
-- **Content Sections Display**: Browse content sections with rich metadata
-- **Section Details**: Comprehensive section information and navigation
-- **Offline-First**: Seamless experience with ETag-based caching
-- **Error Handling**: Graceful error states with retry mechanisms
-- **Loading States**: Smooth loading indicators and state management
+- **Content Sections Display**: Browse content sections with rich metadata and smooth scrolling
+- **Section Details**: Comprehensive section information with detailed navigation
+- **Offline-First**: Seamless experience with ETag-based caching and smart data synchronization
+- **Error Handling**: Graceful error states with user-friendly retry mechanisms
+- **Loading States**: Smooth loading indicators and skeleton screens for better UX
 
-### **Advanced Features**
-- **Accessibility**: VoiceOver support, Dynamic Type, and semantic grouping
-- **Performance**: Efficient list rendering, optimized data fetching, and state management
-- **Modern UI**: Custom design system built with SwiftUI and DSKit
-- **Modular Architecture**: Independent SPM packages for maintainability
-- **Comprehensive Testing**: Unit tests, integration tests, and test plans
+### **Technical Features**
+- **Modular Architecture**: Independent SPM packages for maintainability and scalability
+- **Clean Architecture**: Separation of concerns with clear dependency boundaries
+- **MVVM Pattern**: Reactive UI updates with proper state management
+- **Comprehensive Testing**: Unit tests, integration tests, and snapshot tests
+- **CI/CD Integration**: Automated testing and code quality checks
 
 ## 🚀 Getting Started
 
