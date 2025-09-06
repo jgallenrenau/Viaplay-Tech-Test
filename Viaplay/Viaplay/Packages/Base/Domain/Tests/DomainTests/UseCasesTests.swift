@@ -2,30 +2,49 @@ import XCTest
 @testable import Domain
 
 // Fake repository for testing use cases
-private final class FakePageRepository: PageRepository {
-    var root: Page
-    var pages: [URL: Page]
-    init(root: Page, pages: [URL: Page] = [:]) { self.root = root; self.pages = pages }
-    func getRootPage() async throws -> Page { root }
-    func getPage(by url: URL) async throws -> Page { pages[url] ?? root }
+private final class FakeSectionsRepository: SectionsRepository {
+    var sectionsPage: SectionsPage
+    init(sectionsPage: SectionsPage) { self.sectionsPage = sectionsPage }
+    func fetchSections() async throws -> SectionsPage { sectionsPage }
+}
+
+private final class FakeDetailRepository: DetailRepositoryProtocol {
+    var detailPage: DetailPage
+    init(detailPage: DetailPage) { self.detailPage = detailPage }
+    func fetchDetail(for section: ContentSection) async throws -> DetailPage { detailPage }
 }
 
 final class UseCasesTests: XCTestCase {
-    func testGetRootPageReturnsPage() async throws {
-        let repo = FakePageRepository(root: Page(title: "Home", sections: []))
-        let useCase = GetRootPage(repository: repo)
-        let page = try await useCase.execute()
-        XCTAssertEqual(page.title, "Home")
+    func testFetchSectionsReturnsSectionsPage() async throws {
+        let sectionsPage = SectionsPage(
+            title: "Sections",
+            description: "Available sections",
+            sections: [
+                Section(id: "sport", title: "Sport", href: URL(string: "https://example.com/sport")!, imageURL: nil, description: "Sports content"),
+                Section(id: "movies", title: "Movies", href: URL(string: "https://example.com/movies")!, imageURL: nil, description: "Movie content")
+            ]
+        )
+        let repo = FakeSectionsRepository(sectionsPage: sectionsPage)
+        let useCase = FetchSectionsUseCase(repository: repo)
+        let result = try await useCase.execute()
+        XCTAssertEqual(result.sections.count, 2)
+        XCTAssertEqual(result.sections.first?.title, "Sport")
     }
 
-    func testGetPageReturnsSpecificPage() async throws {
-        let url = URL(string: "https://example.com/page")!
-        let repo = FakePageRepository(
-            root: Page(title: "Home", sections: []),
-            pages: [url: Page(title: "P", sections: [ContentSection(title: "A")])]
+    func testFetchDetailReturnsDetailPage() async throws {
+        let section = ContentSection(title: "Sport", description: "Sports content", href: URL(string: "https://example.com/sport")!)
+        let detailPage = DetailPage(
+            title: "Sport",
+            description: "Sports content",
+            items: [
+                DetailItem(id: "1", title: "Football", description: "Football content", href: URL(string: "https://example.com/football")!)
+            ], navigationTitle: "Sport"
         )
-        let useCase = GetPage(repository: repo)
-        let page = try await useCase.execute(url: url)
-        XCTAssertEqual(page.sections.first?.title, "A")
+        let repo = FakeDetailRepository(detailPage: detailPage)
+        let useCase = FetchDetailUseCase(repository: repo)
+        let result = try await useCase.execute(section: section)
+        XCTAssertEqual(result.title, "Sport")
+        XCTAssertEqual(result.items.count, 1)
+        XCTAssertEqual(result.items.first?.title, "Football")
     }
 }

@@ -1,10 +1,7 @@
-/* Default localizable strings for Sections feature */
 "sections.title" = "Sections";
 "sections.loading" = "Loading sections...";
 "sections.error" = "Error";
 "sections.retry" = "Retry";
-/* Sections Feature Localizable Strings */
-
 "loading.sections" = "Loading sections...";
 "error.title" = "Error";
 "error.retry" = "Retry";

@@ -1,0 +1,65 @@
+/* 
+  Localizable.strings
+  Viaplay
+  
+  Catalan
+*/
+
+// MARK: - Common
+"loading" = "Carregant...";
+"error" = "Error";
+"retry" = "Tornar a intentar";
+"refresh" = "Actualitzar";
+"cancel" = "Cancel·lar";
+"ok" = "OK";
+"done" = "Fet";
+"back" = "Enrere";
+"next" = "Següent";
+"previous" = "Anterior";
+"close" = "Tancar";
+
+// MARK: - Sections
+"sections.title" = "Seccions";
+"sections.loading" = "Carregant seccions...";
+"sections.error.title" = "Error en carregar les seccions";
+"sections.error.message" = "No hem pogut carregar les seccions. Si us plau, verifica la teva connexió a internet i torna-ho a intentar.";
+"sections.empty.title" = "No hi ha seccions disponibles";
+"sections.empty.message" = "No hi ha seccions per mostrar en aquest moment.";
+
+// MARK: - Detail Section
+"detail.title" = "Detalls de la secció";
+"detail.loading" = "Carregant detalls...";
+"detail.error.title" = "Error en carregar els detalls";
+"detail.error.message" = "No hem pogut carregar els detalls de la secció. Si us plau, torna-ho a intentar.";
+"detail.empty.title" = "No hi ha contingut disponible";
+"detail.empty.message" = "Aquesta secció no té contingut per mostrar en aquest moment. Torna més tard per veure actualitzacions!";
+
+// MARK: - Content
+"content.title" = "Contingut";
+"content.elements.count" = "Elements";
+"content.category" = "Categoria";
+"content.status" = "Estat";
+"content.section" = "Secció";
+"content.link.available" = "Enllaç disponible";
+"content.link.unavailable" = "Sense enllaç";
+
+// MARK: - Actions
+"action.explore" = "Explorar";
+"action.share" = "Compartir";
+"action.bookmark" = "Marcar";
+"action.favorite" = "Favorit";
+
+// MARK: - Status
+"status.active" = "Actiu";
+"status.inactive" = "Inactiu";
+"status.pending" = "Pendent";
+"status.completed" = "Completat";
+
+// MARK: - Categories
+"category.sports" = "Esports";
+"category.movies" = "Pel·lícules";
+"category.series" = "Sèries";
+"category.news" = "Notícies";
+"category.kids" = "Infantil";
+"category.documentary" = "Documental";
+"category.entertainment" = "Entreteniment";

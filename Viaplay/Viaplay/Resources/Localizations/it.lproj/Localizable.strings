@@ -1,0 +1,65 @@
+/* 
+  Localizable.strings
+  Viaplay
+  
+  Italian
+*/
+
+// MARK: - Common
+"loading" = "Caricamento...";
+"error" = "Errore";
+"retry" = "Riprova";
+"refresh" = "Aggiorna";
+"cancel" = "Annulla";
+"ok" = "OK";
+"done" = "Fatto";
+"back" = "Indietro";
+"next" = "Avanti";
+"previous" = "Precedente";
+"close" = "Chiudi";
+
+// MARK: - Sections
+"sections.title" = "Sezioni";
+"sections.loading" = "Caricamento sezioni...";
+"sections.error.title" = "Errore nel caricamento delle sezioni";
+"sections.error.message" = "Non siamo riusciti a caricare le sezioni. Controlla la tua connessione internet e riprova.";
+"sections.empty.title" = "Nessuna sezione disponibile";
+"sections.empty.message" = "Al momento non ci sono sezioni da visualizzare.";
+
+// MARK: - Detail Section
+"detail.title" = "Dettagli della sezione";
+"detail.loading" = "Caricamento dettagli...";
+"detail.error.title" = "Errore nel caricamento dei dettagli";
+"detail.error.message" = "Non siamo riusciti a caricare i dettagli della sezione. Riprova.";
+"detail.empty.title" = "Nessun contenuto disponibile";
+"detail.empty.message" = "Questa sezione non ha contenuti da visualizzare al momento. Torna più tardi per vedere gli aggiornamenti!";
+
+// MARK: - Content
+"content.title" = "Contenuto";
+"content.elements.count" = "Elementi";
+"content.category" = "Categoria";
+"content.status" = "Stato";
+"content.section" = "Sezione";
+"content.link.available" = "Link disponibile";
+"content.link.unavailable" = "Nessun link";
+
+// MARK: - Actions
+"action.explore" = "Esplora";
+"action.share" = "Condividi";
+"action.bookmark" = "Segnalibro";
+"action.favorite" = "Preferito";
+
+// MARK: - Status
+"status.active" = "Attivo";
+"status.inactive" = "Inattivo";
+"status.pending" = "In sospeso";
+"status.completed" = "Completato";
+
+// MARK: - Categories
+"category.sports" = "Sport";
+"category.movies" = "Film";
+"category.series" = "Serie";
+"category.news" = "Notizie";
+"category.kids" = "Bambini";
+"category.documentary" = "Documentario";
+"category.entertainment" = "Intrattenimento";

@@ -31,7 +31,7 @@ public struct SectionsListView: View {
                         LoadingView.contentLoading()
                     } else if let errorMessage = viewModel.errorMessage {
                         DesignSystem.Components.errorView(
-                            title: "Oops! Something went wrong",
+                            title: LocalizationKeys.Sections.errorTitle.localized,
                             message: errorMessage,
                             retryAction: {
                                 Task {
@@ -64,11 +64,11 @@ public struct SectionsListView: View {
             LazyVStack(spacing: 16) {
                 // Header section
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Explore our content")
+                    Text("explore.content.title".localized)
                         .font(.system(size: 28, weight: .bold, design: .rounded))
                         .foregroundColor(.primary)
                     
-                    Text("Discover series, movies, sports and more")
+                    Text("explore.content.subtitle".localized)
                         .font(.system(size: 16, weight: .medium, design: .rounded))
                         .foregroundColor(.secondary)
                 }

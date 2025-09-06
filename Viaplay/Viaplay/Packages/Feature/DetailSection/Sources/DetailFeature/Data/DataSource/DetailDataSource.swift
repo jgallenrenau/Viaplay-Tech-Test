@@ -19,7 +19,7 @@ public final class DetailDataSource: DetailDataSourceProtocol {
         
         let detailItems = [
             Domain.DetailItem(
-                id: section.title.lowercased().replacingOccurrences(of: " ", with: "-"),
+                id: generateId(from: section.title),
                 title: section.title,
                 description: section.description,
                 href: section.href,
@@ -35,5 +35,17 @@ public final class DetailDataSource: DetailDataSourceProtocol {
             items: detailItems,
             navigationTitle: section.title
         )
+    }
+    
+    private func generateId(from title: String) -> String {
+        // Remove all special characters except letters, numbers, and spaces
+        let allowedCharacters = CharacterSet.alphanumerics.union(CharacterSet.whitespaces)
+        let cleaned = title
+            .lowercased()
+            .components(separatedBy: allowedCharacters.inverted)
+            .joined(separator: "")
+            .replacingOccurrences(of: " ", with: "-")
+        
+        return cleaned
     }
 }

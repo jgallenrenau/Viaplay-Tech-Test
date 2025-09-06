@@ -4,7 +4,12 @@ import Domain
 
 final class DetailRepositoryImplTests: XCTestCase {
     struct DetailDataSourceStub: DetailDataSourceProtocol {
-        var result: Result<Domain.DetailPage, Error> = .success(Domain.DetailPage(title: "t", items: []))
+        var result: Result<Domain.DetailPage, Error> = .success(Domain.DetailPage(
+            title: "Test Title",
+            description: "Test Description",
+            items: [],
+            navigationTitle: "Test Navigation"
+        ))
         
         func fetchDetail(for section: ContentSection) async throws -> Domain.DetailPage {
             switch result {
@@ -37,7 +42,7 @@ final class DetailRepositoryImplTests: XCTestCase {
     func test_fetchDetail_forwardsFromDataSource() async throws {
         let result = try await sut.fetchDetail(for: section)
         XCTAssertNotNil(result)
-        XCTAssertEqual(result.title, "t") // The stub returns "t" as title
+        XCTAssertEqual(result.title, "Test Title")
     }
 
     func test_fetchDetail_propagatesErrorFromDataSource() async {

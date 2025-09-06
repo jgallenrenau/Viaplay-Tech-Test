@@ -19,7 +19,7 @@ final class DetailDataSourceTests: XCTestCase {
             }
         }
         
-        func getPage(url: String) async throws -> Domain.Page {
+        func getPage(by url: URL) async throws -> Domain.Page {
             throw TestError.notImplemented
         }
     }
@@ -54,7 +54,7 @@ final class DetailDataSourceTests: XCTestCase {
         XCTAssertEqual(item.title, section.title)
         XCTAssertEqual(item.description, section.description)
         XCTAssertEqual(item.href, section.href)
-        XCTAssertTrue(item.content.contains("This is detailed content for"))
+        XCTAssertTrue(item.content?.contains("This is detailed content for") == true)
         XCTAssertEqual(item.tags, ["featured", "popular"])
         XCTAssertNotNil(item.publishedDate)
     }

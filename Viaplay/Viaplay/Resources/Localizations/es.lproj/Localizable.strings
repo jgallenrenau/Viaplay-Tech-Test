@@ -2,46 +2,64 @@
   Localizable.strings
   Viaplay
   
-  Spanish Localization
+  Spanish
 */
 
 // MARK: - Common
-"common.loading" = "Cargando...";
-"common.error" = "¡Ups! Algo salió mal";
-"common.retry" = "Intentar de nuevo";
-"common.show_more" = "Ver más";
-"common.show_less" = "Ver menos";
-"common.open" = "Abrir";
-"common.content" = "Contenido";
-"common.category" = "Categoría";
-"common.section" = "Sección";
-"common.link_available" = "Enlace disponible";
-"common.no_content" = "No hay contenido disponible";
-
-// MARK: - Loading States
-"loading.content" = "Cargando contenido";
-"loading.preparing" = "Preparando las mejores series y películas...";
-"loading.details" = "Preparando los detalles...";
+"loading" = "Cargando...";
+"error" = "Error";
+"retry" = "Reintentar";
+"refresh" = "Actualizar";
+"cancel" = "Cancelar";
+"ok" = "OK";
+"done" = "Hecho";
+"back" = "Atrás";
+"next" = "Siguiente";
+"previous" = "Anterior";
+"close" = "Cerrar";
 
 // MARK: - Sections
-"sections.title" = "Explora nuestro contenido";
-"sections.subtitle" = "Descubre series, películas, deportes y más";
-"sections.items_count" = "%d elementos";
-"sections.section" = "Sección";
+"sections.title" = "Secciones";
+"sections.loading" = "Cargando secciones...";
+"sections.error.title" = "Error al Cargar Secciones";
+"sections.error.message" = "No pudimos cargar las secciones. Por favor, verifica tu conexión a internet e inténtalo de nuevo.";
+"sections.empty.title" = "No Hay Secciones Disponibles";
+"sections.empty.message" = "No hay secciones para mostrar en este momento.";
 
-// MARK: - Detail View
+// MARK: - Detail Section
 "detail.title" = "Detalles de la Sección";
-"detail.items_count" = "%d elementos";
-"detail.no_items_message" = "Esta sección no tiene elementos para mostrar en este momento.";
-"detail.tags" = "Etiquetas:";
-"detail.content_label" = "Contenido:";
+"detail.loading" = "Cargando detalles...";
+"detail.error.title" = "Error al Cargar Detalles";
+"detail.error.message" = "No pudimos cargar los detalles de la sección. Por favor, inténtalo de nuevo.";
+"detail.empty.title" = "No Hay Contenido Disponible";
+"detail.empty.message" = "Esta sección no tiene contenido para mostrar en este momento. ¡Vuelve más tarde para ver actualizaciones!";
 
-// MARK: - Error Messages
-"error.loading_failed" = "Error al cargar el contenido";
-"error.network_error" = "Error de conexión de red";
-"error.unknown_error" = "Ocurrió un error desconocido";
+// MARK: - Content
+"content.title" = "Contenido";
+"content.elements.count" = "Elementos";
+"content.category" = "Categoría";
+"content.status" = "Estado";
+"content.section" = "Sección";
+"content.link.available" = "Enlace Disponible";
+"content.link.unavailable" = "Sin Enlace";
 
 // MARK: - Actions
-"action.retry" = "Intentar de nuevo";
-"action.open_link" = "Abrir enlace";
-"action.view_content" = "Ver contenido";
+"action.explore" = "Explorar";
+"action.share" = "Compartir";
+"action.bookmark" = "Marcar";
+"action.favorite" = "Favorito";
+
+// MARK: - Status
+"status.active" = "Activo";
+"status.inactive" = "Inactivo";
+"status.pending" = "Pendiente";
+"status.completed" = "Completado";
+
+// MARK: - Categories
+"category.sports" = "Deportes";
+"category.movies" = "Películas";
+"category.series" = "Series";
+"category.news" = "Noticias";
+"category.kids" = "Infantil";
+"category.documentary" = "Documental";
+"category.entertainment" = "Entretenimiento";

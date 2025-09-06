@@ -1,0 +1,65 @@
+/* 
+  Localizable.strings
+  Viaplay
+  
+  German
+*/
+
+// MARK: - Common
+"loading" = "Laden...";
+"error" = "Fehler";
+"retry" = "Wiederholen";
+"refresh" = "Aktualisieren";
+"cancel" = "Abbrechen";
+"ok" = "OK";
+"done" = "Fertig";
+"back" = "Zurück";
+"next" = "Weiter";
+"previous" = "Vorherige";
+"close" = "Schließen";
+
+// MARK: - Sections
+"sections.title" = "Bereiche";
+"sections.loading" = "Bereiche werden geladen...";
+"sections.error.title" = "Fehler beim Laden der Bereiche";
+"sections.error.message" = "Wir konnten die Bereiche nicht laden. Bitte überprüfen Sie Ihre Internetverbindung und versuchen Sie es erneut.";
+"sections.empty.title" = "Keine Bereiche verfügbar";
+"sections.empty.message" = "Es sind derzeit keine Bereiche zum Anzeigen verfügbar.";
+
+// MARK: - Detail Section
+"detail.title" = "Bereichsdetails";
+"detail.loading" = "Details werden geladen...";
+"detail.error.title" = "Fehler beim Laden der Details";
+"detail.error.message" = "Wir konnten die Bereichsdetails nicht laden. Bitte versuchen Sie es erneut.";
+"detail.empty.title" = "Kein Inhalt verfügbar";
+"detail.empty.message" = "Dieser Bereich hat derzeit keinen Inhalt zum Anzeigen. Schauen Sie später für Updates vorbei!";
+
+// MARK: - Content
+"content.title" = "Inhalt";
+"content.elements.count" = "Elemente";
+"content.category" = "Kategorie";
+"content.status" = "Status";
+"content.section" = "Bereich";
+"content.link.available" = "Link verfügbar";
+"content.link.unavailable" = "Kein Link";
+
+// MARK: - Actions
+"action.explore" = "Erkunden";
+"action.share" = "Teilen";
+"action.bookmark" = "Lesezeichen";
+"action.favorite" = "Favorit";
+
+// MARK: - Status
+"status.active" = "Aktiv";
+"status.inactive" = "Inaktiv";
+"status.pending" = "Ausstehend";
+"status.completed" = "Abgeschlossen";
+
+// MARK: - Categories
+"category.sports" = "Sport";
+"category.movies" = "Filme";
+"category.series" = "Serien";
+"category.news" = "Nachrichten";
+"category.kids" = "Kinder";
+"category.documentary" = "Dokumentation";
+"category.entertainment" = "Unterhaltung";

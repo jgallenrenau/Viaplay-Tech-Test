@@ -1,0 +1,65 @@
+/* 
+  Localizable.strings
+  Viaplay
+  
+  French
+*/
+
+// MARK: - Common
+"loading" = "Chargement...";
+"error" = "Erreur";
+"retry" = "Réessayer";
+"refresh" = "Actualiser";
+"cancel" = "Annuler";
+"ok" = "OK";
+"done" = "Terminé";
+"back" = "Retour";
+"next" = "Suivant";
+"previous" = "Précédent";
+"close" = "Fermer";
+
+// MARK: - Sections
+"sections.title" = "Sections";
+"sections.loading" = "Chargement des sections...";
+"sections.error.title" = "Échec du chargement des sections";
+"sections.error.message" = "Nous n'avons pas pu charger les sections. Veuillez vérifier votre connexion internet et réessayer.";
+"sections.empty.title" = "Aucune section disponible";
+"sections.empty.message" = "Il n'y a actuellement aucune section à afficher.";
+
+// MARK: - Detail Section
+"detail.title" = "Détails de la section";
+"detail.loading" = "Chargement des détails...";
+"detail.error.title" = "Échec du chargement des détails";
+"detail.error.message" = "Nous n'avons pas pu charger les détails de la section. Veuillez réessayer.";
+"detail.empty.title" = "Aucun contenu disponible";
+"detail.empty.message" = "Cette section n'a actuellement aucun contenu à afficher. Revenez plus tard pour voir les mises à jour !";
+
+// MARK: - Content
+"content.title" = "Contenu";
+"content.elements.count" = "Éléments";
+"content.category" = "Catégorie";
+"content.status" = "Statut";
+"content.section" = "Section";
+"content.link.available" = "Lien disponible";
+"content.link.unavailable" = "Aucun lien";
+
+// MARK: - Actions
+"action.explore" = "Explorer";
+"action.share" = "Partager";
+"action.bookmark" = "Marquer";
+"action.favorite" = "Favori";
+
+// MARK: - Status
+"status.active" = "Actif";
+"status.inactive" = "Inactif";
+"status.pending" = "En attente";
+"status.completed" = "Terminé";
+
+// MARK: - Categories
+"category.sports" = "Sport";
+"category.movies" = "Films";
+"category.series" = "Séries";
+"category.news" = "Actualités";
+"category.kids" = "Enfants";
+"category.documentary" = "Documentaire";
+"category.entertainment" = "Divertissement";
