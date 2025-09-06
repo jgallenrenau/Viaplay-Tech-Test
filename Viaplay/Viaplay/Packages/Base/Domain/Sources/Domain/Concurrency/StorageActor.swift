@@ -28,6 +28,9 @@ public actor StorageActor {
         }
         
         pendingWrites[key] = task
+        defer {
+            pendingWrites.removeValue(forKey: key)
+        }
         
         do {
             try await task.value
@@ -35,8 +38,6 @@ public actor StorageActor {
         } catch {
             print("❌ [StorageActor] Write failed for key \(key): \(error)")
             throw error
-        } finally {
-            pendingWrites.removeValue(forKey: key)
         }
     }
     
