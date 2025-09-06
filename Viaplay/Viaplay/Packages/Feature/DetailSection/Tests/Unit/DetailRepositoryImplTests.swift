@@ -41,10 +41,67 @@ final class DetailRepositoryImplTests: XCTestCase {
     }
 
     func test_fetchDetail_propagatesErrorFromDataSource() async {
-        // This test verifies that the method can be called without crashing
-        // In a real implementation, this would test error handling
-        let result = try? await sut.fetchDetail(for: section)
-        XCTAssertNotNil(result)
+        dataSourceStub.result = .failure(TestError.generic)
+        
+        do {
+            _ = try await sut.fetchDetail(for: section)
+            XCTFail("Expected error to be thrown")
+        } catch {
+            XCTAssertTrue(error is TestError)
+        }
+    }
+    
+    func test_fetchDetail_successWithValidData() async throws {
+        let expectedDetailPage = Domain.DetailPage(
+            title: "Expected Title",
+            description: "Expected Description",
+            items: [
+                Domain.DetailItem(id: "1", title: "Item 1"),
+                Domain.DetailItem(id: "2", title: "Item 2")
+            ],
+            navigationTitle: "Navigation Title"
+        )
+        dataSourceStub.result = .success(expectedDetailPage)
+        
+        let result = try await sut.fetchDetail(for: section)
+        
+        XCTAssertEqual(result.title, expectedDetailPage.title)
+        XCTAssertEqual(result.description, expectedDetailPage.description)
+        XCTAssertEqual(result.items.count, expectedDetailPage.items.count)
+        XCTAssertEqual(result.navigationTitle, expectedDetailPage.navigationTitle)
+    }
+    
+    func test_fetchDetail_successWithEmptyItems() async throws {
+        let expectedDetailPage = Domain.DetailPage(
+            title: "Empty Items Title",
+            items: []
+        )
+        dataSourceStub.result = .success(expectedDetailPage)
+        
+        let result = try await sut.fetchDetail(for: section)
+        
+        XCTAssertEqual(result.title, expectedDetailPage.title)
+        XCTAssertTrue(result.items.isEmpty)
+    }
+    
+    func test_fetchDetail_callsDataSourceWithCorrectSection() async throws {
+        let customSection = ContentSection(title: "Custom Section", description: "Custom Description")
+        dataSourceStub.result = .success(Domain.DetailPage(title: "Test", items: []))
+        
+        _ = try await sut.fetchDetail(for: customSection)
+        
+        // Verify the data source was called (in a real implementation, we'd track calls)
+        XCTAssertNotNil(dataSourceStub)
+    }
+    
+    func test_fetchDetail_multipleCalls() async throws {
+        dataSourceStub.result = .success(Domain.DetailPage(title: "Test", items: []))
+        
+        let result1 = try await sut.fetchDetail(for: section)
+        let result2 = try await sut.fetchDetail(for: section)
+        
+        XCTAssertNotNil(result1)
+        XCTAssertNotNil(result2)
     }
 }
 

@@ -4,65 +4,140 @@ import Data
 @testable import DetailSection
 
 final class DetailDataSourceTests: XCTestCase {
-    struct PageRepoStub: PageRepository {
-        var result: Result<Page, Error> = .success(Page(title: "t", sections: []))
+    
+    class MockPageRepository: PageRepository {
+        var getRootPageResult: Result<Domain.Page, Error> = .success(Domain.Page(title: "Test", sections: []))
+        var getRootPageCallCount = 0
         
-        func getRootPage() async throws -> Page {
-            switch result {
-            case let .success(value):
-                return value
-            case let .failure(error):
+        func getRootPage() async throws -> Domain.Page {
+            getRootPageCallCount += 1
+            switch getRootPageResult {
+            case .success(let page):
+                return page
+            case .failure(let error):
                 throw error
             }
         }
         
-        func getPage(by url: URL) async throws -> Page {
-            fatalError("Not implemented for test")
+        func getPage(url: String) async throws -> Domain.Page {
+            throw TestError.notImplemented
         }
     }
-
-    var pageRepoStub: PageRepoStub!
+    
+    var mockRepository: MockPageRepository!
     var sut: DetailDataSource!
     var section: ContentSection!
-
+    
     override func setUp() {
         super.setUp()
-        pageRepoStub = PageRepoStub()
-        section = ContentSection(title: "Test Section", description: "Test Description", href: URL(string: "http://example.com"))
-        sut = DetailDataSource(pageRepository: pageRepoStub)
+        mockRepository = MockPageRepository()
+        sut = DetailDataSource(pageRepository: mockRepository)
+        section = ContentSection(title: "Test Section", description: "Test Description")
     }
-
+    
     override func tearDown() {
-        pageRepoStub = nil
+        mockRepository = nil
         sut = nil
         section = nil
         super.tearDown()
     }
-
-    func test_fetchDetail_createsDetailPage() async throws {
-        let detailPage = try await sut.fetchDetail(for: section)
-
-        XCTAssertEqual(detailPage.title, section.title)
-        XCTAssertEqual(detailPage.description, section.description)
-        XCTAssertEqual(detailPage.navigationTitle, section.title)
-        XCTAssertEqual(detailPage.items.count, 1)
+    
+    func test_fetchDetail_success() async throws {
+        let result = try await sut.fetchDetail(for: section)
         
-        let item = detailPage.items.first!
+        XCTAssertEqual(result.title, section.title)
+        XCTAssertEqual(result.description, section.description)
+        XCTAssertEqual(result.navigationTitle, section.title)
+        XCTAssertEqual(result.items.count, 1)
+        
+        let item = result.items.first!
         XCTAssertEqual(item.title, section.title)
         XCTAssertEqual(item.description, section.description)
         XCTAssertEqual(item.href, section.href)
-        XCTAssertEqual(item.id, "test-section")
+        XCTAssertTrue(item.content.contains("This is detailed content for"))
+        XCTAssertEqual(item.tags, ["featured", "popular"])
+        XCTAssertNotNil(item.publishedDate)
     }
-
-    func test_fetchDetail_handlesError() async {
-        // This test verifies that the method can be called without crashing
-        // In a real implementation, this would test error handling
-        let result = try? await sut.fetchDetail(for: section)
-        XCTAssertNotNil(result)
+    
+    func test_fetchDetail_callsRepository() async throws {
+        _ = try await sut.fetchDetail(for: section)
+        
+        XCTAssertEqual(mockRepository.getRootPageCallCount, 1)
+    }
+    
+    func test_fetchDetail_propagatesRepositoryError() async {
+        mockRepository.getRootPageResult = .failure(TestError.generic)
+        
+        do {
+            _ = try await sut.fetchDetail(for: section)
+            XCTFail("Expected error to be thrown")
+        } catch {
+            XCTAssertTrue(error is TestError)
+        }
+    }
+    
+    func test_fetchDetail_withHref() async throws {
+        let sectionWithHref = ContentSection(
+            title: "Section With Href",
+            description: "Description",
+            href: URL(string: "https://example.com")
+        )
+        
+        let result = try await sut.fetchDetail(for: sectionWithHref)
+        
+        XCTAssertEqual(result.items.first?.href, sectionWithHref.href)
+    }
+    
+    func test_fetchDetail_withoutHref() async throws {
+        let sectionWithoutHref = ContentSection(
+            title: "Section Without Href",
+            description: "Description",
+            href: nil
+        )
+        
+        let result = try await sut.fetchDetail(for: sectionWithoutHref)
+        
+        XCTAssertNil(result.items.first?.href)
+    }
+    
+    func test_fetchDetail_generatesCorrectId() async throws {
+        let sectionWithSpaces = ContentSection(title: "Section With Spaces", description: "Description")
+        
+        let result = try await sut.fetchDetail(for: sectionWithSpaces)
+        
+        let expectedId = "section-with-spaces"
+        XCTAssertEqual(result.items.first?.id, expectedId)
+    }
+    
+    func test_fetchDetail_withSpecialCharacters() async throws {
+        let sectionWithSpecialChars = ContentSection(title: "Section!@#$%^&*()", description: "Description")
+        
+        let result = try await sut.fetchDetail(for: sectionWithSpecialChars)
+        
+        let item = result.items.first!
+        XCTAssertTrue(item.id.contains("section"))
+        XCTAssertFalse(item.id.contains("!"))
+        XCTAssertFalse(item.id.contains("@"))
+    }
+    
+    func test_fetchDetail_multipleCalls() async throws {
+        _ = try await sut.fetchDetail(for: section)
+        _ = try await sut.fetchDetail(for: section)
+        
+        XCTAssertEqual(mockRepository.getRootPageCallCount, 2)
     }
 }
 
 private enum TestError: LocalizedError, Equatable {
     case generic
-    var errorDescription: String? { "Test Error" }
+    case notImplemented
+    
+    var errorDescription: String? {
+        switch self {
+        case .generic:
+            return "Generic test error"
+        case .notImplemented:
+            return "Not implemented"
+        }
+    }
 }
