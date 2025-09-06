@@ -3,7 +3,7 @@ import Domain
 @testable import DetailSection
 
 final class DetailRepositoryImplTests: XCTestCase {
-    struct DetailDataSourceStub: DetailDataSourceProtocol {
+    class DetailDataSourceStub: DetailDataSourceProtocol {
         var result: Result<Domain.DetailPage, Error> = .success(Domain.DetailPage(
             title: "Test Title",
             description: "Test Description",
