@@ -65,7 +65,7 @@ public actor StorageActor {
     public func batchWrite<T: Codable>(_ items: [(T, String)]) async throws {
         print("📦 [StorageActor] Starting batch write for \(items.count) items")
         
-        await withTaskGroup(of: Void.self) { group in
+        try await withThrowingTaskGroup(of: Void.self) { group in
             for (object, key) in items {
                 group.addTask {
                     try await self.write(object, for: key)

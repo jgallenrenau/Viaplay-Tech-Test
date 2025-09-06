@@ -36,6 +36,9 @@ public actor NetworkActor {
         }
         
         activeRequests[cacheKey] = task
+        defer {
+            activeRequests.removeValue(forKey: cacheKey)
+        }
         
         do {
             let data = try await task.value
@@ -48,8 +51,6 @@ public actor NetworkActor {
         } catch {
             print("❌ [NetworkActor] Request failed for \(url): \(error)")
             throw error
-        } finally {
-            activeRequests.removeValue(forKey: cacheKey)
         }
     }
     

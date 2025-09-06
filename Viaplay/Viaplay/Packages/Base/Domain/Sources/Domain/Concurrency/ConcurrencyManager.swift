@@ -48,11 +48,12 @@ public final class ConcurrencyManager: ObservableObject {
         var results: [String: T] = [:]
         
         await withTaskGroup(of: (String, T?).self) { group in
-            var operationIndex = 0
+            // Use a thread-safe counter for operation index
+            let operationCounter = OperationCounter(total: operations.count)
             
             // Start initial batch
-            for _ in 0..<min(limit, operations.count) {
-                let (id, operation) = operations[operationIndex]
+            for i in 0..<min(limit, operations.count) {
+                let (id, operation) = operations[i]
                 group.addTask {
                     do {
                         let result = try await self.execute(operation, id: id)
@@ -62,7 +63,6 @@ public final class ConcurrencyManager: ObservableObject {
                         return (id, nil)
                     }
                 }
-                operationIndex += 1
             }
             
             // Process results and add new operations
@@ -71,9 +71,9 @@ public final class ConcurrencyManager: ObservableObject {
                     results[id] = result
                 }
                 
-                // Add next operation if available
-                if operationIndex < operations.count {
-                    let (nextId, nextOperation) = operations[operationIndex]
+                // Add next operation if available using thread-safe counter
+                if let nextIndex = await operationCounter.getNextIndex() {
+                    let (nextId, nextOperation) = operations[nextIndex]
                     group.addTask {
                         do {
                             let result = try await self.execute(nextOperation, id: nextId)
@@ -83,7 +83,6 @@ public final class ConcurrencyManager: ObservableObject {
                             return (nextId, nil)
                         }
                     }
-                    operationIndex += 1
                 }
             }
         }
@@ -135,5 +134,25 @@ public final class ConcurrencyManager: ObservableObject {
     public var stats: (active: Int, queued: Int, available: Int) {
         let available = maxConcurrentOperations - activeOperations
         return (activeOperations, queuedOperations, max(0, available))
+    }
+}
+
+// MARK: - Thread-Safe Operation Counter
+
+/// Thread-safe counter for managing operation indices in concurrent contexts
+private actor OperationCounter {
+    private var currentIndex: Int
+    private let totalCount: Int
+    
+    init(total: Int) {
+        self.currentIndex = 0
+        self.totalCount = total
+    }
+    
+    func getNextIndex() -> Int? {
+        guard currentIndex < totalCount else { return nil }
+        let index = currentIndex
+        currentIndex += 1
+        return index
     }
 }

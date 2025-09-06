@@ -8,7 +8,7 @@ public final class ConcurrencyService: ObservableObject {
     @Published public private(set) var activeTasks: Set<String> = []
     @Published public private(set) var completedTasks: Set<String> = []
     
-    private var taskGroups: [String: TaskGroup<Void, Never>] = [:]
+    private var taskGroups: [String: Task<Void, Never>] = [:]
     
     private init() {}
     
@@ -55,26 +55,26 @@ public final class ConcurrencyService: ObservableObject {
         
         return try await withThrowingTaskGroup(of: T.self) { group in
             var results: [T] = []
-            var operationIndex = 0
+            
+            // Use a thread-safe counter for operation index
+            let operationCounter = OperationCounter(total: operations.count)
             
             // Start initial batch
-            for _ in 0..<min(maxConcurrent, operations.count) {
+            for i in 0..<min(maxConcurrent, operations.count) {
                 group.addTask {
-                    try await operations[operationIndex]()
+                    try await operations[i]()
                 }
-                operationIndex += 1
             }
             
             // Process results and add new tasks as needed
             for try await result in group {
                 results.append(result)
                 
-                // Add next operation if available
-                if operationIndex < operations.count {
+                // Add next operation if available using thread-safe counter
+                if let nextIndex = await operationCounter.getNextIndex() {
                     group.addTask {
-                        try await operations[operationIndex]()
+                        try await operations[nextIndex]()
                     }
-                    operationIndex += 1
                 }
             }
             
@@ -84,14 +84,35 @@ public final class ConcurrencyService: ObservableObject {
     
     /// Cancel all active tasks
     public func cancelAllTasks() {
-        for groupId in activeTasks {
-            taskGroups[groupId]?.cancelAll()
+        for task in taskGroups.values {
+            task.cancel()
         }
+        taskGroups.removeAll()
         activeTasks.removeAll()
     }
     
     /// Get concurrency statistics
     public var stats: (active: Int, completed: Int) {
         return (activeTasks.count, completedTasks.count)
+    }
+}
+
+// MARK: - Thread-Safe Operation Counter
+
+/// Thread-safe counter for managing operation indices in concurrent contexts
+private actor OperationCounter {
+    private var currentIndex: Int
+    private let totalCount: Int
+    
+    init(total: Int) {
+        self.currentIndex = 0
+        self.totalCount = total
+    }
+    
+    func getNextIndex() -> Int? {
+        guard currentIndex < totalCount else { return nil }
+        let index = currentIndex
+        currentIndex += 1
+        return index
     }
 }
