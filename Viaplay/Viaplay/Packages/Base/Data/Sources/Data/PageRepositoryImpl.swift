@@ -50,7 +50,11 @@ public final class PageRepositoryImpl: PageRepository {
         }
         
         print("🔄 [PageRepository] Decoding JSON response...")
-        let page = try JSONDecoder().decode(Page.self, from: response.data)
+        print("📄 [PageRepository] Raw JSON data: \(String(data: response.data, encoding: .utf8) ?? "Unable to convert to string")")
+        
+        // Decode DTO first, then map to domain model
+        let pageDTO = try JSONDecoder().decode(PageDTO.self, from: response.data)
+        let page = PageMapper.map(pageDTO)
         
         do {
             try cache.write(page, for: cacheKey)
