@@ -1,5 +1,6 @@
 import SwiftUI
 import Domain
+import DSKit
 
 public struct SectionsListView: View {
     @StateObject private var viewModel: SectionsViewModel
@@ -21,7 +22,12 @@ public struct SectionsListView: View {
             }
             .navigationTitle("Sections")
             .task {
+                print("🎬 [SectionsListView] Starting to load sections from UI...")
                 await viewModel.loadSections()
+                print("🎬 [SectionsListView] UI load completed. Sections count: \(viewModel.sections.count)")
+            }
+            .onAppear {
+                print("👁️ [SectionsListView] View appeared. Current state - isLoading: \(viewModel.isLoading), sections: \(viewModel.sections.count), error: \(viewModel.errorMessage ?? "none")")
             }
         }
     }
@@ -57,8 +63,11 @@ public struct SectionsListView: View {
 
     private var sectionsList: some View {
         List(viewModel.sections, id: \.id) { section in
-            SectionRowView(section: section)
-                .listRowInsets(EdgeInsets())
+            DSKit.SectionRowView(model: DSKit.SectionRowView.Model(
+                title: section.title,
+                description: section.description
+            ))
+            .listRowInsets(EdgeInsets())
         }
         .listStyle(PlainListStyle())
     }
