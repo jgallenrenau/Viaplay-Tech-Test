@@ -27,6 +27,11 @@ The Viaplay Tech Test is a Swift-based iOS application that demonstrates modern 
 
 ### **User Experience Features**
 - **🌙 Dark Mode**: Native dark mode support with automatic system theme detection
+- **🌍 Internationalization**: Comprehensive multi-language support including:
+  - **8 Languages**: English, Spanish, German, French, Italian, Dutch, Portuguese, and Catalan
+  - **Automatic Detection**: Language detection based on device settings
+  - **RTL Support**: Right-to-left language support for future expansion
+  - **Type-safe Localization**: Structured localization keys for maintainability
 - **♿ Accessibility**: Comprehensive accessibility features including:
   - VoiceOver support for screen readers
   - Dynamic Type support for customizable text sizes
@@ -48,6 +53,7 @@ The Viaplay Tech Test is a Swift-based iOS application that demonstrates modern 
 - [📱 Device Compatibility & Features](#-device-compatibility--features)
 - [🧭 Why this architecture](#-why-this-architecture)
 - [🧩 MVVM pattern (per feature)](#-mvvm-pattern-per-feature)
+- [🌍 Internationalization & Localization](#-internationalization--localization)
 - [📦 SPM Architecture Decision: Internal vs External Dependencies](#-spm-architecture-decision-internal-vs-external-dependencies)
 - [🧱 Modular architecture (SPM)](#-modular-architecture-spm)
 - [🧪 Testing strategy](#-testing-strategy)
@@ -111,6 +117,7 @@ The Viaplay Tech Test is a Swift-based iOS application that demonstrates modern 
 - **Content Sections Display**: Browse content sections with rich metadata and smooth scrolling
 - **Section Details**: Comprehensive section information with detailed navigation
 - **Offline-First**: Seamless experience with ETag-based caching and smart data synchronization
+- **Multi-Language Support**: Full internationalization with 8 supported languages
 - **Error Handling**: Graceful error states with user-friendly retry mechanisms
 - **Loading States**: Smooth loading indicators and skeleton screens for better UX
 
@@ -120,6 +127,7 @@ The Viaplay Tech Test is a Swift-based iOS application that demonstrates modern 
 - **MVVM Pattern**: Reactive UI updates with proper state management
 - **Advanced Concurrency**: Thread-safe operations with Swift Concurrency and Actor model
 - **DTO/Mapper Pattern**: Robust JSON parsing with type-safe data transformation
+- **Localization System**: Type-safe internationalization with 8 languages and RTL support
 - **Comprehensive Testing**: Unit tests, integration tests, and snapshot tests
 - **CI/CD Integration**: Automated testing and code quality checks
 
@@ -138,6 +146,32 @@ The Viaplay Tech Test is a Swift-based iOS application that demonstrates modern 
 - **Comprehensive Information**: Detailed content display with statistics and metadata
 - **Responsive Design**: Adaptive layouts that work across different screen sizes
 - **Accessibility**: VoiceOver support, Dynamic Type, and semantic grouping
+
+## 🌍 Internationalization & Localization
+
+### **Multi-Language Support**
+- **8 Supported Languages**: English (default), Spanish, German, French, Italian, Dutch, Portuguese, and Catalan
+- **Automatic Language Detection**: Seamless language switching based on device settings
+- **Type-Safe Localization**: Structured `LocalizationKeys` for compile-time safety
+- **Easy-to-Use API**: Simple `.localized` extension for String types
+
+### **Localization Architecture**
+- **Centralized System**: All localization logic in the Domain package for shared access
+- **Localizable.strings Files**: Separate files for each supported language
+- **RTL Support**: Built-in support for right-to-left languages (Arabic, Hebrew)
+- **Maintainable Structure**: Organized keys by feature and context for easy maintenance
+
+### **Developer Experience**
+```swift
+// Simple usage
+Text("loading".localized)
+
+// Type-safe usage
+Text(LocalizationKeys.Sections.title.localized)
+
+// With arguments
+Text("welcome.message".localized(arguments: userName))
+```
 
 ## ⚡ Advanced Concurrency & Thread Safety
 
