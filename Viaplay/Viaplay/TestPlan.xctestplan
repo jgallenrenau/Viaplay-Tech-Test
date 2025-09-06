@@ -85,13 +85,7 @@
       }
     },
     {
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
       "parallelizable" : true,
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
       "target" : {
         "containerPath" : "container:Viaplay\/Packages\/Feature\/DetailSection",
         "identifier" : "DetailSectionIntegrationTests",
@@ -99,13 +93,7 @@
       }
     },
     {
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
       "parallelizable" : true,
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
       "target" : {
         "containerPath" : "container:Viaplay\/Packages\/Feature\/DetailSection",
         "identifier" : "DetailSectionSnapshotTests",
@@ -113,13 +101,7 @@
       }
     },
     {
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
       "parallelizable" : true,
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
       "target" : {
         "containerPath" : "container:Viaplay\/Packages\/Feature\/DetailSection",
         "identifier" : "DetailSectionUnitTests",
