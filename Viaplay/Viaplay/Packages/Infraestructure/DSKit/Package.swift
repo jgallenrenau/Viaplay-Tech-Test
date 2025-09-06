@@ -10,9 +10,11 @@ let package = Package(
     products: [
         .library(name: "DSKit", targets: ["DSKit"])
     ],
-    dependencies: [],
+    dependencies: [
+        .package(url: "https://github.com/pointfreeco/swift-snapshot-testing", from: "1.12.0")
+    ],
     targets: [
         .target(name: "DSKit"),
-        .testTarget(name: "DSKitTests", dependencies: ["DSKit"])
+        .testTarget(name: "DSKitTests", dependencies: ["DSKit", .product(name: "SnapshotTesting", package: "swift-snapshot-testing")])
     ]
 )
