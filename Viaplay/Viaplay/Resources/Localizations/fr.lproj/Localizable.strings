@@ -1,0 +1,27 @@
+// MARK: - Error Messages
+"sections.errorTitle" = "Oups! Quelque chose s'est mal passé";
+"detail.errorTitle" = "Oups! Quelque chose s'est mal passé";
+
+// MARK: - Content
+"content.elementsCount" = "ÉLÉMENTS";
+"content.category" = "Catégorie";
+"content.status" = "Statut";
+"content.title" = "Contenu";
+
+// MARK: - UI Text
+"explore.content.title" = "Explorez notre contenu";
+"explore.content.subtitle" = "Découvrez des séries, films, sports et plus";
+"available" = "Disponible";
+"active" = "Actif";
+"explore" = "Explorer";
+"share" = "Partager";
+"elements" = "Éléments";
+"no.content.available" = "Aucun contenu disponible";
+"no.content.message" = "Cette section n'a pas de contenu à afficher pour le moment. Revenez plus tard pour voir les mises à jour!";
+
+// MARK: - Section Titles (API mapping)
+"section.serier" = "Séries";
+"section.filmer" = "Films";
+"section.sport" = "Sport";
+"section.barn" = "Enfants";
+"section.kanaler" = "Chaînes";

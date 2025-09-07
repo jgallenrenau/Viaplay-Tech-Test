@@ -1,0 +1,27 @@
+// MARK: - Error Messages
+"sections.errorTitle" = "Ops! Algo deu errado";
+"detail.errorTitle" = "Ops! Algo deu errado";
+
+// MARK: - Content
+"content.elementsCount" = "ELEMENTOS";
+"content.category" = "Categoria";
+"content.status" = "Status";
+"content.title" = "Conteúdo";
+
+// MARK: - UI Text
+"explore.content.title" = "Explore nosso conteúdo";
+"explore.content.subtitle" = "Descubra séries, filmes, esportes e mais";
+"available" = "Disponível";
+"active" = "Ativo";
+"explore" = "Explorar";
+"share" = "Compartilhar";
+"elements" = "Elementos";
+"no.content.available" = "Nenhum Conteúdo Disponível";
+"no.content.message" = "Esta seção não tem conteúdo para exibir no momento. Volte mais tarde para ver atualizações!";
+
+// MARK: - Section Titles (API mapping)
+"section.serier" = "Séries";
+"section.filmer" = "Filmes";
+"section.sport" = "Esportes";
+"section.barn" = "Infantil";
+"section.kanaler" = "Canais";

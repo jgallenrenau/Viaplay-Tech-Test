@@ -9,7 +9,7 @@ public final class DetailViewModel: ObservableObject {
     @Published public var errorMessage: String?
 
     private let fetchDetailUseCase: Domain.FetchDetailUseCaseProtocol
-    private let section: ContentSection
+    public let section: ContentSection
 
     public init(
         section: ContentSection,
@@ -20,16 +20,26 @@ public final class DetailViewModel: ObservableObject {
     }
 
     public func loadDetail() async {
+        print("🔄 [DetailViewModel] Starting to load detail for section: \(section.title)")
         isLoading = true
         errorMessage = nil
 
         do {
+            print("📡 [DetailViewModel] Calling fetchDetailUseCase for section: \(section.title)")
             let detailPage = try await fetchDetailUseCase.execute(section: section)
-            self.detailPage = detailPage
+            print("✅ [DetailViewModel] Successfully loaded detail with \(detailPage.items.count) items")
+            
+            // Update UI with animation
+            withAnimation(.easeInOut(duration: 0.4)) {
+                self.detailPage = detailPage
+            }
+            
         } catch {
+            print("❌ [DetailViewModel] Failed to load detail for section '\(section.title)': \(error.localizedDescription)")
             errorMessage = error.localizedDescription
         }
 
+        print("🏁 [DetailViewModel] Loading completed. isLoading: \(isLoading)")
         isLoading = false
     }
 }

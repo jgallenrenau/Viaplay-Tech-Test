@@ -15,16 +15,28 @@ public final class SectionsViewModel: ObservableObject {
     }
 
     public func loadSections() async {
+        print("🔄 [SectionsViewModel] Starting to load sections...")
         isLoading = true
         errorMessage = nil
 
         do {
+            print("📡 [SectionsViewModel] Calling fetchSectionsUseCase...")
+            
             let sectionsPage = try await fetchSectionsUseCase.execute()
-            sections = sectionsPage.sections
+            
+            print("✅ [SectionsViewModel] Successfully loaded \(sectionsPage.sections.count) sections")
+            
+            // Update UI with animation
+            withAnimation(.easeInOut(duration: 0.3)) {
+                self.sections = sectionsPage.sections
+            }
+            
         } catch {
+            print("❌ [SectionsViewModel] Failed to load sections: \(error.localizedDescription)")
             errorMessage = error.localizedDescription
         }
 
+        print("🏁 [SectionsViewModel] Loading completed. isLoading: \(isLoading)")
         isLoading = false
     }
 }

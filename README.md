@@ -10,17 +10,50 @@
 [![Xcode](https://img.shields.io/badge/Xcode-15.0-blue.svg)](https://developer.apple.com/xcode/)
 [![License](https://img.shields.io/badge/License-MIT-orange.svg)](LICENSE)
 [![iOS](https://img.shields.io/badge/iOS-17.0+-lightgrey.svg)](https://developer.apple.com/ios/)
-[![codecov](https://codecov.io/gh/jordigallenrenau/Viaplay-Tech-Test/branch/develop/graph/badge.svg)](https://codecov.io/gh/jordigallenrenau/Viaplay-Tech-Test)
+[![codecov](https://codecov.io/gh/jgallenrenau/Viaplay-Tech-Test/branch/develop/graph/badge.svg)](https://codecov.io/gh/jgallenrenau/Viaplay-Tech-Test)
 </div>
 
 ## Overview
 
 The Viaplay Tech Test is a Swift-based iOS application that demonstrates modern iOS development practices through a modular architecture built with Swift Package Manager (SPM). This project showcases a content browsing experience with sections and detailed views, leveraging Clean Architecture principles, MVVM pattern, and an offline-first strategy with ETag-based caching. The application is structured as independent SPM modules, each with specific responsibilities and clear dependency boundaries, ensuring maintainability, testability, and team scalability. This project serves as a technical assessment demonstrating enterprise-grade iOS development practices, including comprehensive testing strategies, CI/CD integration, and SOLID principles implementation.
 
+## 📱 Device Compatibility & Features
+
+### **Supported Devices**
+- **iPhone**: All iPhone models running iOS 17.0+
+- **iPad**: All iPad models running iPadOS 17.0+
+- **Universal App**: Optimized for both iPhone and iPad with adaptive layouts
+- **Orientation Support**: Full rotation support for both portrait and landscape modes
+
+### **User Experience Features**
+- **🌙 Dark Mode**: Native dark mode support with automatic system theme detection
+- **🌍 Internationalization**: Comprehensive multi-language support including:
+  - **8 Languages**: English, Spanish, German, French, Italian, Dutch, Portuguese, and Catalan
+  - **Automatic Detection**: Language detection based on device settings
+  - **RTL Support**: Right-to-left language support for future expansion
+  - **Type-safe Localization**: Structured localization keys for maintainability
+- **♿ Accessibility**: Comprehensive accessibility features including:
+  - VoiceOver support for screen readers
+  - Dynamic Type support for customizable text sizes
+  - Semantic grouping for better navigation
+  - High contrast support
+  - Reduced motion support
+- **📱 Adaptive Layout**: Responsive design that adapts to different screen sizes and orientations
+- **🔄 Rotation Support**: Seamless rotation between portrait and landscape orientations
+- **⚡ Performance**: Optimized for smooth 60fps scrolling and animations
+
+### **Visual Design**
+- **Modern UI**: Built with SwiftUI and custom DSKit components
+- **Consistent Theming**: Unified design system across all screens
+- **Smooth Animations**: Fluid transitions and micro-interactions
+- **Loading States**: Elegant loading indicators and skeleton screens
+
 ## 📋 Table of Contents
 
+- [📱 Device Compatibility & Features](#-device-compatibility--features)
 - [🧭 Why this architecture](#-why-this-architecture)
 - [🧩 MVVM pattern (per feature)](#-mvvm-pattern-per-feature)
+- [🌍 Internationalization & Localization](#-internationalization--localization)
 - [📦 SPM Architecture Decision: Internal vs External Dependencies](#-spm-architecture-decision-internal-vs-external-dependencies)
 - [🧱 Modular architecture (SPM)](#-modular-architecture-spm)
 - [🧪 Testing strategy](#-testing-strategy)
@@ -78,21 +111,101 @@ The Viaplay Tech Test is a Swift-based iOS application that demonstrates modern 
 - **GitHub Actions**: Automated CI/CD pipeline
 - **Codecov**: Code coverage tracking and reporting
 
-## 📱 Features
+## 🚀 App Features
 
 ### **Core Functionality**
-- **Content Sections Display**: Browse content sections with rich metadata
-- **Section Details**: Comprehensive section information and navigation
-- **Offline-First**: Seamless experience with ETag-based caching
-- **Error Handling**: Graceful error states with retry mechanisms
-- **Loading States**: Smooth loading indicators and state management
+- **Content Sections Display**: Browse content sections with rich metadata and smooth scrolling
+- **Section Details**: Comprehensive section information with detailed navigation
+- **Offline-First**: Seamless experience with ETag-based caching and smart data synchronization
+- **Multi-Language Support**: Full internationalization with 8 supported languages
+- **Error Handling**: Graceful error states with user-friendly retry mechanisms
+- **Loading States**: Smooth loading indicators and skeleton screens for better UX
 
-### **Advanced Features**
+### **Technical Features**
+- **Modular Architecture**: Independent SPM packages for maintainability and scalability
+- **Clean Architecture**: Separation of concerns with clear dependency boundaries
+- **MVVM Pattern**: Reactive UI updates with proper state management
+- **Advanced Concurrency**: Thread-safe operations with Swift Concurrency and Actor model
+- **DTO/Mapper Pattern**: Robust JSON parsing with type-safe data transformation
+- **Localization System**: Type-safe internationalization with 8 languages and RTL support
+- **Comprehensive Testing**: Unit tests, integration tests, and snapshot tests
+- **CI/CD Integration**: Automated testing and code quality checks
+
+## 🎨 Recent UI/UX Enhancements
+
+### **Modern Design System**
+- **Card-based Layout**: Beautiful card designs with shadows, rounded corners, and smooth animations
+- **Enhanced Detail Views**: Rich information display with hero sections, statistics, and metadata
+- **Interactive Components**: Touch feedback, press animations, and smooth transitions
+- **Thematic Icons**: Contextual icons and colors for different content types
+- **Gradient Backgrounds**: Modern gradient designs for visual appeal
+
+### **User Experience Improvements**
+- **Smooth Animations**: Entrance animations, loading states, and micro-interactions
+- **Enhanced Navigation**: Intuitive navigation with visual indicators and feedback
+- **Comprehensive Information**: Detailed content display with statistics and metadata
+- **Responsive Design**: Adaptive layouts that work across different screen sizes
 - **Accessibility**: VoiceOver support, Dynamic Type, and semantic grouping
-- **Performance**: Efficient list rendering, optimized data fetching, and state management
-- **Modern UI**: Custom design system built with SwiftUI and DSKit
-- **Modular Architecture**: Independent SPM packages for maintainability
-- **Comprehensive Testing**: Unit tests, integration tests, and test plans
+
+## 🌍 Internationalization & Localization
+
+### **Multi-Language Support**
+- **8 Supported Languages**: English (default), Spanish, German, French, Italian, Dutch, Portuguese, and Catalan
+- **Automatic Language Detection**: Seamless language switching based on device settings
+- **Type-Safe Localization**: Structured `LocalizationKeys` for compile-time safety
+- **Easy-to-Use API**: Simple `.localized` extension for String types
+
+### **Localization Architecture**
+- **Centralized System**: All localization logic in the Domain package for shared access
+- **Localizable.strings Files**: Separate files for each supported language
+- **RTL Support**: Built-in support for right-to-left languages (Arabic, Hebrew)
+- **Maintainable Structure**: Organized keys by feature and context for easy maintenance
+
+### **Developer Experience**
+```swift
+// Simple usage
+Text("loading".localized)
+
+// Type-safe usage
+Text(LocalizationKeys.Sections.title.localized)
+
+// With arguments
+Text("welcome.message".localized(arguments: userName))
+```
+
+## ⚡ Advanced Concurrency & Thread Safety
+
+### **Actor-Based Architecture**
+- **NetworkActor**: Thread-safe network requests with request deduplication
+- **StorageActor**: Concurrent storage operations with write queue management
+- **CacheActor**: Thread-safe caching with controlled access patterns
+- **ConcurrencyManager**: Rate limiting and controlled concurrent execution
+
+### **Swift Concurrency Features**
+- **async/await**: Modern concurrency patterns throughout the codebase
+- **TaskGroup**: Parallel operations for data prefetching and optimization
+- **@MainActor**: UI updates guaranteed on main thread
+- **Sendable**: Thread-safe data types and protocols
+
+### **Performance Optimizations**
+- **Parallel Data Loading**: Concurrent cache and network operations
+- **Prefetching**: Background loading of related content
+- **Rate Limiting**: Controlled concurrent execution to prevent resource exhaustion
+- **Non-blocking Operations**: UI remains responsive during data operations
+
+## 🔄 DTO/Mapper Pattern Implementation
+
+### **Robust JSON Parsing**
+- **PageDTO**: Type-safe representation of complex API responses
+- **PageMapper**: Clean transformation from DTOs to domain models
+- **Type Safety**: Compile-time validation of data structures
+- **Maintainability**: Easy to update when API contracts change
+
+### **Benefits**
+- **Error Prevention**: Compile-time checks prevent runtime JSON parsing errors
+- **Clear Separation**: API changes don't directly affect domain models
+- **Testability**: DTOs and mappers can be tested independently
+- **Flexibility**: Easy to handle different API versions or formats
 
 ## 🚀 Getting Started
 
@@ -245,13 +358,13 @@ The application is structured as **independent Swift Package Manager (SPM) modul
 
 ### **Domain** 🏛️
 - **Purpose**: Contains the core business logic and rules of the application.
-- **Contains**: Entities (`Page`, `ContentSection`), contracts (`PageRepository`), use cases (`GetRootPage`), and domain errors.
+- **Contains**: Entities (`Page`, `ContentSection`), contracts (`PageRepository`), use cases (`GetRootPage`), domain errors, and concurrency actors.
 - **Dependencies**: None (pure domain logic).
 - **Benefits**: Framework-agnostic, highly testable, and stable core that rarely changes.
 
 ### **Data** 📊
 - **Purpose**: Orchestrates data access by implementing domain contracts.
-- **Contains**: Repository implementations, DTO mappers, and data coordination logic.
+- **Contains**: Repository implementations, DTO mappers, data coordination logic, and thread-safe operations.
 - **Dependencies**: `Domain` + `NetworkingKit` + `StorageKit`.
 - **Benefits**: Centralized data policies, testable with stubs, and flexible data strategies.
 
@@ -269,15 +382,22 @@ The application is structured as **independent Swift Package Manager (SPM) modul
 
 ### **DSKit** 🎨
 - **Purpose**: Provides reusable UI components and design system elements.
-- **Contains**: SwiftUI views, view models, and styling utilities.
+- **Contains**: SwiftUI views, view models, styling utilities, and enhanced interactive components.
+- **Key Components**: 
+  - `SectionRowView`: Interactive card-based section display with animations
+  - `EnhancedDetailItemView`: Rich detail item presentation with images and metadata
+  - `DetailItemView`: Standard detail item component
 - **Dependencies**: None (pure UI components).
-- **Benefits**: Consistent design, reusable components, and UI/UX standardization.
+- **Benefits**: Consistent design, reusable components, UI/UX standardization, and modern interactions.
 
 ### **Features** (Sections, DetailSection) 🚀
 - **Purpose**: Implements complete user-facing features with MVVM pattern.
-- **Contains**: SwiftUI views, ViewModels, and feature-specific logic.
+- **Contains**: SwiftUI views, ViewModels, feature-specific logic, and enhanced UI components.
+- **Key Features**:
+  - **Sections**: Modern list view with card-based design, animations, and smooth navigation
+  - **DetailSection**: Rich detail views with hero sections, statistics, and comprehensive information display
 - **Dependencies**: `Domain` + `DSKit` (optional).
-- **Benefits**: Independent features, clear boundaries, and easy testing.
+- **Benefits**: Independent features, clear boundaries, easy testing, and modern user experience.
 
 ### **Data Flow** 🔄
 ```
@@ -316,9 +436,14 @@ Our testing approach ensures **comprehensive coverage** across all modules while
 
 ### **Features/DSKit** 🚀
 - **Strategy**: ViewModel tests with **fake use cases** and optional **snapshot tests** for UI.
-- **What we test**: State management, user interactions, and UI rendering.
-- **Tools**: XCTest for ViewModels, SwiftUI testing for UI components.
-- **Benefits**: Feature behavior validation and UI regression prevention.
+- **What we test**: State management, user interactions, UI rendering, and concurrency behavior.
+- **New Test Areas**:
+  - **Actor Testing**: Thread safety and concurrent operations
+  - **DTO/Mapper Testing**: Data transformation accuracy
+  - **UI Component Testing**: Interactive components and animations
+  - **Concurrency Testing**: Parallel operations and rate limiting
+- **Tools**: XCTest for ViewModels, SwiftUI testing for UI components, async testing for concurrency.
+- **Benefits**: Feature behavior validation, UI regression prevention, and thread safety verification.
 
 ### **Test Plan** 📋
 - **File**: `AllTests.xctestplan` groups all test bundles for local and CI execution.

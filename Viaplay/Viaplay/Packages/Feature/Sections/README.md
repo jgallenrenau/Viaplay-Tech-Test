@@ -33,7 +33,6 @@
 
 ## 🧩 Dependencies
 - **Domain**: domain entities (`Section`, `SectionsPage`) + `FetchSectionsUseCase`
-- **DSKit**: reusable UI components for consistent design
 - **Data**: repository implementations for data access
 - **NetworkingKit / StorageKit**: used by `PageRepositoryImpl` (via `SectionsFactory`)
 - **SnapshotTesting** (tests only)

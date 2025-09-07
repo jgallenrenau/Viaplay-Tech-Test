@@ -43,7 +43,6 @@ DetailSection Feature
 - **`Data`**: Base data layer abstractions (e.g., `PageRepository`).
 - **`NetworkingKit`**: Handles network requests.
 - **`StorageKit`**: Manages data caching and persistence.
-- **`DSKit`**: Reusable UI components for consistent design.
 - **`SnapshotTesting`**: For visual regression testing of SwiftUI views.
 
 ## 🔄 Data Flow

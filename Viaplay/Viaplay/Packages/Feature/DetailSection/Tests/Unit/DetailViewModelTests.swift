@@ -48,6 +48,127 @@ final class DetailViewModelTests: XCTestCase {
         XCTAssertNil(sut.detailPage)
         XCTAssertEqual(useCase.executeCalls, 1)
     }
+    
+    func test_initialState() {
+        XCTAssertFalse(sut.isLoading)
+        XCTAssertNil(sut.errorMessage)
+        XCTAssertNil(sut.detailPage)
+        XCTAssertEqual(useCase.executeCalls, 0)
+    }
+    
+    func test_loadDetail_multipleCalls() async {
+        let expectedDetailPage = Domain.DetailPage(
+            title: "Test Section",
+            items: [Domain.DetailItem(id: "1", title: "Test Item")]
+        )
+        useCase.result = .success(expectedDetailPage)
+
+        await sut.loadDetail()
+        await sut.loadDetail()
+
+        XCTAssertEqual(useCase.executeCalls, 2)
+        XCTAssertEqual(sut.detailPage, expectedDetailPage)
+    }
+    
+    func test_loadDetail_loadingState() async {
+        useCase.result = .success(Domain.DetailPage(title: "Test", items: []))
+        
+        // Verify initial state
+        XCTAssertFalse(sut.isLoading)
+        
+        // Start loading
+        await sut.loadDetail()
+        
+        // Verify loading state is false after completion
+        XCTAssertFalse(sut.isLoading)
+    }
+    
+    func test_errorMessage_clearedOnSuccessfulLoad() async {
+        // First load with error
+        useCase.result = .failure(TestError.generic)
+        await sut.loadDetail()
+        
+        XCTAssertNotNil(sut.errorMessage)
+        
+        // Second load with success
+        let expectedDetailPage = Domain.DetailPage(title: "Test", items: [])
+        useCase.result = .success(expectedDetailPage)
+        await sut.loadDetail()
+        
+        XCTAssertNil(sut.errorMessage)
+        XCTAssertEqual(sut.detailPage, expectedDetailPage)
+    }
+    
+    func test_loadDetail_withEmptyItems() async {
+        let expectedDetailPage = Domain.DetailPage(
+            title: "Empty Section",
+            description: "No items",
+            items: []
+        )
+        useCase.result = .success(expectedDetailPage)
+        
+        await sut.loadDetail()
+        
+        XCTAssertFalse(sut.isLoading)
+        XCTAssertNil(sut.errorMessage)
+        XCTAssertEqual(sut.detailPage?.items.count, 0)
+    }
+    
+    func test_loadDetail_withMultipleItems() async {
+        let expectedDetailPage = Domain.DetailPage(
+            title: "Multi Item Section",
+            description: "Multiple items",
+            items: [
+                Domain.DetailItem(id: "1", title: "Item 1"),
+                Domain.DetailItem(id: "2", title: "Item 2"),
+                Domain.DetailItem(id: "3", title: "Item 3")
+            ]
+        )
+        useCase.result = .success(expectedDetailPage)
+        
+        await sut.loadDetail()
+        
+        XCTAssertEqual(sut.detailPage?.items.count, 3)
+        XCTAssertEqual(sut.detailPage?.title, "Multi Item Section")
+    }
+    
+    func test_loadDetail_concurrentCalls() async {
+        let expectedDetailPage = Domain.DetailPage(title: "Test", items: [])
+        useCase.result = .success(expectedDetailPage)
+        
+        // Start multiple concurrent loads
+        async let load1: Void = sut.loadDetail()
+        async let load2: Void = sut.loadDetail()
+        async let load3: Void = sut.loadDetail()
+        
+        await load1
+        await load2
+        await load3
+        
+        // Should have called use case multiple times
+        XCTAssertGreaterThan(useCase.executeCalls, 1)
+    }
+    
+    func test_sectionProperty() {
+        XCTAssertEqual(sut.section.title, "Test Section")
+        XCTAssertEqual(sut.section.description, "Test Description")
+    }
+    
+    func test_loadDetail_withNilDescription() async {
+        let sectionWithNilDescription = ContentSection(title: "Test", description: nil)
+        sut = DetailViewModel(section: sectionWithNilDescription, fetchDetailUseCase: useCase)
+        
+        let expectedDetailPage = Domain.DetailPage(
+            title: "Test",
+            description: nil,
+            items: []
+        )
+        useCase.result = .success(expectedDetailPage)
+        
+        await sut.loadDetail()
+        
+        XCTAssertEqual(sut.detailPage?.description, nil)
+    }
 }
 
 private enum TestError: LocalizedError, Equatable {

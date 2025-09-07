@@ -16,13 +16,15 @@ let package = Package(
         .package(path: "../../Base/Data"),
         .package(path: "../../Infraestructure/NetworkingKit"),
         .package(path: "../../Infraestructure/StorageKit"),
+        .package(path: "../DetailSection"),
         .package(url: "https://github.com/pointfreeco/swift-snapshot-testing", from: "1.11.0")
     ],
     targets: [
         .target(
             name: "Sections",
-            dependencies: ["Domain", "DSKit", "Data", "NetworkingKit", "StorageKit"],
-            resources: [.process("Resources")]
+            dependencies: ["Domain", "DSKit", "Data", "NetworkingKit", "StorageKit", "DetailSection"],
+            path: "Sources/SectionsFeature",
+            resources: [.process("../../Resources")]
         ),
         .testTarget(
             name: "SectionsUnitTests",

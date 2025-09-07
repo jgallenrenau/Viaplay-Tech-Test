@@ -1,0 +1,27 @@
+// MARK: - Error Messages
+"sections.errorTitle" = "Oeps! Er ging iets mis";
+"detail.errorTitle" = "Oeps! Er ging iets mis";
+
+// MARK: - Content
+"content.elementsCount" = "ELEMENTEN";
+"content.category" = "Categorie";
+"content.status" = "Status";
+"content.title" = "Inhoud";
+
+// MARK: - UI Text
+"explore.content.title" = "Verken onze inhoud";
+"explore.content.subtitle" = "Ontdek series, films, sport en meer";
+"available" = "Beschikbaar";
+"active" = "Actief";
+"explore" = "Verken";
+"share" = "Delen";
+"elements" = "Elementen";
+"no.content.available" = "Geen inhoud beschikbaar";
+"no.content.message" = "Deze sectie heeft momenteel geen inhoud om weer te geven. Kom later terug voor updates!";
+
+// MARK: - Section Titles (API mapping)
+"section.serier" = "Series";
+"section.filmer" = "Films";
+"section.sport" = "Sport";
+"section.barn" = "Kinderen";
+"section.kanaler" = "Kanalen";
