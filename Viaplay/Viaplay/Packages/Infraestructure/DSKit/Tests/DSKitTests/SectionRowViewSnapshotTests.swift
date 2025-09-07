@@ -9,21 +9,21 @@ final class SectionRowViewSnapshotTests: XCTestCase {
         let model = SectionRowView.Model(title: "Test Title")
         let view = SectionRowView(model: model)
         
-        assertSnapshot(matching: view, as: .image(layout: .device(config: .iPhone16Pro), traits: .init(displayScale: 2)))
+        assertSnapshot(of: view, as: .image(layout: .device(config: .iPhone13)))
     }
     
     func testSectionRowViewWithTitleAndDescription() {
         let model = SectionRowView.Model(title: "Test Title", description: "Test Description")
         let view = SectionRowView(model: model)
         
-        assertSnapshot(matching: view, as: .image(layout: .device(config: .iPhone16Pro), traits: .init(displayScale: 2)))
+        assertSnapshot(of: view, as: .image(layout: .device(config: .iPhone13)))
     }
     
     func testSectionRowViewWithEmptyDescription() {
         let model = SectionRowView.Model(title: "Test Title", description: "")
         let view = SectionRowView(model: model)
         
-        assertSnapshot(matching: view, as: .image(layout: .device(config: .iPhone16Pro), traits: .init(displayScale: 2)))
+        assertSnapshot(of: view, as: .image(layout: .device(config: .iPhone13)))
     }
     
     func testSectionRowViewWithLongTitle() {
@@ -33,7 +33,7 @@ final class SectionRowViewSnapshotTests: XCTestCase {
         )
         let view = SectionRowView(model: model)
         
-        assertSnapshot(matching: view, as: .image(layout: .device(config: .iPhone16Pro), traits: .init(displayScale: 2)))
+        assertSnapshot(of: view, as: .image(layout: .device(config: .iPhone13)))
     }
     
     func testSectionRowViewWithLongDescription() {
@@ -43,7 +43,7 @@ final class SectionRowViewSnapshotTests: XCTestCase {
         )
         let view = SectionRowView(model: model)
         
-        assertSnapshot(matching: view, as: .image(layout: .device(config: .iPhone16Pro), traits: .init(displayScale: 2)))
+        assertSnapshot(of: view, as: .image(layout: .device(config: .iPhone13)))
     }
     
     func testSectionRowViewInDarkMode() {
@@ -51,7 +51,7 @@ final class SectionRowViewSnapshotTests: XCTestCase {
         let view = SectionRowView(model: model)
             .preferredColorScheme(.dark)
         
-        assertSnapshot(matching: view, as: .image(layout: .device(config: .iPhone16Pro), traits: .init(displayScale: 2)))
+        assertSnapshot(of: view, as: .image(layout: .device(config: .iPhone13)))
     }
     
     func testSectionRowViewAccessibility() {
@@ -60,6 +60,6 @@ final class SectionRowViewSnapshotTests: XCTestCase {
             .accessibilityLabel("Section: Accessible Title")
             .accessibilityHint("Accessible Description")
         
-        assertSnapshot(matching: view, as: .image(layout: .device(config: .iPhone16Pro), traits: .init(displayScale: 2)))
+        assertSnapshot(of: view, as: .image(layout: .device(config: .iPhone13)))
     }
 }
