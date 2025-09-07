@@ -46,17 +46,16 @@ public struct SplashView: View {
     @ViewBuilder
     private func animatedLogo(maxWidth: CGFloat) -> some View {
         ZStack {
-            // Background circle
             Circle()
                 .fill(Color.white.opacity(0.2))
                 .frame(width: min(maxWidth * 0.6, 200))
                 .scaleEffect(scaleEffect)
                 .opacity(opacity)
             
-            // App icon placeholder with system image
-            Image(systemName: "play.rectangle.fill")
-                .font(.system(size: min(maxWidth * 0.3, 100), weight: .bold))
-                .foregroundColor(.white)
+            Image("AppIcon")
+                .resizable()
+                .scaledToFit()
+                .frame(width: min(maxWidth * 0.4, 120))
                 .scaleEffect(scaleEffect)
                 .opacity(opacity)
                 .rotationEffect(.degrees(rotationAngle))

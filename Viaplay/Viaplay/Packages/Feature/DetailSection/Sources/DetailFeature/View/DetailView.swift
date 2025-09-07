@@ -16,6 +16,15 @@ public struct DetailView: View {
             ))
         }
     }
+    
+    public init(domainSection: Domain.Section, viewModel: DetailViewModel? = nil) {
+        let contentSection = ContentSection(
+            title: domainSection.title,
+            description: domainSection.description,
+            href: domainSection.href
+        )
+        self.init(section: contentSection, viewModel: viewModel)
+    }
 
     public var body: some View {
         ScrollView {

@@ -15,7 +15,6 @@ public struct SectionsListView: View {
     public var body: some View {
         NavigationView {
             ZStack {
-                // Background gradient
                 LinearGradient(
                     gradient: Gradient(colors: [
                         Color(.systemBackground),
@@ -85,11 +84,7 @@ public struct SectionsListView: View {
                 
                 // Sections grid
                 ForEach(viewModel.sections.indices, id: \.self) { index in
-                    NavigationLink(destination: DetailView(section: ContentSection(
-                        title: viewModel.sections[index].title,
-                        description: viewModel.sections[index].description,
-                        href: viewModel.sections[index].href
-                    ))) {
+                    NavigationLink(destination: DetailView(domainSection: viewModel.sections[index])) {
                         SectionRowView(
                             model: SectionRowView.Model(
                                 title: viewModel.sections[index].title,

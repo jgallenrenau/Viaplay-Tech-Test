@@ -79,11 +79,7 @@ public struct SectionsListViewtvOS: View {
                 
                 // TV-optimized sections grid
                 ForEach(viewModel.sections.indices, id: \.self) { index in
-                    NavigationLink(destination: DetailViewtvOS(section: ContentSection(
-                        title: viewModel.sections[index].title,
-                        description: viewModel.sections[index].description,
-                        href: viewModel.sections[index].href
-                    ))) {
+                    NavigationLink(destination: DetailViewtvOS(domainSection: viewModel.sections[index])) {
                         DesignSystem.Components.sectionRowView(
                             title: viewModel.sections[index].title,
                             description: viewModel.sections[index].description,
