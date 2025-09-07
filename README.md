@@ -15,23 +15,19 @@
 
 ## Overview
 
-The Viaplay Tech Test is a Swift-based iOS application that demonstrates modern iOS development practices through a modular architecture built with Swift Package Manager (SPM). This project showcases a content browsing experience with sections and detailed views, leveraging Clean Architecture principles, MVVM pattern, and an offline-first strategy with ETag-based caching. The application is structured as independent SPM modules, each with specific responsibilities and clear dependency boundaries, ensuring maintainability, testability, and team scalability. This project serves as a technical assessment demonstrating enterprise-grade iOS development practices, including comprehensive testing strategies, CI/CD integration, and SOLID principles implementation.
+The Viaplay Tech Test is a Swift-based cross-platform application that demonstrates modern iOS and tvOS development practices through a modular architecture built with Swift Package Manager (SPM). This project showcases a content browsing experience with sections and detailed views, leveraging Clean Architecture principles, MVVM pattern, and an offline-first strategy with ETag-based caching. The application is structured as independent SPM modules, each with specific responsibilities and clear dependency boundaries, ensuring maintainability, testability, and team scalability. This project serves as a technical assessment demonstrating enterprise-grade cross-platform development practices, including comprehensive testing strategies, CI/CD integration, SOLID principles implementation, and a reusable DSKit design system.
 
 ## 📱 Device Compatibility & Features
 
 ### **Supported Devices**
 - **iPhone**: All iPhone models running iOS 17.0+
 - **iPad**: All iPad models running iPadOS 17.0+
-- **Universal App**: Optimized for both iPhone and iPad with adaptive layouts
-- **Orientation Support**: Full rotation support for both portrait and landscape modes
+- **Apple TV**: All Apple TV models running tvOS 16.0+
+- **Universal App**: Optimized for iPhone, iPad, and Apple TV with adaptive layouts
+- **Orientation Support**: Full rotation support for both portrait and landscape modes (iOS/iPadOS)
 
 ### **User Experience Features**
 - **🌙 Dark Mode**: Native dark mode support with automatic system theme detection
-- **🌍 Internationalization**: Comprehensive multi-language support including:
-  - **8 Languages**: English, Spanish, German, French, Italian, Dutch, Portuguese, and Catalan
-  - **Automatic Detection**: Language detection based on device settings
-  - **RTL Support**: Right-to-left language support for future expansion
-  - **Type-safe Localization**: Structured localization keys for maintainability
 - **♿ Accessibility**: Comprehensive accessibility features including:
   - VoiceOver support for screen readers
   - Dynamic Type support for customizable text sizes
@@ -41,19 +37,96 @@ The Viaplay Tech Test is a Swift-based iOS application that demonstrates modern 
 - **📱 Adaptive Layout**: Responsive design that adapts to different screen sizes and orientations
 - **🔄 Rotation Support**: Seamless rotation between portrait and landscape orientations
 - **⚡ Performance**: Optimized for smooth 60fps scrolling and animations
+- **🎨 DSKit Integration**: Consistent UI components with LoadingView, ErrorView, and SectionRowView
+- **🎬 Lottie Animations**: Smooth loading animations for enhanced user experience
+- **🔄 Cross-Platform UI**: Shared components that adapt to iOS and tvOS with platform-specific optimizations
+- **🎯 Focus Management**: tvOS-optimized focus effects and navigation for Apple TV remote control
+- **🌍 Localization**: Multi-language support with platform-specific string files for iOS and tvOS
+- **♿ Accessibility**: VoiceOver support, Dynamic Type, and semantic grouping across both platforms
+- **🔄 Error Handling**: Consistent error states with retry functionality using DSKit ErrorView
+- **📱 Responsive Design**: Adaptive layouts that work across different screen sizes and platforms
+- **🎨 Modern UI**: Built with SwiftUI and custom DSKit components for consistent theming
+- **🔄 Loading States**: Elegant loading indicators with Lottie animations for better user feedback
+- **🎯 Performance**: Optimized for smooth 60fps scrolling and animations across all platforms
+- **🔄 Cross-Platform Testing**: Unified test suite validates business logic for both iOS and tvOS
+- **🎨 DSKit Design System**: Reusable UI components with consistent theming and animations
+- **🔄 Modular Architecture**: Independent SPM packages for maintainability and scalability
+- **🔄 Clean Architecture**: Separation of concerns with clear dependency boundaries
+- **🔄 MVVM Pattern**: Reactive UI updates with proper state management
+- **🔄 Advanced Concurrency**: Thread-safe operations with Swift Concurrency and Actor model
+- **🔄 DTO/Mapper Pattern**: Robust JSON parsing with type-safe data transformation
+- **🔄 Comprehensive Testing**: Unit tests, integration tests, and snapshot tests
+- **🔄 CI/CD Integration**: Automated testing and code quality checks
+- **🔄 Offline-First**: Seamless experience with ETag-based caching and smart data synchronization
+- **🔄 Cross-Platform Support**: Native iOS and tvOS apps with platform-optimized UI and shared business logic
+- **🔄 Error Handling**: Graceful error states with user-friendly retry mechanisms using DSKit ErrorView
+- **🔄 Loading States**: Smooth loading indicators with Lottie animations for enhanced user experience
+- **🔄 Content Sections Display**: Browse content sections with rich metadata and smooth scrolling using DSKit components
+- **🔄 Section Details**: Comprehensive section information with detailed navigation and enhanced UI
 
 ### **Visual Design**
 - **Modern UI**: Built with SwiftUI and custom DSKit components
-- **Consistent Theming**: Unified design system across all screens
-- **Smooth Animations**: Fluid transitions and micro-interactions
-- **Loading States**: Elegant loading indicators and skeleton screens
+- **Consistent Theming**: Unified design system across all screens and platforms
+- **Smooth Animations**: Fluid transitions and micro-interactions with Lottie support
+- **Loading States**: Elegant loading indicators with animated feedback
+- **Cross-Platform Adaptation**: Platform-specific UI optimizations for iOS and tvOS
+
+## 📺 tvOS Support & Cross-Platform Architecture
+
+### **Universal App Architecture** 🎯
+The application now supports **both iOS and tvOS** with a sophisticated cross-platform architecture that maximizes code reuse while providing platform-specific optimizations:
+
+### **Shared Codebase Strategy** 🔄
+- **Single Source of Truth**: All business logic, data models, and core functionality are shared between iOS and tvOS
+- **Platform-Specific UI**: Only the presentation layer adapts to each platform's unique interaction patterns
+- **Conditional Compilation**: Strategic use of `#if os(tvOS)` for platform-specific adaptations
+- **Unified Testing**: Same test suites validate functionality across both platforms
+
+### **tvOS-Specific Features** 📺
+- **Focus-Based Navigation**: Optimized for Apple TV remote control interaction
+- **Enhanced Visual Design**: Larger fonts, increased touch targets, and TV-optimized layouts
+- **Focus Effects**: Beautiful focus animations with scaling, shadows, and color transitions
+- **Remote-Friendly UI**: Simplified navigation patterns optimized for directional pad control
+- **TV-Optimized Colors**: Custom color schemes that work well on large TV displays
+
+### **Cross-Platform Components** 🧩
+- **DSKit Components**: All UI components automatically adapt to tvOS with platform-specific styling
+- **Shared ViewModels**: Same business logic and state management across platforms
+- **Unified Data Layer**: Identical data fetching, caching, and offline strategies
+- **Consistent Localization**: Same multi-language support with platform-specific string files
+
+### **Platform Adaptations** ⚙️
+- **iOS**: Touch-optimized with navigation bars, tab bars, and standard iOS patterns
+- **tvOS**: Focus-optimized with custom navigation, larger UI elements, and TV-specific interactions
+- **Conditional UI**: Smart adaptations like removing icons on tvOS, adjusting font sizes, and optimizing layouts
+- **Color System**: Platform-specific color schemes that work optimally on each device type
+
+### **Architecture Benefits** 🏗️
+- **Code Reuse**: ~90% code sharing between platforms, reducing maintenance overhead
+- **Consistent UX**: Same features and functionality across all devices
+- **Independent Evolution**: Each platform can evolve its UI independently while sharing core logic
+- **Unified Testing**: Single test suite validates business logic for both platforms
+- **Easy Maintenance**: Changes to business logic automatically benefit both platforms
+
+### **Technical Implementation** 🔧
+- **SwiftUI Conditional Compilation**: Platform-specific UI adaptations using `#if os(tvOS)`
+- **Shared SPM Packages**: All modules support both iOS and tvOS targets
+- **Platform-Specific Resources**: Separate localization files and assets when needed
+- **Focus Management**: tvOS-specific focus handling and navigation patterns
+- **Performance Optimization**: Platform-specific performance tuning for each device type
+
+### **Development Workflow** 👨‍💻
+- **Single Codebase**: Developers work on one codebase that serves both platforms
+- **Platform Testing**: Easy switching between iOS and tvOS targets for testing
+- **Unified CI/CD**: Same build pipeline validates both platforms
+- **Feature Parity**: New features automatically work on both platforms with appropriate UI adaptations
 
 ## 📋 Table of Contents
 
 - [📱 Device Compatibility & Features](#-device-compatibility--features)
+- [📺 tvOS Support & Cross-Platform Architecture](#-tvos-support--cross-platform-architecture)
 - [🧭 Why this architecture](#-why-this-architecture)
 - [🧩 MVVM pattern (per feature)](#-mvvm-pattern-per-feature)
-- [🌍 Internationalization & Localization](#-internationalization--localization)
 - [📦 SPM Architecture Decision: Internal vs External Dependencies](#-spm-architecture-decision-internal-vs-external-dependencies)
 - [🧱 Modular architecture (SPM)](#-modular-architecture-spm)
 - [🧪 Testing strategy](#-testing-strategy)
@@ -93,15 +166,16 @@ The Viaplay Tech Test is a Swift-based iOS application that demonstrates modern 
 ## 🛠️ Technical Stack
 
 ### **Core Technologies**
-- **Platform:** iOS 17.0+
+- **Platform:** iOS 17.0+ / tvOS 16.0+
 - **Language:** Swift 5.9+
-- **UI Framework:** SwiftUI
+- **UI Framework:** SwiftUI (Cross-platform)
 - **Architecture:** Clean Architecture + MVVM
 - **Modularity:** Swift Package Manager (SPM)
 - **Concurrency:** Swift Concurrency (async/await)
 - **Testing:** XCTest + URLProtocol stubbing
 - **Caching:** ETag-based offline-first strategy
 - **CI/CD:** GitHub Actions + SwiftLint + Codecov
+- **Cross-Platform:** Conditional compilation for iOS/tvOS
 
 ## 🛠️ Development Tools
 
@@ -114,17 +188,20 @@ The Viaplay Tech Test is a Swift-based iOS application that demonstrates modern 
 ## 🚀 App Features
 
 ### **Core Functionality**
-- **Content Sections Display**: Browse content sections with rich metadata and smooth scrolling
-- **Section Details**: Comprehensive section information with detailed navigation
+- **Content Sections Display**: Browse content sections with rich metadata and smooth scrolling using DSKit components
+- **Section Details**: Comprehensive section information with detailed navigation and enhanced UI
+- **Cross-Platform Support**: Native iOS and tvOS apps with platform-optimized UI and shared business logic
 - **Offline-First**: Seamless experience with ETag-based caching and smart data synchronization
-- **Multi-Language Support**: Full internationalization with 8 supported languages
-- **Error Handling**: Graceful error states with user-friendly retry mechanisms
-- **Loading States**: Smooth loading indicators and skeleton screens for better UX
+- **Multi-Language Support**: Full internationalization with 8 supported languages across both platforms
+- **Error Handling**: Graceful error states with user-friendly retry mechanisms using DSKit ErrorView
+- **Loading States**: Smooth loading indicators with Lottie animations for enhanced user experience
 
 ### **Technical Features**
 - **Modular Architecture**: Independent SPM packages for maintainability and scalability
 - **Clean Architecture**: Separation of concerns with clear dependency boundaries
 - **MVVM Pattern**: Reactive UI updates with proper state management
+- **Cross-Platform UI**: Shared SwiftUI components with platform-specific adaptations
+- **DSKit Design System**: Reusable UI components with consistent theming and animations
 - **Advanced Concurrency**: Thread-safe operations with Swift Concurrency and Actor model
 - **DTO/Mapper Pattern**: Robust JSON parsing with type-safe data transformation
 - **Localization System**: Type-safe internationalization with 8 languages and RTL support
@@ -137,41 +214,22 @@ The Viaplay Tech Test is a Swift-based iOS application that demonstrates modern 
 - **Card-based Layout**: Beautiful card designs with shadows, rounded corners, and smooth animations
 - **Enhanced Detail Views**: Rich information display with hero sections, statistics, and metadata
 - **Interactive Components**: Touch feedback, press animations, and smooth transitions
-- **Thematic Icons**: Contextual icons and colors for different content types
+- **Focus-Based Navigation**: tvOS-optimized focus effects with scaling and color transitions
+- **Thematic Icons**: Contextual icons and colors for different content types (iOS only)
 - **Gradient Backgrounds**: Modern gradient designs for visual appeal
+- **Reusable DSKit Components**: Consistent LoadingView, ErrorView, and SectionRowView across all features
+- **Lottie Animations**: Smooth loading animations using Lottie for enhanced user experience
 
 ### **User Experience Improvements**
 - **Smooth Animations**: Entrance animations, loading states, and micro-interactions
 - **Enhanced Navigation**: Intuitive navigation with visual indicators and feedback
+- **Cross-Platform UX**: Optimized experiences for both touch (iOS) and remote (tvOS) interactions
 - **Comprehensive Information**: Detailed content display with statistics and metadata
-- **Responsive Design**: Adaptive layouts that work across different screen sizes
+- **Responsive Design**: Adaptive layouts that work across different screen sizes and platforms
 - **Accessibility**: VoiceOver support, Dynamic Type, and semantic grouping
+- **Consistent Error Handling**: Unified error states with retry functionality across all features
+- **Loading States**: Elegant loading indicators with Lottie animations for better user feedback
 
-## 🌍 Internationalization & Localization
-
-### **Multi-Language Support**
-- **8 Supported Languages**: English (default), Spanish, German, French, Italian, Dutch, Portuguese, and Catalan
-- **Automatic Language Detection**: Seamless language switching based on device settings
-- **Type-Safe Localization**: Structured `LocalizationKeys` for compile-time safety
-- **Easy-to-Use API**: Simple `.localized` extension for String types
-
-### **Localization Architecture**
-- **Centralized System**: All localization logic in the Domain package for shared access
-- **Localizable.strings Files**: Separate files for each supported language
-- **RTL Support**: Built-in support for right-to-left languages (Arabic, Hebrew)
-- **Maintainable Structure**: Organized keys by feature and context for easy maintenance
-
-### **Developer Experience**
-```swift
-// Simple usage
-Text("loading".localized)
-
-// Type-safe usage
-Text(LocalizationKeys.Sections.title.localized)
-
-// With arguments
-Text("welcome.message".localized(arguments: userName))
-```
 
 ## ⚡ Advanced Concurrency & Thread Safety
 
@@ -212,7 +270,7 @@ Text("welcome.message".localized(arguments: userName))
 ### **Prerequisites**
 - `Xcode 15.0+`
 - `Swift 5.9+`
-- `iOS 17.0+`
+- `iOS 17.0+` / `tvOS 16.0+`
 - `SwiftLint` (`brew install swiftlint`)
 
 ### **Installation**
@@ -230,10 +288,17 @@ open Viaplay/Viaplay.xcodeproj
 
 **3. Run tests:**
 ```bash
+# iOS tests
 xcodebuild test \
   -project Viaplay/Viaplay.xcodeproj \
   -scheme Viaplay \
   -destination 'platform=iOS Simulator,name=iPhone 16 Pro,OS=latest'
+
+# tvOS tests
+xcodebuild test \
+  -project Viaplay/Viaplay.xcodeproj \
+  -scheme ViaplaytvOS \
+  -destination 'platform=tvOS Simulator,name=Apple TV 4K (3rd generation),OS=latest'
 ```
 
 **4. Run SwiftLint:**
@@ -384,19 +449,21 @@ The application is structured as **independent Swift Package Manager (SPM) modul
 - **Purpose**: Provides reusable UI components and design system elements.
 - **Contains**: SwiftUI views, view models, styling utilities, and enhanced interactive components.
 - **Key Components**: 
-  - `SectionRowView`: Interactive card-based section display with animations
-  - `EnhancedDetailItemView`: Rich detail item presentation with images and metadata
-  - `DetailItemView`: Standard detail item component
-- **Dependencies**: None (pure UI components).
+  - `SectionRowView`: Interactive card-based section display with animations and tvOS focus support
+  - `LoadingView`: Reusable loading states with content and details variants
+  - `ErrorView`: Consistent error display with retry functionality
+  - `LottieView`: Animated loading states using Lottie animations
+  - `Colors`: Platform-adaptive color system for iOS and tvOS
+- **Dependencies**: `Lottie` (for animations), `swift-snapshot-testing` (for testing).
 - **Benefits**: Consistent design, reusable components, UI/UX standardization, and modern interactions.
 
 ### **Features** (Sections, DetailSection) 🚀
 - **Purpose**: Implements complete user-facing features with MVVM pattern.
 - **Contains**: SwiftUI views, ViewModels, feature-specific logic, and enhanced UI components.
 - **Key Features**:
-  - **Sections**: Modern list view with card-based design, animations, and smooth navigation
-  - **DetailSection**: Rich detail views with hero sections, statistics, and comprehensive information display
-- **Dependencies**: `Domain` + `DSKit` (optional).
+  - **Sections**: Modern list view with card-based design, animations, and smooth navigation using DSKit components
+  - **DetailSection**: Rich detail views with comprehensive information display using DSKit LoadingView and ErrorView
+- **Dependencies**: `Domain` + `DSKit`.
 - **Benefits**: Independent features, clear boundaries, easy testing, and modern user experience.
 
 ### **Data Flow** 🔄
@@ -574,7 +641,7 @@ Our architecture strictly follows **SOLID principles** to ensure maintainable an
 2. Selects the latest stable Xcode.
 3. Caches SPM/DerivedData to speed up builds.
 4. Installs SwiftLint and runs it with `--strict` in `Viaplay`.
-5. Builds and runs unit tests (only `ViaplayTests`) with code coverage and `-skipMacroValidation`.
+5. Builds and runs unit tests for both iOS and tvOS targets with code coverage and `-skipMacroValidation`.
 6. Uploads the `.xcresult` as an artifact even on failure.
 
 **File.** `.github/workflows/ci.yml`
@@ -586,10 +653,18 @@ Our architecture strictly follows **SOLID principles** to ensure maintainable an
 
 **Quick local run.**
 ```bash
+# iOS
 xcodebuild \
   -project Viaplay/Viaplay.xcodeproj \
   -scheme Viaplay \
   -destination 'platform=iOS Simulator,name=iPhone 16 Pro,OS=latest' \
+  clean test
+
+# tvOS
+xcodebuild \
+  -project Viaplay/Viaplay.xcodeproj \
+  -scheme ViaplaytvOS \
+  -destination 'platform=tvOS Simulator,name=Apple TV 4K (3rd generation),OS=latest' \
   clean test
 ```
 
