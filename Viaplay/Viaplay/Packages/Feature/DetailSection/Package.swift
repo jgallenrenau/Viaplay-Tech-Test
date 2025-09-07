@@ -5,7 +5,8 @@ let package = Package(
     name: "DetailSection",
     platforms: [
         .iOS(.v16),
-        .macOS(.v12)
+        .macOS(.v12),
+        .tvOS(.v16)
     ],
     products: [
         .library(name: "DetailSection", targets: ["DetailSection"])

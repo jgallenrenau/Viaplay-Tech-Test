@@ -63,7 +63,7 @@ public struct DetailItemView: View {
                 .padding(.horizontal, 12)
                 .background(
                     RoundedRectangle(cornerRadius: 8)
-                        .fill(Color(.systemGray6))
+                        .fill(contentBackgroundColor)
                 )
             }
 
@@ -144,7 +144,7 @@ public struct DetailItemView: View {
         .padding(20)
         .background(
             RoundedRectangle(cornerRadius: 16)
-                .fill(Color(.systemBackground))
+                .fill(cardBackgroundColor)
                 .shadow(
                     color: Color.black.opacity(0.05),
                     radius: isPressed ? 2 : 8,
@@ -154,5 +154,21 @@ public struct DetailItemView: View {
         )
         .scaleEffect(isPressed ? 0.98 : 1.0)
         .animation(.easeInOut(duration: 0.1), value: isPressed)
+    }
+
+    private var contentBackgroundColor: Color {
+        #if os(tvOS)
+        return Color.gray.opacity(0.2)
+        #else
+        return Color(.systemGray6)
+        #endif
+    }
+
+    private var cardBackgroundColor: Color {
+        #if os(tvOS)
+        return Color.black
+        #else
+        return Color(.systemBackground)
+        #endif
     }
 }

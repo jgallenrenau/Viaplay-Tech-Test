@@ -28,10 +28,10 @@ public struct SectionsListView: View {
                 
                 Group {
                     if viewModel.isLoading {
-                        LoadingView.contentLoading()
+                        LoadingView()
                     } else if let errorMessage = viewModel.errorMessage {
                         DesignSystem.Components.errorView(
-                            title: LocalizationKeys.Sections.errorTitle.localized,
+                            title: "Oops! Something went wrong",
                             message: errorMessage,
                             retryAction: {
                                 Task {
@@ -64,11 +64,18 @@ public struct SectionsListView: View {
             LazyVStack(spacing: 16) {
                 // Header section
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("explore.content.title".localized)
-                        .font(.system(size: 28, weight: .bold, design: .rounded))
-                        .foregroundColor(.primary)
+                    // Show the root page description if available
+                    if let rootDescription = viewModel.rootPageDescription {
+                        Text(rootDescription)
+                            .font(.system(size: 28, weight: .bold, design: .rounded))
+                            .foregroundColor(.primary)
+                    } else {
+                        Text("Explore our content")
+                            .font(.system(size: 28, weight: .bold, design: .rounded))
+                            .foregroundColor(.primary)
+                    }
                     
-                    Text("explore.content.subtitle".localized)
+                    Text("Discover series, movies, sports and more")
                         .font(.system(size: 16, weight: .medium, design: .rounded))
                         .foregroundColor(.secondary)
                 }
@@ -79,13 +86,13 @@ public struct SectionsListView: View {
                 // Sections grid
                 ForEach(viewModel.sections.indices, id: \.self) { index in
                     NavigationLink(destination: DetailView(section: ContentSection(
-                        title: SectionTitleLocalizer.localizedTitle(for: viewModel.sections[index].title),
+                        title: viewModel.sections[index].title,
                         description: viewModel.sections[index].description,
                         href: viewModel.sections[index].href
                     ))) {
                         SectionRowView(
                             model: SectionRowView.Model(
-                                title: SectionTitleLocalizer.localizedTitle(for: viewModel.sections[index].title),
+                                title: viewModel.sections[index].title,
                                 description: viewModel.sections[index].description
                             ),
                             onTap: {

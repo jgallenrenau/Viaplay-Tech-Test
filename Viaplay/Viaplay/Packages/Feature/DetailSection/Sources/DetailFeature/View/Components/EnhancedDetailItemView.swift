@@ -131,7 +131,9 @@ public struct EnhancedDetailItemView: View {
                     Button(action: {
                         // Handle link action
                         if let url = URL(string: href.absoluteString) {
+                            #if !os(tvOS)
                             UIApplication.shared.open(url)
+                            #endif
                         }
                     }) {
                         HStack(spacing: 6) {
@@ -157,7 +159,7 @@ public struct EnhancedDetailItemView: View {
         .padding(20)
         .background(
             RoundedRectangle(cornerRadius: 16)
-                .fill(Color(.systemBackground))
+                .fill(backgroundFillColor)
                 .shadow(
                     color: isPressed ? Color.black.opacity(0.1) : Color.black.opacity(0.15),
                     radius: isPressed ? 4 : 12,
@@ -180,6 +182,14 @@ public struct EnhancedDetailItemView: View {
     }
     
     // MARK: - Helper Properties
+    
+    private var backgroundFillColor: Color {
+        #if os(tvOS)
+        return Color.black
+        #else
+        return Color(.systemBackground)
+        #endif
+    }
     
     private var iconForItem: String {
         if let content = item.content, !content.isEmpty {
@@ -216,5 +226,9 @@ public struct EnhancedDetailItemView: View {
         Spacer()
     }
     .padding()
+    #if os(tvOS)
+    .background(Color.black)
+    #else
     .background(Color(.systemGroupedBackground))
+    #endif
 }
