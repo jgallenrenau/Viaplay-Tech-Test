@@ -3,6 +3,7 @@ import Foundation
 public protocol JSONDiskCache {
     func read<T: Decodable>(for key: String, as type: T.Type) throws -> T?
     func write<T: Encodable>(_ value: T, for key: String) throws
+    func delete(for key: String) throws
 }
 
 public final class FileJSONDiskCache: JSONDiskCache {
@@ -50,6 +51,24 @@ public final class FileJSONDiskCache: JSONDiskCache {
             print("✅ [StorageKit] Successfully cached data for key: \(key)")
         } catch {
             print("❌ [StorageKit] Failed to cache data for key: \(key) - \(error.localizedDescription)")
+            throw error
+        }
+    }
+    
+    public func delete(for key: String) throws {
+        let url = directory.appendingPathComponent(key)
+        print("🗑️ [StorageKit] Attempting to delete cache for key: \(key)")
+        
+        guard FileManager.default.fileExists(atPath: url.path) else {
+            print("📭 [StorageKit] Cache file not found for deletion, key: \(key)")
+            return
+        }
+        
+        do {
+            try FileManager.default.removeItem(at: url)
+            print("✅ [StorageKit] Successfully deleted cache for key: \(key)")
+        } catch {
+            print("❌ [StorageKit] Failed to delete cache for key: \(key) - \(error.localizedDescription)")
             throw error
         }
     }

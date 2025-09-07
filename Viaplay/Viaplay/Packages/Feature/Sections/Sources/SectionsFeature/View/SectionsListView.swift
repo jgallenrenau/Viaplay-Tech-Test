@@ -79,13 +79,13 @@ public struct SectionsListView: View {
                 // Sections grid
                 ForEach(viewModel.sections.indices, id: \.self) { index in
                     NavigationLink(destination: DetailView(section: ContentSection(
-                        title: viewModel.sections[index].title,
+                        title: SectionTitleLocalizer.localizedTitle(for: viewModel.sections[index].title),
                         description: viewModel.sections[index].description,
                         href: viewModel.sections[index].href
                     ))) {
                         SectionRowView(
                             model: SectionRowView.Model(
-                                title: viewModel.sections[index].title,
+                                title: SectionTitleLocalizer.localizedTitle(for: viewModel.sections[index].title),
                                 description: viewModel.sections[index].description
                             ),
                             onTap: {

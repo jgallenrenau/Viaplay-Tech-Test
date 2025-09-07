@@ -1,7 +1,7 @@
 import SwiftUI
 
 public struct SectionRowView: View {
-    public struct Model: Equatable {
+    public struct Model: Equatable, Hashable {
         public let title: String
         public let description: String?
         public init(title: String, description: String? = nil) {

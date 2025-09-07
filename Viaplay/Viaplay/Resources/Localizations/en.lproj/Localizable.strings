@@ -1,68 +1,12 @@
-/* 
-  Localizable.strings
-  Viaplay
-  
-  English (Default)
-*/
-
-// MARK: - Common
-"loading" = "Loading...";
-"error" = "Error";
-"retry" = "Retry";
-"refresh" = "Refresh";
-"cancel" = "Cancel";
-"ok" = "OK";
-"done" = "Done";
-"back" = "Back";
-"next" = "Next";
-"previous" = "Previous";
-"close" = "Close";
-
-// MARK: - Sections
-"sections.title" = "Sections";
-"sections.loading" = "Loading sections...";
-"sections.error.title" = "Failed to Load Sections";
-"sections.error.message" = "We couldn't load the sections. Please check your internet connection and try again.";
-"sections.empty.title" = "No Sections Available";
-"sections.empty.message" = "There are no sections to display at the moment.";
-
-// MARK: - Detail Section
-"detail.title" = "Section Details";
-"detail.loading" = "Loading details...";
-"detail.error.title" = "Failed to Load Details";
-"detail.error.message" = "We couldn't load the section details. Please try again.";
-"detail.empty.title" = "No Content Available";
-"detail.empty.message" = "This section doesn't have any content to display at the moment. Check back later for updates!";
+// MARK: - Error Messages
+"sections.errorTitle" = "Oops! Something went wrong";
+"detail.errorTitle" = "Oops! Something went wrong";
 
 // MARK: - Content
-"content.title" = "Content";
-"content.elements.count" = "Elements";
+"content.elementsCount" = "ELEMENTS";
 "content.category" = "Category";
 "content.status" = "Status";
-"content.section" = "Section";
-"content.link.available" = "Link Available";
-"content.link.unavailable" = "No Link";
-
-// MARK: - Actions
-"action.explore" = "Explore";
-"action.share" = "Share";
-"action.bookmark" = "Bookmark";
-"action.favorite" = "Favorite";
-
-// MARK: - Status
-"status.active" = "Active";
-"status.inactive" = "Inactive";
-"status.pending" = "Pending";
-"status.completed" = "Completed";
-
-// MARK: - Categories
-"category.sports" = "Sports";
-"category.movies" = "Movies";
-"category.series" = "Series";
-"category.news" = "News";
-"category.kids" = "Kids";
-"category.documentary" = "Documentary";
-"category.entertainment" = "Entertainment";
+"content.title" = "Content";
 
 // MARK: - UI Text
 "explore.content.title" = "Explore our content";
@@ -71,9 +15,13 @@
 "active" = "Active";
 "explore" = "Explore";
 "share" = "Share";
-"refresh" = "Refresh";
-"elements" = "elements";
+"elements" = "Elements";
 "no.content.available" = "No Content Available";
 "no.content.message" = "This section doesn't have any content to display at the moment. Check back later for updates!";
-"no.content.simple" = "No content available";
-"no.content.simple.message" = "This section has no items to display at the moment.";
+
+// MARK: - Section Titles (API mapping)
+"section.serier" = "Series";
+"section.filmer" = "Movies";
+"section.sport" = "Sports";
+"section.barn" = "Kids";
+"section.kanaler" = "Channels";

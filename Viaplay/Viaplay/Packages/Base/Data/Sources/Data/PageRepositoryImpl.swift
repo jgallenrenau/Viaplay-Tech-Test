@@ -39,19 +39,33 @@ public final class PageRepositoryImpl: PageRepository {
         }
         
         print("🚀 [PageRepository] Making HTTP request to: \(url)")
-        let response = try await http.get(url, headers: headers)
-        print("📡 [PageRepository] HTTP response received - Status: \(response.statusCode)")
         
-        if response.statusCode == 304, let cached = cached {
-            print("💾 [PageRepository] Using cached data (304 Not Modified)")
-            return cached
+        do {
+            let response = try await http.get(url, headers: headers)
+            print("📡 [PageRepository] HTTP response received - Status: \(response.statusCode)")
+            
+            if response.statusCode == 304, let cached = cached {
+                print("💾 [PageRepository] Using cached data (304 Not Modified)")
+                return cached
+            }
+            
+            let page = try await processResponse(response, cacheKey: cacheKey)
+            
+            storeETagIfNeeded(response, cacheKey: cacheKey)
+            
+            return page
+        } catch {
+            print("⚠️ [PageRepository] Network request failed: \(error.localizedDescription)")
+            
+            // Fallback to cached data if available
+            if let cached = cached {
+                print("💾 [PageRepository] Using cached data as fallback")
+                return cached
+            }
+            
+            // Re-throw the error if no cached data is available
+            throw error
         }
-        
-        let page = try await processResponse(response, cacheKey: cacheKey)
-        
-        storeETagIfNeeded(response, cacheKey: cacheKey)
-        
-        return page
     }
     
     /// Process HTTP response and decode data
@@ -63,14 +77,12 @@ public final class PageRepositoryImpl: PageRepository {
         let pageDTO = try JSONDecoder().decode(PageDTO.self, from: response.data)
         let page = PageMapper.map(pageDTO)
         
-        // Cache the result asynchronously
-        Task.detached { [weak self] in
-            do {
-                try self?.cache.write(page, for: cacheKey)
-                print("💾 [PageRepository] Data cached successfully for key: \(cacheKey)")
-            } catch {
-                print("⚠️ [PageRepository] Failed to cache data: \(error.localizedDescription)")
-            }
+        // Cache the result synchronously for immediate availability
+        do {
+            try cache.write(page, for: cacheKey)
+            print("💾 [PageRepository] Data cached successfully for key: \(cacheKey)")
+        } catch {
+            print("⚠️ [PageRepository] Failed to cache data: \(error.localizedDescription)")
         }
         
         return page

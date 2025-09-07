@@ -126,6 +126,85 @@ final class DetailDataSourceTests: XCTestCase {
         
         XCTAssertEqual(mockRepository.getRootPageCallCount, 2)
     }
+    
+    func test_fetchDetail_withLongTitle() async throws {
+        let longTitle = String(repeating: "Very Long Title ", count: 10)
+        let sectionWithLongTitle = ContentSection(title: longTitle, description: "Description")
+        
+        let result = try await sut.fetchDetail(for: sectionWithLongTitle)
+        
+        XCTAssertEqual(result.title, longTitle)
+        XCTAssertEqual(result.items.first?.title, longTitle)
+    }
+    
+    func test_fetchDetail_withEmptyTitle() async throws {
+        let sectionWithEmptyTitle = ContentSection(title: "", description: "Description")
+        
+        let result = try await sut.fetchDetail(for: sectionWithEmptyTitle)
+        
+        XCTAssertEqual(result.title, "")
+        XCTAssertEqual(result.items.first?.title, "")
+    }
+    
+    func test_fetchDetail_withNilDescription() async throws {
+        let sectionWithNilDescription = ContentSection(title: "Test", description: nil)
+        
+        let result = try await sut.fetchDetail(for: sectionWithNilDescription)
+        
+        XCTAssertEqual(result.description, nil)
+        XCTAssertEqual(result.items.first?.description, nil)
+    }
+    
+    func test_fetchDetail_withEmptyDescription() async throws {
+        let sectionWithEmptyDescription = ContentSection(title: "Test", description: "")
+        
+        let result = try await sut.fetchDetail(for: sectionWithEmptyDescription)
+        
+        XCTAssertEqual(result.description, "")
+        XCTAssertEqual(result.items.first?.description, "")
+    }
+    
+    func test_fetchDetail_generatesUniqueIds() async throws {
+        let section1 = ContentSection(title: "Section 1", description: "Description")
+        let section2 = ContentSection(title: "Section 2", description: "Description")
+        
+        let result1 = try await sut.fetchDetail(for: section1)
+        let result2 = try await sut.fetchDetail(for: section2)
+        
+        XCTAssertNotEqual(result1.items.first?.id, result2.items.first?.id)
+    }
+    
+    func test_fetchDetail_withUnicodeCharacters() async throws {
+        let sectionWithUnicode = ContentSection(title: "Sección con ñ y áéíóú", description: "Descripción")
+        
+        let result = try await sut.fetchDetail(for: sectionWithUnicode)
+        
+        XCTAssertEqual(result.title, "Sección con ñ y áéíóú")
+        XCTAssertTrue(result.items.first?.id.contains("secci") == true)
+    }
+    
+    func test_fetchDetail_withNumbersInTitle() async throws {
+        let sectionWithNumbers = ContentSection(title: "Section 123 Test 456", description: "Description")
+        
+        let result = try await sut.fetchDetail(for: sectionWithNumbers)
+        
+        XCTAssertEqual(result.title, "Section 123 Test 456")
+        XCTAssertTrue(result.items.first?.id.contains("123") == true)
+        XCTAssertTrue(result.items.first?.id.contains("456") == true)
+    }
+    
+    func test_fetchDetail_concurrentCalls() async throws {
+        let section1 = ContentSection(title: "Section 1", description: "Description")
+        let section2 = ContentSection(title: "Section 2", description: "Description")
+        
+        async let result1 = sut.fetchDetail(for: section1)
+        async let result2 = sut.fetchDetail(for: section2)
+        
+        let (detail1, detail2) = try await (result1, result2)
+        
+        XCTAssertNotEqual(detail1.title, detail2.title)
+        XCTAssertEqual(mockRepository.getRootPageCallCount, 2)
+    }
 }
 
 private enum TestError: LocalizedError, Equatable {

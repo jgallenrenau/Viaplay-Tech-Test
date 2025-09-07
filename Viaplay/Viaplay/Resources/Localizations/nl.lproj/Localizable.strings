@@ -1,65 +1,27 @@
-/* 
-  Localizable.strings
-  Viaplay
-  
-  Dutch
-*/
-
-// MARK: - Common
-"loading" = "Laden...";
-"error" = "Fout";
-"retry" = "Opnieuw proberen";
-"refresh" = "Vernieuwen";
-"cancel" = "Annuleren";
-"ok" = "OK";
-"done" = "Klaar";
-"back" = "Terug";
-"next" = "Volgende";
-"previous" = "Vorige";
-"close" = "Sluiten";
-
-// MARK: - Sections
-"sections.title" = "Secties";
-"sections.loading" = "Secties laden...";
-"sections.error.title" = "Fout bij het laden van secties";
-"sections.error.message" = "We konden de secties niet laden. Controleer je internetverbinding en probeer opnieuw.";
-"sections.empty.title" = "Geen secties beschikbaar";
-"sections.empty.message" = "Er zijn momenteel geen secties om weer te geven.";
-
-// MARK: - Detail Section
-"detail.title" = "Sectiedetails";
-"detail.loading" = "Details laden...";
-"detail.error.title" = "Fout bij het laden van details";
-"detail.error.message" = "We konden de sectiedetails niet laden. Probeer opnieuw.";
-"detail.empty.title" = "Geen inhoud beschikbaar";
-"detail.empty.message" = "Deze sectie heeft momenteel geen inhoud om weer te geven. Kom later terug voor updates!";
+// MARK: - Error Messages
+"sections.errorTitle" = "Oeps! Er ging iets mis";
+"detail.errorTitle" = "Oeps! Er ging iets mis";
 
 // MARK: - Content
-"content.title" = "Inhoud";
-"content.elements.count" = "Elementen";
+"content.elementsCount" = "ELEMENTEN";
 "content.category" = "Categorie";
 "content.status" = "Status";
-"content.section" = "Sectie";
-"content.link.available" = "Link beschikbaar";
-"content.link.unavailable" = "Geen link";
+"content.title" = "Inhoud";
 
-// MARK: - Actions
-"action.explore" = "Verkennen";
-"action.share" = "Delen";
-"action.bookmark" = "Bladwijzer";
-"action.favorite" = "Favoriet";
+// MARK: - UI Text
+"explore.content.title" = "Verken onze inhoud";
+"explore.content.subtitle" = "Ontdek series, films, sport en meer";
+"available" = "Beschikbaar";
+"active" = "Actief";
+"explore" = "Verken";
+"share" = "Delen";
+"elements" = "Elementen";
+"no.content.available" = "Geen inhoud beschikbaar";
+"no.content.message" = "Deze sectie heeft momenteel geen inhoud om weer te geven. Kom later terug voor updates!";
 
-// MARK: - Status
-"status.active" = "Actief";
-"status.inactive" = "Inactief";
-"status.pending" = "In behandeling";
-"status.completed" = "Voltooid";
-
-// MARK: - Categories
-"category.sports" = "Sport";
-"category.movies" = "Films";
-"category.series" = "Series";
-"category.news" = "Nieuws";
-"category.kids" = "Kinderen";
-"category.documentary" = "Documentaire";
-"category.entertainment" = "Entertainment";
+// MARK: - Section Titles (API mapping)
+"section.serier" = "Series";
+"section.filmer" = "Films";
+"section.sport" = "Sport";
+"section.barn" = "Kinderen";
+"section.kanaler" = "Kanalen";

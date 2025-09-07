@@ -1,65 +1,27 @@
-/* 
-  Localizable.strings
-  Viaplay
-  
-  German
-*/
-
-// MARK: - Common
-"loading" = "Laden...";
-"error" = "Fehler";
-"retry" = "Wiederholen";
-"refresh" = "Aktualisieren";
-"cancel" = "Abbrechen";
-"ok" = "OK";
-"done" = "Fertig";
-"back" = "Zurück";
-"next" = "Weiter";
-"previous" = "Vorherige";
-"close" = "Schließen";
-
-// MARK: - Sections
-"sections.title" = "Bereiche";
-"sections.loading" = "Bereiche werden geladen...";
-"sections.error.title" = "Fehler beim Laden der Bereiche";
-"sections.error.message" = "Wir konnten die Bereiche nicht laden. Bitte überprüfen Sie Ihre Internetverbindung und versuchen Sie es erneut.";
-"sections.empty.title" = "Keine Bereiche verfügbar";
-"sections.empty.message" = "Es sind derzeit keine Bereiche zum Anzeigen verfügbar.";
-
-// MARK: - Detail Section
-"detail.title" = "Bereichsdetails";
-"detail.loading" = "Details werden geladen...";
-"detail.error.title" = "Fehler beim Laden der Details";
-"detail.error.message" = "Wir konnten die Bereichsdetails nicht laden. Bitte versuchen Sie es erneut.";
-"detail.empty.title" = "Kein Inhalt verfügbar";
-"detail.empty.message" = "Dieser Bereich hat derzeit keinen Inhalt zum Anzeigen. Schauen Sie später für Updates vorbei!";
+// MARK: - Error Messages
+"sections.errorTitle" = "Ups! Etwas ist schief gelaufen";
+"detail.errorTitle" = "Ups! Etwas ist schief gelaufen";
 
 // MARK: - Content
-"content.title" = "Inhalt";
-"content.elements.count" = "Elemente";
+"content.elementsCount" = "ELEMENTE";
 "content.category" = "Kategorie";
 "content.status" = "Status";
-"content.section" = "Bereich";
-"content.link.available" = "Link verfügbar";
-"content.link.unavailable" = "Kein Link";
+"content.title" = "Inhalt";
 
-// MARK: - Actions
-"action.explore" = "Erkunden";
-"action.share" = "Teilen";
-"action.bookmark" = "Lesezeichen";
-"action.favorite" = "Favorit";
+// MARK: - UI Text
+"explore.content.title" = "Entdecke unsere Inhalte";
+"explore.content.subtitle" = "Entdecke Serien, Filme, Sport und mehr";
+"available" = "Verfügbar";
+"active" = "Aktiv";
+"explore" = "Erkunden";
+"share" = "Teilen";
+"elements" = "Elemente";
+"no.content.available" = "Kein Inhalt verfügbar";
+"no.content.message" = "Diese Sektion hat derzeit keinen Inhalt zum Anzeigen. Schau später wieder vorbei für Updates!";
 
-// MARK: - Status
-"status.active" = "Aktiv";
-"status.inactive" = "Inaktiv";
-"status.pending" = "Ausstehend";
-"status.completed" = "Abgeschlossen";
-
-// MARK: - Categories
-"category.sports" = "Sport";
-"category.movies" = "Filme";
-"category.series" = "Serien";
-"category.news" = "Nachrichten";
-"category.kids" = "Kinder";
-"category.documentary" = "Dokumentation";
-"category.entertainment" = "Unterhaltung";
+// MARK: - Section Titles (API mapping)
+"section.serier" = "Serien";
+"section.filmer" = "Filme";
+"section.sport" = "Sport";
+"section.barn" = "Kinder";
+"section.kanaler" = "Kanäle";
