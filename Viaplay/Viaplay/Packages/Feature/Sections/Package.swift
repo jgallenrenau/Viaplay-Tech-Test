@@ -18,12 +18,21 @@ let package = Package(
         .package(path: "../../Infraestructure/NetworkingKit"),
         .package(path: "../../Infraestructure/StorageKit"),
         .package(path: "../DetailSection"),
-        .package(url: "https://github.com/pointfreeco/swift-snapshot-testing", from: "1.11.0")
+        .package(url: "https://github.com/pointfreeco/swift-snapshot-testing", from: "1.12.0"),
+        .package(url: "https://github.com/airbnb/lottie-ios", from: "4.3.0")
     ],
     targets: [
         .target(
             name: "Sections",
-            dependencies: ["Domain", "DSKit", "Data", "NetworkingKit", "StorageKit", "DetailSection"],
+            dependencies: [
+                "Domain", 
+                "DSKit", 
+                "Data", 
+                "NetworkingKit", 
+                "StorageKit", 
+                "DetailSection",
+                .product(name: "Lottie", package: "lottie-ios")
+            ],
             path: "Sources/SectionsFeature",
             resources: [.process("../../Resources")]
         ),

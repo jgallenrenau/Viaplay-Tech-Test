@@ -4,16 +4,19 @@ import DSKit
 
 public struct DetailView: View {
     @StateObject private var viewModel: DetailViewModel
+    private let autoLoad: Bool
 
     public init(section: ContentSection, viewModel: DetailViewModel? = nil) {
         if let viewModel = viewModel {
             self._viewModel = StateObject(wrappedValue: viewModel)
+            self.autoLoad = false
         } else {
             // This will be used for previews or when no specific ViewModel is provided
             self._viewModel = StateObject(wrappedValue: DetailViewModel(
                 section: section,
                 fetchDetailUseCase: DummyDetailUseCase()
             ))
+            self.autoLoad = true
         }
     }
     
@@ -23,7 +26,13 @@ public struct DetailView: View {
             description: domainSection.description,
             href: domainSection.href
         )
-        self.init(section: contentSection, viewModel: viewModel)
+        if let viewModel = viewModel {
+            self._viewModel = StateObject(wrappedValue: viewModel)
+            self.autoLoad = false
+        } else {
+            self._viewModel = StateObject(wrappedValue: DetailFactory.makeDetailViewModel(for: contentSection))
+            self.autoLoad = true
+        }
     }
 
     public var body: some View {
@@ -55,10 +64,14 @@ public struct DetailView: View {
         }
         #if !os(tvOS)
         .navigationTitle("")
+        #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
         #endif
+        #endif
         .task {
-            await viewModel.loadDetail()
+            if autoLoad {
+                await viewModel.loadDetail()
+            }
         }
     }
 
@@ -82,6 +95,22 @@ public struct DetailView: View {
                     .foregroundColor(DSPalette.textSecondary)
                     .multilineTextAlignment(.leading)
             }
+
+            // Section icon chip under description
+            HStack(spacing: 8) {
+                Image(systemName: iconForSection(viewModel.section.title))
+                    .font(.subheadline)
+                    .foregroundColor(colorForSection(viewModel.section.title))
+                Text(viewModel.section.title)
+                    .font(.subheadline)
+                    .foregroundColor(DSPalette.textPrimary)
+            }
+            .padding(.horizontal, 10)
+            .padding(.vertical, 6)
+            .background(
+                Capsule().fill(colorForSection(viewModel.section.title).opacity(0.12))
+            )
+            .frame(maxWidth: .infinity, alignment: .leading)
 
             // Lightweight metadata row
             HStack(spacing: DSSpacing.medium(for: .iOS)) {
@@ -127,6 +156,29 @@ public struct DetailView: View {
                 .fill(DSPalette.cardBackground(for: .iOS))
                 .shadow(color: .black.opacity(0.05), radius: 8, x: 0, y: 4)
         )
+    }
+
+    // MARK: - Helpers for section icon/color (match list style)
+    private func iconForSection(_ title: String) -> String {
+        switch title.lowercased() {
+        case "serier", "series": return "tv.fill"
+        case "filmer", "movies", "film": return "film.fill"
+        case "sport": return "sportscourt.fill"
+        case "barn", "kids", "children": return "figure.and.child.holdinghands"
+        case "kanaler", "channels": return "tv.and.hifispeaker.fill"
+        default: return "play.rectangle.fill"
+        }
+    }
+
+    private func colorForSection(_ title: String) -> Color {
+        switch title.lowercased() {
+        case "serier", "series": return DSPalette.sectionSeries
+        case "filmer", "movies", "film": return DSPalette.sectionMovies
+        case "sport": return DSPalette.sectionSport
+        case "barn", "kids", "children": return DSPalette.sectionKids
+        case "kanaler", "channels": return DSPalette.sectionChannels
+        default: return DSPalette.brand
+        }
     }
 
 

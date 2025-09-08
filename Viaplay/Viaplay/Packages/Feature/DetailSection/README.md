@@ -5,7 +5,7 @@
 # 🎯 DetailSection Feature Module
 
 ## ✨ Overview
-**Feature module** for the detail/section content following _Clean Architecture_ (Domain/Data/View) with **MVVM + UseCase**. It implements the detail view experience with DI via `DetailFactory`.
+**Feature module** for the detail/section content following _Clean Architecture_ (Domain/Data/View) with **MVVM + UseCase**. It implements the detail view experience with DI via `DetailFactory` and supports both iOS and tvOS platforms.
 
 ## 🏗️ Architecture
 ```
@@ -21,9 +21,8 @@ DetailSection Feature
 │   │   └── DetailItemView.swift               # Reusable UI for a single detail item
 │   ├── ViewModel/
 │   │   └── DetailViewModel.swift              # Manages UI state and interacts with UseCase
-│   └── DetailView.swift                       # Main detail view UI
-├── Resources/
-│   └── Localizable.strings                    # Localized strings
+│   ├── DetailView.swift                       # iOS detail view UI
+│   └── DetailViewtvOS.swift                   # tvOS detail view UI
 ├── DetailFactory.swift                        # Dependency injection factory
 └── Tests/
     ├── Unit/                                  # Isolated tests for business logic
@@ -39,8 +38,9 @@ DetailSection Feature
 ```
 
 ## 🔗 Dependencies
-- **`Domain`**: Core business logic, models (`DetailItem`, `DetailPage`), and use cases (`FetchDetailUseCase`).
+- **`Domain`**: Core business logic, models (`DetailItem`, `DetailPage`, `Section`), and use cases (`FetchDetailUseCase`).
 - **`Data`**: Base data layer abstractions (e.g., `PageRepository`).
+- **`DSKit`**: UI components (`LoadingView`, `ErrorView`) for consistent design.
 - **`NetworkingKit`**: Handles network requests.
 - **`StorageKit`**: Manages data caching and persistence.
 - **`SnapshotTesting`**: For visual regression testing of SwiftUI views.
@@ -52,8 +52,9 @@ DetailSection Feature
 4. **Data Source Call**: `Repository` calls `DetailDataSourceProtocol.fetchDetail(for:)`
 5. **Data Retrieval**: `DataSource` uses `PageRepository` (from `Data` layer) to fetch raw data.
 6. **Mapping**: `DataSource` maps `ContentSection` to `Domain.DetailPage` and `Domain.DetailItem`.
-7. **State Update**: `ViewModel` updates `@Published` properties with `Domain.DetailPage` data.
-8. **UI Refresh**: SwiftUI automatically updates the view.
+7. **Description Display**: Shows cached section description from `SectionDescriptionCacheService`
+8. **State Update**: `ViewModel` updates `@Published` properties with `Domain.DetailPage` data.
+9. **UI Refresh**: SwiftUI automatically updates the view.
 
 ## 🧪 Testing
 The `DetailSection` package includes a comprehensive testing suite:
@@ -106,6 +107,8 @@ struct CustomDetailView: View {
 - **MVVM Pattern**: Reactive UI updates with `@Published` properties
 - **Dependency Injection**: Easy testing and modularity via `DetailFactory`
 - **Comprehensive Testing**: Unit, Integration, and Snapshot tests
-- **Localization Ready**: Support for multiple languages via `Localizable.strings`
+- **Cross-Platform Support**: Native iOS and tvOS views with platform-specific optimizations
+- **Description Caching**: Displays cached section descriptions from `SectionDescriptionCacheService`
+- **DSKit Integration**: Consistent UI components (`LoadingView`, `ErrorView`)
 - **SwiftUI Native**: Modern, declarative UI framework
-- **Cross-Platform**: iOS 16+ and macOS 12+ support
+- **Platform Adaptations**: iOS touch-optimized and tvOS focus-optimized interactions

@@ -73,6 +73,7 @@
 		14521C552E69BD6B00CD75E9 /* Data */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Data; sourceTree = "<group>"; };
 		14521C562E69BD6B00CD75E9 /* Domain */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Domain; sourceTree = "<group>"; };
 		14521C6A2E69BE6E00CD75E9 /* NetworkingKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = NetworkingKit; sourceTree = "<group>"; };
+		145FEBD12E6F5298008C0533 /* AllTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = AllTests.xctestplan; sourceTree = "<group>"; };
 		147034D12E6D7F85009BED5C /* ViaplaytvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ViaplaytvOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		147034D32E6D7F85009BED5C /* ViaplaytvOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViaplaytvOSApp.swift; sourceTree = "<group>"; };
 		147034D52E6D7F85009BED5C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -87,7 +88,6 @@
 		14D5FF412E6632EB00F53C94 /* Viaplay.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Viaplay.entitlements; sourceTree = "<group>"; };
 		14D5FF492E6632EB00F53C94 /* ViaplayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ViaplayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		14D5FF662E66C36100F53C94 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
-		14D66F5A2E68DCA70081ED7A /* TestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = TestPlan.xctestplan; path = Viaplay/TestPlan.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -225,7 +225,7 @@
 		14D5FF2F2E6632E600F53C94 = {
 			isa = PBXGroup;
 			children = (
-				14D66F5A2E68DCA70081ED7A /* TestPlan.xctestplan */,
+				145FEBD12E6F5298008C0533 /* AllTests.xctestplan */,
 				14D5FF662E66C36100F53C94 /* README.md */,
 				14D5FF3A2E6632E600F53C94 /* Viaplay */,
 				147034D22E6D7F85009BED5C /* ViaplaytvOS */,

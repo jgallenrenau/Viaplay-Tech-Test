@@ -1,6 +1,7 @@
 import SwiftUI
 import Domain
 
+
 public struct DetailItemView: View {
     let item: Domain.DetailItem
     @State private var isPressed = false
@@ -48,11 +49,7 @@ public struct DetailItemView: View {
             // Content section
             if let content = item.content {
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Contenido")
-                        .font(.system(size: 14, weight: .semibold, design: .rounded))
-                        .foregroundColor(.primary)
-                        .textCase(.uppercase)
-                        .tracking(0.5)
+                    textWithTracking("Contenido", size: 14, weight: .semibold, design: .rounded, color: .primary, uppercase: true)
                     
                     Text(content)
                         .font(.system(size: 15, weight: .medium, design: .rounded))
@@ -70,11 +67,7 @@ public struct DetailItemView: View {
             // Tags section
             if !item.tags.isEmpty {
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Etiquetas")
-                        .font(.system(size: 14, weight: .semibold, design: .rounded))
-                        .foregroundColor(.primary)
-                        .textCase(.uppercase)
-                        .tracking(0.5)
+                    textWithTracking("Etiquetas", size: 14, weight: .semibold, design: .rounded, color: .primary, uppercase: true)
                     
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 8) {
@@ -159,16 +152,34 @@ public struct DetailItemView: View {
     private var contentBackgroundColor: Color {
         #if os(tvOS)
         return Color.gray.opacity(0.2)
-        #else
+        #elseif os(iOS)
         return Color(.systemGray6)
+        #else
+        return Color.gray.opacity(0.2)
         #endif
     }
 
     private var cardBackgroundColor: Color {
         #if os(tvOS)
         return Color.black
-        #else
+        #elseif os(iOS)
         return Color(.systemBackground)
+        #else
+        return Color.white
+        #endif
+    }
+    
+    private func textWithTracking(_ text: String, size: CGFloat, weight: Font.Weight, design: Font.Design, color: Color, uppercase: Bool = false) -> some View {
+        let baseView = Text(text)
+            .font(.system(size: size, weight: weight, design: design))
+            .foregroundColor(color)
+        
+        let uppercasedView = uppercase ? AnyView(baseView.textCase(.uppercase)) : AnyView(baseView)
+        
+        #if os(macOS)
+        return uppercasedView
+        #else
+        return AnyView(uppercasedView.tracking(0.5))
         #endif
     }
 }

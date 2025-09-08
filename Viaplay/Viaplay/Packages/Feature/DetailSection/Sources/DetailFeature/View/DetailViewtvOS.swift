@@ -23,7 +23,11 @@ public struct DetailViewtvOS: View {
             description: domainSection.description,
             href: domainSection.href
         )
-        self.init(section: contentSection, viewModel: viewModel)
+        if let viewModel = viewModel {
+            self._viewModel = StateObject(wrappedValue: viewModel)
+        } else {
+            self._viewModel = StateObject(wrappedValue: DetailFactory.makeDetailViewModel(for: contentSection))
+        }
     }
 
     public var body: some View {
@@ -78,6 +82,22 @@ public struct DetailViewtvOS: View {
                     .foregroundColor(DSPalette.textSecondary)
                     .multilineTextAlignment(.leading)
             }
+
+            // Section icon chip under description (tvOS) - single source of truth for the section name
+            HStack(spacing: DSSpacing.tvSmall) {
+                Image(systemName: iconForSection(viewModel.section.title))
+                    .font(DSTypography.tvBody)
+                    .foregroundColor(colorForSection(viewModel.section.title))
+                Text(detailPage.title.isEmpty ? viewModel.section.title : detailPage.title)
+                    .font(DSTypography.tvBody)
+                    .foregroundColor(DSPalette.textPrimary)
+            }
+            .padding(.horizontal, DSSpacing.tvLarge)
+            .padding(.vertical, DSSpacing.tvMedium)
+            .background(
+                Capsule().fill(colorForSection(viewModel.section.title).opacity(0.12))
+            )
+            .frame(maxWidth: .infinity, alignment: .leading)
 
             // TV-optimized metadata row
             HStack(spacing: DSSpacing.tvMedium) {
@@ -155,6 +175,28 @@ public struct DetailViewtvOS: View {
     }
 }
 
+// MARK: - Helpers for section icon/color (match list style)
+private func iconForSection(_ title: String) -> String {
+    switch title.lowercased() {
+    case "serier", "series": return "tv.fill"
+    case "filmer", "movies", "film": return "film.fill"
+    case "sport": return "sportscourt.fill"
+    case "barn", "kids", "children": return "figure.and.child.holdinghands"
+    case "kanaler", "channels": return "tv.and.hifispeaker.fill"
+    default: return "play.rectangle.fill"
+    }
+}
+
+private func colorForSection(_ title: String) -> Color {
+    switch title.lowercased() {
+    case "serier", "series": return DSPalette.sectionSeries
+    case "filmer", "movies", "film": return DSPalette.sectionMovies
+    case "sport": return DSPalette.sectionSport
+    case "barn", "kids", "children": return DSPalette.sectionKids
+    case "kanaler", "channels": return DSPalette.sectionChannels
+    default: return DSPalette.brand
+    }
+}
 // MARK: - Dummy UseCase for Previews
 
 private struct DummyDetailUseCase: Domain.FetchDetailUseCaseProtocol {

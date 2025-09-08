@@ -1,6 +1,10 @@
 import SwiftUI
 import Domain
 
+#if canImport(UIKit)
+import UIKit
+#endif
+
 public struct EnhancedDetailItemView: View {
     let item: Domain.DetailItem
     @State private var isPressed = false
@@ -131,7 +135,7 @@ public struct EnhancedDetailItemView: View {
                     Button(action: {
                         // Handle link action
                         if let url = URL(string: href.absoluteString) {
-                            #if !os(tvOS)
+                            #if canImport(UIKit) && !os(tvOS)
                             UIApplication.shared.open(url)
                             #endif
                         }
@@ -186,8 +190,10 @@ public struct EnhancedDetailItemView: View {
     private var backgroundFillColor: Color {
         #if os(tvOS)
         return Color.black
+        #elseif os(iOS)
+        return Color(.systemGroupedBackground)
         #else
-        return Color(.systemBackground)
+        return Color.gray.opacity(0.1)
         #endif
     }
     
@@ -226,9 +232,5 @@ public struct EnhancedDetailItemView: View {
         Spacer()
     }
     .padding()
-    #if os(tvOS)
-    .background(Color.black)
-    #else
-    .background(Color(.systemGroupedBackground))
-    #endif
+    .background(Color.gray.opacity(0.1))
 }

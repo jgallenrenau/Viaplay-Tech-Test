@@ -59,8 +59,12 @@ public struct SectionRowView: View {
         .background(
             RoundedRectangle(cornerRadius: 16)
                 .fill(backgroundFillColor)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(DSPalette.border(for: .iOS), lineWidth: 1)
+                )
                 .shadow(
-                    color: Color.black.opacity(0.25),
+                    color: Color.black.opacity(0.10),
                     radius: tvOSShadowRadius,
                     x: 0,
                     y: tvOSShadowY
@@ -120,7 +124,7 @@ public struct SectionRowView: View {
         // Light background that increases on focus to pair with the system focus ring
         return Color.white.opacity(isFocusedTV ? 0.18 : 0.08)
         #else
-        return Color(UIColor.systemBackground)
+        return DSPalette.cardBackground(for: .iOS)
         #endif
     }
 
@@ -168,17 +172,17 @@ public struct SectionRowView: View {
     private func colorForSection(_ title: String) -> Color {
         switch title.lowercased() {
         case "serier", "series":
-            return .purple
+            return DSPalette.sectionSeries
         case "filmer", "movies", "film":
-            return .blue
+            return DSPalette.sectionMovies
         case "sport":
-            return .green
+            return DSPalette.sectionSport
         case "barn", "kids", "children":
-            return .orange
+            return DSPalette.sectionKids
         case "kanaler", "channels":
-            return .red
+            return DSPalette.sectionChannels
         default:
-            return .indigo
+            return DSPalette.brand
         }
     }
 }

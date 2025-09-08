@@ -4,7 +4,7 @@ public struct LoadingView: View {
     let title: String
     let animationName: String
 
-    public init(title: String = String(localized: "Loading…"), animationName: String = String(localized: "Loading")) {
+    public init(title: String = "Loading…", animationName: String = "Loading") {
         self.title = title
         self.animationName = animationName
     }

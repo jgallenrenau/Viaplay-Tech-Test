@@ -3,12 +3,13 @@ import SwiftUI
 import SnapshotTesting
 @testable import DSKit
 
+@MainActor
 final class SplashViewtvOSSnapshotTests: XCTestCase {
     
     func testSplashViewtvOSInitialState() {
         let view = SplashView(onAnimationEnd: {})
-        
-        assertSnapshot(of: view, as: .image(layout: .device(config: .tvOS)))
+        let vc = UIHostingController(rootView: view)
+        assertSnapshot(of: vc, as: .image(on: .tv))
     }
     
     func testSplashViewtvOSWithCustomCallback() {
@@ -16,22 +17,22 @@ final class SplashViewtvOSSnapshotTests: XCTestCase {
         let view = SplashView {
             callbackExecuted = true
         }
-        
-        assertSnapshot(of: view, as: .image(layout: .device(config: .tvOS)))
+        let vc = UIHostingController(rootView: view)
+        assertSnapshot(of: vc, as: .image(on: .tv))
     }
     
     func testSplashViewtvOSInDarkMode() {
         let view = SplashView(onAnimationEnd: {})
             .preferredColorScheme(.dark)
-        
-        assertSnapshot(of: view, as: .image(layout: .device(config: .tvOS)))
+        let vc = UIHostingController(rootView: view)
+        assertSnapshot(of: vc, as: .image(on: .tv))
     }
     
     func testSplashViewtvOSAccessibility() {
         let view = SplashView(onAnimationEnd: {})
             .accessibilityLabel("Viaplay App Loading")
             .accessibilityHint("App is starting up")
-        
-        assertSnapshot(of: view, as: .image(layout: .device(config: .tvOS)))
+        let vc = UIHostingController(rootView: view)
+        assertSnapshot(of: vc, as: .image(on: .tv))
     }
 }

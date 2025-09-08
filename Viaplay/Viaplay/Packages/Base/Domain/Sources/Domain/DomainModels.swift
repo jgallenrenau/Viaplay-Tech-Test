@@ -24,7 +24,7 @@ public struct ContentSection: Equatable, Codable, Sendable {
 
 // MARK: - Sections Feature Models
 
-public struct Section: Equatable, Codable, Sendable {
+public struct Section: Equatable, Hashable, Codable, Sendable {
     public let id: String
     public let title: String
     public let description: String?

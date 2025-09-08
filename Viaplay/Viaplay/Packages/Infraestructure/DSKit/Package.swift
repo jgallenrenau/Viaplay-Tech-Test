@@ -20,6 +20,9 @@ let package = Package(
             name: "DSKit",
             dependencies: [
                 .product(name: "Lottie", package: "lottie-ios")
+            ],
+            resources: [
+                .process("Resources")
             ]
         ),
         .testTarget(name: "DSKitTests", dependencies: ["DSKit", .product(name: "SnapshotTesting", package: "swift-snapshot-testing")])

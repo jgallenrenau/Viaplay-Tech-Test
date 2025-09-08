@@ -4,7 +4,7 @@ import SwiftUI
 public struct DesignSystem {
     
     // MARK: - Colors
-    public static let colors = AppColors.self
+    public static let colors = DSPalette.self
     
     // MARK: - Components
     public struct Components {
@@ -26,7 +26,7 @@ public struct DesignSystem {
         public static func sectionRowView(
             title: String,
             description: String? = nil,
-            onTap: @escaping () -> Void
+            onTap: @escaping () -> Void = {}
         ) -> some View {
             let model = SectionRowView.Model(title: title, description: description)
             return SectionRowView(model: model, onTap: onTap)

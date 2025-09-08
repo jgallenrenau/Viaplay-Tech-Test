@@ -22,6 +22,13 @@ public enum DSPalette {
     public static let tvFocus = brand.opacity(0.3)
     public static let tvHighlight = brand.opacity(0.15)
     public static let tvGlow = brand.opacity(0.6)
+
+    // MARK: - Section Colors (from asset catalog)
+    public static let sectionSeries = Color("SectionSeries", bundle: .module)
+    public static let sectionMovies = Color("SectionMovies", bundle: .module)
+    public static let sectionSport = Color("SectionSport", bundle: .module)
+    public static let sectionKids = Color("SectionKids", bundle: .module)
+    public static let sectionChannels = Color("SectionChannels", bundle: .module)
     
     // MARK: - Platform-Specific Helpers
     public static func accent(for platform: Platform) -> Color {

@@ -1,5 +1,8 @@
 import SwiftUI
 
+#if canImport(UIKit)
+import UIKit
+
 public struct SplashView: View {
     
     public let onAnimationEnd: () -> Void
@@ -33,47 +36,60 @@ public struct SplashView: View {
     // MARK: - Content View
     @ViewBuilder
     private func contentView() -> some View {
-        GeometryReader { geometry in
-            VStack {
-                Spacer()
-                animatedLogo(maxWidth: geometry.size.width)
-                Spacer()
-            }
+        VStack {
+            Spacer()
+            animatedLogo()
+            Spacer()
         }
     }
     
     // MARK: - Animated Logo
     @ViewBuilder
-    private func animatedLogo(maxWidth: CGFloat) -> some View {
+    private func animatedLogo() -> some View {
         ZStack {
+            // Background circle - fixed size for perfect centering
             Circle()
                 .fill(Color.white.opacity(0.2))
-                .frame(width: min(maxWidth * 0.6, 200))
+                .frame(width: 250, height: 250)
                 .scaleEffect(scaleEffect)
                 .opacity(opacity)
             
-            Image("AppIcon")
-                .resizable()
-                .scaledToFit()
-                .frame(width: min(maxWidth * 0.4, 120))
-                .scaleEffect(scaleEffect)
-                .opacity(opacity)
-                .rotationEffect(.degrees(rotationAngle))
+            // Icon perfectly centered in the circle
+            Group {
+                if let appIcon = UIImage(named: "AppIcon", in: Bundle.main, compatibleWith: nil) {
+                    let _ = print("✅ [SplashView] AppIcon loaded successfully from main bundle")
+                    Image(uiImage: appIcon)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 100, height: 100)
+                } else {
+                    let _ = print("❌ [SplashView] AppIcon not found in main bundle, using fallback")
+                    // Fallback to system icon - bigger
+                    Image(systemName: "play.rectangle.fill")
+                        .font(.system(size: 80, weight: .bold))
+                        .foregroundColor(.white)
+                        .shadow(color: .black.opacity(0.3), radius: 5, x: 2, y: 2)
+                }
+            }
+            .scaleEffect(scaleEffect)
+            .opacity(opacity)
+            .rotationEffect(.degrees(rotationAngle))
         }
+        .frame(width: 250, height: 250)
         .shadow(color: DSPalette.shadow.opacity(0.3), radius: 20, x: 0, y: 10)
     }
     
     // MARK: - Animations
     private func startAnimations() {
-        // First animation: appear with scale and opacity (like Marvel)
+        // First animation: appear with scale and opacity
         withAnimation(.easeOut(duration: 0.8)) {
             self.scaleEffect = 1.0
             self.opacity = 1.0
         }
         
-        // Second animation: dramatic grow (Marvel effect)
+        // Second animation: dramatic grow - bigger growth
         withAnimation(.easeInOut(duration: 1.0).delay(0.8)) {
-            self.scaleEffect = 1.5
+            self.scaleEffect = 2.0
         }
         
         // Third animation: subtle rotation during growth
@@ -81,15 +97,15 @@ public struct SplashView: View {
             self.rotationAngle = 15
         }
         
-        // Fourth animation: scale down to normal (Marvel effect)
+        // Fourth animation: scale down to normal
         withAnimation(.easeInOut(duration: 0.6).delay(1.5)) {
             self.scaleEffect = 1.0
             self.rotationAngle = 0
         }
         
-        // Fifth animation: final pulse (Marvel effect)
+        // Fifth animation: final pulse  - bigger pulse
         withAnimation(.easeInOut(duration: 0.4).delay(2.0)) {
-            self.scaleEffect = 1.2
+            self.scaleEffect = 1.5
         }
         
         // Sixth animation: settle to final size
@@ -111,5 +127,33 @@ public struct SplashView: View {
     SplashView(onAnimationEnd: {
         print("Splash animation completed")
     })
+}
+#endif
+
+#else
+// Fallback for platforms without UIKit
+public struct SplashView: View {
+    public let onAnimationEnd: () -> Void
+    
+    public init(onAnimationEnd: @escaping () -> Void) {
+        self.onAnimationEnd = onAnimationEnd
+    }
+    
+    public var body: some View {
+        VStack {
+            Spacer()
+            Text("Viaplay")
+                .font(.largeTitle)
+                .foregroundColor(.white)
+            Spacer()
+        }
+        .background(Color.blue)
+        .ignoresSafeArea()
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                onAnimationEnd()
+            }
+        }
+    }
 }
 #endif

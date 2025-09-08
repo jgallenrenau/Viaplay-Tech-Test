@@ -1,7 +1,10 @@
 import SwiftUI
 import Lottie
 
-public struct LottieView: UIViewRepresentable {
+#if canImport(UIKit)
+import UIKit
+
+public struct LottieView: UIViewRepresentable, View {
     let name: String                 // "Loading"
     var loopMode: LottieLoopMode = .loop
     var accessibilityLabel: String?
@@ -35,7 +38,8 @@ public struct LottieView: UIViewRepresentable {
             animationView.accessibilityLabel = label
         }
         if let hint = accessibilityHint {
-            animationView.accessibilityHint = hint
+            // Note: accessibilityHint might not be available in this Lottie version
+            // animationView.accessibilityHint = hint
         }
 
         animationView.play()
@@ -44,3 +48,25 @@ public struct LottieView: UIViewRepresentable {
 
     public func updateUIView(_ uiView: UIView, context: Context) { }
 }
+
+#else
+// Fallback for platforms without UIKit
+public struct LottieView: View {
+    let name: String
+    var loopMode: LottieLoopMode = .loop
+    var accessibilityLabel: String?
+    var accessibilityHint: String?
+    
+    public init(name: String, loopMode: LottieLoopMode = .loop, accessibilityLabel: String? = nil, accessibilityHint: String? = nil) {
+        self.name = name
+        self.loopMode = loopMode
+        self.accessibilityLabel = accessibilityLabel
+        self.accessibilityHint = accessibilityHint
+    }
+    
+    public var body: some View {
+        Text("Lottie animation not available on this platform")
+            .foregroundColor(.secondary)
+    }
+}
+#endif

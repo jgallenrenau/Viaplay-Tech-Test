@@ -1,101 +1,92 @@
 import XCTest
 import SwiftUI
 import SnapshotTesting
+import UIKit
 @testable import Sections
 @testable import Domain
 
+@MainActor
 final class SectionsListViewtvOSSnapshotTests: XCTestCase {
     
-    private var mockViewModel: MockSectionsViewModel!
+    private var viewModel: SectionsViewModel!
     
     override func setUp() {
         super.setUp()
-        mockViewModel = MockSectionsViewModel()
+        viewModel = SectionsViewModel(fetchSectionsUseCase: DummyUseCase(), cacheService: SectionDescriptionCacheService())
     }
     
     override func tearDown() {
-        mockViewModel = nil
+        viewModel = nil
         super.tearDown()
     }
     
     func testSectionsListViewtvOSWithSections() {
-        mockViewModel.sections = [
-            Section(title: "Series", description: "Drama series", href: URL(string: "https://example.com/series")!),
-            Section(title: "Movies", description: "Action movies", href: URL(string: "https://example.com/movies")!),
-            Section(title: "Sports", description: "Live sports", href: URL(string: "https://example.com/sports")!)
+        viewModel.sections = [
+            Domain.Section(id: "sec-series", title: "Series", href: URL(string: "https://example.com/series")!, description: "Drama series"),
+            Domain.Section(id: "sec-movies", title: "Movies", href: URL(string: "https://example.com/movies")!, description: "Action movies"),
+            Domain.Section(id: "sec-sports", title: "Sports", href: URL(string: "https://example.com/sports")!, description: "Live sports")
         ]
-        mockViewModel.isLoading = false
-        mockViewModel.errorMessage = nil
+        viewModel.isLoading = false
+        viewModel.errorMessage = nil
         
-        let view = SectionsListView(viewModel: mockViewModel)
-        
-        assertSnapshot(of: view, as: .image(layout: .device(config: .tvOS)))
+        let view = SectionsListView(viewModel: viewModel)
+        let vc = UIHostingController(rootView: view)
+        assertSnapshot(of: vc, as: .image(on: .tv))
     }
     
     func testSectionsListViewtvOSLoading() {
-        mockViewModel.isLoading = true
-        mockViewModel.sections = []
-        mockViewModel.errorMessage = nil
+        viewModel.isLoading = true
+        viewModel.sections = []
+        viewModel.errorMessage = nil
         
-        let view = SectionsListView(viewModel: mockViewModel)
-        
-        assertSnapshot(of: view, as: .image(layout: .device(config: .tvOS)))
+        let view = SectionsListView(viewModel: viewModel)
+        let vc = UIHostingController(rootView: view)
+        assertSnapshot(of: vc, as: .image(on: .tv))
     }
     
     func testSectionsListViewtvOSError() {
-        mockViewModel.isLoading = false
-        mockViewModel.sections = []
-        mockViewModel.errorMessage = "Network error occurred"
+        viewModel.isLoading = false
+        viewModel.sections = []
+        viewModel.errorMessage = "Network error occurred"
         
-        let view = SectionsListView(viewModel: mockViewModel)
-        
-        assertSnapshot(of: view, as: .image(layout: .device(config: .tvOS)))
+        let view = SectionsListView(viewModel: viewModel)
+        let vc = UIHostingController(rootView: view)
+        assertSnapshot(of: vc, as: .image(on: .tv))
     }
     
     func testSectionsListViewtvOSEmpty() {
-        mockViewModel.isLoading = false
-        mockViewModel.sections = []
-        mockViewModel.errorMessage = nil
+        viewModel.isLoading = false
+        viewModel.sections = []
+        viewModel.errorMessage = nil
         
-        let view = SectionsListView(viewModel: mockViewModel)
-        
-        assertSnapshot(of: view, as: .image(layout: .device(config: .tvOS)))
+        let view = SectionsListView(viewModel: viewModel)
+        let vc = UIHostingController(rootView: view)
+        assertSnapshot(of: vc, as: .image(on: .tv))
     }
     
     func testSectionsListViewtvOSWithLongTitles() {
-        mockViewModel.sections = [
-            Section(title: "Very Long Section Title That Should Test Text Wrapping", description: "Description", href: URL(string: "https://example.com")!),
-            Section(title: "Another Long Title", description: "Very long description that should test text wrapping and layout behavior on Apple TV", href: URL(string: "https://example.com")!)
+        viewModel.sections = [
+            Domain.Section(id: "sec-long-1", title: "Very Long Section Title That Should Test Text Wrapping", href: URL(string: "https://example.com")!, description: "Description"),
+            Domain.Section(id: "sec-long-2", title: "Another Long Title", href: URL(string: "https://example.com")!, description: "Very long description that should test text wrapping and layout behavior on Apple TV")
         ]
-        mockViewModel.isLoading = false
-        mockViewModel.errorMessage = nil
+        viewModel.isLoading = false
+        viewModel.errorMessage = nil
         
-        let view = SectionsListView(viewModel: mockViewModel)
-        
-        assertSnapshot(of: view, as: .image(layout: .device(config: .tvOS)))
+        let view = SectionsListView(viewModel: viewModel)
+        let vc = UIHostingController(rootView: view)
+        assertSnapshot(of: vc, as: .image(on: .tv))
     }
     
     func testSectionsListViewtvOSInDarkMode() {
-        mockViewModel.sections = [
-            Section(title: "Dark Mode Series", description: "Dark mode description", href: URL(string: "https://example.com")!)
+        viewModel.sections = [
+            Domain.Section(id: "sec-dark", title: "Dark Mode Series", href: URL(string: "https://example.com")!, description: "Dark mode description")
         ]
-        mockViewModel.isLoading = false
-        mockViewModel.errorMessage = nil
+        viewModel.isLoading = false
+        viewModel.errorMessage = nil
         
-        let view = SectionsListView(viewModel: mockViewModel)
+        let view = SectionsListView(viewModel: viewModel)
             .preferredColorScheme(.dark)
-        
-        assertSnapshot(of: view, as: .image(layout: .device(config: .tvOS)))
-    }
-}
-
-// MARK: - Mock ViewModel
-private class MockSectionsViewModel: ObservableObject {
-    @Published var sections: [Section] = []
-    @Published var isLoading: Bool = false
-    @Published var errorMessage: String? = nil
-    
-    func loadSections() async {
-        // Mock implementation
+        let vc = UIHostingController(rootView: view)
+        assertSnapshot(of: vc, as: .image(on: .tv))
     }
 }

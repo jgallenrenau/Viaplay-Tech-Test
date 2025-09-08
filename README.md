@@ -41,7 +41,7 @@ The Viaplay Tech Test is a Swift-based cross-platform application that demonstra
 - **🎬 Lottie Animations**: Smooth loading animations for enhanced user experience
 - **🔄 Cross-Platform UI**: Shared components that adapt to iOS and tvOS with platform-specific optimizations
 - **🎯 Focus Management**: tvOS-optimized focus effects and navigation for Apple TV remote control
-- **🌍 Localization**: Multi-language support with platform-specific string files for iOS and tvOS
+- **🌍 English Only**: Streamlined single-language experience for optimal performance
 - **♿ Accessibility**: VoiceOver support, Dynamic Type, and semantic grouping across both platforms
 - **🔄 Error Handling**: Consistent error states with retry functionality using DSKit ErrorView
 - **📱 Responsive Design**: Adaptive layouts that work across different screen sizes and platforms
@@ -192,7 +192,7 @@ The application now supports **both iOS and tvOS** with a sophisticated cross-pl
 - **Section Details**: Comprehensive section information with detailed navigation and enhanced UI
 - **Cross-Platform Support**: Native iOS and tvOS apps with platform-optimized UI and shared business logic
 - **Offline-First**: Seamless experience with ETag-based caching and smart data synchronization
-- **Multi-Language Support**: Full internationalization with 8 supported languages across both platforms
+- **Description Caching**: Intelligent caching system that fetches and stores section descriptions from API endpoints
 - **Error Handling**: Graceful error states with user-friendly retry mechanisms using DSKit ErrorView
 - **Loading States**: Smooth loading indicators with Lottie animations for enhanced user experience
 
@@ -204,7 +204,7 @@ The application now supports **both iOS and tvOS** with a sophisticated cross-pl
 - **DSKit Design System**: Reusable UI components with consistent theming and animations
 - **Advanced Concurrency**: Thread-safe operations with Swift Concurrency and Actor model
 - **DTO/Mapper Pattern**: Robust JSON parsing with type-safe data transformation
-- **Localization System**: Type-safe internationalization with 8 languages and RTL support
+- **Description Caching System**: Real-time fetching and caching of section descriptions from Viaplay API
 - **Comprehensive Testing**: Unit tests, integration tests, and snapshot tests
 - **CI/CD Integration**: Automated testing and code quality checks
 

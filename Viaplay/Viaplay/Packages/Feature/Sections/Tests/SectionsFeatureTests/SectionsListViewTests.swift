@@ -6,18 +6,14 @@ import SwiftUI
 @MainActor
 final class SectionsListViewTests: XCTestCase {
     func testConstructsWithMockUseCase() {
-        class MockGetRootPageUseCase: GetRootPageUseCase {
-            func execute() async throws -> Page {
-                return Page(
-                    title: "Test Title",
-                    description: "Test Description",
-                    sections: []
-                )
-            }
+        struct DummyUseCase: FetchSectionsUseCaseProtocol {
+            func execute() async throws -> SectionsPage { SectionsPage(title: "Test", sections: []) }
         }
 
-        let mockUseCase = MockGetRootPageUseCase()
-        let viewModel = SectionsViewModel(getRootPage: mockUseCase)
+        let viewModel = SectionsViewModel(
+            fetchSectionsUseCase: DummyUseCase(),
+            cacheService: SectionDescriptionCacheService()
+        )
         _ = SectionsListView(viewModel: viewModel)
         XCTAssertTrue(true)
     }
