@@ -13,13 +13,17 @@ public struct SectionsListView: View {
     }
 
     public var body: some View {
-        NavigationView {
+        #if os(macOS)
+        VStack {
+            sectionsList
+        }
+        #else
+        NavigationStack {
             ZStack {
-                // Background gradient
                 LinearGradient(
                     gradient: Gradient(colors: [
-                        Color(.systemBackground),
-                        Color(.systemBackground).opacity(0.8)
+                        DSPalette.background,
+                        DSPalette.background.opacity(0.8)
                     ]),
                     startPoint: .top,
                     endPoint: .bottom
@@ -28,10 +32,10 @@ public struct SectionsListView: View {
                 
                 Group {
                     if viewModel.isLoading {
-                        LoadingView.contentLoading()
+                        LoadingView()
                     } else if let errorMessage = viewModel.errorMessage {
                         DesignSystem.Components.errorView(
-                            title: LocalizationKeys.Sections.errorTitle.localized,
+                            title: "Oops! Something went wrong",
                             message: errorMessage,
                             retryAction: {
                                 Task {
@@ -44,8 +48,6 @@ public struct SectionsListView: View {
                     }
                 }
             }
-            .navigationTitle("Viaplay")
-            .navigationBarTitleDisplayMode(.large)
             .task {
                 print("🎬 [SectionsListView] Starting to load sections from UI...")
                 await viewModel.loadSections()
@@ -54,46 +56,55 @@ public struct SectionsListView: View {
             .onAppear {
                 print("👁️ [SectionsListView] View appeared. Current state - isLoading: \(viewModel.isLoading), sections: \(viewModel.sections.count), error: \(viewModel.errorMessage ?? "none")")
             }
+            .navigationDestination(isPresented: Binding(
+                get: { selectedSection != nil },
+                set: { if !$0 { selectedSection = nil } }
+            )) {
+                if let section = selectedSection {
+                    DetailView(domainSection: section)
+                }
+            }
+            .onAppear {
+                withAnimation(.spring(response: 0.6, dampingFraction: 0.8).delay(0.3)) {
+                    animateSections = true
+                }
+            }
         }
+        #endif
     }
-
-
 
     private var sectionsList: some View {
         ScrollView {
             LazyVStack(spacing: 16) {
-                // Header section
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("explore.content.title".localized)
-                        .font(.system(size: 28, weight: .bold, design: .rounded))
-                        .foregroundColor(.primary)
+                    if let rootDescription = viewModel.rootPageDescription {
+                        Text(rootDescription)
+                            .font(.system(size: 28, weight: .bold, design: .rounded))
+                            .foregroundColor(DSPalette.textPrimary)
+                    } else {
+                        Text("Explore our content")
+                            .font(.system(size: 28, weight: .bold, design: .rounded))
+                            .foregroundColor(DSPalette.textPrimary)
+                    }
                     
-                    Text("explore.content.subtitle".localized)
+                    Text("Discover series, movies, sports and more")
                         .font(.system(size: 16, weight: .medium, design: .rounded))
-                        .foregroundColor(.secondary)
+                        .foregroundColor(DSPalette.textSecondary)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.horizontal, 20)
                 .padding(.top, 8)
                 
-                // Sections grid
                 ForEach(viewModel.sections.indices, id: \.self) { index in
-                    NavigationLink(destination: DetailView(section: ContentSection(
-                        title: SectionTitleLocalizer.localizedTitle(for: viewModel.sections[index].title),
-                        description: viewModel.sections[index].description,
-                        href: viewModel.sections[index].href
-                    ))) {
-                        SectionRowView(
-                            model: SectionRowView.Model(
-                                title: SectionTitleLocalizer.localizedTitle(for: viewModel.sections[index].title),
-                                description: viewModel.sections[index].description
-                            ),
-                            onTap: {
-                                selectedSection = viewModel.sections[index]
-                            }
-                        )
-                    }
-                    .buttonStyle(PlainButtonStyle())
+                    SectionRowView(
+                        model: SectionRowView.Model(
+                            title: viewModel.sections[index].title,
+                            description: viewModel.sections[index].description
+                        ),
+                        onTap: {
+                            selectedSection = viewModel.sections[index]
+                        }
+                    )
                     .padding(.horizontal, 20)
                     .opacity(animateSections ? 1.0 : 0.0)
                     .offset(y: animateSections ? 0 : 30)
@@ -104,14 +115,8 @@ public struct SectionsListView: View {
                     )
                 }
                 
-                // Bottom padding
                 Color.clear
                     .frame(height: 20)
-            }
-        }
-        .onAppear {
-            withAnimation(.spring(response: 0.6, dampingFraction: 0.8).delay(0.3)) {
-                animateSections = true
             }
         }
     }

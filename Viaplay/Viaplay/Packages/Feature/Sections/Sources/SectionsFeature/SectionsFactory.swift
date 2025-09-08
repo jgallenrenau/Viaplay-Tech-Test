@@ -15,7 +15,10 @@ public final class SectionsFactory {
         let dataSource = SectionsDataSource(pageRepository: pageRepository)
         let repository = SectionsRepositoryImpl(dataSource: dataSource)
         let useCase = FetchSectionsUseCase(repository: repository)
+        
+        // Create the cache service for descriptions
+        let cacheService = SectionDescriptionCacheService()
 
-        return SectionsViewModel(fetchSectionsUseCase: useCase)
+        return SectionsViewModel(fetchSectionsUseCase: useCase, cacheService: cacheService)
     }
 }

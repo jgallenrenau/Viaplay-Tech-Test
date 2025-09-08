@@ -8,35 +8,95 @@ Design System Kit providing reusable UI components and styling utilities for con
 - **Styling**: Centralized colors, fonts, spacing, and visual styles
 - **Design Tokens**: Standardized design values and themes
 - **Accessibility**: Built-in accessibility support for all components
+- **Cross-Platform Support**: iOS and tvOS optimized components
+- **Animations**: Lottie animations and smooth transitions
 
 ## Architecture
 ```
 DSKit
 ├── Components/
-│   └── SectionRowView.swift        # Reusable section row component
-├── Styles/
-│   └── DesignTokens.swift          # Colors, fonts, spacing (planned)
+│   ├── SectionRowView.swift        # Unified section row component (iOS/tvOS)
+│   ├── LoadingView.swift           # Loading states with Lottie animations
+│   ├── ErrorView.swift             # Error states with retry functionality
+│   ├── SplashView.swift            # App launch screen with Marvel-like animation
+│   └── DesignSystem.swift          # Component factory and design system entry point
+├── Foundations/
+│   ├── DSPalette.swift             # Color system
+│   ├── DSSpacing.swift             # Spacing system
+│   └── DSTypography.swift          # Typography system
+├── Resources/
+│   ├── Colors.xcassets/            # Color assets
+│   ├── Media.xcassets/             # Media assets
+│   └── Animations/                 # Lottie animation files
 └── Tests/
-    └── SectionRowViewTests.swift   # Component tests
+    └── DSKitTests/                 # Component and snapshot tests
 ```
 
 ## Dependencies
-None (pure UI components). This keeps the design system independent and reusable.
+- **Lottie**: For smooth animations and loading states
+- **SnapshotTesting**: For visual regression testing
 
 ## Key Components
 
 ### SectionRowView
-Reusable component for displaying content sections:
+Unified component for displaying content sections across iOS and tvOS:
 ```swift
-struct SectionRowView: View {
-    let title: String
-    let description: String?
-    let onTap: () -> Void
+public struct SectionRowView: View {
+    public struct Model: Equatable, Hashable {
+        public let title: String
+        public let description: String?
+    }
     
-    var body: some View {
-        // Consistent section row design
+    private let model: Model
+    private let onTap: (() -> Void)?
+    
+    public init(model: Model, onTap: (() -> Void)? = nil)
+    
+    public var body: some View {
+        // Platform-adaptive design
+        // iOS: Touch-optimized with icons
+        // tvOS: Focus-optimized with focus ring
         // Accessibility support
-        // Touch interactions
+        // Smooth animations
+    }
+}
+```
+
+### LoadingView
+Elegant loading states with Lottie animations:
+```swift
+public struct LoadingView: View {
+    public init()
+    public var body: some View {
+        // Lottie animation
+        // Content loading variant
+        // Smooth transitions
+    }
+}
+```
+
+### ErrorView
+Consistent error states with retry functionality:
+```swift
+public struct ErrorView: View {
+    public init(title: String, message: String, retryAction: @escaping () -> Void)
+    public var body: some View {
+        // Error display
+        // Retry button
+        // Consistent styling
+    }
+}
+```
+
+### SplashView
+App launch screen with Marvel-like animation:
+```swift
+public struct SplashView: View {
+    public init(onAnimationEnd: @escaping () -> Void)
+    public var body: some View {
+        // Marvel-like grow and pulse animation
+        // App icon display
+        // Smooth transitions
     }
 }
 ```
@@ -46,6 +106,8 @@ struct SectionRowView: View {
 - **Reusability**: Components are generic and configurable
 - **Accessibility**: Built-in VoiceOver and Dynamic Type support
 - **Performance**: Lightweight components with minimal overhead
+- **Cross-Platform**: Single component codebase for iOS and tvOS
+- **Modern UI**: SwiftUI-based with smooth animations and transitions
 
 ## Usage
 Import DSKit in your feature modules:
@@ -54,11 +116,29 @@ import DSKit
 
 struct MyView: View {
     var body: some View {
-        SectionRowView(
-            title: "My Section",
-            description: "Section description",
-            onTap: { /* handle tap */ }
-        )
+        VStack {
+            // Using SectionRowView
+            SectionRowView(
+                model: SectionRowView.Model(
+                    title: "My Section",
+                    description: "Section description"
+                ),
+                onTap: { /* handle tap */ }
+            )
+            
+            // Using LoadingView
+            LoadingView()
+            
+            // Using ErrorView
+            ErrorView(
+                title: "Error",
+                message: "Something went wrong",
+                retryAction: { /* retry */ }
+            )
+            
+            // Using SplashView
+            SplashView(onAnimationEnd: { /* navigate */ })
+        }
     }
 }
 ```
@@ -69,5 +149,7 @@ struct MyView: View {
 - **Snapshot Tests**: Visual regression testing for design consistency
 
 ## Directory Layout
-- `Sources/DSKit/SectionRowView.swift` - Main UI component
-- `Tests/DSKitTests/SectionRowViewTests.swift` - Component tests
+- `Sources/DSKit/Components/` - All UI components
+- `Sources/DSKit/Foundations/` - Design system foundations
+- `Sources/DSKit/Resources/` - Assets and resources
+- `Tests/DSKitTests/` - Component and snapshot tests

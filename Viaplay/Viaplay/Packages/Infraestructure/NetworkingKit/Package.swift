@@ -3,7 +3,7 @@ import PackageDescription
 
 let package = Package(
     name: "NetworkingKit",
-    platforms: [ .iOS(.v16), .macOS(.v12) ],
+    platforms: [ .iOS(.v16), .macOS(.v12), .tvOS(.v16) ],
     products: [
         .library(name: "NetworkingKit", targets: ["NetworkingKit"])
     ],

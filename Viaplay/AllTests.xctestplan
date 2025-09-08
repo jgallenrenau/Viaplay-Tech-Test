@@ -1,0 +1,94 @@
+{
+  "configurations" : [
+    {
+      "id" : "AC3734EF-A633-426D-A469-2B5865BA4E7A",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "DataTests",
+        "name" : "DataTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:..\/..\/Feature\/DetailSection",
+        "identifier" : "DetailSectionIntegrationTests",
+        "name" : "DetailSectionIntegrationTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:..\/..\/Feature\/DetailSection",
+        "identifier" : "DetailSectionSnapshotTests",
+        "name" : "DetailSectionSnapshotTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:..\/..\/Feature\/DetailSection",
+        "identifier" : "DetailSectionUnitTests",
+        "name" : "DetailSectionUnitTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:..\/Domain",
+        "identifier" : "DomainTests",
+        "name" : "DomainTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:..\/..\/Infraestructure\/DSKit",
+        "identifier" : "DSKitTests",
+        "name" : "DSKitTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:..\/..\/Infraestructure\/NetworkingKit",
+        "identifier" : "NetworkingKitTests",
+        "name" : "NetworkingKitTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:..\/..\/Feature\/Sections",
+        "identifier" : "SectionsIntegrationTests",
+        "name" : "SectionsIntegrationTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:..\/..\/Feature\/Sections",
+        "identifier" : "SectionsSnapshotTests",
+        "name" : "SectionsSnapshotTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:..\/..\/Feature\/Sections",
+        "identifier" : "SectionsUnitTests",
+        "name" : "SectionsUnitTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:..\/..\/Infraestructure\/StorageKit",
+        "identifier" : "StorageKitTests",
+        "name" : "StorageKitTests"
+      }
+    }
+  ],
+  "version" : 1
+}

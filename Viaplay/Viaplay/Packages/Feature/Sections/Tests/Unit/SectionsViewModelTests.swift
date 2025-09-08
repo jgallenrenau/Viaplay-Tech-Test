@@ -6,18 +6,21 @@ import Domain
 final class SectionsViewModelTests: XCTestCase {
     private var repo: SectionsRepositorySpy!
     private var useCase: FetchSectionsUseCase!
+    private var cacheService: SectionDescriptionCacheService!
     private var sut: SectionsViewModel!
 
     override func setUp() async throws {
         try await super.setUp()
         repo = SectionsRepositorySpy()
         useCase = FetchSectionsUseCase(repository: repo)
-        sut = SectionsViewModel(fetchSectionsUseCase: useCase)
+        cacheService = SectionDescriptionCacheService()
+        sut = SectionsViewModel(fetchSectionsUseCase: useCase, cacheService: cacheService)
     }
 
     override func tearDown() async throws {
         repo = nil
         useCase = nil
+        cacheService = nil
         sut = nil
         try await super.tearDown()
     }

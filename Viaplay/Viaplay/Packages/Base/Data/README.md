@@ -7,7 +7,9 @@ Implements domain repositories and orchestrates Remote + Local data sources with
 - Implement `PageRepository` (from Domain)
 - Fetch from HTTP (NetworkingKit) with conditional headers (If-None-Match)
 - Use local cache (StorageKit) for JSON and ETag storage
-- Map raw JSON into domain models (`Page`, `Section`)
+- Map raw JSON into domain models (`Page`, `ContentSection`, `Section`)
+- Provide data sources for feature modules (`SectionsDataSource`)
+- Handle DTO to domain model transformation (`PageMapper`)
 
 ## Flow
 ```
@@ -25,10 +27,24 @@ public final class PageRepositoryImpl: PageRepository {
   public func getRootPage() async throws -> Page
   public func getPage(by url: URL) async throws -> Page
 }
+
+// Data Sources for Features
+public final class SectionsDataSource: SectionsDataSourceProtocol {
+  public init(pageRepository: PageRepository)
+  public func fetchSections() async throws -> SectionsPage
+}
+
+// DTO Mapping
+struct PageMapper {
+  static func map(_ dto: PageDTO) -> Page
+  static func mapToSectionsPage(_ dto: PageDTO) -> SectionsPage
+}
 ```
 
 ## Directory layout
-- `Sources/Data/PageRepositoryImpl.swift`
+- `Sources/Data/PageRepositoryImpl.swift` - Main repository implementation
+- `Sources/Data/DataSources/SectionsDataSource.swift` - Feature data source
+- `Sources/Data/Mappers/PageMapper.swift` - DTO to domain mapping
 
 ## Testing
 - Stub `HTTPClient` via `URLProtocol`

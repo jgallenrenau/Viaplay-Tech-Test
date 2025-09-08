@@ -1,85 +1,36 @@
 import SwiftUI
 
-/// Reusable loading view component
 public struct LoadingView: View {
     let title: String
-    let subtitle: String?
-    let showSpinner: Bool
-    
-    @State private var isAnimating = false
-    
-    public init(
-        title: String = "Loading...",
-        subtitle: String? = nil,
-        showSpinner: Bool = true
-    ) {
+    let animationName: String
+
+    public init(title: String = "Loading…", animationName: String = "Loading") {
         self.title = title
-        self.subtitle = subtitle
-        self.showSpinner = showSpinner
+        self.animationName = animationName
     }
-    
+
     public var body: some View {
-        VStack(spacing: 24) {
-            if showSpinner {
-                spinnerView
-            }
-            
-            VStack(spacing: 8) {
+        VStack(spacing: DSSpacing.medium) {
+            // This can be moved to inside LottieView, instead of do the logic here
+            if Bundle.module.url(forResource: animationName, withExtension: "json") != nil {
+                LottieView(name: animationName, accessibilityLabel: title)
+                    .frame(width: 250, height: 120)
+                    .accessibilityIdentifier("loadingAnimation")
+            } else {
+                ProgressView()
+                    .scaleEffect(1.2)
+                    .accessibilityIdentifier("defaultAnimation")
                 Text(title)
-                    .font(.system(size: 18, weight: .semibold, design: .rounded))
-                    .foregroundColor(.primary)
-                
-                if let subtitle = subtitle {
-                    Text(subtitle)
-                        .font(.system(size: 14, weight: .medium, design: .rounded))
-                        .foregroundColor(.secondary)
-                        .multilineTextAlignment(.center)
-                }
+                    .font(DSTypography.body)
+                    .foregroundColor(DSPalette.textSecondary)
             }
         }
         .padding()
-        .onAppear {
-            withAnimation(.linear(duration: 1).repeatForever(autoreverses: false)) {
-                isAnimating = true
-            }
-        }
-    }
-    
-    private var spinnerView: some View {
-        ZStack {
-            Circle()
-                .stroke(AppColors.primary.opacity(0.3), lineWidth: 4)
-                .frame(width: 60, height: 60)
-            
-            Circle()
-                .trim(from: 0, to: 0.7)
-                .stroke(
-                    AppColors.primaryGradient,
-                    style: StrokeStyle(lineWidth: 4, lineCap: .round)
-                )
-                .frame(width: 60, height: 60)
-                .rotationEffect(.degrees(isAnimating ? 360 : 0))
-        }
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(title)
     }
 }
 
-// MARK: - Convenience initializers
-public extension LoadingView {
-    static func contentLoading() -> LoadingView {
-        LoadingView(
-            title: "Loading content",
-            subtitle: "Preparing the best series and movies..."
-        )
-    }
-    
-    static func detailsLoading() -> LoadingView {
-        LoadingView(
-            title: "Loading details",
-            subtitle: "Getting the latest information..."
-        )
-    }
-    
-    static func simple(_ title: String) -> LoadingView {
-        LoadingView(title: title, subtitle: nil)
-    }
+#Preview("LoadingView") {
+    LoadingView()
 }

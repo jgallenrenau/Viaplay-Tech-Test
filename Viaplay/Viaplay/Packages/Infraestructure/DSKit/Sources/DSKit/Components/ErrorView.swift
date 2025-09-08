@@ -21,7 +21,7 @@ public struct ErrorView: View {
             // Error icon
             Image(systemName: "exclamationmark.triangle.fill")
                 .font(.system(size: 48))
-                .foregroundColor(AppColors.error)
+                .foregroundColor(DSPalette.error)
             
             VStack(spacing: 8) {
                 Text(title)
@@ -47,7 +47,7 @@ public struct ErrorView: View {
                     .foregroundColor(.white)
                     .padding(.horizontal, 24)
                     .padding(.vertical, 12)
-                    .background(AppColors.primaryGradient)
+                    .background(DSPalette.brand)
                     .clipShape(RoundedRectangle(cornerRadius: 12))
                 }
                 .buttonStyle(PlainButtonStyle())

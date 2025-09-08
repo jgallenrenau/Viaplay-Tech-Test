@@ -1,6 +1,7 @@
 import SwiftUI
 import Domain
 
+
 public struct DetailItemView: View {
     let item: Domain.DetailItem
     @State private var isPressed = false
@@ -48,11 +49,7 @@ public struct DetailItemView: View {
             // Content section
             if let content = item.content {
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Contenido")
-                        .font(.system(size: 14, weight: .semibold, design: .rounded))
-                        .foregroundColor(.primary)
-                        .textCase(.uppercase)
-                        .tracking(0.5)
+                    textWithTracking("Contenido", size: 14, weight: .semibold, design: .rounded, color: .primary, uppercase: true)
                     
                     Text(content)
                         .font(.system(size: 15, weight: .medium, design: .rounded))
@@ -63,18 +60,14 @@ public struct DetailItemView: View {
                 .padding(.horizontal, 12)
                 .background(
                     RoundedRectangle(cornerRadius: 8)
-                        .fill(Color(.systemGray6))
+                        .fill(contentBackgroundColor)
                 )
             }
 
             // Tags section
             if !item.tags.isEmpty {
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Etiquetas")
-                        .font(.system(size: 14, weight: .semibold, design: .rounded))
-                        .foregroundColor(.primary)
-                        .textCase(.uppercase)
-                        .tracking(0.5)
+                    textWithTracking("Etiquetas", size: 14, weight: .semibold, design: .rounded, color: .primary, uppercase: true)
                     
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 8) {
@@ -144,7 +137,7 @@ public struct DetailItemView: View {
         .padding(20)
         .background(
             RoundedRectangle(cornerRadius: 16)
-                .fill(Color(.systemBackground))
+                .fill(cardBackgroundColor)
                 .shadow(
                     color: Color.black.opacity(0.05),
                     radius: isPressed ? 2 : 8,
@@ -154,5 +147,39 @@ public struct DetailItemView: View {
         )
         .scaleEffect(isPressed ? 0.98 : 1.0)
         .animation(.easeInOut(duration: 0.1), value: isPressed)
+    }
+
+    private var contentBackgroundColor: Color {
+        #if os(tvOS)
+        return Color.gray.opacity(0.2)
+        #elseif os(iOS)
+        return Color(.systemGray6)
+        #else
+        return Color.gray.opacity(0.2)
+        #endif
+    }
+
+    private var cardBackgroundColor: Color {
+        #if os(tvOS)
+        return Color.black
+        #elseif os(iOS)
+        return Color(.systemBackground)
+        #else
+        return Color.white
+        #endif
+    }
+    
+    private func textWithTracking(_ text: String, size: CGFloat, weight: Font.Weight, design: Font.Design, color: Color, uppercase: Bool = false) -> some View {
+        let baseView = Text(text)
+            .font(.system(size: size, weight: weight, design: design))
+            .foregroundColor(color)
+        
+        let uppercasedView = uppercase ? AnyView(baseView.textCase(.uppercase)) : AnyView(baseView)
+        
+        #if os(macOS)
+        return uppercasedView
+        #else
+        return AnyView(uppercasedView.tracking(0.5))
+        #endif
     }
 }

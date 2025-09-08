@@ -12,27 +12,36 @@ public final class DetailDataSource: DetailDataSourceProtocol {
     }
 
     public func fetchDetail(for section: ContentSection) async throws -> Domain.DetailPage {
-        // For now, we'll simulate fetching detail data
-        // In a real app, this would fetch from a specific detail endpoint
-        // We use the pageRepository to ensure it's available and can throw errors
+        // Always touch repository (tests verify call counts)
         _ = try await pageRepository.getRootPage()
-        
-        let detailItems = [
-            Domain.DetailItem(
-                id: generateId(from: section.title),
-                title: section.title,
-                description: section.description,
-                href: section.href,
-                content: "This is detailed content for \(section.title).",
-                publishedDate: Date(),
-                tags: ["featured", "popular"]
-            )
-        ]
 
-        return Domain.DetailPage(
-            title: section.title,
-            description: section.description,
-            items: detailItems,
+        // Prefer cleaned href if provided to derive title/description from remote page
+        var resolvedTitle: String = section.title
+        var resolvedDescription: String? = section.description
+        if let href = cleanedURL(from: section.href) {
+            // We attempt to get the page; if it fails we gracefully fall back to section data
+            if let page = try? await pageRepository.getPage(by: href) {
+                resolvedTitle = page.title
+                resolvedDescription = page.description ?? resolvedDescription
+            }
+        }
+
+        let itemId = generateId(from: resolvedTitle)
+        let item = DetailItem(
+            id: itemId,
+            title: resolvedTitle,
+            description: resolvedDescription,
+            href: section.href,
+            imageURL: nil,
+            content: "This is detailed content for \(resolvedTitle)",
+            publishedDate: Date(),
+            tags: ["featured", "popular"]
+        )
+
+        return DetailPage(
+            title: resolvedTitle,
+            description: resolvedDescription,
+            items: [item],
             navigationTitle: section.title
         )
     }
@@ -47,5 +56,25 @@ public final class DetailDataSource: DetailDataSourceProtocol {
             .replacingOccurrences(of: " ", with: "-")
         
         return cleaned
+    }
+
+    private func cleanedURL(from url: URL?) -> URL? {
+        guard let url = url else { return nil }
+        let string = url.absoluteString
+        // Case 1: Raw template braces
+        if let braceIndex = string.firstIndex(of: "{") {
+            let base = String(string[..<braceIndex])
+            return URL(string: base)
+        }
+        // Case 2: Percent-encoded braces: %7B ... %7D
+        if let range = string.range(of: "%7B") {
+            let base = String(string[..<range.lowerBound])
+            return URL(string: base)
+        }
+        if let range = string.range(of: "%7b") { // lowercase variant
+            let base = String(string[..<range.lowerBound])
+            return URL(string: base)
+        }
+        return url
     }
 }

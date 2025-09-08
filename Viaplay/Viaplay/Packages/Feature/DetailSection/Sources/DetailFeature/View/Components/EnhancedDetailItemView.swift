@@ -1,6 +1,10 @@
 import SwiftUI
 import Domain
 
+#if canImport(UIKit)
+import UIKit
+#endif
+
 public struct EnhancedDetailItemView: View {
     let item: Domain.DetailItem
     @State private var isPressed = false
@@ -131,7 +135,9 @@ public struct EnhancedDetailItemView: View {
                     Button(action: {
                         // Handle link action
                         if let url = URL(string: href.absoluteString) {
+                            #if canImport(UIKit) && !os(tvOS)
                             UIApplication.shared.open(url)
+                            #endif
                         }
                     }) {
                         HStack(spacing: 6) {
@@ -157,7 +163,7 @@ public struct EnhancedDetailItemView: View {
         .padding(20)
         .background(
             RoundedRectangle(cornerRadius: 16)
-                .fill(Color(.systemBackground))
+                .fill(backgroundFillColor)
                 .shadow(
                     color: isPressed ? Color.black.opacity(0.1) : Color.black.opacity(0.15),
                     radius: isPressed ? 4 : 12,
@@ -180,6 +186,16 @@ public struct EnhancedDetailItemView: View {
     }
     
     // MARK: - Helper Properties
+    
+    private var backgroundFillColor: Color {
+        #if os(tvOS)
+        return Color.black
+        #elseif os(iOS)
+        return Color(.systemGroupedBackground)
+        #else
+        return Color.gray.opacity(0.1)
+        #endif
+    }
     
     private var iconForItem: String {
         if let content = item.content, !content.isEmpty {
@@ -216,5 +232,5 @@ public struct EnhancedDetailItemView: View {
         Spacer()
     }
     .padding()
-    .background(Color(.systemGroupedBackground))
+    .background(Color.gray.opacity(0.1))
 }
