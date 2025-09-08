@@ -5,7 +5,7 @@ import Domain
 import UIKit
 #endif
 
-public struct EnhancedDetailItemView: View {
+public struct DetailItemViewtvOS: View {
     let item: Domain.DetailItem
     @State private var isPressed = false
     @State private var showFullDescription = false
@@ -221,7 +221,7 @@ public struct EnhancedDetailItemView: View {
 // MARK: - Preview
 #Preview {
     VStack {
-        EnhancedDetailItemView(item: Domain.DetailItem(
+        DetailItemViewtvOS(item: Domain.DetailItem(
             id: "1",
             title: "Example Item",
             description: "This is an example description to show how the enhanced component looks.",

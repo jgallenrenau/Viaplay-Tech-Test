@@ -23,10 +23,10 @@ public struct SectionRowView: View {
     }
 
     public var body: some View {
-        HStack(spacing: 16) {
-            #if os(tvOS)
-            // tvOS: no leading icon – clean, text-centric row
-            VStack(alignment: .leading, spacing: 6) {
+        HStack(spacing: DSSpacing.large) {
+            iconView
+            VStack(alignment: .leading, spacing: DSSpacing.extraSmall) {
+                #if os(tvOS)
                 Text(model.title)
                     .font(.system(size: 28, weight: .semibold))
                     .foregroundColor(.primary)
@@ -36,11 +36,7 @@ public struct SectionRowView: View {
                         .foregroundColor(.secondary)
                         .lineLimit(2)
                 }
-            }
-            #else
-            // iOS: keep previous layout with icon
-            iconView
-            VStack(alignment: .leading, spacing: 6) {
+                #else
                 Text(model.title)
                     .font(.system(size: 18, weight: .semibold, design: .rounded))
                     .foregroundColor(.primary)
@@ -50,12 +46,12 @@ public struct SectionRowView: View {
                         .foregroundColor(.secondary)
                         .lineLimit(2)
                 }
+                #endif
             }
-            #endif
             Spacer()
         }
-        .padding(.horizontal, 20)
-        .padding(.vertical, 16)
+        .padding(.horizontal, DSSpacing.extraLarge)
+        .padding(.vertical, DSSpacing.large)
         .background(
             RoundedRectangle(cornerRadius: 16)
                 .fill(backgroundFillColor)
@@ -109,9 +105,9 @@ public struct SectionRowView: View {
         let iconColor = colorForSection(model.title)
         
         return ZStack {
-            RoundedRectangle(cornerRadius: 12)
+            RoundedRectangle(cornerRadius: DSSpacing.medium)
                 .fill(iconColor.opacity(0.15))
-                .frame(width: 48, height: 48)
+                .frame(width: DSSpacing.huge, height: DSSpacing.huge)
             
             Image(systemName: iconName)
                 .font(.system(size: 20, weight: .semibold))
@@ -158,7 +154,7 @@ public struct SectionRowView: View {
             return "tv.fill"
         case "filmer", "movies", "film":
             return "film.fill"
-        case "sport":
+        case "sport", "sports":
             return "sportscourt.fill"
         case "barn", "kids", "children":
             return "figure.and.child.holdinghands"

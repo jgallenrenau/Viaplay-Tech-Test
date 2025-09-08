@@ -56,14 +56,20 @@ public struct SplashView: View {
             
             // Icon perfectly centered in the circle
             Group {
-                if let appIcon = UIImage(named: "AppIcon", in: Bundle.main, compatibleWith: nil) {
+                if let appIconModule = UIImage(named: "AppIcon", in: .module, compatibleWith: nil) {
+                    let _ = print("✅ [SplashView] AppIcon loaded successfully from DSKit module bundle")
+                    Image(uiImage: appIconModule)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 100, height: 100)
+                } else if let appIconMain = UIImage(named: "AppIcon", in: .main, compatibleWith: nil) {
                     let _ = print("✅ [SplashView] AppIcon loaded successfully from main bundle")
-                    Image(uiImage: appIcon)
+                    Image(uiImage: appIconMain)
                         .resizable()
                         .scaledToFit()
                         .frame(width: 100, height: 100)
                 } else {
-                    let _ = print("❌ [SplashView] AppIcon not found in main bundle, using fallback")
+                    let _ = print("❌ [SplashView] AppIcon not found in module nor main bundle, using fallback")
                     // Fallback to system icon - bigger
                     Image(systemName: "play.rectangle.fill")
                         .font(.system(size: 80, weight: .bold))
@@ -75,7 +81,7 @@ public struct SplashView: View {
             .opacity(opacity)
             .rotationEffect(.degrees(rotationAngle))
         }
-        .frame(width: 250, height: 250)
+        .frame(width: 350, height: 350)
         .shadow(color: DSPalette.shadow.opacity(0.3), radius: 20, x: 0, y: 10)
     }
     
@@ -83,23 +89,23 @@ public struct SplashView: View {
     private func startAnimations() {
         // First animation: appear with scale and opacity
         withAnimation(.easeOut(duration: 0.8)) {
-            self.scaleEffect = 1.0
+            self.scaleEffect = 2.0
             self.opacity = 1.0
         }
         
         // Second animation: dramatic grow - bigger growth
         withAnimation(.easeInOut(duration: 1.0).delay(0.8)) {
-            self.scaleEffect = 2.0
+            self.scaleEffect = 5.0
         }
         
         // Third animation: subtle rotation during growth
         withAnimation(.easeInOut(duration: 0.8).delay(1.0)) {
-            self.rotationAngle = 15
+            self.rotationAngle = 25
         }
         
         // Fourth animation: scale down to normal
         withAnimation(.easeInOut(duration: 0.6).delay(1.5)) {
-            self.scaleEffect = 1.0
+            self.scaleEffect = 3.0
             self.rotationAngle = 0
         }
         

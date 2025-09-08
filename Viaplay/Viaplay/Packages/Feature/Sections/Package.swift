@@ -34,7 +34,7 @@ let package = Package(
                 .product(name: "Lottie", package: "lottie-ios")
             ],
             path: "Sources/SectionsFeature",
-            resources: [.process("../../Resources")]
+            resources: []
         ),
         .testTarget(
             name: "SectionsUnitTests",

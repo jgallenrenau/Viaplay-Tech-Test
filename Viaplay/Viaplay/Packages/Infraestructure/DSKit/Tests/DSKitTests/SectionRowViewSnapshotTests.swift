@@ -7,25 +7,44 @@ import UIKit
 
 final class SectionRowViewSnapshotTests: XCTestCase {
     
+    // MARK: - 1080p Fixed Resolution Configuration
+    private let config1080pPortrait = ViewImageConfig(
+        size: CGSize(width: 1080, height: 1920),
+        safeArea: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0),
+        traits: UITraitCollection(traitsFrom: [
+            .init(displayScale: 1.0),
+            .init(userInterfaceStyle: .light)
+        ])
+    )
+    
+    private let config1080pLandscape = ViewImageConfig(
+        size: CGSize(width: 1920, height: 1080),
+        safeArea: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0),
+        traits: UITraitCollection(traitsFrom: [
+            .init(displayScale: 1.0),
+            .init(userInterfaceStyle: .light)
+        ])
+    )
+    
     func testSectionRowViewWithTitleOnly() {
         let model = SectionRowView.Model(title: "Test Title")
         let view = SectionRowView(model: model)
         let vc = UIHostingController(rootView: view)
-        assertSnapshot(of: vc, as: .image(on: .iPhoneX(.portrait)))
+        assertSnapshot(of: vc, as: .image(on: config1080pPortrait))
     }
     
     func testSectionRowViewWithTitleAndDescription() {
         let model = SectionRowView.Model(title: "Test Title", description: "Test Description")
         let view = SectionRowView(model: model)
         let vc = UIHostingController(rootView: view)
-        assertSnapshot(of: vc, as: .image(on: .iPhoneX(.portrait)))
+        assertSnapshot(of: vc, as: .image(on: config1080pPortrait))
     }
     
     func testSectionRowViewWithEmptyDescription() {
         let model = SectionRowView.Model(title: "Test Title", description: "")
         let view = SectionRowView(model: model)
         let vc = UIHostingController(rootView: view)
-        assertSnapshot(of: vc, as: .image(on: .iPhoneX(.portrait)))
+        assertSnapshot(of: vc, as: .image(on: config1080pPortrait))
     }
     
     func testSectionRowViewWithLongTitle() {
@@ -35,7 +54,7 @@ final class SectionRowViewSnapshotTests: XCTestCase {
         )
         let view = SectionRowView(model: model)
         let vc = UIHostingController(rootView: view)
-        assertSnapshot(of: vc, as: .image(on: .iPhoneX(.portrait)))
+        assertSnapshot(of: vc, as: .image(on: config1080pPortrait))
     }
     
     func testSectionRowViewWithLongDescription() {
@@ -45,7 +64,7 @@ final class SectionRowViewSnapshotTests: XCTestCase {
         )
         let view = SectionRowView(model: model)
         let vc = UIHostingController(rootView: view)
-        assertSnapshot(of: vc, as: .image(on: .iPhoneX(.portrait)))
+        assertSnapshot(of: vc, as: .image(on: config1080pPortrait))
     }
     
     func testSectionRowViewInDarkMode() {
@@ -53,7 +72,7 @@ final class SectionRowViewSnapshotTests: XCTestCase {
         let view = SectionRowView(model: model)
             .preferredColorScheme(.dark)
         let vc = UIHostingController(rootView: view)
-        assertSnapshot(of: vc, as: .image(on: .iPhoneX(.portrait)))
+        assertSnapshot(of: vc, as: .image(on: config1080pPortrait))
     }
     
     func testSectionRowViewAccessibility() {
@@ -62,14 +81,47 @@ final class SectionRowViewSnapshotTests: XCTestCase {
             .accessibilityLabel("Section: Accessible Title")
             .accessibilityHint("Accessible Description")
         let vc = UIHostingController(rootView: view)
-        assertSnapshot(of: vc, as: .image(on: .iPhoneX(.portrait)))
+        assertSnapshot(of: vc, as: .image(on: config1080pPortrait))
     }
     
     func testSectionRowViewPortrait() {
         let model = SectionRowView.Model(title: "Portrait Title", description: "Portrait Description")
         let view = SectionRowView(model: model)
         let vc = UIHostingController(rootView: view)
-        assertSnapshot(of: vc, as: .image(on: .iPhoneX(.portrait)))
+        assertSnapshot(of: vc, as: .image(on: config1080pPortrait))
+    }
+    
+    // MARK: - Landscape Tests
+    func testSectionRowViewLandscapeWithTitleOnly() {
+        let model = SectionRowView.Model(title: "Test Title")
+        let view = SectionRowView(model: model)
+        let vc = UIHostingController(rootView: view)
+        assertSnapshot(of: vc, as: .image(on: config1080pLandscape))
+    }
+    
+    func testSectionRowViewLandscapeWithTitleAndDescription() {
+        let model = SectionRowView.Model(title: "Test Title", description: "Test Description")
+        let view = SectionRowView(model: model)
+        let vc = UIHostingController(rootView: view)
+        assertSnapshot(of: vc, as: .image(on: config1080pLandscape))
+    }
+    
+    func testSectionRowViewLandscapeWithLongTitle() {
+        let model = SectionRowView.Model(
+            title: "This is a very long title that should test text wrapping and layout in landscape",
+            description: "Short description"
+        )
+        let view = SectionRowView(model: model)
+        let vc = UIHostingController(rootView: view)
+        assertSnapshot(of: vc, as: .image(on: config1080pLandscape))
+    }
+    
+    func testSectionRowViewLandscapeInDarkMode() {
+        let model = SectionRowView.Model(title: "Dark Mode Title", description: "Dark Mode Description")
+        let view = SectionRowView(model: model)
+            .preferredColorScheme(.dark)
+        let vc = UIHostingController(rootView: view)
+        assertSnapshot(of: vc, as: .image(on: config1080pLandscape))
     }
 }
 #endif

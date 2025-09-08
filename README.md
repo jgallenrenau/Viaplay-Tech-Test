@@ -13,6 +13,68 @@
 [![codecov](https://codecov.io/gh/jgallenrenau/Viaplay-Tech-Test/branch/develop/graph/badge.svg)](https://codecov.io/gh/jgallenrenau/Viaplay-Tech-Test)
 </div>
 
+## 📋 Table of Contents
+
+1. [🚀 Getting Started](#-getting-started)
+2. [Overview](#overview)
+3. [📱 Device Compatibility & Features](#-device-compatibility--features)
+4. [📺 tvOS Support & Cross-Platform Architecture](#-tvos-support--cross-platform-architecture)
+5. [🏗️ Architecture overview](#-architecture-overview)
+6. [🧱 Modular architecture (SPM)](#-modular-architecture-spm)
+7. [🚀 App Features](#-app-features)
+8. [🎨 Recent UI/UX Enhancements](#-recent-uiux-enhancements)
+9. [⚡ Advanced Concurrency & Thread Safety](#-advanced-concurrency--thread-safety)
+10. [🔄 DTO/Mapper Pattern Implementation](#-dtomapper-pattern-implementation)
+11. [🧪 Testing strategy](#-testing-strategy)
+12. [🛠️ Technical Stack](#-technical-stack)
+13. [🛠️ Development Tools](#-development-tools)
+14. [📈 Scalability and team workflow](#-scalability-and-team-workflow)
+15. [🧠 SOLID applied](#-solid-applied)
+16. [🗂️ Module index](#-module-index)
+17. [🚀 Continuous Integration (CI) with GitHub Actions](#-continuous-integration-ci-with-github-actions)
+18. [🧹 Linting with SwiftLint](#-linting-with-swiftlint)
+
+## 🚀 Getting Started
+
+### **Prerequisites**
+- `Xcode 15.0+`
+- `Swift 5.9+`
+- `iOS 17.0+` / `tvOS 16.0+`
+- `SwiftLint` (`brew install swiftlint`)
+
+### **Installation**
+
+**1. Clone the repository:**
+```bash
+git clone https://github.com/jordigallenrenau/Viaplay-Tech-Test.git
+cd Viaplay-Tech-Test
+```
+
+**2. Open and build:**
+```bash
+open Viaplay/Viaplay.xcodeproj
+```
+
+**3. Run tests:**
+```bash
+# iOS tests
+xcodebuild test \
+  -project Viaplay/Viaplay.xcodeproj \
+  -scheme Viaplay \
+  -destination 'platform=iOS Simulator,name=iPhone 16 Pro,OS=latest'
+
+# tvOS tests
+xcodebuild test \
+  -project Viaplay/Viaplay.xcodeproj \
+  -scheme ViaplaytvOS \
+  -destination 'platform=tvOS Simulator,name=Apple TV 4K (3rd generation),OS=latest'
+```
+
+**4. Run SwiftLint:**
+```bash
+swiftlint --strict
+```
+
 ## Overview
 
 The Viaplay Tech Test is a Swift-based cross-platform application that demonstrates modern iOS and tvOS development practices through a modular architecture built with Swift Package Manager (SPM). This project showcases a content browsing experience with sections and detailed views, leveraging Clean Architecture principles, MVVM pattern, and an offline-first strategy with ETag-based caching. The application is structured as independent SPM modules, each with specific responsibilities and clear dependency boundaries, ensuring maintainability, testability, and team scalability. This project serves as a technical assessment demonstrating enterprise-grade cross-platform development practices, including comprehensive testing strategies, CI/CD integration, SOLID principles implementation, and a reusable DSKit design system.
@@ -120,22 +182,6 @@ The application now supports **both iOS and tvOS** with a sophisticated cross-pl
 - **Platform Testing**: Easy switching between iOS and tvOS targets for testing
 - **Unified CI/CD**: Same build pipeline validates both platforms
 - **Feature Parity**: New features automatically work on both platforms with appropriate UI adaptations
-
-## 📋 Table of Contents
-
-- [📱 Device Compatibility & Features](#-device-compatibility--features)
-- [📺 tvOS Support & Cross-Platform Architecture](#-tvos-support--cross-platform-architecture)
-- [🧭 Why this architecture](#-why-this-architecture)
-- [🧩 MVVM pattern (per feature)](#-mvvm-pattern-per-feature)
-- [📦 SPM Architecture Decision: Internal vs External Dependencies](#-spm-architecture-decision-internal-vs-external-dependencies)
-- [🧱 Modular architecture (SPM)](#-modular-architecture-spm)
-- [🧪 Testing strategy](#-testing-strategy)
-- [📈 Scalability and team workflow](#-scalability-and-team-workflow)
-- [🧠 SOLID applied](#-solid-applied)
-- [🗂️ Module index](#️-module-index)
-- [🏗️ Architecture overview](#️-architecture-overview)
-- [🚀 Continuous Integration (CI) with GitHub Actions](#-continuous-integration-ci-with-github-actions)
-- [🧹 Linting with SwiftLint](#-linting-with-swiftlint)
 
 ---
 
@@ -264,47 +310,6 @@ The application now supports **both iOS and tvOS** with a sophisticated cross-pl
 - **Clear Separation**: API changes don't directly affect domain models
 - **Testability**: DTOs and mappers can be tested independently
 - **Flexibility**: Easy to handle different API versions or formats
-
-## 🚀 Getting Started
-
-### **Prerequisites**
-- `Xcode 15.0+`
-- `Swift 5.9+`
-- `iOS 17.0+` / `tvOS 16.0+`
-- `SwiftLint` (`brew install swiftlint`)
-
-### **Installation**
-
-**1. Clone the repository:**
-```bash
-git clone https://github.com/jordigallenrenau/Viaplay-Tech-Test.git
-cd Viaplay-Tech-Test
-```
-
-**2. Open and build:**
-```bash
-open Viaplay/Viaplay.xcodeproj
-```
-
-**3. Run tests:**
-```bash
-# iOS tests
-xcodebuild test \
-  -project Viaplay/Viaplay.xcodeproj \
-  -scheme Viaplay \
-  -destination 'platform=iOS Simulator,name=iPhone 16 Pro,OS=latest'
-
-# tvOS tests
-xcodebuild test \
-  -project Viaplay/Viaplay.xcodeproj \
-  -scheme ViaplaytvOS \
-  -destination 'platform=tvOS Simulator,name=Apple TV 4K (3rd generation),OS=latest'
-```
-
-**4. Run SwiftLint:**
-```bash
-swiftlint --strict
-```
 
 ## 🧭 Why this architecture
 

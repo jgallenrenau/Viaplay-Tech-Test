@@ -1,5 +1,6 @@
 import SwiftUI
 import Domain
+import DSKit
 
 
 public struct DetailItemView: View {
@@ -11,9 +12,9 @@ public struct DetailItemView: View {
     }
 
     public var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
+        VStack(alignment: .leading, spacing: DSSpacing.large) {
             // Header with icon and title
-            HStack(alignment: .top, spacing: 12) {
+            HStack(alignment: .top, spacing: DSSpacing.medium) {
                 // Icon
                 ZStack {
                     RoundedRectangle(cornerRadius: 8)
@@ -29,7 +30,7 @@ public struct DetailItemView: View {
                         .foregroundColor(.white)
                 }
                 
-                VStack(alignment: .leading, spacing: 4) {
+                VStack(alignment: .leading, spacing: DSSpacing.extraSmall) {
                     Text(item.title)
                         .font(.system(size: 18, weight: .bold, design: .rounded))
                         .foregroundColor(.primary)
@@ -48,7 +49,7 @@ public struct DetailItemView: View {
 
             // Content section
             if let content = item.content {
-                VStack(alignment: .leading, spacing: 8) {
+                VStack(alignment: .leading, spacing: DSSpacing.small) {
                     textWithTracking("Contenido", size: 14, weight: .semibold, design: .rounded, color: .primary, uppercase: true)
                     
                     Text(content)
@@ -56,8 +57,8 @@ public struct DetailItemView: View {
                         .foregroundColor(.primary)
                         .lineLimit(4)
                 }
-                .padding(.vertical, 8)
-                .padding(.horizontal, 12)
+                .padding(.vertical, DSSpacing.small)
+                .padding(.horizontal, DSSpacing.medium)
                 .background(
                     RoundedRectangle(cornerRadius: 8)
                         .fill(contentBackgroundColor)
@@ -66,16 +67,16 @@ public struct DetailItemView: View {
 
             // Tags section
             if !item.tags.isEmpty {
-                VStack(alignment: .leading, spacing: 8) {
+                VStack(alignment: .leading, spacing: DSSpacing.small) {
                     textWithTracking("Etiquetas", size: 14, weight: .semibold, design: .rounded, color: .primary, uppercase: true)
                     
                     ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(spacing: 8) {
+                        HStack(spacing: DSSpacing.small) {
                             ForEach(item.tags, id: \.self) { tag in
                                 Text(tag)
                                     .font(.system(size: 12, weight: .semibold, design: .rounded))
-                                    .padding(.horizontal, 12)
-                                    .padding(.vertical, 6)
+                                    .padding(.horizontal, DSSpacing.medium)
+                                    .padding(.vertical, DSSpacing.extraSmall)
                                     .background(
                                         Capsule()
                                             .fill(LinearGradient(
@@ -87,7 +88,7 @@ public struct DetailItemView: View {
                                     .foregroundColor(.white)
                             }
                         }
-                        .padding(.horizontal, 4)
+                        .padding(.horizontal, DSSpacing.extraSmall)
                     }
                 }
             }
@@ -100,15 +101,15 @@ public struct DetailItemView: View {
                     Button(action: {
                         // Handle link tap
                     }) {
-                        HStack(spacing: 6) {
+                        HStack(spacing: DSSpacing.extraSmall) {
                             Image(systemName: "arrow.up.right.square.fill")
                                 .font(.system(size: 14, weight: .semibold))
                             Text("Show more")
                                 .font(.system(size: 14, weight: .semibold, design: .rounded))
                         }
                         .foregroundColor(.white)
-                        .padding(.horizontal, 16)
-                        .padding(.vertical, 8)
+                        .padding(.horizontal, DSSpacing.large)
+                        .padding(.vertical, DSSpacing.small)
                         .background(
                             Capsule()
                                 .fill(LinearGradient(
@@ -134,7 +135,7 @@ public struct DetailItemView: View {
                 }
             }
         }
-        .padding(20)
+        .padding(DSSpacing.extraLarge)
         .background(
             RoundedRectangle(cornerRadius: 16)
                 .fill(cardBackgroundColor)
