@@ -32,10 +32,13 @@
 
 ### tvOS - Apple TV Experience
 <p align="center">
-  <img src="DocResources/tvOS.gif" width="350" />
+  <img src="DocResources/tvOS.gif" width="500" height="350" />
 </p>
 <p align="center">
-  The tvOS version optimized for Apple TV with focus-based navigation, larger UI elements, and smooth focus effects designed for remote control interaction.
+  <strong>The tvOS version optimized for Apple TV with focus-based navigation, larger UI elements, and smooth focus effects designed for remote control interaction.</strong>
+</p>
+<p align="center">
+  Experience the seamless cross-platform functionality with beautiful focus animations, card-based design, and intuitive navigation optimized for the Apple TV remote. The app demonstrates how the same codebase delivers native experiences across both iOS and tvOS platforms.
 </p>
 
 ---
