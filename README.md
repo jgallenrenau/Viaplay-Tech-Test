@@ -12,6 +12,28 @@
 <!-- [![iOS](https://img.shields.io/badge/iOS-17.0+-lightgrey.svg)](https://developer.apple.com/ios/) -->
 </div>
 
+## 📋 Table of Contents
+
+1. [🎬 App Demonstration Videos](#-app-demonstration-videos)
+2. [🚀 Getting Started](#-getting-started)
+3. [Overview](#overview)
+4. [📱 Device Compatibility & Features](#-device-compatibility--features)
+5. [📺 tvOS Support & Cross-Platform Architecture](#-tvos-support--cross-platform-architecture)
+6. [🏗️ Architecture overview](#-architecture-overview)
+7. [🧱 Modular architecture (SPM)](#-modular-architecture-spm)
+8. [🚀 App Features](#-app-features)
+9. [🎨 Recent UI/UX Enhancements](#-recent-uiux-enhancements)
+10. [⚡ Advanced Concurrency & Thread Safety](#-advanced-concurrency--thread-safety)
+11. [🔄 DTO/Mapper Pattern Implementation](#-dtomapper-pattern-implementation)
+12. [🧪 Testing strategy](#-testing-strategy)
+13. [🛠️ Technical Stack](#-technical-stack)
+14. [🛠️ Development Tools](#-development-tools)
+15. [📈 Scalability and team workflow](#-scalability-and-team-workflow)
+16. [🧠 SOLID applied](#-solid-applied)
+17. [🗂️ Module index](#-module-index)
+18. [🚀 Continuous Integration (CI) with GitHub Actions](#-continuous-integration-ci-with-github-actions)
+19. [🧹 Linting with SwiftLint](#-linting-with-swiftlint)
+
 ## 🎬 App Demonstration Videos
 
 ### iOS - Normal Usage (Online + Light Mode)
@@ -42,28 +64,6 @@
 </p>
 
 ---
-
-## 📋 Table of Contents
-
-1. [🎬 App Demonstration Videos](#-app-demonstration-videos)
-2. [🚀 Getting Started](#-getting-started)
-3. [Overview](#overview)
-4. [📱 Device Compatibility & Features](#-device-compatibility--features)
-5. [📺 tvOS Support & Cross-Platform Architecture](#-tvos-support--cross-platform-architecture)
-6. [🏗️ Architecture overview](#-architecture-overview)
-7. [🧱 Modular architecture (SPM)](#-modular-architecture-spm)
-8. [🚀 App Features](#-app-features)
-9. [🎨 Recent UI/UX Enhancements](#-recent-uiux-enhancements)
-10. [⚡ Advanced Concurrency & Thread Safety](#-advanced-concurrency--thread-safety)
-11. [🔄 DTO/Mapper Pattern Implementation](#-dtomapper-pattern-implementation)
-12. [🧪 Testing strategy](#-testing-strategy)
-13. [🛠️ Technical Stack](#-technical-stack)
-14. [🛠️ Development Tools](#-development-tools)
-15. [📈 Scalability and team workflow](#-scalability-and-team-workflow)
-16. [🧠 SOLID applied](#-solid-applied)
-17. [🗂️ Module index](#-module-index)
-18. [🚀 Continuous Integration (CI) with GitHub Actions](#-continuous-integration-ci-with-github-actions)
-19. [🧹 Linting with SwiftLint](#-linting-with-swiftlint)
 
 ## 🚀 Getting Started
 
