@@ -13,26 +13,55 @@
 [![codecov](https://codecov.io/gh/jgallenrenau/Viaplay-Tech-Test/branch/develop/graph/badge.svg)](https://codecov.io/gh/jgallenrenau/Viaplay-Tech-Test)
 </div>
 
+## 🎬 App Demonstration Videos
+
+### iOS - Normal Usage (Online + Light Mode)
+<p align="center">
+  <img src="DocResources/with-network.gif" width="350" />
+</p>
+<p align="center">
+  The app running with full network connectivity in light mode, showcasing smooth navigation between sections and detail views with modern card-based UI design.
+</p>
+
+### iOS - Offline Experience (No Network + Dark Mode)
+<p align="center">
+  <img src="DocResources/without-network-and-dark-mode.gif" width="350" />
+</p>
+<p align="center">
+  Demonstrating the offline-first functionality with cached data and dark mode interface. The app continues to work seamlessly even without network connectivity.
+</p>
+
+### tvOS - Apple TV Experience
+<p align="center">
+  <img src="DocResources/tvOS.gif" width="350" />
+</p>
+<p align="center">
+  The tvOS version optimized for Apple TV with focus-based navigation, larger UI elements, and smooth focus effects designed for remote control interaction.
+</p>
+
+---
+
 ## 📋 Table of Contents
 
-1. [🚀 Getting Started](#-getting-started)
-2. [Overview](#overview)
-3. [📱 Device Compatibility & Features](#-device-compatibility--features)
-4. [📺 tvOS Support & Cross-Platform Architecture](#-tvos-support--cross-platform-architecture)
-5. [🏗️ Architecture overview](#-architecture-overview)
-6. [🧱 Modular architecture (SPM)](#-modular-architecture-spm)
-7. [🚀 App Features](#-app-features)
-8. [🎨 Recent UI/UX Enhancements](#-recent-uiux-enhancements)
-9. [⚡ Advanced Concurrency & Thread Safety](#-advanced-concurrency--thread-safety)
-10. [🔄 DTO/Mapper Pattern Implementation](#-dtomapper-pattern-implementation)
-11. [🧪 Testing strategy](#-testing-strategy)
-12. [🛠️ Technical Stack](#-technical-stack)
-13. [🛠️ Development Tools](#-development-tools)
-14. [📈 Scalability and team workflow](#-scalability-and-team-workflow)
-15. [🧠 SOLID applied](#-solid-applied)
-16. [🗂️ Module index](#-module-index)
-17. [🚀 Continuous Integration (CI) with GitHub Actions](#-continuous-integration-ci-with-github-actions)
-18. [🧹 Linting with SwiftLint](#-linting-with-swiftlint)
+1. [🎬 App Demonstration Videos](#-app-demonstration-videos)
+2. [🚀 Getting Started](#-getting-started)
+3. [Overview](#overview)
+4. [📱 Device Compatibility & Features](#-device-compatibility--features)
+5. [📺 tvOS Support & Cross-Platform Architecture](#-tvos-support--cross-platform-architecture)
+6. [🏗️ Architecture overview](#-architecture-overview)
+7. [🧱 Modular architecture (SPM)](#-modular-architecture-spm)
+8. [🚀 App Features](#-app-features)
+9. [🎨 Recent UI/UX Enhancements](#-recent-uiux-enhancements)
+10. [⚡ Advanced Concurrency & Thread Safety](#-advanced-concurrency--thread-safety)
+11. [🔄 DTO/Mapper Pattern Implementation](#-dtomapper-pattern-implementation)
+12. [🧪 Testing strategy](#-testing-strategy)
+13. [🛠️ Technical Stack](#-technical-stack)
+14. [🛠️ Development Tools](#-development-tools)
+15. [📈 Scalability and team workflow](#-scalability-and-team-workflow)
+16. [🧠 SOLID applied](#-solid-applied)
+17. [🗂️ Module index](#-module-index)
+18. [🚀 Continuous Integration (CI) with GitHub Actions](#-continuous-integration-ci-with-github-actions)
+19. [🧹 Linting with SwiftLint](#-linting-with-swiftlint)
 
 ## 🚀 Getting Started
 
@@ -724,4 +753,5 @@ else
   echo "warning: SwiftLint not installed. Run 'brew install swiftlint'"
 fi
 ```
+
 ```
