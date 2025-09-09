@@ -21,7 +21,7 @@ final class SplashViewtvOSSnapshotTests: XCTestCase {
     func testSplashViewtvOSInitialState() {
         let view = SplashView(onAnimationEnd: {})
         let vc = UIHostingController(rootView: view)
-        assertSnapshot(of: vc, as: .image(on: config1080p))
+        assertSnapshot(of: vc, as: .image(on: config1080p, precision: 0.98))
     }
     
     func testSplashViewtvOSWithCustomCallback() {

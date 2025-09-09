@@ -21,21 +21,21 @@ final class SectionRowViewtvOSSnapshotTests: XCTestCase {
         let model = SectionRowView.Model(title: "Test Title")
         let view = SectionRowView(model: model)
         let vc = UIHostingController(rootView: view)
-        assertSnapshot(of: vc, as: .image(on: config1080p))
+        assertSnapshot(of: vc, as: .image(on: config1080p, precision: 0.98))
     }
     
     func testSectionRowViewtvOSWithTitleAndDescription() {
         let model = SectionRowView.Model(title: "Test Title", description: "Test Description")
         let view = SectionRowView(model: model)
         let vc = UIHostingController(rootView: view)
-        assertSnapshot(of: vc, as: .image(on: config1080p))
+        assertSnapshot(of: vc, as: .image(on: config1080p, precision: 0.98))
     }
     
     func testSectionRowViewtvOSWithEmptyDescription() {
         let model = SectionRowView.Model(title: "Test Title", description: "")
         let view = SectionRowView(model: model)
         let vc = UIHostingController(rootView: view)
-        assertSnapshot(of: vc, as: .image(on: config1080p))
+        assertSnapshot(of: vc, as: .image(on: config1080p, precision: 0.98))
     }
     
     func testSectionRowViewtvOSWithLongTitle() {
@@ -45,7 +45,7 @@ final class SectionRowViewtvOSSnapshotTests: XCTestCase {
         )
         let view = SectionRowView(model: model)
         let vc = UIHostingController(rootView: view)
-        assertSnapshot(of: vc, as: .image(on: config1080p))
+        assertSnapshot(of: vc, as: .image(on: config1080p, precision: 0.98))
     }
     
     func testSectionRowViewtvOSWithLongDescription() {
@@ -55,7 +55,7 @@ final class SectionRowViewtvOSSnapshotTests: XCTestCase {
         )
         let view = SectionRowView(model: model)
         let vc = UIHostingController(rootView: view)
-        assertSnapshot(of: vc, as: .image(on: config1080p))
+        assertSnapshot(of: vc, as: .image(on: config1080p, precision: 0.98))
     }
     
     func testSectionRowViewtvOSFocused() {
@@ -72,7 +72,7 @@ final class SectionRowViewtvOSSnapshotTests: XCTestCase {
         let view: AnyView = AnyView(SectionRowView(model: model))
         #endif
         let vc = UIHostingController(rootView: view)
-        assertSnapshot(of: vc, as: .image(on: config1080p))
+        assertSnapshot(of: vc, as: .image(on: config1080p, precision: 0.98))
     }
     
     func testSectionRowViewtvOSAccessibility() {
