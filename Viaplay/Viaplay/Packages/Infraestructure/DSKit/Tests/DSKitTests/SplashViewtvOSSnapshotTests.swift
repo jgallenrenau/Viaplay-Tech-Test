@@ -1,7 +1,9 @@
 import XCTest
 import SwiftUI
 import SnapshotTesting
+#if canImport(UIKit)
 import UIKit
+#endif
 @testable import DSKit
 
 @MainActor
@@ -9,8 +11,7 @@ final class SplashViewtvOSSnapshotTests: XCTestCase {
     
     // MARK: - 1080p Fixed Resolution Configuration for tvOS
     private let config1080p = ViewImageConfig(
-        size: CGSize(width: 1920, height: 1080),
-        safeArea: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0),
+        safeArea: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), size: CGSize(width: 1920, height: 1080),
         traits: UITraitCollection(traitsFrom: [
             .init(displayScale: 1.0),
             .init(userInterfaceStyle: .light)

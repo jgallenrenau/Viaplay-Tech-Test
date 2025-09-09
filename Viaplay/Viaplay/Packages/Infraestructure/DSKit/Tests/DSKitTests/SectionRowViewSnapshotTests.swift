@@ -9,8 +9,7 @@ final class SectionRowViewSnapshotTests: XCTestCase {
     
     // MARK: - 1080p Fixed Resolution Configuration
     private let config1080pPortrait = ViewImageConfig(
-        size: CGSize(width: 1080, height: 1920),
-        safeArea: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0),
+        safeArea: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), size: CGSize(width: 1080, height: 1920),
         traits: UITraitCollection(traitsFrom: [
             .init(displayScale: 1.0),
             .init(userInterfaceStyle: .light)
@@ -18,8 +17,7 @@ final class SectionRowViewSnapshotTests: XCTestCase {
     )
     
     private let config1080pLandscape = ViewImageConfig(
-        size: CGSize(width: 1920, height: 1080),
-        safeArea: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0),
+        safeArea: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), size: CGSize(width: 1920, height: 1080),
         traits: UITraitCollection(traitsFrom: [
             .init(displayScale: 1.0),
             .init(userInterfaceStyle: .light)

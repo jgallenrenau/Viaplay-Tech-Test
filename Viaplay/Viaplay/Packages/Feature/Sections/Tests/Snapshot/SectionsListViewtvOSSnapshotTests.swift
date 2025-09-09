@@ -1,7 +1,9 @@
 import XCTest
 import SwiftUI
 import SnapshotTesting
+#if canImport(UIKit)
 import UIKit
+#endif
 @testable import Sections
 @testable import Domain
 

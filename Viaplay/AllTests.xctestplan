@@ -13,6 +13,7 @@
   },
   "testTargets" : [
     {
+      "parallelizable" : true,
       "target" : {
         "containerPath" : "container:Viaplay\/Packages\/Base\/Data",
         "identifier" : "DataTests",
@@ -20,6 +21,7 @@
       }
     },
     {
+      "parallelizable" : true,
       "target" : {
         "containerPath" : "container:Viaplay\/Packages\/Feature\/DetailSection",
         "identifier" : "DetailSectionIntegrationTests",
@@ -27,6 +29,7 @@
       }
     },
     {
+      "parallelizable" : true,
       "target" : {
         "containerPath" : "container:Viaplay\/Packages\/Feature\/DetailSection",
         "identifier" : "DetailSectionSnapshotTests",
@@ -34,6 +37,7 @@
       }
     },
     {
+      "parallelizable" : true,
       "target" : {
         "containerPath" : "container:Viaplay\/Packages\/Feature\/DetailSection",
         "identifier" : "DetailSectionUnitTests",
@@ -41,6 +45,7 @@
       }
     },
     {
+      "parallelizable" : true,
       "target" : {
         "containerPath" : "container:Viaplay\/Packages\/Base\/Domain",
         "identifier" : "DomainTests",
@@ -48,6 +53,7 @@
       }
     },
     {
+      "parallelizable" : true,
       "target" : {
         "containerPath" : "container:Viaplay\/Packages\/Infraestructure\/DSKit",
         "identifier" : "DSKitTests",
@@ -55,6 +61,7 @@
       }
     },
     {
+      "parallelizable" : true,
       "target" : {
         "containerPath" : "container:Viaplay\/Packages\/Infraestructure\/NetworkingKit",
         "identifier" : "NetworkingKitTests",
@@ -62,6 +69,7 @@
       }
     },
     {
+      "parallelizable" : true,
       "target" : {
         "containerPath" : "container:Viaplay\/Packages\/Feature\/Sections",
         "identifier" : "SectionsIntegrationTests",
@@ -69,6 +77,7 @@
       }
     },
     {
+      "parallelizable" : true,
       "target" : {
         "containerPath" : "container:Viaplay\/Packages\/Feature\/Sections",
         "identifier" : "SectionsSnapshotTests",
@@ -76,6 +85,7 @@
       }
     },
     {
+      "parallelizable" : true,
       "target" : {
         "containerPath" : "container:Viaplay\/Packages\/Feature\/Sections",
         "identifier" : "SectionsUnitTests",
@@ -83,6 +93,7 @@
       }
     },
     {
+      "parallelizable" : true,
       "target" : {
         "containerPath" : "container:Viaplay\/Packages\/Infraestructure\/StorageKit",
         "identifier" : "StorageKitTests",
@@ -90,6 +101,7 @@
       }
     },
     {
+      "parallelizable" : true,
       "target" : {
         "containerPath" : "container:Viaplay.xcodeproj",
         "identifier" : "14D5FF482E6632EB00F53C94",
