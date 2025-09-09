@@ -9,7 +9,7 @@
 [![Swift](https://img.shields.io/badge/Swift-5.9-orange.svg)](https://swift.org)
 [![Xcode](https://img.shields.io/badge/Xcode-15.0-blue.svg)](https://developer.apple.com/xcode/)
 [![License](https://img.shields.io/badge/License-MIT-orange.svg)](LICENSE)
-[![Coverage](https://codecov.io/gh/jgallenrenau/Viaplay-Tech-Test/branch/main/graph/badge.svg)](https://codecov.io/gh/jgallenrenau/Viaplay-Tech-Test)
+[![Coverage](https://codecov.io/gh/jgallenrenau/Viaplay-Tech-Test/branch/chore/update-github-ci/graph/badge.svg)](https://codecov.io/gh/jgallenrenau/Viaplay-Tech-Test)
 <!-- [![iOS](https://img.shields.io/badge/iOS-17.0+-lightgrey.svg)](https://developer.apple.com/ios/) -->
 </div>
 
