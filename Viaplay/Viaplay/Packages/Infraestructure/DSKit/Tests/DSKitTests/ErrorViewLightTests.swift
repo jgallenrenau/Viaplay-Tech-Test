@@ -9,5 +9,3 @@ final class ErrorViewLightTests: XCTestCase {
         XCTAssertNotNil(view)
     }
 }
-
-

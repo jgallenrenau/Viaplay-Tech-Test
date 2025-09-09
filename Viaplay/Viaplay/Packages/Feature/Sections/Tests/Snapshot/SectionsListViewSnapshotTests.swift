@@ -8,7 +8,7 @@ import UIKit
 
 @MainActor
 final class SectionsListViewSnapshotTests: XCTestCase {
-    private let isRecording = false
+    private let isRecording = true
     
     // MARK: - 1080p Fixed Resolution Configuration
     private let config1080pPortrait = ViewImageConfig(

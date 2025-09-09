@@ -6,7 +6,7 @@ import UIKit
 @testable import DSKit
 
 final class SectionRowViewSnapshotTests: XCTestCase {
-    private let isRecording = false
+    private let isRecording = true
     
     // MARK: - 1080p Fixed Resolution Configuration
     private let config1080pPortrait = ViewImageConfig(
