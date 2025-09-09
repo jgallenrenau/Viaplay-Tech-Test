@@ -8,6 +8,7 @@ import UIKit
 
 @MainActor
 final class SplashViewtvOSSnapshotTests: XCTestCase {
+    private let isRecording = false
     
     // MARK: - 1080p Fixed Resolution Configuration for tvOS
     private let config1080p = ViewImageConfig(

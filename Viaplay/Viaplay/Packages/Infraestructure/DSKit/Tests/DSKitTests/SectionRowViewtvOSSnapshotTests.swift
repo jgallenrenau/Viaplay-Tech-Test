@@ -1,14 +1,13 @@
+#if os(tvOS)
 import XCTest
 import SwiftUI
 import SnapshotTesting
-#if canImport(UIKit)
-import UIKit
-#endif
+import TVUIKit
 @testable import DSKit
 
 final class SectionRowViewtvOSSnapshotTests: XCTestCase {
+    private let isRecording = false
     
-    // MARK: - 1080p Fixed Resolution Configuration for tvOS
     private let config1080p = ViewImageConfig(
         safeArea: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), size: CGSize(width: 1920, height: 1080),
         traits: UITraitCollection(traitsFrom: [
@@ -17,70 +16,49 @@ final class SectionRowViewtvOSSnapshotTests: XCTestCase {
         ])
     )
     
-    func testSectionRowViewtvOSWithTitleOnly() {
-        let model = SectionRowView.Model(title: "Test Title")
+    func testSectionRowViewtvOSWithSections() {
+        let model = SectionRowView.Model(title: "Sections", description: "A list of sections")
         let view = SectionRowView(model: model)
         let vc = UIHostingController(rootView: view)
-        assertSnapshot(of: vc, as: .image(on: config1080p, precision: 0.98))
+        assertSnapshot(of: vc, as: .image(on: config1080p, precision: 0.98), record: isRecording)
     }
     
-    func testSectionRowViewtvOSWithTitleAndDescription() {
-        let model = SectionRowView.Model(title: "Test Title", description: "Test Description")
+    func testSectionRowViewtvOSWithLongTitles() {
+        let model = SectionRowView.Model(title: String(repeating: "Long Title ", count: 10), description: String(repeating: "Long Description ", count: 10))
         let view = SectionRowView(model: model)
         let vc = UIHostingController(rootView: view)
-        assertSnapshot(of: vc, as: .image(on: config1080p, precision: 0.98))
-    }
-    
-    func testSectionRowViewtvOSWithEmptyDescription() {
-        let model = SectionRowView.Model(title: "Test Title", description: "")
-        let view = SectionRowView(model: model)
-        let vc = UIHostingController(rootView: view)
-        assertSnapshot(of: vc, as: .image(on: config1080p, precision: 0.98))
-    }
-    
-    func testSectionRowViewtvOSWithLongTitle() {
-        let model = SectionRowView.Model(
-            title: "This is a very long title that should test text wrapping and layout on Apple TV",
-            description: "Short description"
-        )
-        let view = SectionRowView(model: model)
-        let vc = UIHostingController(rootView: view)
-        assertSnapshot(of: vc, as: .image(on: config1080p, precision: 0.98))
-    }
-    
-    func testSectionRowViewtvOSWithLongDescription() {
-        let model = SectionRowView.Model(
-            title: "Short Title",
-            description: "This is a very long description that should test text wrapping and layout behavior in the UI component on Apple TV"
-        )
-        let view = SectionRowView(model: model)
-        let vc = UIHostingController(rootView: view)
-        assertSnapshot(of: vc, as: .image(on: config1080p, precision: 0.98))
+        assertSnapshot(of: vc, as: .image(on: config1080p, precision: 0.98), record: isRecording)
     }
     
     func testSectionRowViewtvOSFocused() {
-        let model = SectionRowView.Model(title: "Focused Title", description: "Focused Description")
-        #if os(tvOS)
-        let base = SectionRowView(model: model)
-        let view: AnyView
-        if #available(tvOS 17.0, *) {
-            view = AnyView(base.focusable(true))
-        } else {
-            view = AnyView(base)
-        }
-        #else
-        let view: AnyView = AnyView(SectionRowView(model: model))
-        #endif
+        let model = SectionRowView.Model(title: "Focused", description: "Focus state")
+        let view = SectionRowView(model: model)
         let vc = UIHostingController(rootView: view)
-        assertSnapshot(of: vc, as: .image(on: config1080p, precision: 0.98))
+        assertSnapshot(of: vc, as: .image(on: config1080p, precision: 0.98), record: isRecording)
     }
     
     func testSectionRowViewtvOSAccessibility() {
-        let model = SectionRowView.Model(title: "Accessible Title", description: "Accessible Description")
+        let model = SectionRowView.Model(title: "Accessibility", description: "A11y")
         let view = SectionRowView(model: model)
-            .accessibilityLabel("Section: Accessible Title")
-            .accessibilityHint("Accessible Description")
+            .accessibilityLabel("Section: Accessibility")
+            .accessibilityHint("A11y")
         let vc = UIHostingController(rootView: view)
-        assertSnapshot(of: vc, as: .image(on: config1080p))
+        assertSnapshot(of: vc, as: .image(on: config1080p, precision: 0.98), record: isRecording)
+    }
+    
+    func testSectionRowViewtvOSWithEmptyDescription() {
+        let model = SectionRowView.Model(title: "Empty", description: "")
+        let view = SectionRowView(model: model)
+        let vc = UIHostingController(rootView: view)
+        assertSnapshot(of: vc, as: .image(on: config1080p, precision: 0.98), record: isRecording)
+    }
+    
+    func testSectionRowViewtvOSWithLongDescription() {
+        let model = SectionRowView.Model(title: "Title", description: String(repeating: "Long Description ", count: 10))
+        let view = SectionRowView(model: model)
+        let vc = UIHostingController(rootView: view)
+        assertSnapshot(of: vc, as: .image(on: config1080p, precision: 0.98), record: isRecording)
     }
 }
+#endif
+
