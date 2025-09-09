@@ -2,14 +2,14 @@ name: CI
 
 on:
   pull_request:
-    branches: [ develop ]
+    branches: [ main, develop ]
     paths:
       - 'Viaplay/**'
       - '.swiftlint.yml'
       - '.github/workflows/**'
       - '!**/*.md'
   push:
-    branches: [ develop ]
+    branches: [ develop, 'feature/*', 'chore/*', 'fit/*' ]
     paths:
       - 'Viaplay/**'
       - '.swiftlint.yml'
@@ -27,7 +27,7 @@ jobs:
   test:
     name: Run Unit Tests
     runs-on: macos-15
-    if: (startsWith(github.head_ref, 'feature/') || startsWith(github.head_ref, 'fix/')) || github.event.inputs.run_tests == true
+    if: (startsWith(github.head_ref, 'feature/') || startsWith(github.head_ref, 'chore/') || startsWith(github.head_ref, 'fit/') || startsWith(github.head_ref, 'fix/')) || github.event.inputs.run_tests == true
 
     env:
       SCHEME: Viaplay
