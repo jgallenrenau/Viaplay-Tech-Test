@@ -4,7 +4,7 @@ import SwiftUI
 
 final class ErrorViewLightTests: XCTestCase {
     func testErrorViewBuilds() {
-        let view = DesignSystem.Components.errorView(title: "Error", description: "Try again", retryAction: {})
+        let view = DesignSystem.Components.errorView(title: "Error", message: "Try again", retryAction: {})
         _ = view.body
         XCTAssertNotNil(view)
     }
