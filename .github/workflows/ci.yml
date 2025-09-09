@@ -27,7 +27,7 @@ jobs:
   test:
     name: Run Unit Tests
     runs-on: macos-15
-    if: (startsWith(github.head_ref, 'feature/') || startsWith(github.head_ref, 'fix/')) || github.event.inputs.run_tests == true
+    if: (github.event_name == 'push' && github.ref_name == 'develop') || startsWith(github.head_ref, 'feature/') || startsWith(github.head_ref, 'chore/') || startsWith(github.head_ref, 'fix/') || github.event.inputs.run_tests == true
 
     env:
       SCHEME: Viaplay
