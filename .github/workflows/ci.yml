@@ -74,10 +74,18 @@ jobs:
             -project "$PROJECT" \
             -scheme "$SCHEME" \
             -destination "$DESTINATION" \
+            -testPlan AllTests \
             -enableCodeCoverage YES \
             -skipMacroValidation \
             clean test \
-            -only-testing:ViaplayTests \
+            -only-testing:DataTests \
+            -only-testing:DetailSectionIntegrationTests \
+            -only-testing:DetailSectionUnitTests \
+            -only-testing:DomainTests \
+            -only-testing:NetworkingKitTests \
+            -only-testing:SectionsIntegrationTests \
+            -only-testing:SectionsUnitTests \
+            -only-testing:StorageKitTests \
             -resultBundlePath TestResults.xcresult
 
       - name: Generate Code Coverage Report
