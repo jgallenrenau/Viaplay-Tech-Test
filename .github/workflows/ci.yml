@@ -83,6 +83,7 @@ jobs:
             -only-testing:DetailSectionUnitTests \
             -only-testing:DomainTests \
             -only-testing:NetworkingKitTests \
+            -only-testing:DSKitTests \
             -only-testing:SectionsIntegrationTests \
             -only-testing:SectionsUnitTests \
             -only-testing:StorageKitTests \
