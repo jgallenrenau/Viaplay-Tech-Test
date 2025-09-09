@@ -32,7 +32,7 @@
 
 ### tvOS - Apple TV Experience
 <p align="center">
-  <img src="DocResources/tvOS.gif" width="500" height="350" />
+  <img src="DocResources/tvOS.gif" width="800" height="560" />
 </p>
 <p align="center">
   <strong>The tvOS version optimized for Apple TV with focus-based navigation, larger UI elements, and smooth focus effects designed for remote control interaction.</strong>
