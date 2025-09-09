@@ -9,8 +9,7 @@
 [![Swift](https://img.shields.io/badge/Swift-5.9-orange.svg)](https://swift.org)
 [![Xcode](https://img.shields.io/badge/Xcode-15.0-blue.svg)](https://developer.apple.com/xcode/)
 [![License](https://img.shields.io/badge/License-MIT-orange.svg)](LICENSE)
-[![iOS](https://img.shields.io/badge/iOS-17.0+-lightgrey.svg)](https://developer.apple.com/ios/)
-[![codecov](https://codecov.io/gh/jgallenrenau/Viaplay-Tech-Test/branch/develop/graph/badge.svg)](https://codecov.io/gh/jgallenrenau/Viaplay-Tech-Test)
+<!-- [![iOS](https://img.shields.io/badge/iOS-17.0+-lightgrey.svg)](https://developer.apple.com/ios/) -->
 </div>
 
 ## 🎬 App Demonstration Videos
@@ -106,7 +105,7 @@ swiftlint --strict
 
 ## Overview
 
-The Viaplay Tech Test is a Swift-based cross-platform application that demonstrates modern iOS and tvOS development practices through a modular architecture built with Swift Package Manager (SPM). This project showcases a content browsing experience with sections and detailed views, leveraging Clean Architecture principles, MVVM pattern, and an offline-first strategy with ETag-based caching. The application is structured as independent SPM modules, each with specific responsibilities and clear dependency boundaries, ensuring maintainability, testability, and team scalability. This project serves as a technical assessment demonstrating enterprise-grade cross-platform development practices, including comprehensive testing strategies, CI/CD integration, SOLID principles implementation, and a reusable DSKit design system.
+The Viaplay Tech Test is a Swift-based cross-platform application that demonstrates modern iOS and tvOS development practices through a modular architecture built with Swift Package Manager (SPM). This project showcases a content browsing experience with sections and detailed views, leveraging Clean Architecture principles, MVVM pattern, and an offline-first strategy with ETag-based caching.
 
 ## 📱 Device Compatibility & Features
 
@@ -133,27 +132,6 @@ The Viaplay Tech Test is a Swift-based cross-platform application that demonstra
 - **🔄 Cross-Platform UI**: Shared components that adapt to iOS and tvOS with platform-specific optimizations
 - **🎯 Focus Management**: tvOS-optimized focus effects and navigation for Apple TV remote control
 - **🌍 English Only**: Streamlined single-language experience for optimal performance
-- **♿ Accessibility**: VoiceOver support, Dynamic Type, and semantic grouping across both platforms
-- **🔄 Error Handling**: Consistent error states with retry functionality using DSKit ErrorView
-- **📱 Responsive Design**: Adaptive layouts that work across different screen sizes and platforms
-- **🎨 Modern UI**: Built with SwiftUI and custom DSKit components for consistent theming
-- **🔄 Loading States**: Elegant loading indicators with Lottie animations for better user feedback
-- **🎯 Performance**: Optimized for smooth 60fps scrolling and animations across all platforms
-- **🔄 Cross-Platform Testing**: Unified test suite validates business logic for both iOS and tvOS
-- **🎨 DSKit Design System**: Reusable UI components with consistent theming and animations
-- **🔄 Modular Architecture**: Independent SPM packages for maintainability and scalability
-- **🔄 Clean Architecture**: Separation of concerns with clear dependency boundaries
-- **🔄 MVVM Pattern**: Reactive UI updates with proper state management
-- **🔄 Advanced Concurrency**: Thread-safe operations with Swift Concurrency and Actor model
-- **🔄 DTO/Mapper Pattern**: Robust JSON parsing with type-safe data transformation
-- **🔄 Comprehensive Testing**: Unit tests, integration tests, and snapshot tests
-- **🔄 CI/CD Integration**: Automated testing and code quality checks
-- **🔄 Offline-First**: Seamless experience with ETag-based caching and smart data synchronization
-- **🔄 Cross-Platform Support**: Native iOS and tvOS apps with platform-optimized UI and shared business logic
-- **🔄 Error Handling**: Graceful error states with user-friendly retry mechanisms using DSKit ErrorView
-- **🔄 Loading States**: Smooth loading indicators with Lottie animations for enhanced user experience
-- **🔄 Content Sections Display**: Browse content sections with rich metadata and smooth scrolling using DSKit components
-- **🔄 Section Details**: Comprehensive section information with detailed navigation and enhanced UI
 
 ### **Visual Design**
 - **Modern UI**: Built with SwiftUI and custom DSKit components
@@ -300,10 +278,6 @@ The application now supports **both iOS and tvOS** with a sophisticated cross-pl
 - **Enhanced Navigation**: Intuitive navigation with visual indicators and feedback
 - **Cross-Platform UX**: Optimized experiences for both touch (iOS) and remote (tvOS) interactions
 - **Comprehensive Information**: Detailed content display with statistics and metadata
-- **Responsive Design**: Adaptive layouts that work across different screen sizes and platforms
-- **Accessibility**: VoiceOver support, Dynamic Type, and semantic grouping
-- **Consistent Error Handling**: Unified error states with retry functionality across all features
-- **Loading States**: Elegant loading indicators with Lottie animations for better user feedback
 
 
 ## ⚡ Advanced Concurrency & Thread Safety
@@ -399,57 +373,6 @@ Each feature follows the **MVVM (Model-View-ViewModel)** pattern with **Clean Ar
   - Manages offline/online data synchronization
 - **Benefits**: Abstract data access, testable with stubs, and flexible data strategies.
 
-## 📦 SPM Architecture Decision: Internal vs External Dependencies
-
-### **Decision: SPM as Internal Targets**
-
-We chose to implement SPM modules as **internal targets** within the main Xcode project rather than external dependencies. Here's the rationale:
-
-### **✅ Advantages of Internal SPM Targets**
-
-**Development Experience:**
-- **Test Plans**: All test targets appear automatically in Xcode Test Navigator
-- **Debugging**: Seamless debugging across modules with breakpoints
-- **IntelliSense**: Perfect autocompletion and navigation between modules
-- **Build Performance**: Faster incremental builds and development cycles
-
-**Tech Test Benefits:**
-- **Demonstration**: Easy to show comprehensive testing strategies
-- **Evaluation**: Evaluators can quickly run and review all tests
-- **Maintainability**: Clear module separation without complexity overhead
-
-### **❌ Trade-offs Considered**
-
-**External SPM Dependencies would provide:**
-- **True Modularity**: Complete independence between packages
-- **Reusability**: Packages could be used in other projects
-- **Versioning**: Independent versioning per module
-- **Team Scalability**: Better for large distributed teams
-
-**Why we chose Internal for this Tech Test:**
-- **Scope**: Single-project demonstration of architectural principles
-- **Time Constraints**: Faster development and testing cycles
-- **Evaluation Focus**: Emphasis on code quality over distribution complexity
-- **Learning**: Clear demonstration of Clean Architecture without tooling overhead
-
-### **🏗️ Architecture Benefits Maintained**
-
-Even with internal targets, we maintain:
-- **Separation of Concerns**: Each module has single responsibility
-- **Dependency Inversion**: Clear dependency flow (Features → Domain ← Data)
-- **Testability**: Isolated testing with dependency injection
-- **SOLID Principles**: All principles applied within modular structure
-
-### **🔄 Future Migration Path**
-
-If this project were to scale to a production environment with multiple teams, the migration path to external SPM dependencies would be straightforward:
-
-1. **Extract Packages**: Move each internal target to separate `Package.swift` files
-2. **Update Dependencies**: Modify project to reference local package dependencies
-3. **CI/CD Updates**: Update build scripts to handle individual package testing
-4. **Team Structure**: Assign ownership of packages to different teams
-
-The current architecture makes this migration path clear and maintainable.
 
 ## 🧱 Modular architecture (SPM)
 
@@ -576,34 +499,6 @@ This architecture is designed to **scale with your team and product requirements
 - **Quality gates**: PRs from `feature/*` and `fix/*` branches are automatically validated.
 - **Fast feedback**: Only changed modules are rebuilt, reducing CI execution time.
 
-## 🧠 SOLID applied
-
-Our architecture strictly follows **SOLID principles** to ensure maintainable and extensible code:
-
-### **S - Single Responsibility Principle** 🎯
-- **Each module has one reason to change**: Domain handles business logic, NetworkingKit handles HTTP, StorageKit handles persistence.
-- **Each class has one responsibility**: `GetRootPageUseCase` only fetches root page, `HTTPClient` only makes HTTP requests.
-- **Benefits**: Easier testing, debugging, and maintenance.
-
-### **O - Open/Closed Principle** 🔓
-- **Open for extension, closed for modification**: New features extend via new SPM packages without modifying existing code.
-- **Protocol-based design**: New data sources implement existing protocols (`PageRepository`, `HTTPClient`).
-- **Benefits**: Backward compatibility and easy feature additions.
-
-### **L - Liskov Substitution Principle** 🔄
-- **Subtypes are substitutable**: Fake repositories and stubs implement the same contracts as real implementations.
-- **Test doubles work seamlessly**: Mock `HTTPClient` behaves exactly like real `HTTPClient`.
-- **Benefits**: Reliable testing and flexible implementations.
-
-### **I - Interface Segregation Principle** 🎭
-- **Small, focused protocols**: `PageRepository`, `HTTPClient`, `JSONDiskCache` have minimal, specific interfaces.
-- **No fat interfaces**: Clients only depend on methods they actually use.
-- **Benefits**: Reduced coupling and easier implementation.
-
-### **D - Dependency Inversion Principle** ⬆️
-- **Depend on abstractions, not concretions**: Features depend on domain protocols, not concrete implementations.
-- **Infrastructure depends on domain**: Data implements domain contracts, not the other way around.
-- **Benefits**: Flexible architecture and easy testing with mocks.
 
 ## 🗂️ Module index
 
@@ -620,37 +515,6 @@ Our architecture strictly follows **SOLID principles** to ensure maintainable an
 - StorageKit → [Packages/Infraestructure/StorageKit/README.md](Packages/Infraestructure/StorageKit/README.md)
 - DSKit → [Packages/Infraestructure/DSKit/README.md](Packages/Infraestructure/DSKit/README.md)
 
-## 🏗️ Architecture overview
-
-- **Clean Architecture + MVVM** in modular SPM packages.
-- **Flow**: `View (SwiftUI) → ViewModel → UseCase (Domain) → Repository (Data) → Data Sources (NetworkingKit + StorageKit)`.
-- **Offline-first** with ETag/304: when the server indicates Not Modified we return the **cache**.
-- **DSKit** is UI only; features translate domain models to view models.
-
-### Why this design (rationale per layer)
-
-- **Domain (Why?)**: Keep the business core stable, portable, and easy to test. No dependency on Apple frameworks.
-  - Defines entities (`Page`, `ContentSection`), contracts (`PageRepository`), and use cases (`GetRootPage`).
-- **Data (Why?)**: Orchestrate policies (ETag, mappings, future expiration) separated from domain. API or cache changes don't impact UI or use cases.
-  - Implements `PageRepository` combining remote and local; maps DTO ↔ domain.
-- **NetworkingKit (Why?)**: Abstract HTTP to enable stubbing/testing and replace client or strategy without touching repos/use cases.
-  - Provides `HTTPClient` and endpoint helpers.
-- **StorageKit (Why?)**: Encapsulate persistence (JSON/KeyValue) and allow switching from disk to database without affecting Data.
-  - `JSONDiskCache`, `KeyValueStore` (ETag/Last-Modified).
-- **DSKit (Why?)**: Independent reusable UI; facilitates visual consistency and avoids coupling UI to domain types.
-  - SwiftUI components that receive simple models.
-- **Features (Why?)**: Move presentation logic (MVVM) out of the root app and allow screen evolution without touching infrastructure.
-  - View + ViewModel dependent on domain; dependency injection in the composition root.
-
-### Online/Offline flow
-
-1) View requests data via ViewModel → UseCase (`GetRootPage`).
-2) Repository (`Data`) prepares conditional headers (`If-None-Match` with ETag stored in `StorageKit`).
-3) `NetworkingKit` makes the GET:
-   - **200 OK (online, new content)**: Data decodes JSON → maps to domain → saves ETag and JSON in `StorageKit` → returns to ViewModel.
-   - **304 Not Modified (logical offline / no changes)**: Data reads cached JSON from `StorageKit` and returns it.
-   - **Network error (real offline)**: Data attempts fallback to cached JSON; if it exists, returns it, if not, propagates error.
-4) ViewModel adapts to view models (for DSKit) and updates the UI.
 
 
 ### 🚀 Continuous Integration (CI) with GitHub Actions
