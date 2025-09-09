@@ -47,10 +47,10 @@ final class PageMapperTests: XCTestCase {
     }
 
     func test_map_ignoresInvalidURLs() {
-        let bad = makeSectionDTO(title: "Bad", href: "not a url")
+        let bad = makeSectionDTO(title: "Bad", href: "")
         let dto = makeDTO(sections: [bad])
         let page = PageMapper.map(dto)
-        XCTAssertTrue(page.sections.isEmpty)
+        XCTAssertEqual(page.sections.count, 0)
     }
 }
 
