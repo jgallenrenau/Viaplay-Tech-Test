@@ -9,7 +9,8 @@
 [![Swift](https://img.shields.io/badge/Swift-5.9-orange.svg)](https://swift.org)
 [![Xcode](https://img.shields.io/badge/Xcode-15.0-blue.svg)](https://developer.apple.com/xcode/)
 [![License](https://img.shields.io/badge/License-MIT-orange.svg)](LICENSE)
-<!-- [![iOS](https://img.shields.io/badge/iOS-17.0+-lightgrey.svg)](https://developer.apple.com/ios/) -->
+[![Coverage](https://codecov.io/gh/jgallenrenau/Viaplay-Tech-Test/branch/develop/graph/badge.svg)](https://codecov.io/gh/jgallenrenau/Viaplay-Tech-Test)
+[![iOS](https://img.shields.io/badge/iOS-17.0+-lightgrey.svg)](https://developer.apple.com/ios/)
 </div>
 
 ## 📋 Table of Contents
@@ -42,6 +43,13 @@
 </p>
 <p align="center">
   The app running with full network connectivity in light mode, showcasing smooth navigation between sections and detail views with modern card-based UI design.
+</p>
+
+### iOS - Normal Usage with Landscape format (Online + Light Mod)
+<p align="center">
+  <img src="DocResources/landscapeFormat.gif" width="800" height="560" />
+<p align="center">
+  The app running with full network connectivity in light mode, showcasing smooth navigation between sections and detail views with modern card-based UI design and in landscape format.
 </p>
 
 ### iOS - Offline Experience (No Network + Dark Mode)
@@ -418,7 +426,7 @@ We chose **UserDefaults** for storing ETags and metadata in this Viaplay Tech Te
 | 🔒 **Keychain**     | Maximum     | ⚡ Fast         | 🔴 High    | Secrets      | ❌ **Overkill**        |
 | 🗄️ **Core Data**    | High        | 🟡 Medium      | 🔴 High    | Complex Data | ❌ **Overkill**        |
 | 📁 **File System**  | High        | 🟡 Medium      | 🟡 Medium  | Files/Media  | ❌ **Overkill**        |
-| ⚙️ **UserDefaults** | Low         | ⚡⚡ Fastest     | 🟢 Low     | Preferences  | ✅ **Perfect**         |
+| ⚙️ **UserDefaults** | Medium     | ⚡⚡ Fastest     | 🟢 Low     | Preferences  | ✅ **Perfect**         |
 | 💾 **In-Memory**    | None        | ⚡⚡⚡ Fastest    | 🟢 Low     | Temporary    | ❌ **Not Persistent**  |
 
 **Why UserDefaults Wins for ETags:**
@@ -665,6 +673,7 @@ This architecture is designed to **scale with your team and product requirements
 **Badge (optional).** Add to the README:
 ```md
 ![iOS CI](https://github.com/<org>/<repo>/actions/workflows/ci.yml/badge.svg)
+[![Coverage](https://codecov.io/gh/<org>/<repo>/branch/develop/graph/badge.svg)](https://codecov.io/gh/<org>/<repo>)
 ```
 
 **Quick local run.**

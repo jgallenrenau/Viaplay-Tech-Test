@@ -1,10 +1,6 @@
 import SwiftUI
 import Domain
 
-#if canImport(UIKit)
-import UIKit
-#endif
-
 public struct DetailItemViewtvOS: View {
     let item: Domain.DetailItem
     @State private var isPressed = false
