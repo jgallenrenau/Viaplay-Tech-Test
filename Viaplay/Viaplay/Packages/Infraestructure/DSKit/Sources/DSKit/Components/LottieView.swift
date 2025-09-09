@@ -1,11 +1,24 @@
 import SwiftUI
 import Lottie
 
-public struct LottieView: UIViewRepresentable, View {
+#if canImport(UIKit)
+import UIKit
+
+public struct LottieView: UIViewRepresentable {
     let name: String                 // "Loading"
     var loopMode: LottieLoopMode = .loop
     var accessibilityLabel: String?
     var accessibilityHint: String?
+
+    public init(name: String,
+                loopMode: LottieLoopMode = .loop,
+                accessibilityLabel: String? = nil,
+                accessibilityHint: String? = nil) {
+        self.name = name
+        self.loopMode = loopMode
+        self.accessibilityLabel = accessibilityLabel
+        self.accessibilityHint = accessibilityHint
+    }
 
     public func makeUIView(context: Context) -> UIView {
         let container = UIView()
