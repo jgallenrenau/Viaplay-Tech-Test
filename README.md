@@ -10,7 +10,7 @@
 [![Xcode](https://img.shields.io/badge/Xcode-15.0-blue.svg)](https://developer.apple.com/xcode/)
 [![License](https://img.shields.io/badge/License-MIT-orange.svg)](LICENSE)
 [![Coverage](https://codecov.io/gh/jgallenrenau/Viaplay-Tech-Test/branch/develop/graph/badge.svg)](https://codecov.io/gh/jgallenrenau/Viaplay-Tech-Test)
-<!-- [![iOS](https://img.shields.io/badge/iOS-17.0+-lightgrey.svg)](https://developer.apple.com/ios/) -->
+[![iOS](https://img.shields.io/badge/iOS-17.0+-lightgrey.svg)](https://developer.apple.com/ios/)
 </div>
 
 ## 📋 Table of Contents
