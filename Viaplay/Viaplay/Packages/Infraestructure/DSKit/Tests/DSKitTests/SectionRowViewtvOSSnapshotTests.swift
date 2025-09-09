@@ -6,7 +6,7 @@ import TVUIKit
 @testable import DSKit
 
 final class SectionRowViewtvOSSnapshotTests: XCTestCase {
-    private let isRecording = true
+    private let isRecording = false
     
     private let config1080p = ViewImageConfig(
         safeArea: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), size: CGSize(width: 1920, height: 1080),

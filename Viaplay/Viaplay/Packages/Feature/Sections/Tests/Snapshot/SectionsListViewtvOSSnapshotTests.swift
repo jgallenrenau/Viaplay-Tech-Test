@@ -1,15 +1,12 @@
 import XCTest
 import SwiftUI
 import SnapshotTesting
-#if canImport(UIKit)
-import UIKit
-#endif
 @testable import Sections
 @testable import Domain
 
 @MainActor
 final class SectionsListViewtvOSSnapshotTests: XCTestCase {
-    private let isRecording = true
+    private let isRecording = false
     
     // MARK: - 1080p Fixed Resolution Configuration for tvOS
     private let config1080p = ViewImageConfig(

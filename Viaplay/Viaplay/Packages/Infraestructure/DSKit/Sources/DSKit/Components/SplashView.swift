@@ -1,8 +1,5 @@
 import SwiftUI
 
-#if canImport(UIKit)
-import UIKit
-
 public struct SplashView: View {
     
     public let onAnimationEnd: () -> Void

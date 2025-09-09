@@ -1,9 +1,6 @@
 import SwiftUI
 import Lottie
 
-#if canImport(UIKit)
-import UIKit
-
 public struct LottieView: UIViewRepresentable, View {
     let name: String                 // "Loading"
     var loopMode: LottieLoopMode = .loop

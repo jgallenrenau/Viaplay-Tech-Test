@@ -6,7 +6,7 @@ import SwiftUI
 
 @MainActor
 final class DetailViewSnapshotTests: XCTestCase {
-    private let isRecording = true
+    private let isRecording = false
     func test_detailView_snapshot() {
         let section = ContentSection(
             title: "Test Section",
