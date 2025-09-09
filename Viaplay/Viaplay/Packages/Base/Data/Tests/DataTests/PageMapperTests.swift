@@ -15,8 +15,7 @@ final class PageMapperTests: XCTestCase {
         primary: [SectionDTO]? = nil,
         secondary: [SectionDTO]? = nil
     ) -> PageDTO {
-        PageDTO(title: title, description: description, links: PageLinksDTO(
-            selfHref: "https://example.com/root",
+        PageDTO(title: title, description: description, links: LinksDTO(
             viaplaySections: sections,
             viaplayPrimaryNavigation: primary,
             viaplaySecondaryNavigation: secondary
