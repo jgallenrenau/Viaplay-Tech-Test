@@ -132,31 +132,3 @@ public struct SplashView: View {
     })
 }
 #endif
-
-#else
-// Fallback for platforms without UIKit
-public struct SplashView: View {
-    public let onAnimationEnd: () -> Void
-    
-    public init(onAnimationEnd: @escaping () -> Void) {
-        self.onAnimationEnd = onAnimationEnd
-    }
-    
-    public var body: some View {
-        VStack {
-            Spacer()
-            Text("Viaplay")
-                .font(.largeTitle)
-                .foregroundColor(.white)
-            Spacer()
-        }
-        .background(Color.blue)
-        .ignoresSafeArea()
-        .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                onAnimationEnd()
-            }
-        }
-    }
-}
-#endif
