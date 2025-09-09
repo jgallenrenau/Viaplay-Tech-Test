@@ -13,80 +13,99 @@
   },
   "testTargets" : [
     {
+      "parallelizable" : true,
       "target" : {
-        "containerPath" : "container:",
+        "containerPath" : "container:Viaplay\/Packages\/Base\/Data",
         "identifier" : "DataTests",
         "name" : "DataTests"
       }
     },
     {
+      "parallelizable" : true,
       "target" : {
-        "containerPath" : "container:..\/..\/Feature\/DetailSection",
+        "containerPath" : "container:Viaplay\/Packages\/Feature\/DetailSection",
         "identifier" : "DetailSectionIntegrationTests",
         "name" : "DetailSectionIntegrationTests"
       }
     },
     {
+      "parallelizable" : true,
       "target" : {
-        "containerPath" : "container:..\/..\/Feature\/DetailSection",
+        "containerPath" : "container:Viaplay\/Packages\/Feature\/DetailSection",
         "identifier" : "DetailSectionSnapshotTests",
         "name" : "DetailSectionSnapshotTests"
       }
     },
     {
+      "parallelizable" : true,
       "target" : {
-        "containerPath" : "container:..\/..\/Feature\/DetailSection",
+        "containerPath" : "container:Viaplay\/Packages\/Feature\/DetailSection",
         "identifier" : "DetailSectionUnitTests",
         "name" : "DetailSectionUnitTests"
       }
     },
     {
+      "parallelizable" : true,
       "target" : {
-        "containerPath" : "container:..\/Domain",
+        "containerPath" : "container:Viaplay\/Packages\/Base\/Domain",
         "identifier" : "DomainTests",
         "name" : "DomainTests"
       }
     },
     {
+      "parallelizable" : true,
       "target" : {
-        "containerPath" : "container:..\/..\/Infraestructure\/DSKit",
+        "containerPath" : "container:Viaplay\/Packages\/Infraestructure\/DSKit",
         "identifier" : "DSKitTests",
         "name" : "DSKitTests"
       }
     },
     {
+      "parallelizable" : true,
       "target" : {
-        "containerPath" : "container:..\/..\/Infraestructure\/NetworkingKit",
+        "containerPath" : "container:Viaplay\/Packages\/Infraestructure\/NetworkingKit",
         "identifier" : "NetworkingKitTests",
         "name" : "NetworkingKitTests"
       }
     },
     {
+      "parallelizable" : true,
       "target" : {
-        "containerPath" : "container:..\/..\/Feature\/Sections",
+        "containerPath" : "container:Viaplay\/Packages\/Feature\/Sections",
         "identifier" : "SectionsIntegrationTests",
         "name" : "SectionsIntegrationTests"
       }
     },
     {
+      "parallelizable" : true,
       "target" : {
-        "containerPath" : "container:..\/..\/Feature\/Sections",
+        "containerPath" : "container:Viaplay\/Packages\/Feature\/Sections",
         "identifier" : "SectionsSnapshotTests",
         "name" : "SectionsSnapshotTests"
       }
     },
     {
+      "parallelizable" : true,
       "target" : {
-        "containerPath" : "container:..\/..\/Feature\/Sections",
+        "containerPath" : "container:Viaplay\/Packages\/Feature\/Sections",
         "identifier" : "SectionsUnitTests",
         "name" : "SectionsUnitTests"
       }
     },
     {
+      "parallelizable" : true,
       "target" : {
-        "containerPath" : "container:..\/..\/Infraestructure\/StorageKit",
+        "containerPath" : "container:Viaplay\/Packages\/Infraestructure\/StorageKit",
         "identifier" : "StorageKitTests",
         "name" : "StorageKitTests"
+      }
+    },
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:Viaplay.xcodeproj",
+        "identifier" : "14D5FF482E6632EB00F53C94",
+        "name" : "ViaplayTests"
       }
     }
   ],
