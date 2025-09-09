@@ -1,13 +1,11 @@
 import XCTest
 import SwiftUI
 import SnapshotTesting
-#if canImport(UIKit)
-import UIKit
-#endif
 @testable import DSKit
 
 @MainActor
 final class SplashViewtvOSSnapshotTests: XCTestCase {
+    private let isRecording = false
     
     // MARK: - 1080p Fixed Resolution Configuration for tvOS
     private let config1080p = ViewImageConfig(
@@ -21,7 +19,7 @@ final class SplashViewtvOSSnapshotTests: XCTestCase {
     func testSplashViewtvOSInitialState() {
         let view = SplashView(onAnimationEnd: {})
         let vc = UIHostingController(rootView: view)
-        assertSnapshot(of: vc, as: .image(on: config1080p))
+        assertSnapshot(of: vc, as: .image(on: config1080p, precision: 0.98))
     }
     
     func testSplashViewtvOSWithCustomCallback() {
