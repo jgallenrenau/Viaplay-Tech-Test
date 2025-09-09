@@ -35,15 +35,9 @@
       </TestPlans>
       <Testables>
          <TestableReference
-            skipped = "YES"
+            skipped = "NO"
             parallelizable = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "14D5FF482E6632EB00F53C94"
-               BuildableName = "ViaplayTests.xctest"
-               BlueprintName = "ViaplayTests"
-               ReferencedContainer = "container:Viaplay.xcodeproj">
-            </BuildableReference>
+            <!-- Removed ViaplayTests reference -->
          </TestableReference>
       </Testables>
    </TestAction>
