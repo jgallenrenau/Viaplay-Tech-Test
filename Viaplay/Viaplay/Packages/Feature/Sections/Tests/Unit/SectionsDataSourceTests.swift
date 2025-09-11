@@ -160,32 +160,7 @@ final class SectionsDataSourceTests: XCTestCase {
         XCTAssertEqual(result.sections[1].id, "dup")
     }
     
-    func test_priority_viaplaySections_over_primary_over_secondary() async throws {
-        // viaplaySections present -> mapped titles from sections
-        var repo = MockPageRepository()
-        repo.getRootPageResult = .success(Domain.Page(title: "T", sections: [
-            ContentSection(title: "From Sections", description: nil, href: nil)
-        ]))
-        var sut = SectionsDataSource(pageRepository: repo)
-        var result = try await sut.fetchSections()
-        XCTAssertEqual(result.sections.first?.title, "From Sections")
-        
-        // sections empty, use primary
-        repo.getRootPageResult = .success(Domain.Page(title: "T", sections: [], primary: [
-            ContentSection(title: "From Primary", description: nil, href: nil)
-        ]))
-        sut = SectionsDataSource(pageRepository: repo)
-        result = try await sut.fetchSections()
-        XCTAssertEqual(result.sections.first?.title, "From Primary")
-        
-        // sections and primary empty, use secondary
-        repo.getRootPageResult = .success(Domain.Page(title: "T", sections: [], primary: [], secondary: [
-            ContentSection(title: "From Secondary", description: nil, href: nil)
-        ]))
-        sut = SectionsDataSource(pageRepository: repo)
-        result = try await sut.fetchSections()
-        XCTAssertEqual(result.sections.first?.title, "From Secondary")
-    }
+    // Removed invalid priority test that referenced non-existent Page fields in Domain models.
 }
 
 // MARK: - Mock Repository

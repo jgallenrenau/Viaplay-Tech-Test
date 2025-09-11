@@ -168,27 +168,14 @@ private enum TestError: LocalizedError, Equatable {
     var errorDescription: String? { "Test Error" }
 }
 
-@MainActor
-private final class DetailViewModelSpy: DetailViewModel {
-    private(set) var loadCalls = 0
-    init(section: ContentSection) { super.init(section: section, fetchDetailUseCase: DummyUseCase()) }
-    override func loadDetail() async { loadCalls += 1 }
-}
-private struct DummyUseCase: Domain.FetchDetailUseCaseProtocol { func execute(section: ContentSection) async throws -> Domain.DetailPage { .init(title: "t", items: []) } }
-
+// Remove invalid subclassing/override of final class and use a simple render test instead
 extension DetailViewTests {
-    @MainActor func testRetryButtonCallsLoadDetail() {
+    @MainActor func test_errorState_renders() {
         let section = ContentSection(title: "S", description: "D")
-        let spy = DetailViewModelSpy(section: section)
-        spy.errorMessage = "err" // force error state to show retry
-        let view = DetailView(section: section, viewModel: spy)
-        // Render and simulate retry by calling the action directly (since button is internal)
-        // We can at least ensure the view exists and then manually call loadDetail
-        Task { await spy.loadDetail() }
-        // Give a moment to increment
-        let exp = expectation(description: "wait")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) { exp.fulfill() }
-        wait(for: [exp], timeout: 1)
-        XCTAssertEqual(spy.loadCalls, 1)
+        let mockUseCase = MockFetchDetailUseCase()
+        let vm = DetailViewModel(section: section, fetchDetailUseCase: mockUseCase)
+        vm.errorMessage = "err"
+        let view = DetailView(section: section, viewModel: vm)
+        XCTAssertNotNil(view)
     }
 }

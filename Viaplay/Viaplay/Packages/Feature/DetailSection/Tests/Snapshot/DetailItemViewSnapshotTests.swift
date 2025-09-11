@@ -17,7 +17,16 @@ final class DetailItemViewSnapshotTests: XCTestCase {
     }
     
     func test_item_variants_light_dark_dynamicType() {
-        let base = DetailItem(id: "1", title: String(repeating: "Title ", count: 5), description: "Desc", content: String(repeating: "Content ", count: 10), href: URL(string: "https://example.com"), tags: ["a","b","c"]) 
+        let base = DetailItem(
+            id: "1",
+            title: String(repeating: "Title ", count: 5),
+            description: "Desc",
+            href: URL(string: "https://example.com"),
+            imageURL: nil,
+            content: String(repeating: "Content ", count: 10),
+            publishedDate: nil,
+            tags: ["a","b","c"]
+        )
         let view = DetailItemView(item: base)
         assertSnapshot(matching: makeVC(view), as: .image, record: record)
         assertSnapshot(matching: makeVC(view, dark: true), as: .image, record: record)
@@ -26,7 +35,7 @@ final class DetailItemViewSnapshotTests: XCTestCase {
     }
     
     func test_item_without_tags_or_href() {
-        let item = DetailItem(id: "2", title: "Simple", description: nil, content: "Short")
+        let item = DetailItem(id: "2", title: "Simple", description: nil, href: nil, imageURL: nil, content: "Short")
         let view = DetailItemView(item: item)
         assertSnapshot(matching: makeVC(view, size: CGSize(width: 390, height: 120)), as: .image, record: record)
     }
