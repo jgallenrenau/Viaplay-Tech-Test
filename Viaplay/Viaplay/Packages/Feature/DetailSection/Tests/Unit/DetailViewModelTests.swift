@@ -169,9 +169,55 @@ final class DetailViewModelTests: XCTestCase {
         
         XCTAssertEqual(sut.detailPage?.description, nil)
     }
+    
+    func test_loadDetail_cancellation_setsLoadingFalseAndNoDetail() async {
+        let delayedUseCase = DelayedFetchDetailUseCaseSpy(delayNanos: 500_000_000, result: .success(Domain.DetailPage(title: "T", items: [])))
+        sut = DetailViewModel(section: section, fetchDetailUseCase: delayedUseCase)
+        
+        let task = Task { await sut.loadDetail() }
+        
+        // Give it a moment to flip isLoading to true, then cancel
+        try? await Task.sleep(nanoseconds: 50_000_000)
+        task.cancel()
+        
+        // Wait a bit to allow cancellation to propagate
+        try? await Task.sleep(nanoseconds: 50_000_000)
+        
+        XCTAssertFalse(sut.isLoading)
+        XCTAssertNil(sut.detailPage)
+    }
+    
+    func test_loadDetail_withInvalidSection_setsError() async {
+        let invalidSection = ContentSection(title: "", description: nil)
+        sut = DetailViewModel(section: invalidSection, fetchDetailUseCase: useCase)
+        useCase.result = .failure(TestError.generic)
+        
+        await sut.loadDetail()
+        
+        XCTAssertNotNil(sut.errorMessage)
+        XCTAssertNil(sut.detailPage)
+        XCTAssertFalse(sut.isLoading)
+    }
 }
 
 private enum TestError: LocalizedError, Equatable {
     case generic
     var errorDescription: String? { "Test Error" }
+}
+
+// Local delayed use case for cancellation testing
+private final class DelayedFetchDetailUseCaseSpy: Domain.FetchDetailUseCaseProtocol {
+    let delayNanos: UInt64
+    let result: Result<Domain.DetailPage, Error>
+    init(delayNanos: UInt64, result: Result<Domain.DetailPage, Error>) {
+        self.delayNanos = delayNanos
+        self.result = result
+    }
+    func execute(section: ContentSection) async throws -> Domain.DetailPage {
+        try await Task.sleep(nanoseconds: delayNanos)
+        switch result {
+        case let .success(value): return value
+        case let .failure(error): throw error
+        }
+    }
 }

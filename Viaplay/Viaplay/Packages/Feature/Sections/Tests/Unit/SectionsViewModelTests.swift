@@ -120,4 +120,29 @@ final class SectionsViewModelTests: XCTestCase {
         XCTAssertEqual(sut.sections[1].title, "Section 2")
         XCTAssertEqual(sut.sections[2].title, "Section 3")
     }
+    
+    func test_loadSections_cachesRootPageAndSections() async {
+        let section1 = Section(id: "1", title: "One", href: nil, imageURL: nil, description: "Desc 1")
+        let section2 = Section(id: "2", title: "Two", href: nil, imageURL: nil, description: "Desc 2")
+        let sectionsPage = SectionsPage(title: "Home", description: "Root Desc", sections: [section1, section2], rootDescription: "Root Desc")
+        repo.result = .success(sectionsPage)
+        
+        await sut.loadSections()
+        
+        XCTAssertEqual(sut.rootPageDescription, "Root Desc")
+        XCTAssertTrue(cacheService.isSectionCached("1"))
+        XCTAssertTrue(cacheService.isSectionCached("2"))
+        XCTAssertEqual(cacheService.getSectionDescription(for: "1")?.description, "Desc 1")
+        XCTAssertEqual(cacheService.getSectionDescription(for: "2")?.description, "Desc 2")
+    }
+    
+    func test_getSectionDescription_and_isSectionCached_afterLoad() async {
+        let section = Section(id: "abc", title: "S", href: nil, imageURL: nil, description: "D")
+        repo.result = .success(SectionsPage(title: "T", description: nil, sections: [section], rootDescription: nil))
+        
+        await sut.loadSections()
+        
+        XCTAssertTrue(sut.isSectionCached("abc"))
+        XCTAssertEqual(sut.getSectionDescription(for: "abc"), "D")
+    }
 }
