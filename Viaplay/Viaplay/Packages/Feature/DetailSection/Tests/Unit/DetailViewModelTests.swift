@@ -198,6 +198,19 @@ final class DetailViewModelTests: XCTestCase {
         XCTAssertNil(sut.detailPage)
         XCTAssertFalse(sut.isLoading)
     }
+    
+    func test_retryAfterError_clearsErrorAndLoads() async {
+        useCase.result = .failure(TestError.generic)
+        await sut.loadDetail()
+        XCTAssertNotNil(sut.errorMessage)
+        
+        let expectedDetailPage = Domain.DetailPage(title: "OK", items: [])
+        useCase.result = .success(expectedDetailPage)
+        await sut.loadDetail()
+        
+        XCTAssertNil(sut.errorMessage)
+        XCTAssertEqual(sut.detailPage, expectedDetailPage)
+    }
 }
 
 private enum TestError: LocalizedError, Equatable {

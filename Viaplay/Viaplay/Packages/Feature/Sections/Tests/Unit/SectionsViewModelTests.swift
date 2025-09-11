@@ -145,4 +145,115 @@ final class SectionsViewModelTests: XCTestCase {
         XCTAssertTrue(sut.isSectionCached("abc"))
         XCTAssertEqual(sut.getSectionDescription(for: "abc"), "D")
     }
+    
+    func test_parallelRefresh_doesNotLeaveIsLoadingStuck() async {
+        repo.result = .success(SectionsPage(title: "Home", sections: [
+            Section(id: "id", title: "Title", href: URL(string: "https://example.com/1"))
+        ]))
+        
+        async let load1: Void = sut.loadSections()
+        async let load2: Void = sut.loadSections()
+        _ = await ((), ())
+        
+        XCTAssertFalse(sut.isLoading)
+    }
+    
+    // MARK: - Networking for section descriptions
+    
+    func test_fetchSectionDescription_200WithoutField_returnsNil() async {
+        URLProtocolStub.startInterceptingRequests()
+        URLProtocolStub.stub(statusCode: 200, body: Data("{}".utf8))
+        
+        repo.result = .success(SectionsPage(title: "Home", sections: [
+            Section(id: "s1", title: "T", href: URL(string: "https://example.com/desc"))
+        ]))
+        
+        await sut.loadSections()
+        
+        XCTAssertNil(sut.sections.first?.description)
+        URLProtocolStub.stopInterceptingRequests()
+    }
+    
+    func test_fetchSectionDescription_200InvalidJSON_returnsNil() async {
+        URLProtocolStub.startInterceptingRequests()
+        URLProtocolStub.stub(statusCode: 200, body: Data("not-json".utf8))
+        
+        repo.result = .success(SectionsPage(title: "Home", sections: [
+            Section(id: "s1", title: "T", href: URL(string: "https://example.com/desc"))
+        ]))
+        
+        await sut.loadSections()
+        
+        XCTAssertNil(sut.sections.first?.description)
+        URLProtocolStub.stopInterceptingRequests()
+    }
+    
+    func test_fetchSectionDescription_404_returnsNil() async {
+        URLProtocolStub.startInterceptingRequests()
+        URLProtocolStub.stub(statusCode: 404, body: Data())
+        
+        repo.result = .success(SectionsPage(title: "Home", sections: [
+            Section(id: "s1", title: "T", href: URL(string: "https://example.com/desc"))
+        ]))
+        
+        await sut.loadSections()
+        XCTAssertNil(sut.sections.first?.description)
+        URLProtocolStub.stopInterceptingRequests()
+    }
+    
+    func test_fetchSectionDescription_timeout_returnsNil() async {
+        URLProtocolStub.startInterceptingRequests()
+        URLProtocolStub.stubWithError(URLError(.timedOut))
+        
+        repo.result = .success(SectionsPage(title: "Home", sections: [
+            Section(id: "s1", title: "T", href: URL(string: "https://example.com/desc"))
+        ]))
+        
+        await sut.loadSections()
+        XCTAssertNil(sut.sections.first?.description)
+        URLProtocolStub.stopInterceptingRequests())
+    }
+}
+
+// MARK: - URLProtocol Stub
+private final class URLProtocolStub: URLProtocol {
+    private struct Stub {
+        let response: HTTPURLResponse?
+        let body: Data?
+        let error: Error?
+    }
+    private static var stub: Stub?
+    
+    static func stub(statusCode: Int, body: Data) {
+        let response = HTTPURLResponse(url: URL(string: "https://stub.local")!, statusCode: statusCode, httpVersion: nil, headerFields: nil)
+        stub = Stub(response: response, body: body, error: nil)
+    }
+    static func stubWithError(_ error: Error) {
+        stub = Stub(response: nil, body: nil, error: error)
+    }
+    
+    static func startInterceptingRequests() {
+        URLProtocol.registerClass(URLProtocolStub.self)
+    }
+    static func stopInterceptingRequests() {
+        URLProtocol.unregisterClass(URLProtocolStub.self)
+        stub = nil
+    }
+    
+    override class func canInit(with request: URLRequest) -> Bool { true }
+    override class func canonicalRequest(for request: URLRequest) -> URLRequest { request }
+    override func startLoading() {
+        if let error = URLProtocolStub.stub?.error {
+            client?.urlProtocol(self, didFailWithError: error)
+            return
+        }
+        if let response = URLProtocolStub.stub?.response {
+            client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
+        }
+        if let body = URLProtocolStub.stub?.body {
+            client?.urlProtocol(self, didLoad: body)
+        }
+        client?.urlProtocolDidFinishLoading(self)
+    }
+    override func stopLoading() { }
 }
