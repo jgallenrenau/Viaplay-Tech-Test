@@ -18,16 +18,10 @@ final class ViaplayAppTests: XCTestCase {
     }
     
     func test_app_initialization() {
-        // Given: A new ViaplayApp instance
-        // When: The app is created
-        // Then: It should be properly initialized
         XCTAssertNotNil(sut)
     }
     
     func test_app_body_returnsWindowGroup() {
-        // Given: A ViaplayApp instance
-        // When: Accessing the body
-        // Then: It should return a WindowGroup scene
         let body = sut.body
         
         // Verify that the body is a WindowGroup
@@ -37,9 +31,6 @@ final class ViaplayAppTests: XCTestCase {
     }
     
     func test_app_scene_containsContentView() {
-        // Given: A ViaplayApp instance
-        // When: Accessing the scene body
-        // Then: The WindowGroup should contain ContentView
         let scene = sut.body
         
         // The scene should be accessible and not crash
@@ -50,9 +41,6 @@ final class ViaplayAppTests: XCTestCase {
     }
     
     func test_app_multipleInstances() {
-        // Given: Multiple ViaplayApp instances
-        // When: Creating them
-        // Then: Each should be independent
         let app1 = ViaplayApp()
         let app2 = ViaplayApp()
         
@@ -64,18 +52,12 @@ final class ViaplayAppTests: XCTestCase {
     }
     
     func test_app_lifecycle() {
-        // Given: A ViaplayApp instance
-        // When: Creating and destroying it
-        // Then: It should handle lifecycle properly
         
         var app: ViaplayApp? = ViaplayApp()
         XCTAssertNotNil(app)
         
-        // Access body to ensure it works
         let _ = app?.body
         
-        // Deallocate
         app = nil
-        // Should not crash or cause issues
     }
 }
