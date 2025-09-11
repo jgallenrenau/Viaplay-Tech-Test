@@ -211,7 +211,7 @@ final class SectionsViewModelTests: XCTestCase {
         
         await sut.loadSections()
         XCTAssertNil(sut.sections.first?.description)
-        URLProtocolStub.stopInterceptingRequests())
+        URLProtocolStub.stopInterceptingRequests()
     }
 }
 
