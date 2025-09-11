@@ -6,7 +6,7 @@ import SwiftUI
 
 @MainActor
 final class DetailItemViewSnapshotTests: XCTestCase {
-    private let isRecording = true
+    private let isRecording = false
     
     private func makeVC<T: View>(_ view: T, dark: Bool = false, traits: UITraitCollection? = nil, size: CGSize = CGSize(width: 390, height: 200)) -> UIViewController {
         let v = dark ? AnyView(view.preferredColorScheme(.dark)) : AnyView(AnyView(view))

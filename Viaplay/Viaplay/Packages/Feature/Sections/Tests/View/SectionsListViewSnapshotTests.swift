@@ -8,7 +8,7 @@ import UIKit
 
 @MainActor
 final class SectionsListViewSnapshotTests: XCTestCase {
-    private let isRecording = true
+    private let isRecording = false
     
     private func makeVC<T: View>(_ view: T, traits: UITraitCollection? = nil, size: CGSize = CGSize(width: 390, height: 844)) -> UIViewController {
         let vc = UIHostingController(rootView: view)
