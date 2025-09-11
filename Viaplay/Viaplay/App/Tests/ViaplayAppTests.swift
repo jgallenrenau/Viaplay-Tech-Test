@@ -52,6 +52,7 @@ final class ViaplayAppTests: XCTestCase {
     }
     
     func test_app_lifecycle() {
+Laravel1991!
         
         var app: ViaplayApp? = ViaplayApp()
         XCTAssertNotNil(app)
