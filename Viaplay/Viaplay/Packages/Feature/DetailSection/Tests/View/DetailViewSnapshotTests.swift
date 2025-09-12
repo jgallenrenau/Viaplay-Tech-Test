@@ -20,7 +20,7 @@ final class DetailViewSnapshotTests: XCTestCase {
         let vm = DetailViewModel(section: section, fetchDetailUseCase: DummyDetailUseCase())
         vm.isLoading = true
         let view = DetailView(section: section, viewModel: vm)
-        assertSnapshot(matching: makeVC(view), as: .image, record: record)
+        assertSnapshot(matching: makeVC(view), as: .image, record: isRecording)
     }
     
     func test_error_dark() {
@@ -28,7 +28,7 @@ final class DetailViewSnapshotTests: XCTestCase {
         let vm = DetailViewModel(section: section, fetchDetailUseCase: DummyDetailUseCase())
         vm.errorMessage = "Network error"
         let view = DetailView(section: section, viewModel: vm)
-        assertSnapshot(matching: makeVC(view, dark: true), as: .image, record: record)
+        assertSnapshot(matching: makeVC(view, dark: true), as: .image, record: isRecording)
     }
     
     func test_empty_light() {
@@ -36,7 +36,7 @@ final class DetailViewSnapshotTests: XCTestCase {
         let vm = DetailViewModel(section: section, fetchDetailUseCase: DummyDetailUseCase())
         vm.detailPage = DetailPage(title: "S", items: [])
         let view = DetailView(section: section, viewModel: vm)
-        assertSnapshot(matching: makeVC(view), as: .image, record: record)
+        assertSnapshot(matching: makeVC(view), as: .image, record: isRecording)
     }
     
     func test_oneItem_dark_large() {
@@ -44,7 +44,7 @@ final class DetailViewSnapshotTests: XCTestCase {
         let vm = DetailViewModel(section: section, fetchDetailUseCase: DummyDetailUseCase())
         vm.detailPage = DetailPage(title: "S", items: [DetailItem(id: "1", title: "Item", description: "Desc")])
         let view = DetailView(section: section, viewModel: vm)
-        assertSnapshot(matching: makeVC(view, dark: true, size: CGSize(width: 428, height: 926)), as: .image, record: record)
+        assertSnapshot(matching: makeVC(view, dark: true, size: CGSize(width: 428, height: 926)), as: .image, record: isRecording)
     }
     
     func test_manyItems_light() {
@@ -52,7 +52,7 @@ final class DetailViewSnapshotTests: XCTestCase {
         let vm = DetailViewModel(section: section, fetchDetailUseCase: DummyDetailUseCase())
         vm.detailPage = DetailPage(title: "S", items: (1...10).map { DetailItem(id: String($0), title: "Item \($0)") })
         let view = DetailView(section: section, viewModel: vm)
-        assertSnapshot(matching: makeVC(view, size: CGSize(width: 390, height: 844)), as: .image, record: record)
+        assertSnapshot(matching: makeVC(view, size: CGSize(width: 390, height: 844)), as: .image, record: isRecording)
     }
 }
 

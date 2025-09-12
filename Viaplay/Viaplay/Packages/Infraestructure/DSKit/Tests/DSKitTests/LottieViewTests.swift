@@ -10,7 +10,6 @@ final class LottieViewTests: XCTestCase {
     override func setUp() async throws {
         try await super.setUp()
         
-        // Initialize SUT with default parameters
         sut = DSKit.LottieView(name: "Loading")
     }
     
@@ -19,7 +18,6 @@ final class LottieViewTests: XCTestCase {
         try await super.tearDown()
     }
     
-    // MARK: - Initialization Tests
     
     func test_init_withDefaultParameters() {
         let lottieView = DSKit.LottieView(name: "TestAnimation")
@@ -54,7 +52,6 @@ final class LottieViewTests: XCTestCase {
         XCTAssertEqual(autoReverseView.loopMode, .autoReverse)
     }
     
-    // MARK: - Property Tests
     
     func test_nameProperty() {
         let customName = "CustomAnimationName"
@@ -80,7 +77,6 @@ final class LottieViewTests: XCTestCase {
         XCTAssertEqual(view.accessibilityHint, "Test Hint")
     }
     
-    // MARK: - Animation Name Tests
     
     func test_differentAnimationNames() {
         let names = ["Loading", "Success", "Error", "Spinner", "CustomAnimation"]
@@ -96,7 +92,6 @@ final class LottieViewTests: XCTestCase {
         XCTAssertEqual(view.name, "")
     }
     
-    // MARK: - Edge Cases Tests
     
     func test_multipleInstances() {
         let view1 = DSKit.LottieView(name: "Animation1")
@@ -110,13 +105,10 @@ final class LottieViewTests: XCTestCase {
     func test_sameInstanceMultipleAccess() {
         XCTAssertEqual(sut.name, "Loading")
         XCTAssertEqual(sut.loopMode, .loop)
-        // Note: accessibilityLabel and accessibilityHint are not tested here due to SwiftUI ambiguity
     }
     
-    // MARK: - Integration Tests
     
     func test_swiftUIIntegration() {
-        // Test that LottieView can be used in SwiftUI
         let swiftUIView = DSKit.LottieView(name: "Test")
         
         XCTAssertEqual(swiftUIView.name, "Test")
@@ -132,7 +124,6 @@ final class LottieViewTests: XCTestCase {
         }
     }
     
-    // MARK: - Accessibility Tests
     
     func test_accessibilityLabelOnly() {
         let view = DSKit.LottieView(
@@ -172,7 +163,6 @@ final class LottieViewTests: XCTestCase {
         XCTAssertNil(view.accessibilityHint)
     }
     
-    // MARK: - Loop Mode Edge Cases
     
     func test_loopModeDefault() {
         let view = DSKit.LottieView(name: "Test")
@@ -189,7 +179,6 @@ final class LottieViewTests: XCTestCase {
         XCTAssertEqual(view.loopMode, .autoReverse)
     }
     
-    // MARK: - String Edge Cases
     
     func test_nameWithSpecialCharacters() {
         let specialName = "Animation-With_Special.Chars123"
@@ -212,34 +201,28 @@ final class LottieViewTests: XCTestCase {
         XCTAssertEqual(view.name, spacedName)
     }
     
-    // MARK: - Memory Management Tests
     
     func test_memoryManagement() {
-        // Since LottieView is a struct, we test value semantics instead
         var view1 = DSKit.LottieView(name: "Test")
         let view2 = view1
         
-        // Modifying one should not affect the other (value semantics)
         view1 = DSKit.LottieView(name: "Modified")
         
         XCTAssertEqual(view1.name, "Modified")
         XCTAssertEqual(view2.name, "Test")
     }
     
-    // MARK: - Equality Tests
     
     func test_equality() {
         let view1 = DSKit.LottieView(name: "Test")
         let view2 = DSKit.LottieView(name: "Test")
         
-        // Properties should be equal
         XCTAssertEqual(view1.name, view2.name)
         XCTAssertEqual(view1.loopMode, view2.loopMode)
         XCTAssertEqual(view1.accessibilityLabel, view2.accessibilityLabel)
         XCTAssertEqual(view1.accessibilityHint, view2.accessibilityHint)
     }
     
-    // MARK: - Performance Tests
     
     func test_initializationPerformance() {
         measure {

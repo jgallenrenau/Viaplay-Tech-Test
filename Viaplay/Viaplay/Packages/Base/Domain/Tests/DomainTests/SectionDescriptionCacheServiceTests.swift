@@ -11,19 +11,15 @@ final class SectionDescriptionCacheServiceTests: XCTestCase {
     override func setUp() async throws {
         try await super.setUp()
         
-        // Create a test-specific UserDefaults suite
         userDefaults = UserDefaults(suiteName: testSuiteName)!
         userDefaults.removePersistentDomain(forName: testSuiteName)
         
-        // Initialize SUT with test UserDefaults
         sut = SectionDescriptionCacheService()
         
-        // Clear any existing cache
         sut.clearCache()
     }
     
     override func tearDown() async throws {
-        // Clean up test data
         sut.clearCache()
         userDefaults.removePersistentDomain(forName: testSuiteName)
         
@@ -33,14 +29,12 @@ final class SectionDescriptionCacheServiceTests: XCTestCase {
         try await super.tearDown()
     }
     
-    // MARK: - Initial State Tests
     
     func test_init_hasEmptyCache() {
         XCTAssertTrue(sut.cachedSections.isEmpty)
         XCTAssertNil(sut.rootPageCache)
     }
     
-    // MARK: - Root Page Caching Tests
     
     func test_cacheRootPage_savesTitleAndDescription() {
         let title = "Test Title"
@@ -77,7 +71,6 @@ final class SectionDescriptionCacheServiceTests: XCTestCase {
         XCTAssertNil(result)
     }
     
-    // MARK: - Sections Caching Tests
     
     func test_cacheSections_savesMultipleSections() {
         let sections = [
@@ -139,23 +132,18 @@ final class SectionDescriptionCacheServiceTests: XCTestCase {
         XCTAssertFalse(sut.isSectionCached("non-cached-id"))
     }
     
-    // MARK: - Cache Management Tests
     
     func test_clearCache_removesAllData() {
-        // First, add some data
         sut.cacheRootPage(title: "Test Title", description: "Test Description")
         sut.cacheSections([
             Section(id: "1", title: "Section 1", href: nil, description: nil)
         ])
         
-        // Verify data exists
         XCTAssertNotNil(sut.rootPageCache)
         XCTAssertFalse(sut.cachedSections.isEmpty)
         
-        // Clear cache
         sut.clearCache()
         
-        // Verify data is removed
         XCTAssertNil(sut.rootPageCache)
         XCTAssertTrue(sut.cachedSections.isEmpty)
     }
@@ -169,7 +157,6 @@ final class SectionDescriptionCacheServiceTests: XCTestCase {
         XCTAssertTrue(sut.cachedSections.isEmpty)
     }
     
-    // MARK: - Persistence Tests
     
     func test_cacheRootPage_persistsToUserDefaults() {
         let title = "Persistent Title"
@@ -177,7 +164,6 @@ final class SectionDescriptionCacheServiceTests: XCTestCase {
         
         sut.cacheRootPage(title: title, description: description)
         
-        // Create a new instance to test persistence
         let newSut = SectionDescriptionCacheService()
         
         XCTAssertEqual(newSut.rootPageCache?.title, title)
@@ -191,14 +177,12 @@ final class SectionDescriptionCacheServiceTests: XCTestCase {
         
         sut.cacheSections(sections)
         
-        // Create a new instance to test persistence
         let newSut = SectionDescriptionCacheService()
         
         XCTAssertEqual(newSut.cachedSections.count, 1)
         XCTAssertEqual(newSut.cachedSections["persistent-1"]?.title, "Persistent Section")
     }
     
-    // MARK: - Error Handling Tests
     
     func test_cacheSections_overwritesExistingData() {
         let firstSections = [
@@ -227,7 +211,6 @@ final class SectionDescriptionCacheServiceTests: XCTestCase {
         XCTAssertEqual(sut.rootPageCache?.description, "Second Description")
     }
     
-    // MARK: - Edge Cases Tests
     
     func test_cacheSections_withEmptyArray() {
         sut.cacheSections([])
@@ -243,7 +226,6 @@ final class SectionDescriptionCacheServiceTests: XCTestCase {
         
         sut.cacheSections(sections)
         
-        // Should only have one entry with the last value
         XCTAssertEqual(sut.cachedSections.count, 1)
         XCTAssertEqual(sut.cachedSections["duplicate"]?.title, "Second")
     }

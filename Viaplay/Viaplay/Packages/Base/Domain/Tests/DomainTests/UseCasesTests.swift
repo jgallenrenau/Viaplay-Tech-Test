@@ -1,7 +1,6 @@
 import XCTest
 @testable import Domain
 
-// Fake repository for testing use cases
 private final class FakeSectionsRepository: SectionsRepository {
     var sectionsPage: SectionsPage
     init(sectionsPage: SectionsPage) { self.sectionsPage = sectionsPage }

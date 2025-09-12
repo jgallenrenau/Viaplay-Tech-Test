@@ -10,16 +10,13 @@ final class UserDefaultsStoreTests: XCTestCase {
     override func setUp() async throws {
         try await super.setUp()
         
-        // Create a test-specific UserDefaults suite
         userDefaults = UserDefaults(suiteName: testSuiteName)!
         userDefaults.removePersistentDomain(forName: testSuiteName)
         
-        // Initialize SUT with test UserDefaults
         sut = UserDefaultsStore(defaults: userDefaults)
     }
     
     override func tearDown() async throws {
-        // Clean up test data
         userDefaults.removePersistentDomain(forName: testSuiteName)
         
         sut = nil
@@ -28,7 +25,6 @@ final class UserDefaultsStoreTests: XCTestCase {
         try await super.tearDown()
     }
     
-    // MARK: - Get Tests
     
     func test_get_returnsNilForNonExistentKey() {
         let result = sut.get("non-existent-key")
@@ -70,7 +66,6 @@ final class UserDefaultsStoreTests: XCTestCase {
         XCTAssertEqual(result, value)
     }
     
-    // MARK: - Set Tests
     
     func test_set_storesValue() {
         let key = "storage-key"
@@ -123,7 +118,6 @@ final class UserDefaultsStoreTests: XCTestCase {
         XCTAssertEqual(result, value)
     }
     
-    // MARK: - Integration Tests
     
     func test_setAndGet_multipleKeys() {
         let keyValuePairs = [
@@ -132,12 +126,10 @@ final class UserDefaultsStoreTests: XCTestCase {
             ("key3", "value3")
         ]
         
-        // Set all values
         for (key, value) in keyValuePairs {
             sut.set(value, for: key)
         }
         
-        // Verify all values
         for (key, expectedValue) in keyValuePairs {
             let result = sut.get(key)
             XCTAssertEqual(result, expectedValue, "Failed for key: \(key)")
@@ -155,7 +147,6 @@ final class UserDefaultsStoreTests: XCTestCase {
         }
     }
     
-    // MARK: - Edge Cases Tests
     
     func test_get_afterUserDefaultsClear() {
         let key = "clear-test-key"
@@ -164,17 +155,14 @@ final class UserDefaultsStoreTests: XCTestCase {
         sut.set(value, for: key)
         XCTAssertEqual(sut.get(key), value)
         
-        // Clear UserDefaults
         userDefaults.removePersistentDomain(forName: testSuiteName)
         
-        // Value should be nil after clear
         XCTAssertNil(sut.get(key))
     }
     
     func test_set_withNilValue() {
         let key = "nil-value-key"
         
-        // This should not crash
         sut.set("", for: key)
         sut.set("", for: key)
         

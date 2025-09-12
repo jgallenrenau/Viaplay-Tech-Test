@@ -2,20 +2,12 @@ import XCTest
 import SwiftUI
 import SnapshotTesting
 import Domain
-@testable import DetailFeature
+@testable import DetailSection
 
 @MainActor
 final class DetailItemViewtvOSSnapshotTests: XCTestCase {
     
-    override func setUp() async throws {
-        try await super.setUp()
-        // Configure snapshot testing for tvOS
-        isRecording = false
-    }
-    
-    override func tearDown() async throws {
-        try await super.tearDown()
-    }
+    private let isRecording = false
     
     func test_detailItemViewtvOS_completeItem() {
         let item = Domain.DetailItem(
@@ -29,7 +21,7 @@ final class DetailItemViewtvOSSnapshotTests: XCTestCase {
         
         let view = DetailItemViewtvOS(item: item)
         
-        assertSnapshot(matching: view, as: .image(layout: .device(config: .tv), traits: .init(userInterfaceStyle: .light)))
+        assertSnapshot(of: view, as: .image(layout: .fixed(width: 1920, height: 1080), traits: .init(userInterfaceStyle: .light)), record: isRecording)
     }
     
     func test_detailItemViewtvOS_minimalItem() {
@@ -44,7 +36,7 @@ final class DetailItemViewtvOSSnapshotTests: XCTestCase {
         
         let view = DetailItemViewtvOS(item: item)
         
-        assertSnapshot(matching: view, as: .image(layout: .device(config: .tv), traits: .init(userInterfaceStyle: .light)))
+        assertSnapshot(of: view, as: .image(layout: .fixed(width: 1920, height: 1080), traits: .init(userInterfaceStyle: .light)), record: isRecording)
     }
     
     func test_detailItemViewtvOS_withTagsOnly() {
@@ -59,7 +51,7 @@ final class DetailItemViewtvOSSnapshotTests: XCTestCase {
         
         let view = DetailItemViewtvOS(item: item)
         
-        assertSnapshot(matching: view, as: .image(layout: .device(config: .tv), traits: .init(userInterfaceStyle: .light)))
+        assertSnapshot(of: view, as: .image(layout: .fixed(width: 1920, height: 1080), traits: .init(userInterfaceStyle: .light)), record: isRecording)
     }
     
     func test_detailItemViewtvOS_withContentOnly() {
@@ -74,7 +66,7 @@ final class DetailItemViewtvOSSnapshotTests: XCTestCase {
         
         let view = DetailItemViewtvOS(item: item)
         
-        assertSnapshot(matching: view, as: .image(layout: .device(config: .tv), traits: .init(userInterfaceStyle: .light)))
+        assertSnapshot(of: view, as: .image(layout: .fixed(width: 1920, height: 1080), traits: .init(userInterfaceStyle: .light)), record: isRecording)
     }
     
     func test_detailItemViewtvOS_withHrefOnly() {
@@ -89,7 +81,7 @@ final class DetailItemViewtvOSSnapshotTests: XCTestCase {
         
         let view = DetailItemViewtvOS(item: item)
         
-        assertSnapshot(matching: view, as: .image(layout: .device(config: .tv), traits: .init(userInterfaceStyle: .light)))
+        assertSnapshot(of: view, as: .image(layout: .fixed(width: 1920, height: 1080), traits: .init(userInterfaceStyle: .light)), record: isRecording)
     }
     
     func test_detailItemViewtvOS_longTitle() {
@@ -104,7 +96,7 @@ final class DetailItemViewtvOSSnapshotTests: XCTestCase {
         
         let view = DetailItemViewtvOS(item: item)
         
-        assertSnapshot(matching: view, as: .image(layout: .device(config: .tv), traits: .init(userInterfaceStyle: .light)))
+        assertSnapshot(of: view, as: .image(layout: .fixed(width: 1920, height: 1080), traits: .init(userInterfaceStyle: .light)), record: isRecording)
     }
     
     func test_detailItemViewtvOS_manyTags() {
@@ -119,7 +111,7 @@ final class DetailItemViewtvOSSnapshotTests: XCTestCase {
         
         let view = DetailItemViewtvOS(item: item)
         
-        assertSnapshot(matching: view, as: .image(layout: .device(config: .tv), traits: .init(userInterfaceStyle: .light)))
+        assertSnapshot(of: view, as: .image(layout: .fixed(width: 1920, height: 1080), traits: .init(userInterfaceStyle: .light)), record: isRecording)
     }
     
     func test_detailItemViewtvOS_darkMode() {
@@ -134,7 +126,7 @@ final class DetailItemViewtvOSSnapshotTests: XCTestCase {
         
         let view = DetailItemViewtvOS(item: item)
         
-        assertSnapshot(matching: view, as: .image(layout: .device(config: .tv), traits: .init(userInterfaceStyle: .dark)))
+        assertSnapshot(of: view, as: .image(layout: .fixed(width: 1920, height: 1080), traits: .init(userInterfaceStyle: .dark)), record: isRecording)
     }
     
     func test_detailItemViewtvOS_lightMode() {
@@ -149,7 +141,7 @@ final class DetailItemViewtvOSSnapshotTests: XCTestCase {
         
         let view = DetailItemViewtvOS(item: item)
         
-        assertSnapshot(matching: view, as: .image(layout: .device(config: .tv), traits: .init(userInterfaceStyle: .light)))
+        assertSnapshot(of: view, as: .image(layout: .fixed(width: 1920, height: 1080), traits: .init(userInterfaceStyle: .light)), record: isRecording)
     }
     
     func test_detailItemViewtvOS_specialCharacters() {
@@ -164,7 +156,7 @@ final class DetailItemViewtvOSSnapshotTests: XCTestCase {
         
         let view = DetailItemViewtvOS(item: item)
         
-        assertSnapshot(matching: view, as: .image(layout: .device(config: .tv), traits: .init(userInterfaceStyle: .light)))
+        assertSnapshot(of: view, as: .image(layout: .fixed(width: 1920, height: 1080), traits: .init(userInterfaceStyle: .light)), record: isRecording)
     }
     
     func test_detailItemViewtvOS_emptyStrings() {
@@ -179,7 +171,7 @@ final class DetailItemViewtvOSSnapshotTests: XCTestCase {
         
         let view = DetailItemViewtvOS(item: item)
         
-        assertSnapshot(matching: view, as: .image(layout: .device(config: .tv), traits: .init(userInterfaceStyle: .light)))
+        assertSnapshot(of: view, as: .image(layout: .fixed(width: 1920, height: 1080), traits: .init(userInterfaceStyle: .light)), record: isRecording)
     }
     
     func test_detailItemViewtvOS_largeContent() {
@@ -195,6 +187,6 @@ final class DetailItemViewtvOSSnapshotTests: XCTestCase {
         
         let view = DetailItemViewtvOS(item: item)
         
-        assertSnapshot(matching: view, as: .image(layout: .device(config: .tv), traits: .init(userInterfaceStyle: .light)))
+        assertSnapshot(of: view, as: .image(layout: .fixed(width: 1920, height: 1080), traits: .init(userInterfaceStyle: .light)), record: isRecording)
     }
 }

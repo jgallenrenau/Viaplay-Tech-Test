@@ -1,7 +1,7 @@
 import XCTest
 import SwiftUI
 import Domain
-@testable import DetailFeature
+@testable import DetailSection
 
 @MainActor
 final class DetailItemViewtvOSTests: XCTestCase {

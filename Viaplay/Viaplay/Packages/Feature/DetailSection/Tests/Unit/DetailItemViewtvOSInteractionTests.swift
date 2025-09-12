@@ -1,7 +1,7 @@
 import XCTest
 import SwiftUI
 import Domain
-@testable import DetailFeature
+@testable import DetailSection
 
 @MainActor
 final class DetailItemViewtvOSInteractionTests: XCTestCase {
@@ -34,22 +34,18 @@ final class DetailItemViewtvOSInteractionTests: XCTestCase {
     }
     
     func test_view_handlesTapGesture() {
-        // We can't easily test the exact tap behavior due to SwiftUI's architecture
-        // But we can verify the view structure supports tap gestures
         let body = sut.body
         XCTAssertNotNil(body)
     }
     
     func test_view_handlesShowMoreButton() {
         
-        // The view should render the show more/less button
         let body = sut.body
         XCTAssertNotNil(body)
     }
     
     func test_view_handlesLinkButton() {
         
-        // The view should render the link button when href is present
         let body = sut.body
         XCTAssertNotNil(body)
     }
@@ -144,7 +140,6 @@ final class DetailItemViewtvOSInteractionTests: XCTestCase {
         view = DetailItemViewtvOS(item: item2)
         let _ = view.body
         
-        // Should not crash
     }
     
     func test_view_handlesLongTextContent() {

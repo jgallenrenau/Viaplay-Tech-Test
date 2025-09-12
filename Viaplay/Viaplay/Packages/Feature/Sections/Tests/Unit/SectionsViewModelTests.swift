@@ -70,25 +70,20 @@ final class SectionsViewModelTests: XCTestCase {
     func test_loadSections_loadingState() async {
         repo.result = .success(SectionsPage(title: "Home", sections: []))
         
-        // Verify initial state
         XCTAssertFalse(sut.isLoading)
         
-        // Start loading
         await sut.loadSections()
         
-        // Verify loading state is false after completion
         XCTAssertFalse(sut.isLoading)
     }
     
     func test_errorMessage_clearedOnSuccessfulLoad() async {
-        // First load with error
         enum FetchError: Error { case generic }
         repo.result = .failure(FetchError.generic)
         await sut.loadSections()
         
         XCTAssertNotNil(sut.errorMessage)
         
-        // Second load with success
         repo.result = .success(SectionsPage(title: "Home", sections: []))
         await sut.loadSections()
         
@@ -153,12 +148,11 @@ final class SectionsViewModelTests: XCTestCase {
         
         async let load1: Void = sut.loadSections()
         async let load2: Void = sut.loadSections()
-        _ = await ((), ())
+        _ = await (load1, load2)
         
         XCTAssertFalse(sut.isLoading)
     }
     
-    // MARK: - Networking for section descriptions
     
     func test_fetchSectionDescription_200WithoutField_returnsNil() async {
         URLProtocolStub.startInterceptingRequests()
@@ -215,7 +209,6 @@ final class SectionsViewModelTests: XCTestCase {
     }
 }
 
-// MARK: - URLProtocol Stub
 private final class URLProtocolStub: URLProtocol {
     private struct Stub {
         let response: HTTPURLResponse?

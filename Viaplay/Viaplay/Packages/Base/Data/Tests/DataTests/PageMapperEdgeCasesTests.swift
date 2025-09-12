@@ -4,7 +4,6 @@ import Domain
 
 final class PageMapperEdgeCasesTests: XCTestCase {
     
-    // MARK: - Edge Cases Tests
     
     func test_map_withEmptySections() {
         let dto = makeDTO(sections: [])
@@ -40,12 +39,9 @@ final class PageMapperEdgeCasesTests: XCTestCase {
         let dto = makeDTO(sections: sections)
         let page = PageMapper.map(dto)
         
-        // Should only include valid URLs - URL(string:) might accept some URLs we consider invalid
-        // Let's check what actually gets through
         XCTAssertGreaterThanOrEqual(page.sections.count, 2)
         XCTAssertLessThanOrEqual(page.sections.count, 4)
         
-        // Verify that the valid URLs are definitely included
         let validTitles = page.sections.map { $0.title }
         XCTAssertTrue(validTitles.contains("Valid"))
         XCTAssertTrue(validTitles.contains("Another Valid"))
@@ -84,7 +80,6 @@ final class PageMapperEdgeCasesTests: XCTestCase {
         let dto = makeDTO(sections: sections)
         let page = PageMapper.map(dto)
         
-        // Should include sections with empty titles
         XCTAssertEqual(page.sections.count, 2)
         XCTAssertEqual(page.sections[0].title, "")
         XCTAssertEqual(page.sections[1].title, "Valid Title")
@@ -142,7 +137,6 @@ final class PageMapperEdgeCasesTests: XCTestCase {
         let dto = makeDTO(sections: sections)
         let page = PageMapper.map(dto)
         
-        // Should include all sections even with duplicate titles
         XCTAssertEqual(page.sections.count, 3)
         XCTAssertEqual(page.sections[0].title, "Duplicate")
         XCTAssertEqual(page.sections[1].title, "Duplicate")
@@ -183,13 +177,10 @@ final class PageMapperEdgeCasesTests: XCTestCase {
         let dto = makeDTO(sections: sections)
         let page = PageMapper.map(dto)
         
-        // URL(string:) might accept more URLs than we expect
-        // Let's verify that at least the valid HTTPS URL is included
         XCTAssertGreaterThanOrEqual(page.sections.count, 1)
         let validTitles = page.sections.map { $0.title }
         XCTAssertTrue(validTitles.contains("Valid"))
         
-        // Verify that the valid URL has the correct href
         if let validSection = page.sections.first(where: { $0.title == "Valid" }) {
             XCTAssertEqual(validSection.href?.absoluteString, "https://example.com")
         }
@@ -205,7 +196,6 @@ final class PageMapperEdgeCasesTests: XCTestCase {
         XCTAssertEqual(page.sections[0].href?.absoluteString, longURL)
     }
     
-    // MARK: - Helper Methods
     
     private func makeSectionDTO(title: String, href: String) -> SectionDTO {
         SectionDTO(title: title, href: href)

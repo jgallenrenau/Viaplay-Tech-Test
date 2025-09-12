@@ -21,14 +21,14 @@ final class SectionsListViewSnapshotTests: XCTestCase {
         let vm = SectionsViewModel(fetchSectionsUseCase: DummyUseCase(), cacheService: SectionDescriptionCacheService())
         vm.isLoading = true
         let view = SectionsListView(viewModel: vm)
-        assertSnapshot(matching: makeVC(view), as: .image, record: record)
+        assertSnapshot(matching: makeVC(view), as: .image, record: isRecording)
     }
     
     func test_error_dark() {
         let vm = SectionsViewModel(fetchSectionsUseCase: DummyUseCase(), cacheService: SectionDescriptionCacheService())
         vm.errorMessage = "Oops"
         let view = SectionsListView(viewModel: vm).preferredColorScheme(.dark)
-        assertSnapshot(matching: makeVC(view), as: .image, record: record)
+        assertSnapshot(matching: makeVC(view), as: .image, record: isRecording)
     }
     
     func test_empty_dynamicTypeXXL() {
@@ -36,14 +36,14 @@ final class SectionsListViewSnapshotTests: XCTestCase {
         vm.sections = []
         let view = SectionsListView(viewModel: vm)
         let traits = UITraitCollection(preferredContentSizeCategory: .accessibilityExtraExtraExtraLarge)
-        assertSnapshot(matching: makeVC(view, traits: traits), as: .image, record: record)
+        assertSnapshot(matching: makeVC(view, traits: traits), as: .image, record: isRecording)
     }
     
     func test_success_list_long() {
         let vm = SectionsViewModel(fetchSectionsUseCase: DummyUseCase(), cacheService: SectionDescriptionCacheService())
         vm.sections = (1...12).map { Section(id: String($0), title: "Section \($0)") }
         let view = SectionsListView(viewModel: vm)
-        assertSnapshot(matching: makeVC(view, size: CGSize(width: 428, height: 926)), as: .image, record: record)
+        assertSnapshot(matching: makeVC(view, size: CGSize(width: 428, height: 926)), as: .image, record: isRecording)
     }
 }
 

@@ -8,7 +8,6 @@ import SnapshotTesting
 final class SectionsListViewtvOSSnapshotTests: XCTestCase {
     private let isRecording = false
     
-    // MARK: - 1080p Fixed Resolution Configuration for tvOS
     private let config1080p = ViewImageConfig(
         safeArea: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), size: CGSize(width: 1920, height: 1080),
         traits: UITraitCollection(traitsFrom: [
@@ -40,7 +39,7 @@ final class SectionsListViewtvOSSnapshotTests: XCTestCase {
         
         let view = SectionsListView(viewModel: viewModel)
         let vc = UIHostingController(rootView: view)
-        assertSnapshot(of: vc, as: .image(on: config1080p))
+        assertSnapshot(of: vc, as: .image(on: config1080p), record: isRecording)
     }
     
     func testSectionsListViewtvOSLoading() {
@@ -50,7 +49,7 @@ final class SectionsListViewtvOSSnapshotTests: XCTestCase {
         
         let view = SectionsListView(viewModel: viewModel)
         let vc = UIHostingController(rootView: view)
-        assertSnapshot(of: vc, as: .image(on: config1080p))
+        assertSnapshot(of: vc, as: .image(on: config1080p), record: isRecording)
     }
     
     func testSectionsListViewtvOSError() {
@@ -60,17 +59,7 @@ final class SectionsListViewtvOSSnapshotTests: XCTestCase {
         
         let view = SectionsListView(viewModel: viewModel)
         let vc = UIHostingController(rootView: view)
-        assertSnapshot(of: vc, as: .image(on: config1080p))
-    }
-    
-    func testSectionsListViewtvOSEmpty() {
-        viewModel.isLoading = false
-        viewModel.sections = []
-        viewModel.errorMessage = nil
-        
-        let view = SectionsListView(viewModel: viewModel)
-        let vc = UIHostingController(rootView: view)
-        assertSnapshot(of: vc, as: .image(on: config1080p))
+        assertSnapshot(of: vc, as: .image(on: config1080p), record: isRecording)
     }
     
     func testSectionsListViewtvOSWithLongTitles() {

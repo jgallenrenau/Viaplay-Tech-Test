@@ -8,7 +8,6 @@ import SnapshotTesting
 final class DetailViewtvOSSnapshotTests: XCTestCase {
     private let isRecording = false
     
-    // MARK: - 1080p Fixed Resolution Configuration for tvOS
     private let config1080p = ViewImageConfig(
         safeArea: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), size: CGSize(width: 1920, height: 1080),
         traits: UITraitCollection(traitsFrom: [
@@ -42,23 +41,22 @@ final class DetailViewtvOSSnapshotTests: XCTestCase {
         )))
         let view = DetailView(section: section, viewModel: viewModel)
         let vc = UIHostingController(rootView: view)
-        assertSnapshot(of: vc, as: .image(on: config1080p))
+        assertSnapshot(of: vc, as: .image(on: config1080p), record: isRecording)
     }
 
     func testDetailViewtvOSLoading() {
         let viewModel = DetailViewModel(section: section, fetchDetailUseCase: StubDetailUseCase(page: nil))
-        // simulate loading state
         viewModel.isLoading = true
         let view = DetailView(section: section, viewModel: viewModel)
         let vc = UIHostingController(rootView: view)
-        assertSnapshot(of: vc, as: .image(on: config1080p))
+        assertSnapshot(of: vc, as: .image(on: config1080p), record: isRecording)
     }
 
     func testDetailViewtvOSError() {
         let viewModel = DetailViewModel(section: section, fetchDetailUseCase: FailingDetailUseCase(error: NSError(domain: "test", code: 1)))
         let view = DetailView(section: section, viewModel: viewModel)
         let vc = UIHostingController(rootView: view)
-        assertSnapshot(of: vc, as: .image(on: config1080p))
+        assertSnapshot(of: vc, as: .image(on: config1080p), record: isRecording)
     }
 
     func testDetailViewtvOSEmpty() {
@@ -71,7 +69,7 @@ final class DetailViewtvOSSnapshotTests: XCTestCase {
         let emptySection = ContentSection(title: "Empty Section", description: "Empty Description", href: URL(string: "https://example.com")!)
         let view = DetailView(section: emptySection, viewModel: viewModel)
         let vc = UIHostingController(rootView: view)
-        assertSnapshot(of: vc, as: .image(on: config1080p))
+        assertSnapshot(of: vc, as: .image(on: config1080p), record: isRecording)
     }
 
     func testDetailViewtvOSWithLongContent() {
@@ -87,7 +85,7 @@ final class DetailViewtvOSSnapshotTests: XCTestCase {
         let longSection = ContentSection(title: "Long Section", description: "Long Description", href: URL(string: "https://example.com")!)
         let view = DetailView(section: longSection, viewModel: viewModel)
         let vc = UIHostingController(rootView: view)
-        assertSnapshot(of: vc, as: .image(on: config1080p))
+        assertSnapshot(of: vc, as: .image(on: config1080p), record: isRecording)
     }
 
     func testDetailViewtvOSInDarkMode() {
@@ -103,11 +101,10 @@ final class DetailViewtvOSSnapshotTests: XCTestCase {
         let view = DetailView(section: darkSection, viewModel: viewModel)
             .preferredColorScheme(.dark)
         let vc = UIHostingController(rootView: view)
-        assertSnapshot(of: vc, as: .image(on: config1080p))
+        assertSnapshot(of: vc, as: .image(on: config1080p), record: isRecording)
     }
 }
 
-// MARK: - Test Doubles
 private struct StubDetailUseCase: Domain.FetchDetailUseCaseProtocol {
     let page: Domain.DetailPage?
     func execute(section: ContentSection) async throws -> Domain.DetailPage {

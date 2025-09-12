@@ -51,7 +51,6 @@ final class PageRepositoryImplTests: XCTestCase {
         cache = FileJSONDiskCache()
         keyValueStore = InMemoryKeyValueStore()
         
-        // Clear any existing cache data
         try? cache.delete(for: "root.json")
     }
     
@@ -135,7 +134,6 @@ final class PageRepositoryImplTests: XCTestCase {
 
         _ = try await repository.getRootPage()
         
-        // Verify data was cached
         let cachedPage: Page? = try? cache.read(for: "root.json", as: Page.self)
         XCTAssertNotNil(cachedPage)
         XCTAssertEqual(cachedPage?.title, "Home")
@@ -153,7 +151,6 @@ final class PageRepositoryImplTests: XCTestCase {
             _ = try await repository.getRootPage()
             XCTFail("Expected error to be thrown")
         } catch {
-            // Network error should be thrown
             XCTAssertNotNil(error)
         }
     }
@@ -179,7 +176,6 @@ final class PageRepositoryImplTests: XCTestCase {
         let page = Page(title: "Cached Home", sections: [ContentSection(title: "Cached Section")])
         try cache.write(page, for: "root.json")
         
-        // Use network error to trigger cache fallback
         let client = StubHTTPClient(status: 500, body: Data(), shouldThrowError: true)
         repository = PageRepositoryImpl(
             http: client,
@@ -224,7 +220,6 @@ final class PageRepositoryImplTests: XCTestCase {
         }
         let largePage = Page(title: "Large Page", sections: largeSections)
         
-        // Create proper DTO structure for large response
         let sectionsDTO = largeSections.map { section in
             SectionDTO(title: section.title, href: section.href?.absoluteString ?? "")
         }

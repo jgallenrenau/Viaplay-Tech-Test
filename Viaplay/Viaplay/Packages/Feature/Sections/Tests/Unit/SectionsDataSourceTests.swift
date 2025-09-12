@@ -160,10 +160,8 @@ final class SectionsDataSourceTests: XCTestCase {
         XCTAssertEqual(result.sections[1].id, "dup")
     }
     
-    // Removed invalid priority test that referenced non-existent Page fields in Domain models.
 }
 
-// MARK: - Mock Repository
 
 class MockPageRepository: PageRepository {
     var getRootPageResult: Result<Domain.Page, Error> = .success(Domain.Page(title: "Test", sections: []))

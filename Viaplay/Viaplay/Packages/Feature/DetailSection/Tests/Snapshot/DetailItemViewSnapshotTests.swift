@@ -28,15 +28,15 @@ final class DetailItemViewSnapshotTests: XCTestCase {
             tags: ["a","b","c"]
         )
         let view = DetailItemView(item: base)
-        assertSnapshot(matching: makeVC(view), as: .image, record: record)
-        assertSnapshot(matching: makeVC(view, dark: true), as: .image, record: record)
+        assertSnapshot(of: makeVC(view), as: .image, record: isRecording)
+        assertSnapshot(of: makeVC(view, dark: true), as: .image, record: isRecording)
         let traits = UITraitCollection(preferredContentSizeCategory: .accessibilityExtraExtraExtraLarge)
-        assertSnapshot(matching: makeVC(view, traits: traits), as: .image, record: record)
+        assertSnapshot(of: makeVC(view, traits: traits), as: .image, record: isRecording)
     }
     
     func test_item_without_tags_or_href() {
         let item = DetailItem(id: "2", title: "Simple", description: nil, href: nil, imageURL: nil, content: "Short")
         let view = DetailItemView(item: item)
-        assertSnapshot(matching: makeVC(view, size: CGSize(width: 390, height: 120)), as: .image, record: record)
+        assertSnapshot(of: makeVC(view, size: CGSize(width: 390, height: 120)), as: .image, record: isRecording)
     }
 }

@@ -93,7 +93,6 @@ final class DetailItemViewTests: XCTestCase {
         XCTAssertNotNil(view)
     }
     
-    // MARK: - Edge Cases
     
     func testDetailItemViewWithEmptyTitle() {
         let item = Domain.DetailItem(id: "1", title: "")
@@ -269,7 +268,6 @@ final class DetailItemViewTests: XCTestCase {
         XCTAssertNotNil(view)
     }
     
-    // MARK: - Performance Tests
     
     func testDetailItemViewCreationPerformance() {
         let item = Domain.DetailItem(
@@ -315,7 +313,6 @@ final class DetailItemViewTests: XCTestCase {
         }
     }
     
-    // MARK: - Complex Scenarios
     
     func testDetailItemViewWithAllNilOptionalProperties() {
         let item = Domain.DetailItem(
