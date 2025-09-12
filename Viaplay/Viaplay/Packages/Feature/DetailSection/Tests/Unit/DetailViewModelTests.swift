@@ -73,24 +73,19 @@ final class DetailViewModelTests: XCTestCase {
     func test_loadDetail_loadingState() async {
         useCase.result = .success(Domain.DetailPage(title: "Test", items: []))
         
-        // Verify initial state
         XCTAssertFalse(sut.isLoading)
         
-        // Start loading
         await sut.loadDetail()
         
-        // Verify loading state is false after completion
         XCTAssertFalse(sut.isLoading)
     }
     
     func test_errorMessage_clearedOnSuccessfulLoad() async {
-        // First load with error
         useCase.result = .failure(TestError.generic)
         await sut.loadDetail()
         
         XCTAssertNotNil(sut.errorMessage)
         
-        // Second load with success
         let expectedDetailPage = Domain.DetailPage(title: "Test", items: [])
         useCase.result = .success(expectedDetailPage)
         await sut.loadDetail()
@@ -136,7 +131,6 @@ final class DetailViewModelTests: XCTestCase {
         let expectedDetailPage = Domain.DetailPage(title: "Test", items: [])
         useCase.result = .success(expectedDetailPage)
         
-        // Start multiple concurrent loads
         async let load1: Void = sut.loadDetail()
         async let load2: Void = sut.loadDetail()
         async let load3: Void = sut.loadDetail()
@@ -145,7 +139,6 @@ final class DetailViewModelTests: XCTestCase {
         await load2
         await load3
         
-        // Should have called use case multiple times
         XCTAssertGreaterThan(useCase.executeCalls, 1)
     }
     
@@ -169,9 +162,65 @@ final class DetailViewModelTests: XCTestCase {
         
         XCTAssertEqual(sut.detailPage?.description, nil)
     }
+    
+    func test_loadDetail_cancellation_setsLoadingFalseAndNoDetail() async {
+        let delayedUseCase = DelayedFetchDetailUseCaseSpy(delayNanos: 500_000_000, result: .success(Domain.DetailPage(title: "T", items: [])))
+        sut = DetailViewModel(section: section, fetchDetailUseCase: delayedUseCase)
+        
+        let task = Task { await sut.loadDetail() }
+        
+        try? await Task.sleep(nanoseconds: 50_000_000)
+        task.cancel()
+        
+        try? await Task.sleep(nanoseconds: 50_000_000)
+        
+        XCTAssertFalse(sut.isLoading)
+        XCTAssertNil(sut.detailPage)
+    }
+    
+    func test_loadDetail_withInvalidSection_setsError() async {
+        let invalidSection = ContentSection(title: "", description: nil)
+        sut = DetailViewModel(section: invalidSection, fetchDetailUseCase: useCase)
+        useCase.result = .failure(TestError.generic)
+        
+        await sut.loadDetail()
+        
+        XCTAssertNotNil(sut.errorMessage)
+        XCTAssertNil(sut.detailPage)
+        XCTAssertFalse(sut.isLoading)
+    }
+    
+    func test_retryAfterError_clearsErrorAndLoads() async {
+        useCase.result = .failure(TestError.generic)
+        await sut.loadDetail()
+        XCTAssertNotNil(sut.errorMessage)
+        
+        let expectedDetailPage = Domain.DetailPage(title: "OK", items: [])
+        useCase.result = .success(expectedDetailPage)
+        await sut.loadDetail()
+        
+        XCTAssertNil(sut.errorMessage)
+        XCTAssertEqual(sut.detailPage, expectedDetailPage)
+    }
 }
 
 private enum TestError: LocalizedError, Equatable {
     case generic
     var errorDescription: String? { "Test Error" }
+}
+
+private final class DelayedFetchDetailUseCaseSpy: Domain.FetchDetailUseCaseProtocol {
+    let delayNanos: UInt64
+    let result: Result<Domain.DetailPage, Error>
+    init(delayNanos: UInt64, result: Result<Domain.DetailPage, Error>) {
+        self.delayNanos = delayNanos
+        self.result = result
+    }
+    func execute(section: ContentSection) async throws -> Domain.DetailPage {
+        try await Task.sleep(nanoseconds: delayNanos)
+        switch result {
+        case let .success(value): return value
+        case let .failure(error): throw error
+        }
+    }
 }

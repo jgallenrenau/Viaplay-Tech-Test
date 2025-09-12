@@ -68,3 +68,7 @@ fastlane/test_output
 # macOS
 .DS_Store
 Viaplay/.DS_Store
+
+# Xcode Test Results (never commit)
+**/*.xcresult/
+Viaplay/TestResults.xcresult/

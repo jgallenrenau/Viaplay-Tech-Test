@@ -5,6 +5,14 @@ import Domain
 
 final class DetailViewTests: XCTestCase {
     
+    override func setUp() async throws {
+        try await super.setUp()
+    }
+    
+    override func tearDown() async throws {
+        try await super.tearDown()
+    }
+    
     @MainActor func testDetailViewInitializationWithViewModel() {
         let section = ContentSection(title: "Test Section", description: "Test Description")
         let viewModel = DetailViewModel(section: section, fetchDetailUseCase: MockFetchDetailUseCase())
@@ -24,11 +32,9 @@ final class DetailViewTests: XCTestCase {
         let section = ContentSection(title: "Test Section", description: "Test Description")
         let view = DetailView(section: section)
         
-        // Verify view can be created with dummy use case
         XCTAssertNotNil(view)
     }
     
-    // MARK: - Edge Cases
     
     @MainActor func testDetailViewWithEmptySection() {
         let emptySection = ContentSection(title: "", description: "")
@@ -88,7 +94,6 @@ final class DetailViewTests: XCTestCase {
         XCTAssertNotNil(view)
     }
     
-    // MARK: - ViewModel Integration Tests
     
     @MainActor func testDetailViewWithLoadingState() {
         let section = ContentSection(title: "Test", description: "Description")
@@ -119,7 +124,6 @@ final class DetailViewTests: XCTestCase {
         XCTAssertNotNil(view)
     }
     
-    // MARK: - Performance Tests
     
     @MainActor func testDetailViewCreationPerformance() {
         let section = ContentSection(title: "Test", description: "Description")
@@ -144,7 +148,6 @@ final class DetailViewTests: XCTestCase {
     }
 }
 
-// MARK: - Mock UseCase
 
 private class MockFetchDetailUseCase: Domain.FetchDetailUseCaseProtocol {
     var shouldThrowError = false
@@ -166,4 +169,15 @@ private class MockFetchDetailUseCase: Domain.FetchDetailUseCaseProtocol {
 private enum TestError: LocalizedError, Equatable {
     case generic
     var errorDescription: String? { "Test Error" }
+}
+
+extension DetailViewTests {
+    @MainActor func test_errorState_renders() {
+        let section = ContentSection(title: "S", description: "D")
+        let mockUseCase = MockFetchDetailUseCase()
+        let vm = DetailViewModel(section: section, fetchDetailUseCase: mockUseCase)
+        vm.errorMessage = "err"
+        let view = DetailView(section: section, viewModel: vm)
+        XCTAssertNotNil(view)
+    }
 }

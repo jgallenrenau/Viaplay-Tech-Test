@@ -125,9 +125,43 @@ final class SectionsDataSourceTests: XCTestCase {
         
         XCTAssertEqual(mockRepository.getRootPageCallCount, 1)
     }
+    
+    func test_fetchSections_handlesURLVariants() async throws {
+        let mockRepository = MockPageRepository()
+        mockRepository.getRootPageResult = .success(Domain.Page(
+            title: "Test",
+            sections: [
+                ContentSection(title: "With Query", description: nil, href: URL(string: "https://example.com/p?x=1&y=2")),
+                ContentSection(title: "With Fragment", description: nil, href: URL(string: "https://example.com/p#frag")),
+                ContentSection(title: "With Port", description: nil, href: URL(string: "https://example.com:8080/p"))
+            ]
+        ))
+        let sut = SectionsDataSource(pageRepository: mockRepository)
+        let result = try await sut.fetchSections()
+        
+        XCTAssertEqual(result.sections[0].href?.absoluteString, "https://example.com/p?x=1&y=2")
+        XCTAssertEqual(result.sections[1].href?.absoluteString, "https://example.com/p#frag")
+        XCTAssertEqual(result.sections[2].href?.absoluteString, "https://example.com:8080/p")
+    }
+    
+    func test_fetchSections_duplicateTitles_generateStableIds() async throws {
+        let mockRepository = MockPageRepository()
+        mockRepository.getRootPageResult = .success(Domain.Page(
+            title: "Test",
+            sections: [
+                ContentSection(title: "Dup", description: nil, href: nil),
+                ContentSection(title: "Dup", description: nil, href: nil)
+            ]
+        ))
+        let sut = SectionsDataSource(pageRepository: mockRepository)
+        let result = try await sut.fetchSections()
+        
+        XCTAssertEqual(result.sections[0].id, "dup")
+        XCTAssertEqual(result.sections[1].id, "dup")
+    }
+    
 }
 
-// MARK: - Mock Repository
 
 class MockPageRepository: PageRepository {
     var getRootPageResult: Result<Domain.Page, Error> = .success(Domain.Page(title: "Test", sections: []))

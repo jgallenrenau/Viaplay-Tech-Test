@@ -95,7 +95,6 @@ final class DetailRepositoryImplTests: XCTestCase {
         
         _ = try await sut.fetchDetail(for: customSection)
         
-        // Verify the data source was called (in a real implementation, we'd track calls)
         XCTAssertNotNil(dataSourceStub)
     }
     

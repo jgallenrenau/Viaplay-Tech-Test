@@ -16,27 +16,30 @@ public enum DSTypography {
     
     // MARK: - Platform-Specific Helpers
     public static func title(for platform: Platform) -> Font {
-        #if os(tvOS)
-        return tvTitle
-        #else
-        return title
-        #endif
+        switch platform {
+        case .iOS:
+            return title
+        case .tvOS:
+            return tvTitle
+        }
     }
     
     public static func body(for platform: Platform) -> Font {
-        #if os(tvOS)
-        return tvBody
-        #else
-        return body
-        #endif
+        switch platform {
+        case .iOS:
+            return body
+        case .tvOS:
+            return tvBody
+        }
     }
     
     public static func caption(for platform: Platform) -> Font {
-        #if os(tvOS)
-        return tvCaption
-        #else
-        return caption
-        #endif
+        switch platform {
+        case .iOS:
+            return caption
+        case .tvOS:
+            return tvCaption
+        }
     }
 }
 

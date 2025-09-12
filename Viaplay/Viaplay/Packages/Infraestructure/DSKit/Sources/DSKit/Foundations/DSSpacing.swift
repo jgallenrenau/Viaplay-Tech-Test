@@ -20,42 +20,47 @@ public enum DSSpacing {
     
     // MARK: - Platform-Specific Helpers
     public static func extraSmall(for platform: Platform) -> CGFloat {
-        #if os(tvOS)
-        return tvExtraSmall
-        #else
-        return extraSmall
-        #endif
+        switch platform {
+        case .iOS:
+            return extraSmall
+        case .tvOS:
+            return tvExtraSmall
+        }
     }
     
     public static func small(for platform: Platform) -> CGFloat {
-        #if os(tvOS)
-        return tvSmall
-        #else
-        return small
-        #endif
+        switch platform {
+        case .iOS:
+            return small
+        case .tvOS:
+            return tvSmall
+        }
     }
     
     public static func medium(for platform: Platform) -> CGFloat {
-        #if os(tvOS)
-        return tvMedium
-        #else
-        return medium
-        #endif
+        switch platform {
+        case .iOS:
+            return medium
+        case .tvOS:
+            return tvMedium
+        }
     }
     
     public static func large(for platform: Platform) -> CGFloat {
-        #if os(tvOS)
-        return tvLarge
-        #else
-        return large
-        #endif
+        switch platform {
+        case .iOS:
+            return large
+        case .tvOS:
+            return tvLarge
+        }
     }
     
     public static func extraLarge(for platform: Platform) -> CGFloat {
-        #if os(tvOS)
-        return tvExtraLarge
-        #else
-        return extraLarge
-        #endif
+        switch platform {
+        case .iOS:
+            return extraLarge
+        case .tvOS:
+            return tvExtraLarge
+        }
     }
 }

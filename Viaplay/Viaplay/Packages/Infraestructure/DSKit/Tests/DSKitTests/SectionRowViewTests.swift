@@ -4,7 +4,6 @@ import SwiftUI
 
 final class SectionRowViewTests: XCTestCase {
     
-    // MARK: - Model Tests
     
     func testModelInitializationWithTitleOnly() {
         let model = SectionRowView.Model(title: "Test Title")
@@ -29,13 +28,11 @@ final class SectionRowViewTests: XCTestCase {
         XCTAssertNotEqual(model1, model3)
     }
     
-    // MARK: - View Tests
     
     func testViewInitialization() {
         let model = SectionRowView.Model(title: "Test Title", description: "Test Description")
         let view = SectionRowView(model: model)
         
-        // Verify view can be created without crashing
         XCTAssertNotNil(view)
     }
     
@@ -43,7 +40,6 @@ final class SectionRowViewTests: XCTestCase {
         let model = SectionRowView.Model(title: "Title", description: "")
         let view = SectionRowView(model: model)
         
-        // Empty description should be treated as nil
         XCTAssertNotNil(view)
     }
     
@@ -54,7 +50,6 @@ final class SectionRowViewTests: XCTestCase {
         XCTAssertNotNil(view)
     }
     
-    // MARK: - Edge Cases
     
     func testModelWithVeryLongTitle() {
         let longTitle = String(repeating: "Very Long Title ", count: 50)
@@ -106,7 +101,6 @@ final class SectionRowViewTests: XCTestCase {
         XCTAssertEqual(model.description, whitespaceDescription)
     }
     
-    // MARK: - Hashable Tests
     
     func testModelHashable() {
         let model1 = SectionRowView.Model(title: "Title", description: "Description")
@@ -130,7 +124,6 @@ final class SectionRowViewTests: XCTestCase {
         XCTAssertEqual(set.count, 2) // model1 and model2 are equal, so only 2 unique items
     }
     
-    // MARK: - Performance Tests
     
     func testModelCreationPerformance() {
         measure {
@@ -151,7 +144,6 @@ final class SectionRowViewTests: XCTestCase {
         }
     }
     
-    // MARK: - View Edge Cases
     
     func testViewWithVeryLongContent() {
         let longTitle = String(repeating: "Very Long Title ", count: 100)
