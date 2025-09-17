@@ -18,16 +18,9 @@ github_checks:
   annotations: true
 
 ignore:
-  - "Viaplay/ViaplayTests/**"
-  - "**/Tests/**"
-  - "**/*Tests.swift"
-  - "**/*Test.swift"
-  - "**/Mocks.swift"
-  - "**/Stubs.swift"
   - "**/Preview Content/**"
   - "**/Assets.xcassets/**"
-  - "**/*.entitlements"
-  - "**/App/**"
+  - "**/*.png"
 
 codecov:
   require_ci_to_pass: yes
