@@ -32,7 +32,6 @@ jobs:
     env:
       SCHEME: Viaplay
       PROJECT: Viaplay/Viaplay.xcodeproj
-      DESTINATION: 'platform=iOS Simulator,name=iPhone 15'
 
     steps:
       - name: Checkout
@@ -59,6 +58,24 @@ jobs:
         working-directory: Viaplay
         run: swiftlint --strict
 
+      - name: List available simulators
+        run: xcrun simctl list devices | sed -n '1,120p'
+
+      - name: Detect iOS simulator (prefer iPhone 15)
+        id: detect_sim
+        run: |
+          set -e
+          NAME=$(xcrun simctl list devices available | grep -E "iPhone 15( |\()" | head -1 | sed -E 's/^.*([A-Za-z0-9 +\-()]+) \([A-F0-9\-]+\) \(Available\)$/\1/')
+          if [ -z "$NAME" ]; then
+            NAME=$(xcrun simctl list devices available | grep -E "iPhone .*\(.*\) \(Available\)" | head -1 | sed -E 's/^.*([A-Za-z0-9 +\-()]+) \([A-F0-9\-]+\) \(Available\)$/\1/')
+          fi
+          if [ -z "$NAME" ]; then
+            echo "No iPhone simulator found" >&2
+            exit 1
+          fi
+          echo "Using iOS simulator: $NAME"
+          echo "dest=platform=iOS Simulator,name=$NAME" >> $GITHUB_OUTPUT
+
       - name: Build & Test (all tests with coverage)
         run: |
           # Clean Swift Package Manager cache to avoid dependency conflicts
@@ -73,7 +90,8 @@ jobs:
           xcodebuild \
             -project "$PROJECT" \
             -scheme "$SCHEME" \
-            -destination "$DESTINATION" \
+            -destination "${{ steps.detect_sim.outputs.dest }}" \
+            -destination-timeout 60 \
             -testPlan AllTests \
             -enableCodeCoverage YES \
             -skipMacroValidation \
@@ -165,3 +183,47 @@ jobs:
         with:
           name: xcresult
           path: ~/Library/Developer/Xcode/DerivedData/**/Logs/Test/*.xcresult
+
+  tvos:
+    name: Run tvOS Unit Tests
+    runs-on: macos-15
+    if: (github.event_name == 'push' && github.ref_name == 'develop') || startsWith(github.head_ref, 'feature/') || startsWith(github.head_ref, 'chore/') || startsWith(github.head_ref, 'fix/') || github.event.inputs.run_tests == true
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Select Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: 'latest-stable'
+
+      - name: List available simulators
+        run: xcrun simctl list devices | sed -n '1,200p'
+
+      - name: Detect tvOS simulator (prefer Apple TV 4K)
+        id: detect_tv
+        run: |
+          set -e
+          NAME=$(xcrun simctl list devices available | grep -E "Apple TV 4K" | head -1 | sed -E 's/^.*([A-Za-z0-9 +\-()]+) \([A-F0-9\-]+\) \(Available\)$/\1/')
+          if [ -z "$NAME" ]; then
+            NAME=$(xcrun simctl list devices available | grep -E "Apple TV.*\(Available\)" | head -1 | sed -E 's/^.*([A-Za-z0-9 +\-()]+) \([A-F0-9\-]+\) \(Available\)$/\1/')
+          fi
+          if [ -z "$NAME" ]; then
+            echo "No tvOS simulator found" >&2
+            exit 1
+          fi
+          echo "Using tvOS simulator: $NAME"
+          echo "dest=platform=tvOS Simulator,name=$NAME" >> $GITHUB_OUTPUT
+
+      - name: Build & Test tvOS
+        run: |
+          set -euo pipefail
+          xcodebuild \
+            -project Viaplay/Viaplay.xcodeproj \
+            -scheme ViaplaytvOS \
+            -destination "${{ steps.detect_tv.outputs.dest }}" \
+            -destination-timeout 60 \
+            -testPlan AllTests \
+            -skipMacroValidation \
+            clean test
